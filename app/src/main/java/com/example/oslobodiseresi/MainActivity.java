@@ -23,6 +23,10 @@ public class MainActivity extends AppCompatActivity {
         artikli.add(new Artikal("Kasika", "https://image.shutterstock.com/image-photo/wooden-spoon-placed-on-white-260nw-1716144358.jpg"));
         artikli.add(new Artikal("Kasika", "https://image.shutterstock.com/image-photo/wooden-spoon-placed-on-white-260nw-1716144358.jpg"));
         artikli.add(new Artikal("Kasika", "https://image.shutterstock.com/image-photo/wooden-spoon-placed-on-white-260nw-1716144358.jpg"));
+        artikli.add(new Artikal("Kasika", "https://image.shutterstock.com/image-photo/wooden-spoon-placed-on-white-260nw-1716144358.jpg"));
+        artikli.add(new Artikal("Kasika", "https://image.shutterstock.com/image-photo/wooden-spoon-placed-on-white-260nw-1716144358.jpg"));
+        artikli.add(new Artikal("Kasika", "https://image.shutterstock.com/image-photo/wooden-spoon-placed-on-white-260nw-1716144358.jpg"));
+        artikli.add(new Artikal("Kasika", "https://image.shutterstock.com/image-photo/wooden-spoon-placed-on-white-260nw-1716144358.jpg"));
         //recycler view
 
 
