@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         adapterArtikli.setArtikli(artikli);
 
         recyclerArtikli.setAdapter(adapterArtikli);
-        recyclerArtikli.setLayoutManager(new GridLayoutManager(this, 2));
+        recyclerArtikli.setLayoutManager(new GridLayoutManager(this, 3));
     }
 
 }
