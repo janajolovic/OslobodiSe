@@ -22,8 +22,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         recyclerArtikli = findViewById(R.id.artikli);
         //artikli
         artikli.add(new Artikal("Kasika", "https://image.shutterstock.com/image-photo/wooden-spoon-placed-on-white-260nw-1716144358.jpg"));
@@ -34,9 +32,8 @@ public class MainActivity extends AppCompatActivity {
         artikli.add(new Artikal("Kasika", "https://image.shutterstock.com/image-photo/wooden-spoon-placed-on-white-260nw-1716144358.jpg"));
         artikli.add(new Artikal("Kasika", "https://image.shutterstock.com/image-photo/wooden-spoon-placed-on-white-260nw-1716144358.jpg"));
         artikli.add(new Artikal("Kasika", "https://image.shutterstock.com/image-photo/wooden-spoon-placed-on-white-260nw-1716144358.jpg"));
+
         //recycler view
-
-
         ArtikalAdapter adapterArtikli = new ArtikalAdapter(this);
         adapterArtikli.setArtikli(artikli);
 
@@ -44,21 +41,4 @@ public class MainActivity extends AppCompatActivity {
         recyclerArtikli.setLayoutManager(new GridLayoutManager(this, 2));
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.item_ikonica:
-                Toast.makeText(this, "ikonica", Toast.LENGTH_SHORT).show();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }
