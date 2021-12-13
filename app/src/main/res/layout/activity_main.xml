@@ -22,7 +22,7 @@
             android:layout_height="40dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
-            android:src="@drawable/ic_baseline_menu_24"/>
+            android:src="@drawable/ic_baseline_menu_24" />
         <ImageView
             android:id="@+id/imgProfil"
             android:layout_width="40dp"
