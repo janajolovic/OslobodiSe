@@ -34,9 +34,9 @@ public class ArtikalAdapter extends RecyclerView.Adapter<ArtikalAdapter.ViewHold
         return new ViewHolder(view);
     }
 
-    //TODO: ispraviti gresku
+
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.txtView.setText(artikli.get(position).getNaziv());
         Glide.with(context)
                 .asBitmap()
@@ -47,7 +47,7 @@ public class ArtikalAdapter extends RecyclerView.Adapter<ArtikalAdapter.ViewHold
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ArtikalActivity.class);
-                intent.putExtra(ARTIKAL_ID_KEY, artikli.get(position).getId());
+                intent.putExtra(ARTIKAL_ID_KEY, artikli.get(holder.getAdapterPosition()).getId());
                 context.startActivity(intent);
             }
         });

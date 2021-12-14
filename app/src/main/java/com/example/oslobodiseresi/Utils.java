@@ -40,7 +40,7 @@ public class Utils {
     //neefikasno, ali nema veze
     public static Artikal getArtikalById(int id)
     {
-        for(int i = 0;i<artikli.size();i++) {
+        for(int i = 0; i<artikli.size(); i++) {
             if(id == artikli.get(i).getId())
                 return artikli.get(i);
         }
