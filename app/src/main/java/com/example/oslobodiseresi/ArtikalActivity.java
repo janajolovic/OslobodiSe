@@ -14,6 +14,7 @@ public class ArtikalActivity extends AppCompatActivity {
     public static final String ARTIKAL_ID_KEY = "artikalId";
     private TextView txtOpis;
     private ImageView img;
+    private TextView txtNaziv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,7 @@ public class ArtikalActivity extends AppCompatActivity {
 
     private void setData(Artikal artikal) {
         txtOpis.setText(artikal.getOpis());
+        txtNaziv.setText(artikal.getNaziv());
         Glide.with(this)
                 .asBitmap()
                 .load(artikal.getUrlSlike())
@@ -45,7 +47,8 @@ public class ArtikalActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        txtOpis = findViewById(R.id.txtOpsirno);
+        txtOpis = findViewById(R.id.opis);
         img = findViewById(R.id.imgOpsirno);
+        txtNaziv = findViewById(R.id.txtNaziv);
     }
 }
