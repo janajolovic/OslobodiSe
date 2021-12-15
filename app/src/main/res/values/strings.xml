@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">OslobodiSeResi</string>
+    <string name="app_name">Oslobodi Se</string>
+    <dimen name="velicina_ikonice">40dp</dimen>
 </resources>

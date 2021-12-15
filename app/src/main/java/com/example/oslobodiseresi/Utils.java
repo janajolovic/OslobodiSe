@@ -37,7 +37,7 @@ public class Utils {
         return artikli;
     }
 
-    //neefikasno, ali nema veze
+    //neefikasno, ali nema veze i bice jos gore
     public static Artikal getArtikalById(int id)
     {
         for(int i = 0; i<artikli.size(); i++) {
