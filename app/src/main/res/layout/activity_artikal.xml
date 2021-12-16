@@ -23,6 +23,20 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_launcher_background" />
 
+
+            <ImageView
+                android:id="@+id/artikalBack"
+                android:layout_width="@dimen/velicina_ikonice"
+                android:layout_height="@dimen/velicina_ikonice"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/black"
+                android:src="@drawable/ic_back"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints" />
+
+
             <TextView
                 android:id="@+id/txtNaziv"
                 android:layout_width="wrap_content"

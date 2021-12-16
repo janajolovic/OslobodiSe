@@ -1,5 +1,7 @@
 package com.example.oslobodiseresi;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -8,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -22,28 +25,44 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Artikal> artikli = new ArrayList<>();
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+    private ImageView back;
+    private ImageView hamburger;
+    public ActionBarDrawerToggle actionBarDrawerToggle;
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (Build.VERSION.SDK_INT < 16) {
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        }
         setContentView(R.layout.activity_main);
         recyclerArtikli = findViewById(R.id.artikli);
 
-//        drawerLayout = findViewById(R.id.drawerLayout);
-//        navigationView = findViewById(R.id.navView);
-//
-//        ImageView back = findViewById(R.id.navBack);
-//        back.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                drawerLayout.closeDrawer(GravityCompat.START);
-//            }
-//
-//        });
+        drawerLayout = findViewById(R.id.drawerLayout);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_closed);
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+
+        navigationView = findViewById(R.id.navView);
+        back = navigationView.getHeaderView(0).findViewById(R.id.navBack);
+        hamburger = findViewById(R.id.imgHamburger);
+        hamburger.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer((GravityCompat.START));
+            }
+        });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.closeDrawer(GravityCompat.START);
+            }
+        });
 
         //recycler view
         ArtikalAdapter adapterArtikli = new ArtikalAdapter(this);

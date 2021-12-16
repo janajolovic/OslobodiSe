@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,11 +16,23 @@ public class ArtikalActivity extends AppCompatActivity {
     private TextView txtOpis;
     private ImageView img;
     private TextView txtNaziv;
+    private ImageView artikalBack;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_artikal);
+
+        artikalBack = findViewById(R.id.artikalImage);
+        artikalBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                TODO: popraviti ovo, neefikasno + ne radi
+//                Intent intent = new Intent(this, MainActivity.class);
+//                startActivity(intent);
+            }
+        });
 
         initViews();
 
