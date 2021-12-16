@@ -15,7 +15,6 @@
         app:headerLayout="@layout/header"
         app:menu="@menu/main_menu"
         android:layout_gravity="start"
-
         />
 
     <androidx.constraintlayout.widget.ConstraintLayout
