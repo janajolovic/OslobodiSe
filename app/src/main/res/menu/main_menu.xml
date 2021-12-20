@@ -7,7 +7,7 @@
             android:title="Moj profil"/>
         <item
             android:id="@+id/mojiOglasi"
-            android:title="MojiOglasi"/>
+            android:title="Moji Oglasi"/>
         <item
             android:id="@+id/omiljeniOglasi"
             android:title="Omiljeni Oglasi"/>
