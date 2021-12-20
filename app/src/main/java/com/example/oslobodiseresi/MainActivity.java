@@ -1,5 +1,7 @@
 package com.example.oslobodiseresi;
 
+import static com.example.oslobodiseresi.ArtikalActivity.ARTIKAL_ID_KEY;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,6 +10,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -27,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private ImageView back;
     private ImageView hamburger;
+    private ImageView btnPrijava;
     public ActionBarDrawerToggle actionBarDrawerToggle;
 
     @Override
@@ -72,6 +76,14 @@ public class MainActivity extends AppCompatActivity {
         recyclerArtikli.setLayoutManager(new GridLayoutManager(this, 2));
 
 
+        btnPrijava.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                TODO: popraviti ovo
+//                Intent intent = new Intent(this, LoginActivity.class);
+//                startActivity(intent);
+            }
+        });
     }
 
     @Override
