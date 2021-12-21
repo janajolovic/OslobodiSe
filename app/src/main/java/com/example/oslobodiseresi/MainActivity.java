@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private ImageView back;
     private ImageView hamburger;
-    private ImageView btnPrijava;
+    private ImageView  imgPrijava;
     public ActionBarDrawerToggle actionBarDrawerToggle;
 
     @Override
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_closed);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
-
+//
         navigationView = findViewById(R.id.navView);
         back = navigationView.getHeaderView(0).findViewById(R.id.navBack);
         hamburger = findViewById(R.id.imgHamburger);
@@ -75,21 +75,19 @@ public class MainActivity extends AppCompatActivity {
         recyclerArtikli.setAdapter(adapterArtikli);
         recyclerArtikli.setLayoutManager(new GridLayoutManager(this, 2));
 
-
-        btnPrijava.setOnClickListener(new View.OnClickListener() {
+        imgPrijava = findViewById(R.id.imgProfil);
+        imgPrijava.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                TODO: popraviti ovo
-//                Intent intent = new Intent(this, LoginActivity.class);
-//                startActivity(intent);
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
             }
         });
     }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-    }
+//
+//    @Override
+//    public void onBackPressed() {
+//        super.onBackPressed();
+//    }
 
 
 }
