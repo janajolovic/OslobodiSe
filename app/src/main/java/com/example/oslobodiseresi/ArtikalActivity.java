@@ -24,13 +24,12 @@ public class ArtikalActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_artikal);
 
-        artikalBack = findViewById(R.id.artikalImage);
+        artikalBack = findViewById(R.id.artikalBack);
         artikalBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                TODO: popraviti ovo, neefikasno + ne radi
-//                Intent intent = new Intent(this, MainActivity.class);
-//                startActivity(intent);
+           @Override
+           public void onClick(View v) {
+                Intent intent = new Intent(ArtikalActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
 
