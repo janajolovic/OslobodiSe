@@ -18,41 +18,52 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-<!--TODO: dodati ikonice u hint-->
     <EditText
-        android:id="@+id/lozinka"
+        android:id="@+id/emailLogin"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="72dp"
+        android:ems="10"
+        android:hint="E-mail adresa"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPrijavaNebitno" />
+    <!--TODO: dodati ikonice u hint-->
+
+    <EditText
+        android:id="@+id/lozinkaLogin"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
         android:layout_marginTop="32dp"
         android:ems="10"
         android:hint="Lozinka"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username" />
+        app:layout_constraintTop_toBottomOf="@+id/emailLogin" />
 
-    <EditText
-        android:id="@+id/username"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
-        android:ems="10"
-        android:hint="Ime ili e-mail adresa"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPrijavaNebitno" />
-<!--TODO: proveriti da li radi shadow i dodati dimenzije-->
+    <!--TODO: proveriti da li radi shadow i dodati dimenzije-->
     <Button
         android:id="@+id/prijavaBtn"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:shadowDx="7"
+        android:shadowDy="7"
         android:text="Prijavite se"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lozinka"
-        android:shadowDx="7"
-        android:shadowDy="7"/>
+        app:layout_constraintTop_toBottomOf="@+id/lozinkaLogin" />
+
+    <TextView
+        android:id="@+id/txtLoginToRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nemate nalog? Registrujte se!"
+        android:textColor="@color/dark_blue"
+        app:layout_constraintEnd_toEndOf="@+id/prijavaBtn"
+        app:layout_constraintStart_toStartOf="@+id/prijavaBtn"
+        app:layout_constraintTop_toBottomOf="@+id/prijavaBtn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
