@@ -15,8 +15,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText Email;
     private EditText Lozinka;
     private Button dugme;
-
-    private TextView LoginToRegister;
+    private TextView loginPogresno;
+    private TextView loginToRegister;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,23 +25,27 @@ public class LoginActivity extends AppCompatActivity {
         Email = findViewById(R.id.emailLogin);
         Lozinka = findViewById(R.id.lozinkaLogin);
         dugme = findViewById(R.id.prijavaBtn);
-        LoginToRegister = findViewById(R.id.txtLoginToRegister);
+        loginToRegister = findViewById(R.id.txtLoginToRegister);
+        loginPogresno = findViewById(R.id.loginPogresno);
 
         dugme.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Korisnik k = Utils.getInstance().prijaviKorisnika(Email.getText().toString(), Lozinka.getText().toString());
                 //TODO: poboljsati.
-                if(k != null)
-                    Toast.makeText(LoginActivity.this, k.getIme()+" "+k.getPrezime()+" je prijavljen.", Toast.LENGTH_SHORT).show();
-                else
-                    Toast.makeText(LoginActivity.this, "Pogresna lozinka ili email.", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(intent);
+                if(k != null) {
+                    loginPogresno.setVisibility(View.INVISIBLE);
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                } else {
+                    loginPogresno.setVisibility(View.VISIBLE);
+
+                }
+
             }
         });
 
-        LoginToRegister.setOnClickListener(new View.OnClickListener() {
+        loginToRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, RegistracijaActivity.class);
