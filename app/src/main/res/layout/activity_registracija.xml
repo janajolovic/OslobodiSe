@@ -69,8 +69,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:ems="10"
-            android:inputType="textPassword"
             android:hint="Lozinka"
+            android:inputType="textPassword"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/registracijaEmail" />
 
@@ -106,5 +106,28 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/registracijaTelefon" />
 
+        <TextView
+            android:id="@+id/txtRegisterToLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:text="Već imate nalog? Prijavite se!"
+            android:textColor="@color/dark_blue"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/registracijaBtn"
+            app:layout_constraintStart_toStartOf="@+id/registracijaBtn"
+            app:layout_constraintTop_toBottomOf="@+id/registracijaBtn" />
+
+        <TextView
+            android:id="@+id/registracijaPogresneLozinke"
+            android:layout_height="wrap_content"
+            android:text="Lozinke nisu iste"
+            android:visibility="invisible"
+            android:textColor="#ff0000"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/registracijaLozinkaPonovi"
+            android:layout_width="wrap_content"/>
+
+        <!--        TODO: scroll view-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

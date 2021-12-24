@@ -14,6 +14,7 @@
         android:text="Prijava"
         android:textSize="34sp"
         android:textStyle="bold"
+        android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -59,11 +60,23 @@
     <TextView
         android:id="@+id/txtLoginToRegister"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
         android:text="Nemate nalog? Registrujte se!"
         android:textColor="@color/dark_blue"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/prijavaBtn"
         app:layout_constraintStart_toStartOf="@+id/prijavaBtn"
         app:layout_constraintTop_toBottomOf="@+id/prijavaBtn" />
+
+    <TextView
+        android:id="@+id/loginPogresno"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="E-mail ili lozinka nisu ispravni"
+        android:textColor="#ff0000"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lozinkaLogin" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
