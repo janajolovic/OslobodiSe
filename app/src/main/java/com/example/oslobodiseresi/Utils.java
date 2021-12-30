@@ -44,15 +44,15 @@ public class Utils {
     public boolean addToKorisnici(Korisnik k){
         return korisnici.add(k);
     }
-
-    public Korisnik prijaviKorisnika(String email, String lozinka)
-    {
-        for(int i=0;i<korisnici.size();i++){
-            if(korisnici.get(i).getEmail().equals(email) && korisnici.get(i).getLozinka().equals(lozinka))
-                return korisnici.get(i);
-        }
-        return null;
-    }
+//
+//    public Korisnik prijaviKorisnika(String email, String lozinka)
+//    {
+//        for(int i=0;i<korisnici.size();i++){
+//            if(korisnici.get(i).getEmail().equals(email) && korisnici.get(i).getLozinka().equals(lozinka))
+//                return korisnici.get(i);
+//        }
+//        return null;
+//    }
 
     //neefikasno, ali nema veze i bice jos gore
     public static Artikal getArtikalById(int id)

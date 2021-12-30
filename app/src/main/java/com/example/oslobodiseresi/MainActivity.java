@@ -45,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
         recyclerArtikli = findViewById(R.id.artikli);
 
         drawerLayout = findViewById(R.id.drawerLayout);

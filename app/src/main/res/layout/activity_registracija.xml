@@ -19,37 +19,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5" />
-
         <EditText
             android:id="@+id/registracijaIme"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginTop="32dp"
-            android:layout_marginEnd="16dp"
             android:ems="10"
-            android:hint="Ime"
-            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            android:hint="Korisničko ime"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtRegistracijaNebitno" />
-
-        <EditText
-            android:id="@+id/registracijaPrezime"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="Prezime"
-            app:layout_constraintBottom_toBottomOf="@+id/registracijaIme"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline3"
-            app:layout_constraintTop_toTopOf="@+id/registracijaIme" />
 
         <EditText
             android:id="@+id/registracijaEmail"

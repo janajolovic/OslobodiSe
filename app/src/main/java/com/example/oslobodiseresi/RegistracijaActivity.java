@@ -13,7 +13,6 @@ import android.widget.Toast;
 public class RegistracijaActivity extends AppCompatActivity {
 
     private EditText ime;
-    private EditText prezime;
     private EditText email;
     private EditText lozinka;
     private EditText lozinkaPonovi;
@@ -27,7 +26,6 @@ public class RegistracijaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registracija);
 
         ime = findViewById(R.id.registracijaIme);
-        prezime = findViewById(R.id.registracijaPrezime);
         email = findViewById(R.id.registracijaEmail);
         lozinka = findViewById(R.id.registracijaLozinka);
         lozinkaPonovi = findViewById(R.id.registracijaLozinkaPonovi);
@@ -44,16 +42,26 @@ public class RegistracijaActivity extends AppCompatActivity {
                     return;
                 }
                 pogresneLozinke.setVisibility(View.INVISIBLE);
-                Utils.getInstance().addToKorisnici(new Korisnik(
-                    ime.getText().toString(),
-                    prezime.getText().toString(),
-                    email.getText().toString(),
-                    lozinka.getText().toString(),
-                    brojTelefona.getText().toString()
-                ));
 
+                Korisnik k = UserRepository.getInstance(MainApplication.apiManager).Register(new RegistarModel(
+                   ime.getText().toString(),
+                   email.getText().toString(),
+                   lozinka.getText().toString(),
+                   brojTelefona.getText().toString()
+                )).getValue();
+
+                if(k==null){
+                    Toast.makeText(RegistracijaActivity.this, "Null je", Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    Toast.makeText(RegistracijaActivity.this, k.getIme(), Toast.LENGTH_LONG).show();
+                }
+                /*
                 Intent intent = new Intent(RegistracijaActivity.this, MainActivity.class);
                 startActivity(intent);
+
+                 */
             }
         });
         registerToLogin.setOnClickListener(new View.OnClickListener() {

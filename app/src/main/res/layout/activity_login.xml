@@ -30,7 +30,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtPrijavaNebitno" />
-    <!--TODO: dodati ikonice u hint-->
 
     <EditText
         android:id="@+id/lozinkaLogin"
@@ -44,7 +43,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailLogin" />
 
-    <!--TODO: proveriti da li radi shadow i dodati dimenzije-->
     <Button
         android:id="@+id/prijavaBtn"
         android:layout_width="200dp"

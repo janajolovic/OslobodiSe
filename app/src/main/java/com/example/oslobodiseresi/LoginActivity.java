@@ -31,16 +31,15 @@ public class LoginActivity extends AppCompatActivity {
         dugme.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Korisnik k = Utils.getInstance().prijaviKorisnika(Email.getText().toString(), Lozinka.getText().toString());
-                //TODO: poboljsati.
-                if(k != null) {
-                    loginPogresno.setVisibility(View.INVISIBLE);
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
-                } else {
-                    loginPogresno.setVisibility(View.VISIBLE);
-
-                }
+//                Korisnik k = Utils.getInstance().prijaviKorisnika(Email.getText().toString(), Lozinka.getText().toString());
+//                if(k != null) {
+//                    loginPogresno.setVisibility(View.INVISIBLE);
+//                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                    startActivity(intent);
+//                } else {
+//                    loginPogresno.setVisibility(View.VISIBLE);
+//
+//                }
 
             }
         });
