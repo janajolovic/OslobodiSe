@@ -33,6 +33,7 @@ public class UserRepository {
                     korisnik.setValue(response.body());
                 }else{
                     Log.println(Log.ERROR, "[Greska1]",response.message());
+                    korisnik.setValue(null);
                 }
 
             }
@@ -40,6 +41,7 @@ public class UserRepository {
             @Override
             public void onFailure(Call<Korisnik> call, Throwable t) {
                 Log.println(Log.ERROR, "[Greska]",t.getMessage());
+                korisnik.setValue(null);
             }
         });
         return korisnik;

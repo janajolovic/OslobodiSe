@@ -1,6 +1,8 @@
 package com.example.oslobodiseresi;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.MutableLiveData;
+
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -43,25 +45,24 @@ public class RegistracijaActivity extends AppCompatActivity {
                 }
                 pogresneLozinke.setVisibility(View.INVISIBLE);
 
-                Korisnik k = UserRepository.getInstance(MainApplication.apiManager).Register(new RegistarModel(
+
+                MutableLiveData<Korisnik> k = UserRepository.getInstance(MainApplication.apiManager).Register(new RegistarModel(
                    ime.getText().toString(),
                    email.getText().toString(),
                    lozinka.getText().toString(),
                    brojTelefona.getText().toString()
-                )).getValue();
+                ));
 
-                if(k==null){
-                    Toast.makeText(RegistracijaActivity.this, "Null je", Toast.LENGTH_LONG).show();
-                }
-                else
-                {
-                    Toast.makeText(RegistracijaActivity.this, k.getIme(), Toast.LENGTH_LONG).show();
-                }
-                /*
-                Intent intent = new Intent(RegistracijaActivity.this, MainActivity.class);
-                startActivity(intent);
+                k.observe(RegistracijaActivity.this, funk->{
+                    if(k.getValue()!=null){
+                        Toast.makeText(RegistracijaActivity.this, "Korisnik je "+k.getValue().getIme(), Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(RegistracijaActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    }
+                    else
+                        Toast.makeText(RegistracijaActivity.this, "Korisnik je null :((((", Toast.LENGTH_LONG).show();
 
-                 */
+                });
             }
         });
         registerToLogin.setOnClickListener(new View.OnClickListener() {
