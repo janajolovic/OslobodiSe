@@ -5,6 +5,9 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 public interface RestInterface {
-    @POST("register")
+    @POST("users/register")
     Call<Korisnik> register(@Body RegistarModel korisnik);
+
+    @POST("users/login")
+    Call<Korisnik> login(@Body LoginModel korisnik);
 }

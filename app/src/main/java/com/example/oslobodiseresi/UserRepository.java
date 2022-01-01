@@ -46,4 +46,25 @@ public class UserRepository {
         });
         return korisnik;
     }
+
+    public MutableLiveData<Korisnik> Login(LoginModel model) {
+        apiManager.LoginUser(model, new Callback<Korisnik>() {
+            @Override
+            public void onResponse(Call<Korisnik> call, Response<Korisnik> response) {
+                if (response.isSuccessful()) {
+                    korisnik.setValue(response.body());
+                }else{
+                    Log.println(Log.ERROR, "[Greska1]",response.message());
+                    korisnik.setValue(null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Korisnik> call, Throwable t) {
+                Log.println(Log.ERROR, "[Greska]",t.getMessage());
+                korisnik.setValue(null);
+            }
+        });
+        return korisnik;
+    }
 }
