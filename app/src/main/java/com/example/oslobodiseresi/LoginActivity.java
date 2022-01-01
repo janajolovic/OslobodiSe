@@ -1,6 +1,7 @@
 package com.example.oslobodiseresi;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.MutableLiveData;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,15 +32,17 @@ public class LoginActivity extends AppCompatActivity {
         dugme.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Korisnik k = Utils.getInstance().prijaviKorisnika(Email.getText().toString(), Lozinka.getText().toString());
-//                if(k != null) {
-//                    loginPogresno.setVisibility(View.INVISIBLE);
-//                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//                    startActivity(intent);
-//                } else {
-//                    loginPogresno.setVisibility(View.VISIBLE);
-//
-//                }
+                MutableLiveData<Korisnik> k = UserRepository.getInstance(MainApplication.apiManager).Login(new LoginModel(Email.getText().toString(), Lozinka.getText().toString()));
+                k.observe(LoginActivity.this, funk->{
+                    if(k.getValue()!=null){
+                        Toast.makeText(LoginActivity.this, "Korisnik je "+k.getValue().getIme(), Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    }
+                    else
+                        Toast.makeText(LoginActivity.this, "Korisnik je null :((((", Toast.LENGTH_LONG).show();
+
+                });
 
             }
         });

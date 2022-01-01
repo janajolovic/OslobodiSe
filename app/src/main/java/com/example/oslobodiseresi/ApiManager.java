@@ -21,4 +21,9 @@ public class ApiManager {
         Call<Korisnik> registerCall = service.register(model);
         registerCall.enqueue(callback);
     }
+
+    public void LoginUser(LoginModel model, Callback<Korisnik> callback) {
+        Call<Korisnik> loginCall = service.login(model);
+        loginCall.enqueue((callback));
+    }
 }
