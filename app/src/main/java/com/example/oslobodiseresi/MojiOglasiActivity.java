@@ -1,7 +1,5 @@
 package com.example.oslobodiseresi;
 
-import static com.example.oslobodiseresi.ArtikalActivity.ARTIKAL_ID_KEY;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,18 +9,16 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MojiOglasiActivity extends AppCompatActivity {
 
     private RecyclerView recyclerArtikli;
     private ArrayList<Artikal> artikli = new ArrayList<>();
@@ -44,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_moji_oglasi);
 
         recyclerArtikli = findViewById(R.id.artikli);
 
@@ -80,8 +76,9 @@ public class MainActivity extends AppCompatActivity {
         imgPrijava.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                startActivity(new Intent(MojiOglasiActivity.this, LoginActivity.class));
             }
         });
     }
 }
+
