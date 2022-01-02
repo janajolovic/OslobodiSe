@@ -8,4 +8,12 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="dark_blue">#092945</color>
+
+    <color name="svetlo_plava">#124FDD</color>
+    <color name="plava">#0A369D</color>
+    <color name="tamno_plava">#082977</color>
+    <color name="svetlo_narandzasta">#FA8449</color>
+    <color name="narandzasta">#cc6b3b</color>
+    <color name="tandzarina">#bb4430</color>
+    <color name="platinum">#e5e5e5</color>
 </resources>

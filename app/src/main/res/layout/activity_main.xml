@@ -35,7 +35,7 @@
             android:id="@+id/relHead"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@color/design_default_color_primary"
+            android:background="?android:attr/colorPrimary"
             app:layout_constraintBottom_toTopOf="@+id/guideline2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -48,14 +48,15 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="5dp"
                 android:src="@drawable/ic_menu" />
+
             <ImageView
                 android:id="@+id/imgProfil"
                 android:layout_width="@dimen/velicina_ikonice"
                 android:layout_height="@dimen/velicina_ikonice"
+                android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="5dp"
-                android:layout_alignParentRight="true"
-                android:src="@drawable/ic_account"/>
+                android:src="@drawable/ic_account" />
             <ImageView
                 android:id="@+id/imgSearch"
                 android:layout_width="@dimen/velicina_ikonice"

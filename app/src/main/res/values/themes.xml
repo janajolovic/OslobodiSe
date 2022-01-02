@@ -2,14 +2,14 @@
     <!-- Base application theme. -->
     <style name="Theme.OslobodiSeResi" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#4859ad</item>
-        <item name="colorPrimaryVariant">#27187e</item>
+        <item name="colorPrimary">@color/plava</item>
+        <item name="colorPrimaryVariant">@color/tamno_plava</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">#cc6b3b</item>
-        <item name="colorSecondaryVariant">#bb4430</item>
+        <item name="colorSecondary">@color/narandzasta</item>
+        <item name="colorSecondaryVariant">@color/tandzarina</item>
         <item name="colorOnSecondary">@color/white</item>
-        <item name="colorBackgroundFloating">#e5e5e5</item>
+        <item name="colorBackgroundFloating">@color/platinum</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
