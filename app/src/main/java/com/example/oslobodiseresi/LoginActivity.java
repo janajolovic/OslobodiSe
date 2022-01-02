@@ -40,8 +40,7 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                     else
-                        Toast.makeText(LoginActivity.this, "Korisnik je null :((((", Toast.LENGTH_LONG).show();
-
+                        loginPogresno.setVisibility(View.VISIBLE);
                 });
 
             }
