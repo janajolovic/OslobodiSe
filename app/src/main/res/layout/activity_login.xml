@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?android:attr/background"
     android:padding="32dp">
 
     <TextView
@@ -61,7 +60,6 @@
         android:layout_height="40dp"
         android:gravity="center_vertical"
         android:text="Nemate nalog? Registrujte se!"
-        android:textColor="?android:attr/colorPrimary"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/prijavaBtn"
         app:layout_constraintStart_toStartOf="@+id/prijavaBtn"
