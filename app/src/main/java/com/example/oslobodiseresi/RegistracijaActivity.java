@@ -36,8 +36,6 @@ public class RegistracijaActivity extends AppCompatActivity {
         pogresneLozinke = findViewById(R.id.registracijaPogresneLozinke);
         registerToLogin = findViewById(R.id.txtRegisterToLogin);
 
-
-//        TODO: da nema enter kad se unosi ime jer posle 'nestane'
         dugme.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
