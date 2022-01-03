@@ -14,9 +14,6 @@
         <item
             android:id="@+id/omiljeniOglasi"
             android:title="Omiljeni Oglasi"/>
-        <item
-            android:id="@+id/odjava"
-            android:title="Odjava"/>
     </group>
     <group android:checkableBehavior="single">
         <item
