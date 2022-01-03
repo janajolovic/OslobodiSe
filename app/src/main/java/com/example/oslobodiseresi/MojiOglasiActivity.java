@@ -18,67 +18,53 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 
-public class MojiOglasiActivity extends AppCompatActivity {
+public class MojiOglasiActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
-    private RecyclerView recyclerArtikli;
-    private ArrayList<Artikal> artikli = new ArrayList<>();
-    private DrawerLayout drawerLayout;
-    private NavigationView navigationView;
     private ImageView back;
-    private ImageView hamburger;
-    private ImageView  imgPrijava;
-    public ActionBarDrawerToggle actionBarDrawerToggle;
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+    private DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        TODO: promeniti layout
         setContentView(R.layout.activity_moji_oglasi);
 
-        recyclerArtikli = findViewById(R.id.artikli);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
-        drawerLayout = findViewById(R.id.drawerLayout);
-        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_closed);
-        drawerLayout.addDrawerListener(actionBarDrawerToggle);
-        actionBarDrawerToggle.syncState();
-//
-        navigationView = findViewById(R.id.navView);
+        drawerLayout = findViewById(R.id.drawer_layout);
         back = navigationView.getHeaderView(0).findViewById(R.id.navBack);
-        hamburger = findViewById(R.id.imgHamburger);
-        hamburger.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                drawerLayout.openDrawer((GravityCompat.START));
-            }
-        });
         back.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 drawerLayout.closeDrawer(GravityCompat.START);
             }
         });
+    }
 
-        //recycler view
-        ArtikalAdapter adapterArtikli = new ArtikalAdapter(this);
-        adapterArtikli.setArtikli(Utils.getInstance().getArtikli());
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Intent intent;
+        switch (item.getItemId()) {
 
-        recyclerArtikli.setAdapter(adapterArtikli);
-        recyclerArtikli.setLayoutManager(new GridLayoutManager(this, 2));
-
-        imgPrijava = findViewById(R.id.imgProfil);
-        imgPrijava.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MojiOglasiActivity.this, LoginActivity.class));
-            }
-        });
+            case R.id.pocetna:
+                intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                break;
+            //TODO: dovrsiti
+            case R.id.mojProfil:
+                intent = new Intent(this, MojProfilActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.mojiOglasi:
+                intent = new Intent(this, MojiOglasiActivity.class);
+                startActivity(intent);
+        }
+        //close navigation drawer
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return false;
     }
 }
 
