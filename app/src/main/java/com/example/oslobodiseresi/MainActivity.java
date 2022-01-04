@@ -94,18 +94,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (item.getItemId()) {
 
             case R.id.pocetna:
-                intent = new Intent(MainActivity.this, MainActivity.class);
+                intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
                 break;
             //TODO: dovrsiti
             case R.id.mojProfil:
-                intent = new Intent(MainActivity.this, MojProfilActivity.class);
+                intent = new Intent(this, MojProfilActivity.class);
                 startActivity(intent);
                 break;
-            //TODO: dovrsiti
-
+            case R.id.mojiOglasi:
+                intent = new Intent(this, MojiOglasiActivity.class);
+                startActivity(intent);
         }
         //close navigation drawer
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         drawerLayout.closeDrawer(GravityCompat.START);
         return false;
     }
