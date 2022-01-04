@@ -17,12 +17,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private RecyclerView recyclerArtikli;
     private ArrayList<Artikal> artikli = new ArrayList<>();
@@ -44,16 +45,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.nav_activity_main);
 
         recyclerArtikli = findViewById(R.id.artikli);
 
-        drawerLayout = findViewById(R.id.drawerLayout);
+        drawerLayout = findViewById(R.id.drawer_layout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_closed);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 //
-        navigationView = findViewById(R.id.navView);
+        navigationView = findViewById(R.id.nav_view);
         back = navigationView.getHeaderView(0).findViewById(R.id.navBack);
         hamburger = findViewById(R.id.imgHamburger);
         hamburger.setOnClickListener(new View.OnClickListener() {
@@ -68,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
                 drawerLayout.closeDrawer(GravityCompat.START);
             }
         });
+
+        navigationView.setNavigationItemSelectedListener(this);
 
         //recycler view
         ArtikalAdapter adapterArtikli = new ArtikalAdapter(this);
@@ -84,4 +87,27 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Intent intent;
+        switch (item.getItemId()) {
+
+            case R.id.pocetna:
+                intent = new Intent(MainActivity.this, MainActivity.class);
+                startActivity(intent);
+                break;
+            //TODO: dovrsiti
+            case R.id.mojProfil:
+                intent = new Intent(MainActivity.this, MojProfilActivity.class);
+                startActivity(intent);
+                break;
+            //TODO: dovrsiti
+
+        }
+        //close navigation drawer
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return false;
+    }
+
 }
