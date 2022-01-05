@@ -65,4 +65,14 @@
         app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/txtNaziv" />
 
+    <ImageView
+        android:id="@+id/imgFav"
+        android:layout_width="@dimen/velicina_ikonice"
+        android:layout_height="@dimen/velicina_ikonice"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgOpsirno"
+        app:srcCompat="@drawable/ic_prazno_srce" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
