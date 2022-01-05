@@ -4,8 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="32dp"
     tools:context=".RegistracijaActivity">
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"/>
 
         <TextView
             android:id="@+id/txtRegistracijaNebitno"
@@ -17,13 +19,15 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
         <EditText
             android:id="@+id/registracijaIme"
             android:layout_width="0dp"
             android:layout_height="48dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
             android:ems="10"
             android:hint="Korisničko ime"
             app:layout_constraintEnd_toEndOf="parent"
@@ -36,10 +40,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:ems="10"
-            android:inputType="textEmailAddress"
             android:hint="E-mail adresa"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:inputType="textEmailAddress"
+            app:layout_constraintEnd_toEndOf="@+id/registracijaIme"
+            app:layout_constraintStart_toStartOf="@+id/registracijaIme"
             app:layout_constraintTop_toBottomOf="@+id/registracijaIme" />
 
         <EditText
@@ -50,7 +54,7 @@
             android:ems="10"
             android:hint="Lozinka"
             android:inputType="textPassword"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/registracijaIme"
             app:layout_constraintTop_toBottomOf="@+id/registracijaEmail" />
 
         <EditText
@@ -59,9 +63,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:ems="10"
-            android:inputType="textPassword"
             android:hint="Ponovite lozinku"
-            app:layout_constraintStart_toStartOf="parent"
+            android:inputType="textPassword"
+            app:layout_constraintStart_toStartOf="@+id/registracijaIme"
             app:layout_constraintTop_toBottomOf="@+id/registracijaLozinka" />
 
         <EditText
@@ -72,7 +76,7 @@
             android:ems="10"
             android:hint="Broj telefona"
             android:inputType="phone"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/registracijaIme"
             app:layout_constraintTop_toBottomOf="@+id/registracijaLozinkaPonovi" />
 
         <Button
@@ -98,13 +102,13 @@
 
         <TextView
             android:id="@+id/registracijaPogresneLozinke"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Lozinke nisu iste"
-            android:visibility="invisible"
             android:textColor="#ff0000"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/registracijaLozinkaPonovi"
-            android:layout_width="wrap_content"/>
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="@+id/registracijaLozinkaPonovi"
+            app:layout_constraintTop_toBottomOf="@+id/registracijaLozinkaPonovi" />
 
         <!--        TODO: scroll view-->
 

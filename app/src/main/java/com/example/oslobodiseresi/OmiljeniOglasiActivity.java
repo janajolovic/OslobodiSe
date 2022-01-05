@@ -14,23 +14,19 @@ import android.widget.ImageView;
 
 import com.google.android.material.navigation.NavigationView;
 
-public class MojProfilActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class OmiljeniOglasiActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private ImageView back;
-    private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.nav_activity_moj_profil);
+        setContentView(R.layout.nav_activity_omiljeni_oglasi);
 
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         setToolbar(this);
     }
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Intent intent;
