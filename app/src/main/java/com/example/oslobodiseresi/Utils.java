@@ -3,36 +3,32 @@ package com.example.oslobodiseresi;
 import java.util.ArrayList;
 
 public class Utils {
+    private int jelUlogovan;
+    private Korisnik korisnik;
+
     private static Utils instance;
 
     private static ArrayList<Artikal> artikli;
     private static ArrayList<Korisnik> korisnici;
-
     private Utils(){
-        if(instance == null)
-        {
-            artikli = new ArrayList<>();
-            korisnici = new ArrayList<>();
-            initData();
-        }
-    }
+        jelUlogovan = 0;
+        korisnik = null;
 
-    public static Utils getInstance(){
-        if(instance == null)
-            instance = new Utils();
-        return instance;
+        artikli = new ArrayList<>();
+        korisnici = new ArrayList<>();
+        initData();
     }
 
     private void initData()
     {
-        artikli.add(new Artikal(1, "Kasika", "https://image.shutterstock.com/image-photo/wooden-spoon-placed-on-white-260nw-1716144358.jpg", "Kasika 1"));
-        artikli.add(new Artikal(2, "Kasika", "https://image.shutterstock.com/image-photo/wooden-spoon-placed-on-white-260nw-1716144358.jpg", "Kasika 2"));
-        artikli.add(new Artikal(3, "Kasika", "https://image.shutterstock.com/image-photo/wooden-spoon-placed-on-white-260nw-1716144358.jpg", "Kasika 3"));
-        artikli.add(new Artikal(4, "Kasika", "https://image.shutterstock.com/image-photo/wooden-spoon-placed-on-white-260nw-1716144358.jpg", "Kasika 4"));
-        artikli.add(new Artikal(5, "Kasika", "https://image.shutterstock.com/image-photo/wooden-spoon-placed-on-white-260nw-1716144358.jpg", "Kasika 5"));
-        artikli.add(new Artikal(6, "Kasika", "https://image.shutterstock.com/image-photo/wooden-spoon-placed-on-white-260nw-1716144358.jpg", "Kasika 6"));
-        artikli.add(new Artikal(7, "Kasika", "https://image.shutterstock.com/image-photo/wooden-spoon-placed-on-white-260nw-1716144358.jpg", "Kasika 7"));
-        artikli.add(new Artikal(8, "Kasika", "https://image.shutterstock.com/image-photo/wooden-spoon-placed-on-white-260nw-1716144358.jpg", "Kasika 8"));
+        artikli.add(new Artikal(1, "Hamdov Hleb", "https://stil.kurir.rs/data/images/2020/04/25/13/217211_shutterstock-551620258_ls.jpg", "Hleb"));
+        artikli.add(new Artikal(2, "Hamdov Hleb", "https://stil.kurir.rs/data/images/2020/04/25/13/217211_shutterstock-551620258_ls.jpg", "Hleb"));
+        artikli.add(new Artikal(3, "Hamdov Hleb", "https://stil.kurir.rs/data/images/2020/04/25/13/217211_shutterstock-551620258_ls.jpg", "Hleb"));
+        artikli.add(new Artikal(4, "Hamdov Hleb", "https://stil.kurir.rs/data/images/2020/04/25/13/217211_shutterstock-551620258_ls.jpg", "Hleb"));
+        artikli.add(new Artikal(5, "Hamdov Hleb", "https://stil.kurir.rs/data/images/2020/04/25/13/217211_shutterstock-551620258_ls.jpg", "Hleb"));
+        artikli.add(new Artikal(6, "Hamdov Hleb", "https://stil.kurir.rs/data/images/2020/04/25/13/217211_shutterstock-551620258_ls.jpg", "Hleb"));
+        artikli.add(new Artikal(7, "Hamdov Hleb", "https://stil.kurir.rs/data/images/2020/04/25/13/217211_shutterstock-551620258_ls.jpg", "Hleb"));
+        artikli.add(new Artikal(8, "Hamdov Hleb", "https://stil.kurir.rs/data/images/2020/04/25/13/217211_shutterstock-551620258_ls.jpg", "Hleb"));
     }
 
     public static ArrayList<Artikal> getArtikli() {
@@ -62,5 +58,27 @@ public class Utils {
                 return artikli.get(i);
         }
         return null;
+    }
+
+    public static Utils getInstance(){
+        if(instance == null)
+            instance = new Utils();
+        return instance;
+    }
+
+    public int getJelUlogovan() {
+        return jelUlogovan;
+    }
+
+    public Korisnik getKorisnik() {
+        return korisnik;
+    }
+
+    public void setKorisnik(Korisnik korisnik) {
+        this.korisnik = korisnik;
+    }
+
+    public void setJelUlogovan(int jelUlogovan) {
+        this.jelUlogovan = jelUlogovan;
     }
 }

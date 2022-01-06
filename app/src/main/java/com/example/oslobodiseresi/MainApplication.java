@@ -9,5 +9,6 @@ public class MainApplication extends Application {
     public void onCreate() {
         super.onCreate();
         apiManager = ApiManager.getInstance();
+        Utils.getInstance();
     }
 }

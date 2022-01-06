@@ -51,6 +51,8 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
                     if(k.getValue()!=null){
                         Toast.makeText(LoginActivity.this, "Korisnik je "+k.getValue().getIme(), Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        Utils.getInstance().setKorisnik(k.getValue());
+                        Utils.getInstance().setJelUlogovan(1);
                         startActivity(intent);
                     }
                     else

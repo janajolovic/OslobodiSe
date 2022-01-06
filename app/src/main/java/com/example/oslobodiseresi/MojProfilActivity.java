@@ -11,11 +11,13 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 
 public class MojProfilActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
+    private TextView textView4;
     private ImageView back;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -27,6 +29,10 @@ public class MojProfilActivity extends AppCompatActivity implements NavigationVi
 
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        textView4 = findViewById(R.id.textView4);
+
+        if(Utils.getInstance().getJelUlogovan() == 1)
+            textView4.setText(Utils.getInstance().getKorisnik().getIme());
 
         setToolbar(this);
     }
