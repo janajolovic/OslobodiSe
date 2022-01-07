@@ -47,9 +47,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         adapterArtikli.setArtikli(Utils.getInstance().getArtikli());
 
         recyclerArtikli.setAdapter(adapterArtikli);
-        recyclerArtikli.setLayoutManager(new GridLayoutManager(this, 2));
-
-
+        recyclerArtikli.setLayoutManager(new GridLayoutManager(this, 1));
     }
 
     //todo sve funkcije ispod moraju da se kopiraju na sve ostale aktivitije, naci nacin da se ovo izbegne

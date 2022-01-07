@@ -81,7 +81,7 @@ public class ArtikalActivity extends AppCompatActivity implements NavigationView
         txtNaziv.setText(artikal.getNaziv());
         Glide.with(this)
                 .asBitmap()
-                .load(artikal.getUrlSlike())
+                .load(artikal.getSlika())
                 .into(img);
     }
 

@@ -38,17 +38,26 @@ public class ArtikalAdapter extends RecyclerView.Adapter<ArtikalAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.txtView.setText(artikli.get(position).getNaziv());
-        Glide.with(context)
-                .asBitmap()
-                .load(artikli.get(position).getUrlSlike())
-                .into(holder.imgView);
+        holder.imgProfil.setImageBitmap(artikli.get(position).getSlika());
 
-        holder.parent.setOnClickListener(new View.OnClickListener() {
+        holder.imgProfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ArtikalActivity.class);
                 intent.putExtra(ARTIKAL_ID_KEY, artikli.get(holder.getAdapterPosition()).getId());
                 context.startActivity(intent);
+            }
+        });
+
+        holder.imgFav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.isFav = !holder.isFav;
+                if (holder.isFav) {
+                    holder.imgFav.setImageResource(R.drawable.ic_heart);
+                } else {
+                    holder.imgFav.setImageResource(R.drawable.ic_prazno_srce);
+                }
             }
         });
     }
@@ -65,14 +74,19 @@ public class ArtikalAdapter extends RecyclerView.Adapter<ArtikalAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private CardView parent;
-        private ImageView imgView;
+        private ImageView imgProfil;
         private TextView txtView;
+        private ImageView imgFav;
+
+        private Boolean isFav;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imgView = itemView.findViewById(R.id.artikalImage);
+            isFav = false;
+            imgProfil = itemView.findViewById(R.id.artikalImage);
             txtView = itemView.findViewById(R.id.artikalNaziv);
             parent = itemView.findViewById(R.id.artikalParent);
+            imgFav = itemView.findViewById(R.id.imgFav);
         }
     }
 }
