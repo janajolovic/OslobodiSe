@@ -1,8 +1,12 @@
-package com.example.oslobodiseresi;
+package com.example.oslobodiseresi.Retrofit;
 
 import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
+
+import com.example.oslobodiseresi.Models.Korisnik;
+import com.example.oslobodiseresi.Models.LoginModel;
+import com.example.oslobodiseresi.Models.RegistarModel;
 
 import retrofit2.Call;
 import retrofit2.Callback;

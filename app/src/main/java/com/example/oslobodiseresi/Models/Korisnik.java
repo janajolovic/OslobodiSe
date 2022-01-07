@@ -1,4 +1,4 @@
-package com.example.oslobodiseresi;
+package com.example.oslobodiseresi.Models;
 
 import com.google.gson.annotations.SerializedName;
 

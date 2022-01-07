@@ -1,35 +1,55 @@
-package com.example.oslobodiseresi;
+package com.example.oslobodiseresi.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.oslobodiseresi.ArtikalAdapter;
+import com.example.oslobodiseresi.Models.Item;
+import com.example.oslobodiseresi.R;
+import com.example.oslobodiseresi.Utils;
 import com.google.android.material.navigation.NavigationView;
 
-public class MojiOglasiActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+import java.util.ArrayList;
 
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    private RecyclerView recyclerArtikli;
+    private ArrayList<Item> artikli = new ArrayList<>();
     private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.nav_activity_moji_oglasi);
+        setContentView(R.layout.nav_activity_main);
+
+        recyclerArtikli = findViewById(R.id.artikli);
 
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         setToolbar(this);
+
+        //recycler view
+        ArtikalAdapter adapterArtikli = new ArtikalAdapter(this);
+        adapterArtikli.setArtikli(Utils.getInstance().getArtikli());
+
+        recyclerArtikli.setAdapter(adapterArtikli);
+        recyclerArtikli.setLayoutManager(new GridLayoutManager(this, 1));
     }
 
-
+    //todo sve funkcije ispod moraju da se kopiraju na sve ostale aktivitije, naci nacin da se ovo izbegne
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Intent intent;
@@ -92,4 +112,5 @@ public class MojiOglasiActivity extends AppCompatActivity implements NavigationV
             }
         });
     }
+
 }

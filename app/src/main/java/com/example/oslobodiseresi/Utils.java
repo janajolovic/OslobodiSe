@@ -1,5 +1,17 @@
 package com.example.oslobodiseresi;
 
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.MutableLiveData;
+
+import com.example.oslobodiseresi.Models.Item;
+import com.example.oslobodiseresi.Models.Korisnik;
+import com.example.oslobodiseresi.Retrofit.ItemRepository;
+import com.example.oslobodiseresi.Retrofit.UserRepository;
+
 import java.util.ArrayList;
 
 public class Utils {
@@ -8,23 +20,32 @@ public class Utils {
 
     private static Utils instance;
 
-    private static ArrayList<Artikal> artikli;
+    private static ArrayList<Item> artikli;
     private static ArrayList<Korisnik> korisnici;
     private Utils(){
         jelUlogovan = 0;
         korisnik = null;
-
+        Log.println(Log.ERROR, "[Greska]","Konstruktor je pozvan");
         artikli = new ArrayList<>();
         korisnici = new ArrayList<>();
         initData();
     }
 
-    private void initData()
+    public void initData()
     {
+        Log.println(Log.ERROR, "[Greska]","init data je pozvan");
+       MutableLiveData<ArrayList<Item>> mld = new MutableLiveData<>();
+       mld = ItemRepository.getInstance(MainApplication.apiManager).getAllItems();
+       if(mld != null)
+        artikli = mld.getValue();
 
+//       if(artikli.size() != 0)
+//           Log.println(Log.ERROR, "[Greska]","Ima data");
+//        else
+//            Log.println(Log.ERROR, "[Greska]","nema data");
     }
 
-    public static ArrayList<Artikal> getArtikli() {
+    public static ArrayList<Item> getArtikli() {
         return artikli;
     }
 
@@ -34,7 +55,7 @@ public class Utils {
         return korisnici.add(k);
     }
 
-    public boolean addToArtikli(Artikal a){
+    public boolean addToArtikli(Item a){
         return artikli.add(a);
     }
 //
@@ -48,7 +69,7 @@ public class Utils {
 //    }
 
     //neefikasno, ali nema veze i bice jos gore
-    public static Artikal getArtikalById(int id)
+    public static Item getArtikalById(int id)
     {
         for(int i = 0; i<artikli.size(); i++) {
             if(id == artikli.get(i).getId())
@@ -78,4 +99,5 @@ public class Utils {
     public void setJelUlogovan(int jelUlogovan) {
         this.jelUlogovan = jelUlogovan;
     }
+
 }

@@ -1,105 +1,84 @@
-package com.example.oslobodiseresi;
+package com.example.oslobodiseresi.Activity;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.lifecycle.MutableLiveData;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.oslobodiseresi.Models.Korisnik;
+import com.example.oslobodiseresi.Models.LoginModel;
+import com.example.oslobodiseresi.MainApplication;
+import com.example.oslobodiseresi.R;
+import com.example.oslobodiseresi.Retrofit.UserRepository;
+import com.example.oslobodiseresi.Utils;
 import com.google.android.material.navigation.NavigationView;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
+public class LoginActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
-public class NapraviArtikal extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
+    private EditText Email;
+    private EditText Lozinka;
+    private Button dugme;
+    private TextView loginPogresno;
+    private TextView loginToRegister;
     private NavigationView navigationView;
-    private Button dodajArtikal;
-
-    private EditText naziv;
-    private EditText opis;
-    private ImageView izaberi;
-    private ImageView slika;
-
-    private Bitmap bitmap;
-
-    int SELECT_PHOTO = 1;
-    Uri uri;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.nav_activity_napravi_artikal);
+        setContentView(R.layout.nav_activity_login);
 
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        Utils.getInstance().initData();
+
         setToolbar(this);
 
-        naziv = findViewById(R.id.txtNaziv);
-        opis = findViewById(R.id.txtOpis);
-        slika = findViewById(R.id.slika);
+        Email = findViewById(R.id.emailLogin);
+        Lozinka = findViewById(R.id.lozinkaLogin);
+        dugme = findViewById(R.id.prijavaBtn);
+        loginToRegister = findViewById(R.id.txtLoginToRegister);
+        loginPogresno = findViewById(R.id.loginPogresno);
 
-        izaberi = findViewById(R.id.imgIzaberi);
-        izaberi.setOnClickListener(new View.OnClickListener() {
+        dugme.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(NapraviArtikal.this, "Hej", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setType("image/*");
-                someActivityResultLauncher.launch(intent);
+                MutableLiveData<Korisnik> k = UserRepository.getInstance(MainApplication.apiManager).Login(new LoginModel(Email.getText().toString(), Lozinka.getText().toString()));
+                k.observe(LoginActivity.this, funk->{
+                    if(k.getValue()!=null){
+                        Toast.makeText(LoginActivity.this, "Korisnik je "+k.getValue().getIme(), Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        Utils.getInstance().setKorisnik(k.getValue());
+                        Utils.getInstance().setJelUlogovan(1);
+                        startActivity(intent);
+                    }
+                    else
+                        loginPogresno.setVisibility(View.VISIBLE);
+                });
+
             }
         });
 
-        dodajArtikal = findViewById(R.id.dodajArtikal);
-        dodajArtikal.setOnClickListener(new View.OnClickListener() {
+        loginToRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Utils.getInstance().addToArtikli(new Artikal(Utils.getInstance().getArtikli().size() + 1, naziv.getText().toString(), bitmap, opis.getText().toString()));
-                Intent intent2 = new Intent(NapraviArtikal.this, MainActivity.class);
-                startActivity(intent2);
+                Intent intent = new Intent(LoginActivity.this, RegistracijaActivity.class);
+                startActivity(intent);
             }
         });
     }
 
-    ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if (result.getResultCode() == Activity.RESULT_OK) {
-                        // There are no request codes
-                        Intent data = result.getData();
-                        uri = data.getData();
-                        try{
-                            bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
-                            slika.setImageBitmap(bitmap);
-                        } catch (FileNotFoundException e){
-                            e.printStackTrace();
-                        } catch (IOException e)
-                        {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            });
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Intent intent;

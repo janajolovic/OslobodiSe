@@ -1,6 +1,6 @@
 package com.example.oslobodiseresi;
 
-import static com.example.oslobodiseresi.ArtikalActivity.ARTIKAL_ID_KEY;
+import static com.example.oslobodiseresi.Activity.ArtikalActivity.ARTIKAL_ID_KEY;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,14 +14,15 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
+import com.example.oslobodiseresi.Activity.ArtikalActivity;
+import com.example.oslobodiseresi.Models.Item;
 
 import java.util.ArrayList;
 
 
 public class ArtikalAdapter extends RecyclerView.Adapter<ArtikalAdapter.ViewHolder> {
 
-    ArrayList<Artikal> artikli = new ArrayList<>();
+    ArrayList<Item> artikli = new ArrayList<>();
     private Context context;
     public ArtikalAdapter(Context context) {
         this.context = context;
@@ -38,7 +39,7 @@ public class ArtikalAdapter extends RecyclerView.Adapter<ArtikalAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.txtView.setText(artikli.get(position).getNaziv());
-        holder.imgProfil.setImageBitmap(artikli.get(position).getSlika());
+//        holder.imgProfil.setImageBitmap(artikli.get(position).getSlika());
 
         holder.imgProfil.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,7 +68,7 @@ public class ArtikalAdapter extends RecyclerView.Adapter<ArtikalAdapter.ViewHold
         return artikli.size();
     }
 
-    public void setArtikli(ArrayList<Artikal> artikli) {
+    public void setArtikli(ArrayList<Item> artikli) {
         this.artikli = artikli;
         notifyDataSetChanged();
     }

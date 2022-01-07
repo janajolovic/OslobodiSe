@@ -2,6 +2,8 @@ package com.example.oslobodiseresi;
 
 import android.app.Application;
 
+import com.example.oslobodiseresi.Retrofit.ApiManager;
+
 public class MainApplication extends Application {
     public static ApiManager apiManager;
 
@@ -9,6 +11,5 @@ public class MainApplication extends Application {
     public void onCreate() {
         super.onCreate();
         apiManager = ApiManager.getInstance();
-        Utils.getInstance();
     }
 }

@@ -1,4 +1,4 @@
-package com.example.oslobodiseresi;
+package com.example.oslobodiseresi.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,42 +11,25 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.example.oslobodiseresi.R;
 import com.google.android.material.navigation.NavigationView;
 
-public class MojProfilActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class MojiOglasiActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private TextView textView4;
-    private ImageView back;
-    private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-    private FloatingActionButton dodajArtikal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.nav_activity_moj_profil);
+        setContentView(R.layout.nav_activity_moji_oglasi);
 
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        textView4 = findViewById(R.id.textView4);
-
-        if(Utils.getInstance().getJelUlogovan() == 1)
-            textView4.setText(Utils.getInstance().getKorisnik().getIme());
-
-        dodajArtikal = findViewById(R.id.dodajArtikal);
-        dodajArtikal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MojProfilActivity.this, NapraviArtikal.class);
-                startActivity(intent);
-            }
-        });
 
         setToolbar(this);
     }
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

@@ -1,4 +1,11 @@
-package com.example.oslobodiseresi;
+package com.example.oslobodiseresi.Retrofit;
+
+import com.example.oslobodiseresi.Models.Item;
+import com.example.oslobodiseresi.Models.Korisnik;
+import com.example.oslobodiseresi.Models.LoginModel;
+import com.example.oslobodiseresi.Models.RegistarModel;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,6 +31,11 @@ public class ApiManager {
 
     public void LoginUser(LoginModel model, Callback<Korisnik> callback) {
         Call<Korisnik> loginCall = service.login(model);
-        loginCall.enqueue((callback));
+        loginCall.enqueue(callback);
+    }
+
+    public void GetAllItems(Callback<ArrayList<Item>> callback){
+        Call<ArrayList<Item>> allItems = service.getAllItems();
+        allItems.enqueue(callback);
     }
 }

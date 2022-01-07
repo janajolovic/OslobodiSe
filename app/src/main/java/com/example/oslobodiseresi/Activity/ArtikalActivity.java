@@ -1,56 +1,99 @@
-package com.example.oslobodiseresi;
-
-import static com.example.oslobodiseresi.ArtikalActivity.ARTIKAL_ID_KEY;
+package com.example.oslobodiseresi.Activity;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.example.oslobodiseresi.Models.Item;
+import com.example.oslobodiseresi.R;
+import com.example.oslobodiseresi.Utils;
 import com.google.android.material.navigation.NavigationView;
 
-import java.util.ArrayList;
+public class ArtikalActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
-    private RecyclerView recyclerArtikli;
-    private ArrayList<Artikal> artikli = new ArrayList<>();
+    public static final String ARTIKAL_ID_KEY = "artikalId";
+    private TextView txtOpis;
+    private ImageView img;
+    private TextView txtNaziv;
+    private ImageView artikalBack;
+    private ImageView imgFav;
+    private Boolean isFav;
     private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.nav_activity_main);
-
-        recyclerArtikli = findViewById(R.id.artikli);
+        setContentView(R.layout.nav_activity_artikal);
 
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         setToolbar(this);
 
-        //recycler view
-        ArtikalAdapter adapterArtikli = new ArtikalAdapter(this);
-        adapterArtikli.setArtikli(Utils.getInstance().getArtikli());
+        isFav = false;
+        imgFav = findViewById(R.id.imgFav);
+        imgFav.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                isFav = !isFav;
+                if (isFav) {
+                    imgFav.setImageResource(R.drawable.ic_heart);
+                } else {
+                    imgFav.setImageResource(R.drawable.ic_prazno_srce);
+                }
+            }
+        }) ;
 
-        recyclerArtikli.setAdapter(adapterArtikli);
-        recyclerArtikli.setLayoutManager(new GridLayoutManager(this, 1));
+        artikalBack = findViewById(R.id.artikalBack);
+        artikalBack.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+                Intent intent = new Intent(ArtikalActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        initViews();
+
+        Intent intent = getIntent();
+
+        if(null != intent)
+        {
+            int artikalId = intent.getIntExtra(ARTIKAL_ID_KEY, -1);
+            if(artikalId != -1){
+                Item incomingArtikal = Utils.getInstance().getArtikalById(artikalId);
+                if(incomingArtikal!=null){
+                    setData(incomingArtikal);
+                }
+            }
+        }
     }
 
-    //todo sve funkcije ispod moraju da se kopiraju na sve ostale aktivitije, naci nacin da se ovo izbegne
+    private void setData(Item artikal) {
+        txtOpis.setText(artikal.getOpis());
+        txtNaziv.setText(artikal.getNaziv());
+//        Glide.with(this)
+//                .asBitmap()
+//                .load(artikal.getSlika())
+//                .into(img);
+    }
+
+    private void initViews() {
+        txtOpis = findViewById(R.id.opis);
+        img = findViewById(R.id.imgOpsirno);
+        txtNaziv = findViewById(R.id.txtNaziv);
+    }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Intent intent;
@@ -113,5 +156,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
     }
-
 }

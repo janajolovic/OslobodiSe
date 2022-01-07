@@ -1,10 +1,11 @@
-package com.example.oslobodiseresi;
+package com.example.oslobodiseresi.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.MutableLiveData;
+
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,55 +18,76 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.oslobodiseresi.Models.Korisnik;
+import com.example.oslobodiseresi.MainApplication;
+import com.example.oslobodiseresi.R;
+import com.example.oslobodiseresi.Models.RegistarModel;
+import com.example.oslobodiseresi.Retrofit.UserRepository;
 import com.google.android.material.navigation.NavigationView;
 
-public class LoginActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class RegistracijaActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private EditText Email;
-    private EditText Lozinka;
+    private EditText ime;
+    private EditText email;
+    private EditText lozinka;
+    private EditText lozinkaPonovi;
+    private EditText brojTelefona;
     private Button dugme;
-    private TextView loginPogresno;
-    private TextView loginToRegister;
+    private TextView pogresneLozinke;
+    private TextView registerToLogin;
     private NavigationView navigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.nav_activity_login);
+        setContentView(R.layout.nav_activity_registracija);
 
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         setToolbar(this);
 
-        Email = findViewById(R.id.emailLogin);
-        Lozinka = findViewById(R.id.lozinkaLogin);
-        dugme = findViewById(R.id.prijavaBtn);
-        loginToRegister = findViewById(R.id.txtLoginToRegister);
-        loginPogresno = findViewById(R.id.loginPogresno);
+        ime = findViewById(R.id.registracijaIme);
+        email = findViewById(R.id.registracijaEmail);
+        lozinka = findViewById(R.id.registracijaLozinka);
+        lozinkaPonovi = findViewById(R.id.registracijaLozinkaPonovi);
+        brojTelefona = findViewById(R.id.registracijaTelefon);
+        dugme = findViewById(R.id.registracijaBtn);
+        pogresneLozinke = findViewById(R.id.registracijaPogresneLozinke);
+        registerToLogin = findViewById(R.id.txtRegisterToLogin);
 
         dugme.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MutableLiveData<Korisnik> k = UserRepository.getInstance(MainApplication.apiManager).Login(new LoginModel(Email.getText().toString(), Lozinka.getText().toString()));
-                k.observe(LoginActivity.this, funk->{
+                if(!lozinka.getText().toString().equals(lozinkaPonovi.getText().toString())) {
+                    pogresneLozinke.setVisibility(View.VISIBLE);
+                    return;
+                }
+                pogresneLozinke.setVisibility(View.INVISIBLE);
+
+
+                MutableLiveData<Korisnik> k = UserRepository.getInstance(MainApplication.apiManager).Register(new RegistarModel(
+                   ime.getText().toString(),
+                   email.getText().toString(),
+                   lozinka.getText().toString(),
+                   brojTelefona.getText().toString()
+                ));
+
+                k.observe(RegistracijaActivity.this, funk->{
                     if(k.getValue()!=null){
-                        Toast.makeText(LoginActivity.this, "Korisnik je "+k.getValue().getIme(), Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        Utils.getInstance().setKorisnik(k.getValue());
-                        Utils.getInstance().setJelUlogovan(1);
+                        Toast.makeText(RegistracijaActivity.this, "Korisnik je "+k.getValue().getIme(), Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(RegistracijaActivity.this, MainActivity.class);
                         startActivity(intent);
                     }
                     else
-                        loginPogresno.setVisibility(View.VISIBLE);
-                });
+                        Toast.makeText(RegistracijaActivity.this, "Korisnik je null :((((", Toast.LENGTH_LONG).show();
 
+                });
             }
         });
-
-        loginToRegister.setOnClickListener(new View.OnClickListener() {
+        registerToLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, RegistracijaActivity.class);
+                Intent intent = new Intent(RegistracijaActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
         });

@@ -15,33 +15,33 @@
         android:theme="@style/Theme.OslobodiSeResi"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".NapraviArtikal"
+            android:name=".Activity.NapraviArtikal"
             android:exported="false" />
         <activity
-            android:name=".MojiOglasiActivity"
+            android:name=".Activity.MojiOglasiActivity"
             android:exported="false" />
         <activity
-            android:name=".OmiljeniOglasiActivity"
+            android:name=".Activity.OmiljeniOglasiActivity"
             android:exported="false" />
         <activity
-            android:name=".MojProfilActivity"
+            android:name=".Activity.MojProfilActivity"
             android:exported="false" />
         <activity
-            android:name=".DrawerActivity"
+            android:name=".Activity.DrawerActivity"
             android:exported="false"
             android:label="@string/title_activity_drawer"
             android:theme="@style/Theme.OslobodiSeResi.NoActionBar" />
         <activity
-            android:name=".RegistracijaActivity"
+            android:name=".Activity.RegistracijaActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".Activity.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".ArtikalActivity"
+            android:name=".Activity.ArtikalActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

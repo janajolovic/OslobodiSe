@@ -1,13 +1,11 @@
-package com.example.oslobodiseresi;
+package com.example.oslobodiseresi.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.Menu;
 import android.widget.Toast;
 
-import com.google.android.material.snackbar.Snackbar;
+import com.example.oslobodiseresi.R;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;

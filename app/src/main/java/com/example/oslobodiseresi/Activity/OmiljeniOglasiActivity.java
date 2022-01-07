@@ -1,4 +1,4 @@
-package com.example.oslobodiseresi;
+package com.example.oslobodiseresi.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.oslobodiseresi.R;
 import com.google.android.material.navigation.NavigationView;
 
 public class OmiljeniOglasiActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
