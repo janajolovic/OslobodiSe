@@ -21,14 +21,7 @@ public class Utils {
 
     private void initData()
     {
-        artikli.add(new Artikal(1, "Hamdov Hleb", "https://stil.kurir.rs/data/images/2020/04/25/13/217211_shutterstock-551620258_ls.jpg", "Hleb"));
-        artikli.add(new Artikal(2, "Hamdov Hleb", "https://stil.kurir.rs/data/images/2020/04/25/13/217211_shutterstock-551620258_ls.jpg", "Hleb"));
-        artikli.add(new Artikal(3, "Hamdov Hleb", "https://stil.kurir.rs/data/images/2020/04/25/13/217211_shutterstock-551620258_ls.jpg", "Hleb"));
-        artikli.add(new Artikal(4, "Hamdov Hleb", "https://stil.kurir.rs/data/images/2020/04/25/13/217211_shutterstock-551620258_ls.jpg", "Hleb"));
-        artikli.add(new Artikal(5, "Hamdov Hleb", "https://stil.kurir.rs/data/images/2020/04/25/13/217211_shutterstock-551620258_ls.jpg", "Hleb"));
-        artikli.add(new Artikal(6, "Hamdov Hleb", "https://stil.kurir.rs/data/images/2020/04/25/13/217211_shutterstock-551620258_ls.jpg", "Hleb"));
-        artikli.add(new Artikal(7, "Hamdov Hleb", "https://stil.kurir.rs/data/images/2020/04/25/13/217211_shutterstock-551620258_ls.jpg", "Hleb"));
-        artikli.add(new Artikal(8, "Hamdov Hleb", "https://stil.kurir.rs/data/images/2020/04/25/13/217211_shutterstock-551620258_ls.jpg", "Hleb"));
+
     }
 
     public static ArrayList<Artikal> getArtikli() {
@@ -39,6 +32,10 @@ public class Utils {
 
     public boolean addToKorisnici(Korisnik k){
         return korisnici.add(k);
+    }
+
+    public boolean addToArtikli(Artikal a){
+        return artikli.add(a);
     }
 //
 //    public Korisnik prijaviKorisnika(String email, String lozinka)
