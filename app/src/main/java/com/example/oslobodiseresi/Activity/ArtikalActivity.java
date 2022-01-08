@@ -2,11 +2,17 @@ package com.example.oslobodiseresi.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
+
+import com.example.oslobodiseresi.MainApplication;
 import com.example.oslobodiseresi.Models.Item;
+import com.example.oslobodiseresi.Retrofit.ItemRepository;
 import com.example.oslobodiseresi.ToolbarNavigacijaSetup;
 import com.example.oslobodiseresi.R;
 import com.example.oslobodiseresi.Utils;
@@ -57,17 +63,22 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
         });
 
         initViews();
-
         Intent intent = getIntent();
 
         if(null != intent)
         {
             int artikalId = intent.getIntExtra(ARTIKAL_ID_KEY, -1);
+            Log.println(Log.ASSERT,"[tag]","id je "+artikalId);
             if(artikalId != -1){
-                Item incomingArtikal = Utils.getInstance().getArtikalById(artikalId);
-                if(incomingArtikal!=null){
-                    setData(incomingArtikal);
-                }
+                MutableLiveData<Item> mld = ItemRepository.getInstance(MainApplication.apiManager).getItem(artikalId);
+                mld.observe(ArtikalActivity.this, new Observer<Item>() {
+                    @Override
+                    public void onChanged(Item item) {
+                        if(mld.getValue() != null){
+                            setData(mld.getValue());
+                        }
+                    }
+                });
             }
         }
     }

@@ -4,6 +4,8 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -16,8 +18,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.example.oslobodiseresi.MainApplication;
+import com.example.oslobodiseresi.Models.Item;
+import com.example.oslobodiseresi.Models.ItemPostModel;
+import com.example.oslobodiseresi.Retrofit.ItemRepository;
+import com.example.oslobodiseresi.Retrofit.UserRepository;
 import com.example.oslobodiseresi.ToolbarNavigacijaSetup;
 import com.example.oslobodiseresi.R;
+import com.example.oslobodiseresi.Utils;
 import com.google.android.material.navigation.NavigationView;
 
 import java.io.FileNotFoundException;
@@ -66,9 +74,19 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
         dodajArtikal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Utils.getInstance().addToArtikli(new Item(Utils.getInstance().getArtikli().size() + 1, naziv.getText().toString(),  opis.getText().toString()), null, -1, null, -1);
-                Intent intent2 = new Intent(NapraviArtikal.this, MainActivity.class);
-                startActivity(intent2);
+                MutableLiveData<Item> mld = ItemRepository.getInstance(MainApplication.apiManager).postItem(new ItemPostModel(
+                        naziv.getText().toString(),
+                        opis.getText().toString(),
+                        1,1,
+                        Utils.getInstance().getKorisnik().getId()
+                ));
+                mld.observe(NapraviArtikal.this, new Observer<Item>() {
+                    @Override
+                    public void onChanged(Item item) {
+                        Intent intent2 = new Intent(NapraviArtikal.this, MainActivity.class);
+                        startActivity(intent2);
+                    }
+                });
             }
         });
     }

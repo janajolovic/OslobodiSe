@@ -3,6 +3,7 @@ package com.example.oslobodiseresi.Models;
 import com.google.gson.annotations.SerializedName;
 
 public class Korisnik {
+    @SerializedName("id")
     private String Id;
     @SerializedName("userName")
     private String ime;
@@ -18,6 +19,10 @@ public class Korisnik {
         this.brojTelefona = brojTelefona;
         this.brojOcena = brojOcena;
         this.zbirOcena = zbirOcena;
+    }
+
+    public String getId() {
+        return Id;
     }
 
     public String getIme() {

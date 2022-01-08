@@ -1,11 +1,26 @@
 package com.example.oslobodiseresi.Models;
 
+import com.google.gson.annotations.SerializedName;
+
 public class ItemPostModel {
+    @SerializedName("naziv")
     private String Naziv;
+    @SerializedName("opis")
     private String Opis;
+    @SerializedName("kategorijaId")
     private int KategorijaId;
+    @SerializedName("gradId")
     private int GradId;
+    @SerializedName("userId")
     private String UserId;
+
+    public ItemPostModel(String naziv, String opis, int kategorijaId, int gradId, String userId) {
+        Naziv = naziv;
+        Opis = opis;
+        KategorijaId = kategorijaId;
+        GradId = gradId;
+        UserId = userId;
+    }
 
     //region Getters and Setters
     public String getNaziv() {

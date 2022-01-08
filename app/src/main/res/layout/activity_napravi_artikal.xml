@@ -105,5 +105,18 @@
         app:layout_constraintStart_toEndOf="@+id/textView8"
         app:layout_constraintTop_toTopOf="@+id/textView8" />
 
+<!--    <Spinner-->
+<!--        android:id="@+id/spinnerKategorije"-->
+<!--        android:background="@color/siva"-->
+<!--        -->
+<!--        android:layout_width="409dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="32dp"-->
+<!--        android:layout_marginTop="32dp"-->
+<!--        android:layout_marginEnd="32dp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/txtOpis" />-->
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
