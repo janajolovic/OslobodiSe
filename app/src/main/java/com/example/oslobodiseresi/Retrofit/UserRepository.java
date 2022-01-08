@@ -4,9 +4,12 @@ import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.oslobodiseresi.Models.Item;
 import com.example.oslobodiseresi.Models.Korisnik;
 import com.example.oslobodiseresi.Models.LoginModel;
 import com.example.oslobodiseresi.Models.RegistarModel;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -17,6 +20,7 @@ public class UserRepository {
     private final ApiManager apiManager;
 
     private final MutableLiveData<Korisnik> korisnik = new MutableLiveData<>();
+    private final MutableLiveData<ArrayList<Item>> items = new MutableLiveData<>();
 
     private UserRepository(ApiManager apiManager){
         this.apiManager = apiManager;
@@ -36,7 +40,7 @@ public class UserRepository {
                 if(response.isSuccessful()){
                     korisnik.setValue(response.body());
                 }else{
-                    Log.println(Log.ERROR, "[Greska1]",response.message());
+                    Log.println(Log.ERROR, "[Greska]",response.message());
                     korisnik.setValue(null);
                 }
 
@@ -58,7 +62,7 @@ public class UserRepository {
                 if (response.isSuccessful()) {
                     korisnik.setValue(response.body());
                 }else{
-                    Log.println(Log.ERROR, "[Greska1]",response.message());
+                    Log.println(Log.ERROR, "[Greska]",response.message());
                     korisnik.setValue(null);
                 }
             }
@@ -70,5 +74,27 @@ public class UserRepository {
             }
         });
         return korisnik;
+    }
+
+
+    public MutableLiveData<ArrayList<Item>> GetAllItems() {
+        apiManager.GetAllItems(new Callback<ArrayList<Item>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Item>> call, Response<ArrayList<Item>> response) {
+                if (response.isSuccessful()) {
+                    items.setValue(response.body());
+                }else{
+                    Log.println(Log.ERROR, "[Greska]",response.message());
+                    items.setValue(null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Item>> call, Throwable t) {
+                Log.println(Log.ERROR, "[Greska]",t.getMessage());
+                items.setValue(null);
+            }
+        });
+        return items;
     }
 }
