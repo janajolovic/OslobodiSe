@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.example.oslobodiseresi.ArtikalAdapter;
 import com.example.oslobodiseresi.MainApplication;
@@ -22,11 +24,14 @@ public class MainActivity extends ToolbarNavigacijaSetup {
     private RecyclerView recyclerArtikli;
     private ArrayList<Item> artikli = new ArrayList<>();
     private NavigationView navigationView;
+    private ProgressBar progress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nav_activity_main);
+
+        progress = findViewById(R.id.progress);
 
         recyclerArtikli = findViewById(R.id.artikli);
 
@@ -46,9 +51,9 @@ public class MainActivity extends ToolbarNavigacijaSetup {
             public void onChanged(ArrayList<Item> items) {
                 adapterArtikli.setArtikli(artikli.getValue());
                 recyclerArtikli.setAdapter(adapterArtikli);
+                progress.setVisibility(View.INVISIBLE);
             }
         });
-
 
     }
 }
