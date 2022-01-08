@@ -27,11 +27,6 @@
             android:name=".Activity.MojProfilActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.DrawerActivity"
-            android:exported="false"
-            android:label="@string/title_activity_drawer"
-            android:theme="@style/Theme.OslobodiSeResi.NoActionBar" />
-        <activity
             android:name=".Activity.RegistracijaActivity"
             android:exported="false" />
         <activity

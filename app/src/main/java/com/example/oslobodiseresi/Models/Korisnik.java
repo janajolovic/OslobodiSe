@@ -39,4 +39,16 @@ public class Korisnik {
     public int getZbirOcena() {
         return zbirOcena;
     }
+
+    @Override
+    public String toString() {
+        return "Korisnik{" +
+                "Id='" + Id + '\'' +
+                ", ime='" + ime + '\'' +
+                ", email='" + email + '\'' +
+                ", brojTelefona='" + brojTelefona + '\'' +
+                ", brojOcena=" + brojOcena +
+                ", zbirOcena=" + zbirOcena +
+                '}';
+    }
 }
