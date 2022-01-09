@@ -9,7 +9,6 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar"/>
 
-
     <ImageView
         android:id="@+id/imgOpsirno"
         android:layout_width="0dp"

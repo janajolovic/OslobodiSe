@@ -86,7 +86,7 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
     private void setData(Item artikal) {
         txtOpis.setText(artikal.getOpis());
         txtNaziv.setText(artikal.getNaziv());
-        txtKategorija.setText(artikal.getKategorija().toString());
+        txtKategorija.setText(artikal.getKategorija().getNaziv());
         txtGrad.setText(artikal.getGrad().getNaziv());
         txtKorisnik.setText(artikal.getUser().getIme());
 //        Glide.with(this)

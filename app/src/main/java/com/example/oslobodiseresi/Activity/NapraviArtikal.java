@@ -13,6 +13,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -63,12 +64,14 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
 
         spinnerKategorije = findViewById(R.id.spinnerKategorije);
 
+        ArrayList<String> kategorije = new ArrayList<>();
+
         MutableLiveData<ArrayList<Kategorija>> mldKategorije = ItemRepository.getInstance(MainApplication.apiManager).getAllKategorije();
         mldKategorije.observe(NapraviArtikal.this, new Observer<ArrayList<Kategorija>>() {
             @Override
             public void onChanged(ArrayList<Kategorija> kategorija) {
-                ArrayList<String> kategorije = new ArrayList<>();
                 for(Kategorija k: mldKategorije.getValue()) {
+                    Log.println(Log.ASSERT, "[info]","k je "+k.toString());
                     kategorije.add(k.getNaziv());
                 }
             }
@@ -78,16 +81,13 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
 
         spinnerKategorije.setAdapter(kategorijeAdapter);
 
-
-
-
-        spinnerKategorije = findViewById(R.id.spinnerGradovi);
+        spinnerGradovi = findViewById(R.id.spinnerGradovi);
+        ArrayList<String> gradovi = new ArrayList<>();
 
         MutableLiveData<ArrayList<Grad>> mldGradovi = ItemRepository.getInstance(MainApplication.apiManager).getAllGradovi();
         mldGradovi.observe(NapraviArtikal.this, new Observer<ArrayList<Grad>>() {
             @Override
             public void onChanged(ArrayList<Grad> grad) {
-                ArrayList<String> gradovi = new ArrayList<>();
                 for(Grad g: mldGradovi.getValue()) {
                     gradovi.add(g.getNaziv());
                 }
@@ -96,16 +96,7 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
 
         ArrayAdapter<String> gradoviAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, gradovi);
 
-        spinnerKategorije.setAdapter(gradoviAdapter);
-
-
-
-        spinnerKategorije.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(NapraviArtikal.this, kategorije.get(position), Toast.LENGTH_SHORT).show();
-            }
-        });
+        spinnerGradovi.setAdapter(gradoviAdapter);
 
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
