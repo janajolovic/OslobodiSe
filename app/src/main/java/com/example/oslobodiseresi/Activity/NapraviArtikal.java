@@ -23,6 +23,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.oslobodiseresi.MainApplication;
+import com.example.oslobodiseresi.Models.Grad;
 import com.example.oslobodiseresi.Models.Item;
 import com.example.oslobodiseresi.Models.ItemPostModel;
 import com.example.oslobodiseresi.Models.Kategorija;
@@ -42,10 +43,13 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
     private NavigationView navigationView;
     private Button dodajArtikal;
     private Spinner spinnerKategorije;
+    private Spinner spinnerGradovi;
     private EditText naziv;
     private EditText opis;
     private ImageView izaberi;
     private ImageView slika;
+    private ArrayList<String> kategorije;
+    private ArrayList<String> gradovi;
 
     private Bitmap bitmap;
 
@@ -59,15 +63,41 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
 
         spinnerKategorije = findViewById(R.id.spinnerKategorije);
 
-        ArrayList<String> kategorije = new ArrayList<>();
-        kategorije.add("knjige");
-        kategorije.add("ribolov");
-        kategorije.add("pekara");
-
+        MutableLiveData<ArrayList<Kategorija>> mldKategorije = ItemRepository.getInstance(MainApplication.apiManager).getAllKategorije();
+        mldKategorije.observe(NapraviArtikal.this, new Observer<ArrayList<Kategorija>>() {
+            @Override
+            public void onChanged(ArrayList<Kategorija> kategorija) {
+                ArrayList<String> kategorije = new ArrayList<>();
+                for(Kategorija k: mldKategorije.getValue()) {
+                    kategorije.add(k.getNaziv());
+                }
+            }
+        });
 
         ArrayAdapter<String> kategorijeAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, kategorije);
 
         spinnerKategorije.setAdapter(kategorijeAdapter);
+
+
+
+
+        spinnerKategorije = findViewById(R.id.spinnerGradovi);
+
+        MutableLiveData<ArrayList<Grad>> mldGradovi = ItemRepository.getInstance(MainApplication.apiManager).getAllGradovi();
+        mldGradovi.observe(NapraviArtikal.this, new Observer<ArrayList<Grad>>() {
+            @Override
+            public void onChanged(ArrayList<Grad> grad) {
+                ArrayList<String> gradovi = new ArrayList<>();
+                for(Grad g: mldGradovi.getValue()) {
+                    gradovi.add(g.getNaziv());
+                }
+            }
+        });
+
+        ArrayAdapter<String> gradoviAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, gradovi);
+
+        spinnerKategorije.setAdapter(gradoviAdapter);
+
 
 
         spinnerKategorije.setOnItemClickListener(new AdapterView.OnItemClickListener() {
