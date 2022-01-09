@@ -21,7 +21,7 @@ import com.google.android.material.navigation.NavigationView;
 public class ArtikalActivity extends ToolbarNavigacijaSetup {
 
     public static final String ARTIKAL_ID_KEY = "artikalId";
-    private TextView txtOpis;
+    private TextView txtOpis, txtKategorija, txtGrad, txtKorisnik;
     private ImageView img;
     private TextView txtNaziv;
     private ImageView artikalBack;
@@ -86,6 +86,9 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
     private void setData(Item artikal) {
         txtOpis.setText(artikal.getOpis());
         txtNaziv.setText(artikal.getNaziv());
+        txtKategorija.setText(artikal.getKategorija().toString());
+        txtGrad.setText(artikal.getGrad().toString());
+        txtKorisnik.setText(artikal.getUser().toString());
 //        Glide.with(this)
 //                .asBitmap()
 //                .load(artikal.getSlika())
@@ -96,5 +99,8 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
         txtOpis = findViewById(R.id.opis);
         img = findViewById(R.id.imgOpsirno);
         txtNaziv = findViewById(R.id.txtNaziv);
+        txtKategorija = findViewById(R.id.txtKategorija);
+        txtGrad = findViewById(R.id.txtGrad);
+        txtKorisnik = findViewById(R.id.txtKorisnik);
     }
 }
