@@ -14,13 +14,18 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.oslobodiseresi.MainApplication;
 import com.example.oslobodiseresi.Models.Item;
 import com.example.oslobodiseresi.Models.ItemPostModel;
+import com.example.oslobodiseresi.Models.Kategorija;
 import com.example.oslobodiseresi.Retrofit.ItemRepository;
 import com.example.oslobodiseresi.Retrofit.UserRepository;
 import com.example.oslobodiseresi.ToolbarNavigacijaSetup;
@@ -30,12 +35,13 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class NapraviArtikal extends ToolbarNavigacijaSetup {
 
     private NavigationView navigationView;
     private Button dodajArtikal;
-
+    private Spinner spinnerKategorije;
     private EditText naziv;
     private EditText opis;
     private ImageView izaberi;
@@ -50,6 +56,26 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nav_activity_napravi_artikal);
+
+        spinnerKategorije = findViewById(R.id.spinnerKategorije);
+
+        ArrayList<String> kategorije = new ArrayList<>();
+        kategorije.add("knjige");
+        kategorije.add("ribolov");
+        kategorije.add("pekara");
+
+
+        ArrayAdapter<String> kategorijeAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, kategorije);
+
+        spinnerKategorije.setAdapter(kategorijeAdapter);
+
+
+        spinnerKategorije.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(NapraviArtikal.this, kategorije.get(position), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
