@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.oslobodiseresi.MainApplication;
@@ -51,6 +52,7 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
     private ImageView slika;
     private ArrayList<String> kategorije;
     private ArrayList<String> gradovi;
+    private TextView txtNemaKategorija, txtNemaGrad;
 
     private Bitmap bitmap;
 
@@ -61,6 +63,9 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nav_activity_napravi_artikal);
+
+        txtNemaKategorija = findViewById(R.id.txtNemaKategorija);
+        txtNemaGrad = findViewById(R.id.txtNemaGrad);
 
         spinnerKategorije = findViewById(R.id.spinnerKategorije);
 
