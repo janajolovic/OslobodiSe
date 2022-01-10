@@ -12,6 +12,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -19,12 +20,13 @@ import android.widget.ImageView;
 import com.example.oslobodiseresi.R;
 
 import com.example.oslobodiseresi.ToolbarNavigacijaSetup;
+import com.google.android.material.navigation.NavigationView;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class ZaDavuda extends ToolbarNavigacijaSetup {
-
+    private NavigationView navigationView;
     Button dugme;
     ImageView slika, slika2;
     ImageView izaberi;
@@ -37,6 +39,12 @@ public class ZaDavuda extends ToolbarNavigacijaSetup {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_za_davuda);
+
+        navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        setToolbar(this);
+
 
         dugme = findViewById(R.id.dugme);
         slika = findViewById(R.id.slika);

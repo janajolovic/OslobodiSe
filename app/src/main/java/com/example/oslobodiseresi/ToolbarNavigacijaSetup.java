@@ -16,6 +16,7 @@ import com.example.oslobodiseresi.Activity.MainActivity;
 import com.example.oslobodiseresi.Activity.MojProfilActivity;
 import com.example.oslobodiseresi.Activity.MojiOglasiActivity;
 import com.example.oslobodiseresi.Activity.OmiljeniOglasiActivity;
+import com.example.oslobodiseresi.Activity.ZaDavuda;
 import com.google.android.material.navigation.NavigationView;
 
 public class ToolbarNavigacijaSetup extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -39,6 +40,11 @@ public class ToolbarNavigacijaSetup extends AppCompatActivity implements Navigat
             case R.id.omiljeniOglasi:
                 intent = new Intent(this, OmiljeniOglasiActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.davud:
+                intent = new Intent(this, ZaDavuda.class);
+                if(intent != null)
+                    startActivity(intent);
                 break;
         }
         //close navigation drawer

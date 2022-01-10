@@ -16,7 +16,7 @@
             android:title="Omiljeni Oglasi"/>
         <item
             android:id="@+id/davud"
-            android:title="davud"/>
+            android:title="DAVUD"/>
     </group>
     <group android:checkableBehavior="single">
         <item

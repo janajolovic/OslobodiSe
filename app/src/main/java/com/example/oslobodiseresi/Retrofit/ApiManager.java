@@ -61,4 +61,9 @@ public class ApiManager {
         Call<Item> getItem = service.getItem(Id);
         getItem.enqueue(callback);
     }
+
+    public void GetItemsFromUser(String Id, Callback<ArrayList<Item>> callback){
+        Call<ArrayList<Item>> getItemsFromUser = service.getItemsFromUser(Id);
+        getItemsFromUser.enqueue(callback);
+    }
 }

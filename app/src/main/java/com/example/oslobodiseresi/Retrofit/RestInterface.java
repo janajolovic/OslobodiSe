@@ -38,4 +38,8 @@ public interface RestInterface {
 
     @GET("items/{Id}")
     Call<Item> getItem(@Path("Id") int Id);
+
+    @GET("/items/user/{userId}")
+    Call<ArrayList<Item>> getItemsFromUser(@Path("userId") String Id);
+
 }

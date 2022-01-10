@@ -126,4 +126,21 @@ public class ItemRepository {
         });
         return gradovi;
     }
+
+    public MutableLiveData<ArrayList<Item>> getItemsFromUser(String Id){
+        apiManager.GetItemsFromUser(Id, new Callback<ArrayList<Item>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Item>> call, Response<ArrayList<Item>> response) {
+                if(response.isSuccessful()){
+                    items.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Item>> call, Throwable t) {
+
+            }
+        });
+        return items;
+    }
 }

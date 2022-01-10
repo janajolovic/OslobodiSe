@@ -1,15 +1,32 @@
 package com.example.oslobodiseresi.Activity;
 
 import android.os.Bundle;
+import android.view.View;
 
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.oslobodiseresi.ArtikalAdapter;
+import com.example.oslobodiseresi.MainApplication;
+import com.example.oslobodiseresi.Models.Item;
+import com.example.oslobodiseresi.Retrofit.ItemRepository;
+import com.example.oslobodiseresi.Retrofit.UserRepository;
 import com.example.oslobodiseresi.ToolbarNavigacijaSetup;
 import com.example.oslobodiseresi.R;
+import com.example.oslobodiseresi.Utils;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.ArrayList;
+
+import okhttp3.internal.Util;
 
 public class MojiOglasiActivity extends ToolbarNavigacijaSetup {
 
     private NavigationView navigationView;
-
+    private RecyclerView recyclerArtikli;
+    private ArrayList<Item> artikli = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,5 +36,20 @@ public class MojiOglasiActivity extends ToolbarNavigacijaSetup {
         navigationView.setNavigationItemSelectedListener(this);
 
         setToolbar(this);
+
+        recyclerArtikli = findViewById(R.id.mojiArtikli);
+
+        ArtikalAdapter adapterArtikli = new ArtikalAdapter(this);
+
+        recyclerArtikli.setLayoutManager(new GridLayoutManager(this, 2));
+
+        MutableLiveData<ArrayList<Item>> artikli = ItemRepository.getInstance(MainApplication.apiManager).getItemsFromUser(Utils.getInstance().getKorisnik().getId());
+        artikli.observe(MojiOglasiActivity.this, new Observer<ArrayList<Item>>() {
+            @Override
+            public void onChanged(ArrayList<Item> items) {
+                adapterArtikli.setArtikli(artikli.getValue());
+                recyclerArtikli.setAdapter(adapterArtikli);
+            }
+        });
     }
 }
