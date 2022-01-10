@@ -58,7 +58,11 @@ public class ToolbarNavigacijaSetup extends AppCompatActivity implements Navigat
         imgPrijava.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(context, LoginActivity.class));
+                if (Utils.getInstance().getKorisnik() != null) {
+
+                } else {
+                    startActivity(new Intent(context, LoginActivity.class));
+                }
             }
         });
         //todo search

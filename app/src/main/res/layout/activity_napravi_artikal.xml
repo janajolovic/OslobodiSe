@@ -107,21 +107,69 @@ tools:context=".Activity.RegistracijaActivity">
     app:layout_constraintStart_toEndOf="@+id/textView8"
     app:layout_constraintTop_toTopOf="@+id/textView8" />
 
+    <TextView
+        android:id="@+id/txtKategorijeNebitno"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@+id/txtOpis"
+        android:text="Kategorija: "
+        android:layout_marginTop="16dp"
+        android:textStyle="bold"
+        android:textSize="@dimen/velicina_slova">
+    </TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtNemaKategorija"
+        app:layout_constraintTop_toBottomOf="@+id/txtKategorijeNebitno"
+        app:layout_constraintStart_toStartOf="@+id/txtKategorijeNebitno"
+        android:text="Morate da odaberete kategoriju"
+        android:visibility="invisible"
+        android:textSize="@dimen/velicina_slova"
+        android:textColor="#ff0000">
+    </TextView>
 <Spinner
     android:id="@+id/spinnerKategorije"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginTop="16dp"
-    app:layout_constraintStart_toStartOf="@+id/textView8"
+    android:layout_marginLeft="16dp"
+    app:layout_constraintStart_toEndOf="@+id/txtKategorijeNebitno"
     app:layout_constraintTop_toBottomOf="@+id/txtOpis" />
+
+    <TextView
+        android:id="@+id/txtGradNebitno"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@+id/txtKategorijeNebitno"
+        android:text="Grad:  "
+        android:layout_marginTop="32dp"
+        android:textStyle="bold"
+        android:textSize="@dimen/velicina_slova">
+    </TextView>
 
     <Spinner
         android:id="@+id/spinnerGradovi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="@+id/textView8"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerKategorije" />
+        android:layout_marginTop="32dp"
+        android:layout_marginLeft="16dp"
+        app:layout_constraintStart_toEndOf="@+id/txtGradNebitno"
+        app:layout_constraintTop_toBottomOf="@+id/txtKategorijeNebitno" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtNemaGrad"
+        app:layout_constraintTop_toBottomOf="@+id/txtGradNebitno"
+        app:layout_constraintStart_toStartOf="@+id/txtKategorijeNebitno"
+        android:text="Morate da odaberete grad"
+        android:textSize="@dimen/velicina_slova"
+        android:visibility="invisible"
+        android:textColor="#ff0000">
+    </TextView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
