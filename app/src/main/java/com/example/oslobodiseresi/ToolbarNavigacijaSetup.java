@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.oslobodiseresi.Activity.InformacijeActivity;
 import com.example.oslobodiseresi.Activity.LoginActivity;
 import com.example.oslobodiseresi.Activity.MainActivity;
 import com.example.oslobodiseresi.Activity.MojProfilActivity;
@@ -43,8 +44,11 @@ public class ToolbarNavigacijaSetup extends AppCompatActivity implements Navigat
                 break;
             case R.id.davud:
                 intent = new Intent(this, ZaDavuda.class);
-                if(intent != null)
-                    startActivity(intent);
+                startActivity(intent);
+                break;
+            case R.id.informacije:
+                intent = new Intent(this, InformacijeActivity.class);
+                startActivity(intent);
                 break;
         }
         //close navigation drawer
