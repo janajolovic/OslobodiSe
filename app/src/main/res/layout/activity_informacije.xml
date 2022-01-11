@@ -17,7 +17,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginRight="32dp"
         android:layout_marginLeft="32dp"
-        android:text="Opis nase predivne aplikacije... Hamdo <3"
+        android:text="Opis nase predivne aplikacije... Hamdo 3"
         android:textSize="@dimen/velicina_slova"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

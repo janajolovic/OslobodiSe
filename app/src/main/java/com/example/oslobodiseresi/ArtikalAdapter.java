@@ -41,6 +41,13 @@ public class ArtikalAdapter extends RecyclerView.Adapter<ArtikalAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
+        if(Utils.getInstance().getKorisnik() == null)
+            holder.imgDelete.setVisibility(View.INVISIBLE);
+        else if(Utils.getInstance().getKorisnik().getId() == artikli.get(position).getUserId())
+            holder.imgDelete.setVisibility(View.VISIBLE);
+
+
         holder.txtNaziv.setText(artikli.get(position).getNaziv());
 //        holder.imgProfil.setImageBitmap(artikli.get(position).getSlika());
 
@@ -69,7 +76,7 @@ public class ArtikalAdapter extends RecyclerView.Adapter<ArtikalAdapter.ViewHold
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setMessage("Da li ste sigurni da zelite da obrisete " + holder.txtNaziv + "?");
+                builder.setMessage("Da li ste sigurni da zelite da obrisete " + holder.txtNaziv.getText().toString() + "?");
                 builder.setPositiveButton("Da", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -82,6 +89,7 @@ public class ArtikalAdapter extends RecyclerView.Adapter<ArtikalAdapter.ViewHold
                         Toast.makeText(context, "nista", Toast.LENGTH_SHORT).show();
                     }
                 });
+                builder.show();
             }
         });
     }
