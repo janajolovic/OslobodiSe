@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.oslobodiseresi.Activity.ArtikalActivity;
 import com.example.oslobodiseresi.Models.Item;
+import com.example.oslobodiseresi.Retrofit.ItemRepository;
 
 import java.util.ArrayList;
 
@@ -80,6 +81,7 @@ public class ArtikalAdapter extends RecyclerView.Adapter<ArtikalAdapter.ViewHold
                 builder.setPositiveButton("Da", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        ItemRepository.getInstance(MainApplication.apiManager).DeleteItem(artikli.get(position).getId());
                         Toast.makeText(context, "obrisano", Toast.LENGTH_SHORT).show();
                     }
                 });

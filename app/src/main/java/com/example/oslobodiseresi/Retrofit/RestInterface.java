@@ -13,7 +13,9 @@ import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.HTTP;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
@@ -41,5 +43,8 @@ public interface RestInterface {
 
     @GET("/items/user/{userId}")
     Call<ArrayList<Item>> getItemsFromUser(@Path("userId") String Id);
+
+    @HTTP(method = "DELETE", path = "items/delete", hasBody = true)
+    Call<Void> deleteItem(@Body int Id);
 
 }

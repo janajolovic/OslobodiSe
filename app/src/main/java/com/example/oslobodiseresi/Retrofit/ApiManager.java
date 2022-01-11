@@ -66,4 +66,9 @@ public class ApiManager {
         Call<ArrayList<Item>> getItemsFromUser = service.getItemsFromUser(Id);
         getItemsFromUser.enqueue(callback);
     }
+
+    public void DeleteItem(int Id, Callback<Void> callback){
+        Call<Void> deleteItem = service.deleteItem(Id);
+        deleteItem.enqueue(callback);
+    }
 }

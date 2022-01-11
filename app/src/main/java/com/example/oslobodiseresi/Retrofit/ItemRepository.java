@@ -8,7 +8,6 @@ import com.example.oslobodiseresi.Models.Grad;
 import com.example.oslobodiseresi.Models.Item;
 import com.example.oslobodiseresi.Models.ItemPostModel;
 import com.example.oslobodiseresi.Models.Kategorija;
-import com.example.oslobodiseresi.Models.Korisnik;
 
 import java.util.ArrayList;
 
@@ -142,5 +141,19 @@ public class ItemRepository {
             }
         });
         return items;
+    }
+
+    public void DeleteItem(int Id){
+        apiManager.DeleteItem(Id, new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                Log.println(Log.ASSERT, "[Brisanje OnResponse]", response.message());
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.println(Log.ASSERT, "[Brisanje OnFailure]", t.getMessage());
+            }
+        });
     }
 }
