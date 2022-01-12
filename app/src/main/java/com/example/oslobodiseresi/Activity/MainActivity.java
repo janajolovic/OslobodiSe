@@ -65,7 +65,6 @@ public class MainActivity extends ToolbarNavigacijaSetup {
                 adapterArtikli.getFilter().filter(query);
                 return false;
             }
-
             @Override
             public boolean onQueryTextChange(String newText) {
                 return false;
