@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,11 +24,13 @@ import com.example.oslobodiseresi.Models.Item;
 import com.example.oslobodiseresi.Retrofit.ItemRepository;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 
-public class ArtikalAdapter extends RecyclerView.Adapter<ArtikalAdapter.ViewHolder> {
+public class ArtikalAdapter extends RecyclerView.Adapter<ArtikalAdapter.ViewHolder> implements Filterable {
 
     ArrayList<Item> artikli = new ArrayList<>();
+    ArrayList<Item> artikliFull = new ArrayList<>();
     private Context context;
     public ArtikalAdapter(Context context) {
         this.context = context;
@@ -103,8 +107,40 @@ public class ArtikalAdapter extends RecyclerView.Adapter<ArtikalAdapter.ViewHold
 
     public void setArtikli(ArrayList<Item> artikli) {
         this.artikli = artikli;
+        artikliFull = new ArrayList<>(artikli);
         notifyDataSetChanged();
     }
+
+    @Override
+    public Filter getFilter() {
+        return artikalFilter;
+    }
+
+    private Filter artikalFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            ArrayList<Item> filteredArtikli = new ArrayList<>();
+            if(constraint == null || constraint.length() == 0)
+                filteredArtikli.addAll(artikliFull);
+            else
+            {
+                String filteredPattern = constraint.toString().toLowerCase().trim();
+                for(Item item : filteredArtikli)
+                    if(item.getNaziv().toLowerCase().trim().contains(filteredPattern))
+                        filteredArtikli.add(item);
+            }
+            FilterResults filterResults = new FilterResults();
+            filterResults.values = filteredArtikli;
+            return filterResults;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            artikli.clear();
+            artikli.addAll((ArrayList)results.values);
+            notifyDataSetChanged();
+        }
+    };
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private CardView parent;

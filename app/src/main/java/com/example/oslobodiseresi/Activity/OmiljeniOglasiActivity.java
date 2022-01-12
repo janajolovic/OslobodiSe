@@ -17,6 +17,6 @@ public class OmiljeniOglasiActivity extends ToolbarNavigacijaSetup {
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        setToolbar(this);
+        setToolbar(this, true);
     }
 }

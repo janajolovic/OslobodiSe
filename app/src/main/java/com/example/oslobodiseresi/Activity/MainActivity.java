@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 
 import com.example.oslobodiseresi.ArtikalAdapter;
 import com.example.oslobodiseresi.MainApplication;
@@ -38,7 +40,7 @@ public class MainActivity extends ToolbarNavigacijaSetup {
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        setToolbar(this);
+        setToolbar(this, true);
 
         recyclerArtikli.setLayoutManager(new GridLayoutManager(this, 2));
 
@@ -55,5 +57,19 @@ public class MainActivity extends ToolbarNavigacijaSetup {
             }
         });
 
+        SearchView searchView = findViewById(R.id.search_bar);
+        //searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                adapterArtikli.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
     }
 }

@@ -106,7 +106,7 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        setToolbar(this);
+        setToolbar(this, false);
 
         naziv = findViewById(R.id.txtNaziv);
         opis = findViewById(R.id.txtOpis);

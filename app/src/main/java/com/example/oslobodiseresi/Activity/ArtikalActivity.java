@@ -37,7 +37,7 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        setToolbar(this);
+        setToolbar(this, false);
 
         isFav = false;
         imgFav = findViewById(R.id.imgFav);
