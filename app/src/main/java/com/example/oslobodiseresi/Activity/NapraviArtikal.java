@@ -69,16 +69,27 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
 
         spinnerKategorije = findViewById(R.id.spinnerKategorije);
 
-        ArrayList<String> kategorije = new ArrayList<>();
+        kategorije = new ArrayList<>();
 
         MutableLiveData<ArrayList<Kategorija>> mldKategorije = ItemRepository.getInstance(MainApplication.apiManager).getAllKategorije();
         mldKategorije.observe(NapraviArtikal.this, new Observer<ArrayList<Kategorija>>() {
             @Override
             public void onChanged(ArrayList<Kategorija> kategorija) {
                 for(Kategorija k: mldKategorije.getValue()) {
-                    Log.println(Log.ASSERT, "[info]","k je "+k.toString());
                     kategorije.add(k.getNaziv());
                 }
+            }
+        });
+
+        spinnerKategorije.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                txtNemaKategorija.setVisibility(View.VISIBLE);
             }
         });
 
@@ -87,7 +98,7 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
         spinnerKategorije.setAdapter(kategorijeAdapter);
 
         spinnerGradovi = findViewById(R.id.spinnerGradovi);
-        ArrayList<String> gradovi = new ArrayList<>();
+        gradovi = new ArrayList<>();
 
         MutableLiveData<ArrayList<Grad>> mldGradovi = ItemRepository.getInstance(MainApplication.apiManager).getAllGradovi();
         mldGradovi.observe(NapraviArtikal.this, new Observer<ArrayList<Grad>>() {
@@ -122,6 +133,18 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
             }
         });
 
+        spinnerGradovi.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                txtNemaGrad.setVisibility(View.VISIBLE);
+            }
+        });
+
         dodajArtikal = findViewById(R.id.dodajArtikal);
         dodajArtikal.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,7 +152,7 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
                 MutableLiveData<Item> mld = ItemRepository.getInstance(MainApplication.apiManager).postItem(new ItemPostModel(
                         naziv.getText().toString(),
                         opis.getText().toString(),
-                        1,1,
+                        spinnerKategorije.getSelectedItemPosition(),spinnerGradovi.getSelectedItemPosition(),
                         Utils.getInstance().getKorisnik().getId()
                 ));
                 mld.observe(NapraviArtikal.this, new Observer<Item>() {
