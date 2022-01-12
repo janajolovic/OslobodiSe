@@ -62,11 +62,11 @@ public class MainActivity extends ToolbarNavigacijaSetup {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                adapterArtikli.getFilter().filter(query);
                 return false;
             }
             @Override
             public boolean onQueryTextChange(String newText) {
+                adapterArtikli.getFilter().filter(newText);
                 return false;
             }
         });

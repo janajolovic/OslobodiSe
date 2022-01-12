@@ -136,7 +136,8 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
         spinnerGradovi.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                 position = spinnerGradovi
+                           .getSelectedItemPosition();
             }
 
             @Override
@@ -152,9 +153,10 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
                 MutableLiveData<Item> mld = ItemRepository.getInstance(MainApplication.apiManager).postItem(new ItemPostModel(
                         naziv.getText().toString(),
                         opis.getText().toString(),
-                        spinnerKategorije.getSelectedItemPosition(),spinnerGradovi.getSelectedItemPosition(),
+                        1, spinnerGradovi.getSelectedItemPosition(),
                         Utils.getInstance().getKorisnik().getId()
                 ));
+                Toast.makeText(NapraviArtikal.this, Integer.toString(spinnerGradovi.getSelectedItemPosition() + 1), Toast.LENGTH_SHORT).show();
                 mld.observe(NapraviArtikal.this, new Observer<Item>() {
                     @Override
                     public void onChanged(Item item) {

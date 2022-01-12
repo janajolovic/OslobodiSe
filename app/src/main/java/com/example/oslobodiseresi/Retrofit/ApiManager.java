@@ -1,5 +1,7 @@
 package com.example.oslobodiseresi.Retrofit;
 
+import android.os.RemoteCallbackList;
+
 import com.example.oslobodiseresi.Models.Grad;
 import com.example.oslobodiseresi.Models.Item;
 import com.example.oslobodiseresi.Models.ItemPostModel;
@@ -67,8 +69,18 @@ public class ApiManager {
         getItemsFromUser.enqueue(callback);
     }
 
-    public void DeleteItem(int Id, Callback<Void> callback){
-        Call<Void> deleteItem = service.deleteItem(Id);
+    public void GetItemsFromGrad(int Id, Callback<ArrayList<Item>> callback){
+        Call<ArrayList<Item>> getItemsFromGrad = service.getItemsFromGrad(Id);
+        getItemsFromGrad.enqueue(callback);
+    }
+
+    public void GetItemsFromKategorija(int Id, Callback<ArrayList<Item>> callback){
+        Call<ArrayList<Item>> getItemsFromKategorija = service.getItemsFromKategorija(Id);
+        getItemsFromKategorija.enqueue(callback);
+    }
+
+    public void DeleteItem(int Id, Callback<String> callback){
+        Call<String> deleteItem = service.deleteItem(Id);
         deleteItem.enqueue(callback);
     }
 }
