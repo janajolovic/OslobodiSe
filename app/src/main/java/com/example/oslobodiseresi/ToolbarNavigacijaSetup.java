@@ -2,11 +2,14 @@ package com.example.oslobodiseresi;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -57,7 +60,7 @@ public class ToolbarNavigacijaSetup extends AppCompatActivity implements Navigat
         return false;
     }
 
-    public void setToolbar(Context context){
+    public void setToolbar(Context context, boolean search){
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ImageView back;
@@ -93,5 +96,14 @@ public class ToolbarNavigacijaSetup extends AppCompatActivity implements Navigat
                 drawerLayout.closeDrawer(GravityCompat.START);
             }
         });
+
+        SearchView searchView = findViewById(R.id.search_bar);
+        if(search)
+        {
+            searchView.setVisibility(View.VISIBLE);
+            //todo da ikonica bude sa desne strane
+        }
+        else
+            searchView.setVisibility(View.GONE);
     }
 }

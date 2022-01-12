@@ -36,7 +36,7 @@ public class LoginActivity extends ToolbarNavigacijaSetup {
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        setToolbar(this);
+        setToolbar(this, false);
 
         Email = findViewById(R.id.emailLogin);
         Lozinka = findViewById(R.id.lozinkaLogin);

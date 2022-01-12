@@ -38,7 +38,7 @@ public class MojProfilActivity extends ToolbarNavigacijaSetup {
             }
         });
 
-        setToolbar(this);
+        setToolbar(this, false);
     }
 
 }
