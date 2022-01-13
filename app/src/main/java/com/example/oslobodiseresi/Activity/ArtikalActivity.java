@@ -29,6 +29,7 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
     private ImageView imgFav;
     private Boolean isFav;
     private NavigationView navigationView;
+    private TextView txtKontakt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +98,7 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
         txtKategorija.setText(artikal.getKategorija().getNaziv());
         txtGrad.setText(artikal.getGrad().getNaziv());
         txtKorisnik.setText(artikal.getUser().getIme());
+        txtKontakt.setText(Utils.getInstance().getKorisnik().getBrojTelefona());
 //        Glide.with(this)
 //                .asBitmap()
 //                .load(artikal.getSlika())
@@ -110,5 +112,6 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
         txtKategorija = findViewById(R.id.txtKategorija);
         txtGrad = findViewById(R.id.txtGrad);
         txtKorisnik = findViewById(R.id.txtKorisnik);
+        txtKontakt = findViewById(R.id.txtKontakt);
     }
 }
