@@ -2,6 +2,7 @@ package com.example.oslobodiseresi;
 
 import static com.example.oslobodiseresi.Activity.ArtikalActivity.ARTIKAL_ID_KEY;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -27,7 +28,6 @@ import com.example.oslobodiseresi.Models.Item;
 import com.example.oslobodiseresi.Retrofit.ItemRepository;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 
 public class ArtikalAdapter extends RecyclerView.Adapter<ArtikalAdapter.ViewHolder> implements Filterable {
@@ -50,7 +50,7 @@ public class ArtikalAdapter extends RecyclerView.Adapter<ArtikalAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        if(Utils.getInstance().getKorisnik() == null)
+        if(!Utils.getInstance().jeUlogovan())
             holder.imgDelete.setVisibility(View.INVISIBLE);
         else if(Utils.getInstance().getKorisnik().getId() == artikli.get(position).getUserId())
             holder.imgDelete.setVisibility(View.VISIBLE);
@@ -71,11 +71,17 @@ public class ArtikalAdapter extends RecyclerView.Adapter<ArtikalAdapter.ViewHold
         holder.imgFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.isFav = !holder.isFav;
-                if (holder.isFav) {
-                    holder.imgFav.setImageResource(R.drawable.ic_heart);
-                } else {
-                    holder.imgFav.setImageResource(R.drawable.ic_prazno_srce);
+                if(Utils.getInstance().jeUlogovan()){
+                    holder.isFav = !holder.isFav;
+                    if (holder.isFav) {
+                        holder.imgFav.setImageResource(R.drawable.ic_heart);
+                    } else {
+                        holder.imgFav.setImageResource(R.drawable.ic_prazno_srce);
+                    }
+                }
+                else
+                {
+                    Toast.makeText(context, "Morate biti prijavljeni da biste oznacili oglas", Toast.LENGTH_SHORT).show();
                 }
             }
         });

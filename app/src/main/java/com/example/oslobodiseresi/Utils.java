@@ -2,20 +2,15 @@ package com.example.oslobodiseresi;
 
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.oslobodiseresi.Models.Item;
 import com.example.oslobodiseresi.Models.Korisnik;
 import com.example.oslobodiseresi.Retrofit.ItemRepository;
-import com.example.oslobodiseresi.Retrofit.UserRepository;
 
 import java.util.ArrayList;
 
 public class Utils {
-    private int jelUlogovan;
     private Korisnik korisnik;
 
     private static Utils instance;
@@ -23,7 +18,6 @@ public class Utils {
     private static ArrayList<Item> artikli;
     private static ArrayList<Korisnik> korisnici;
     private Utils(){
-        jelUlogovan = 0;
         korisnik = null;
         Log.println(Log.ERROR, "[Greska]","Konstruktor je pozvan");
         artikli = new ArrayList<>();
@@ -84,8 +78,8 @@ public class Utils {
         return instance;
     }
 
-    public int getJelUlogovan() {
-        return jelUlogovan;
+    public boolean jeUlogovan() {
+        return korisnik != null;
     }
 
     public Korisnik getKorisnik() {
@@ -94,10 +88,6 @@ public class Utils {
 
     public void setKorisnik(Korisnik korisnik) {
         this.korisnik = korisnik;
-    }
-
-    public void setJelUlogovan(int jelUlogovan) {
-        this.jelUlogovan = jelUlogovan;
     }
 
 }

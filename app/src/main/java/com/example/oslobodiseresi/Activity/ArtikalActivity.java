@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
@@ -37,18 +38,25 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        setToolbar(this, false);
+        setToolbar(false);
 
         isFav = false;
         imgFav = findViewById(R.id.imgFav);
         imgFav.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                isFav = !isFav;
-                if (isFav) {
-                    imgFav.setImageResource(R.drawable.ic_heart);
-                } else {
-                    imgFav.setImageResource(R.drawable.ic_prazno_srce);
+                if(Utils.getInstance().jeUlogovan())
+                {
+                    isFav = !isFav;
+                    if (isFav) {
+                        imgFav.setImageResource(R.drawable.ic_heart);
+                    } else {
+                        imgFav.setImageResource(R.drawable.ic_prazno_srce);
+                    }
+                }
+                else
+                {
+                    Toast.makeText(ArtikalActivity.this, "Morate biti prijavljeni da biste oznacili oglas", Toast.LENGTH_SHORT).show();
                 }
             }
         }) ;

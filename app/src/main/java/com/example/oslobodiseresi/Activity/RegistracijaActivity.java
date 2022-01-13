@@ -39,7 +39,7 @@ public class RegistracijaActivity extends ToolbarNavigacijaSetup {
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        setToolbar(this, false);
+        setToolbar(false);
 
         ime = findViewById(R.id.registracijaIme);
         email = findViewById(R.id.registracijaEmail);

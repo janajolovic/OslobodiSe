@@ -69,6 +69,8 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
 
         spinnerKategorije = findViewById(R.id.spinnerKategorije);
 
+        ArrayList<String> kategorije = new ArrayList<>();
+        kategorije.add(" ");
         kategorije = new ArrayList<>();
 
         MutableLiveData<ArrayList<Kategorija>> mldKategorije = ItemRepository.getInstance(MainApplication.apiManager).getAllKategorije();
@@ -78,9 +80,16 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
                 for(Kategorija k: mldKategorije.getValue()) {
                     kategorije.add(k.getNaziv());
                 }
+                ArrayAdapter<String> kategorijeAdapter = new ArrayAdapter<>(NapraviArtikal.this, android.R.layout.simple_spinner_dropdown_item, kategorije);
+                kategorijeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerKategorije.setAdapter(kategorijeAdapter);
             }
         });
 
+        spinnerGradovi = findViewById(R.id.spinnerGradovi);
+        ArrayList<String> gradovi = new ArrayList<>();
+        gradovi.add(" ");
+      
         spinnerKategorije.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -107,17 +116,16 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
                 for(Grad g: mldGradovi.getValue()) {
                     gradovi.add(g.getNaziv());
                 }
+                ArrayAdapter<String> gradoviAdapter = new ArrayAdapter<>(NapraviArtikal.this, android.R.layout.simple_spinner_dropdown_item, gradovi);
+                gradoviAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerGradovi.setAdapter(gradoviAdapter);
             }
         });
-
-        ArrayAdapter<String> gradoviAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, gradovi);
-
-        spinnerGradovi.setAdapter(gradoviAdapter);
 
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        setToolbar(this, false);
+        setToolbar(false);
 
         naziv = findViewById(R.id.txtNaziv);
         opis = findViewById(R.id.txtOpis);
@@ -150,9 +158,20 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
         dodajArtikal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(spinnerKategorije.getSelectedItemPosition() == 0)
+                    txtNemaKategorija.setVisibility(View.VISIBLE);
+                if(spinnerGradovi.getSelectedItemPosition() == 0)
+                    txtNemaGrad.setVisibility(View.VISIBLE);
+
+                if(spinnerKategorije.getSelectedItemPosition() == 0 || spinnerGradovi.getSelectedItemPosition() == 0)
+                    return;
+
                 MutableLiveData<Item> mld = ItemRepository.getInstance(MainApplication.apiManager).postItem(new ItemPostModel(
                         naziv.getText().toString(),
                         opis.getText().toString(),
+
+                        spinnerKategorije.getSelectedItemPosition(),
+                        spinnerGradovi.getSelectedItemPosition(),
                         1, spinnerGradovi.getSelectedItemPosition(),
                         Utils.getInstance().getKorisnik().getId()
                 ));
