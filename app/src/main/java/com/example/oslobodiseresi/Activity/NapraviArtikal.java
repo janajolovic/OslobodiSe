@@ -69,14 +69,13 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
 
         spinnerKategorije = findViewById(R.id.spinnerKategorije);
 
-        ArrayList<String> kategorije = new ArrayList<>();
-        kategorije.add(" ");
-
         MutableLiveData<ArrayList<Kategorija>> mldKategorije = ItemRepository.getInstance(MainApplication.apiManager).getAllKategorije();
         mldKategorije.observe(NapraviArtikal.this, new Observer<ArrayList<Kategorija>>() {
             @Override
             public void onChanged(ArrayList<Kategorija> kategorija) {
-                for(Kategorija k: mldKategorije.getValue()) {
+                ArrayList<String> kategorije = new ArrayList<>();
+                kategorije.add(" ");
+                for (Kategorija k : mldKategorije.getValue()) {
                     kategorije.add(k.getNaziv());
                 }
                 ArrayAdapter<String> kategorijeAdapter = new ArrayAdapter<>(NapraviArtikal.this, android.R.layout.simple_spinner_dropdown_item, kategorije);
@@ -86,33 +85,14 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
         });
 
         spinnerGradovi = findViewById(R.id.spinnerGradovi);
-        ArrayList<String> gradovi = new ArrayList<>();
-        gradovi.add(" ");
-      
-        spinnerKategorije.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                txtNemaKategorija.setVisibility(View.VISIBLE);
-            }
-        });
-
-        ArrayAdapter<String> kategorijeAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, kategorije);
-
-        spinnerKategorije.setAdapter(kategorijeAdapter);
-
-        spinnerGradovi = findViewById(R.id.spinnerGradovi);
-        gradovi.add(" ");
 
         MutableLiveData<ArrayList<Grad>> mldGradovi = ItemRepository.getInstance(MainApplication.apiManager).getAllGradovi();
         mldGradovi.observe(NapraviArtikal.this, new Observer<ArrayList<Grad>>() {
             @Override
             public void onChanged(ArrayList<Grad> grad) {
-                for(Grad g: mldGradovi.getValue()) {
+                ArrayList<String> gradovi = new ArrayList<>();
+                gradovi.add(" ");
+                for (Grad g : mldGradovi.getValue()) {
                     gradovi.add(g.getNaziv());
                 }
                 ArrayAdapter<String> gradoviAdapter = new ArrayAdapter<>(NapraviArtikal.this, android.R.layout.simple_spinner_dropdown_item, gradovi);

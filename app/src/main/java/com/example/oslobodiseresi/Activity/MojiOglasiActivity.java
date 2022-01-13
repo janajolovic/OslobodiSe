@@ -46,14 +46,14 @@ public class MojiOglasiActivity extends ToolbarNavigacijaSetup {
 
         recyclerArtikli.setLayoutManager(new GridLayoutManager(this, 2));
 
-//        MutableLiveData<ArrayList<Item>> artikli = ItemRepository.getInstance(MainApplication.apiManager).getItemsFromUser(Utils.getInstance().getKorisnik().getId());
-//        artikli.observe(MojiOglasiActivity.this, new Observer<ArrayList<Item>>() {
-//            @Override
-//            public void onChanged(ArrayList<Item> items) {
-//                adapterArtikli.setArtikli(artikli.getValue());
-//                recyclerArtikli.setAdapter(adapterArtikli);
-//            }
-//        });
+        MutableLiveData<ArrayList<Item>> artikli = ItemRepository.getInstance(MainApplication.apiManager).getItemsFromUser(Utils.getInstance().getKorisnik().getId());
+        artikli.observe(MojiOglasiActivity.this, new Observer<ArrayList<Item>>() {
+            @Override
+            public void onChanged(ArrayList<Item> items) {
+                adapterArtikli.setArtikli(artikli.getValue());
+                recyclerArtikli.setAdapter(adapterArtikli);
+            }
+        });
 
         dodajArtikal = findViewById(R.id.dodajArtikal);
         dodajArtikal.setOnClickListener(new View.OnClickListener() {

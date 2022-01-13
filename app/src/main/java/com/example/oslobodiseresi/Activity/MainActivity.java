@@ -29,12 +29,14 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends ToolbarNavigacijaSetup implements AdapterView.OnItemSelectedListener {
+public class MainActivity extends ToolbarNavigacijaSetup {
 
     private RecyclerView recyclerArtikli;
     private NavigationView navigationView;
     private ProgressBar progress;
     Spinner spinnerKategorije, spinnerGradovi;
+
+    int izabraniGrad, izabranaKategorija;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,50 +57,51 @@ public class MainActivity extends ToolbarNavigacijaSetup implements AdapterView.
         spinnerKategorije = findViewById(R.id.spinnerKategorije);
         spinnerGradovi = findViewById(R.id.spinnerGradovi);
 
-        ArrayList<String> kategorije = new ArrayList<>();
-        kategorije.add("Sve kategorije");
-        MutableLiveData<ArrayList<Kategorija>> mldKategorije = ItemRepository.getInstance(MainApplication.apiManager).getAllKategorije();
-        mldKategorije.observe(MainActivity.this, new Observer<ArrayList<Kategorija>>() {
-            @Override
-            public void onChanged(ArrayList<Kategorija> kategorija) {
-                for(Kategorija k: mldKategorije.getValue()) {
-                    kategorije.add(k.getNaziv());
-                }
-                ArrayAdapter<String> kategorijeAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_spinner_dropdown_item, kategorije);
-                kategorijeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinnerKategorije.setAdapter(kategorijeAdapter);
-                spinnerKategorije.setOnItemSelectedListener(MainActivity.this);
-            }
-        });
+            MutableLiveData<ArrayList<Kategorija>> mldKategorije = ItemRepository.getInstance(MainApplication.apiManager).getAllKategorije();
+            mldKategorije.observe(MainActivity.this, new Observer<ArrayList<Kategorija>>() {
+                @Override
+                public void onChanged(ArrayList<Kategorija> kategorija) {
+                        ArrayList<String> kategorije = new ArrayList<>();
+                        kategorije.add("Sve kategorije");
+                        for (Kategorija k : mldKategorije.getValue()) {
+                            kategorije.add(k.getNaziv());
+                        }
+                        ArrayAdapter<String> kategorijeAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_spinner_dropdown_item, kategorije);
+                        kategorijeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        spinnerKategorije.setAdapter(kategorijeAdapter);
+                        spinnerKategorije.setOnItemSelectedListener(MainActivity.this);
+                    }
+            });
 
-        ArrayList<String> gradovi = new ArrayList<>();
-        gradovi.add("Svi gradovi");
-        MutableLiveData<ArrayList<Grad>> mldGradovi = ItemRepository.getInstance(MainApplication.apiManager).getAllGradovi();
-        mldGradovi.observe(MainActivity.this, new Observer<ArrayList<Grad>>() {
-            @Override
-            public void onChanged(ArrayList<Grad> grad) {
-                for(Grad g: mldGradovi.getValue()) {
-                    gradovi.add(g.getNaziv());
-                }
-                ArrayAdapter<String> gradoviAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_spinner_dropdown_item, gradovi);
-                gradoviAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinnerGradovi.setAdapter(gradoviAdapter);
-                spinnerGradovi.setOnItemSelectedListener(MainActivity.this);
-            }
-        });
+
+            MutableLiveData<ArrayList<Grad>> mldGradovi = ItemRepository.getInstance(MainApplication.apiManager).getAllGradovi();
+            mldGradovi.observe(MainActivity.this, new Observer<ArrayList<Grad>>() {
+                @Override
+                public void onChanged(ArrayList<Grad> grad) {
+                    ArrayList<String> gradovi = new ArrayList<>();
+                    gradovi.add("Svi gradovi");
+                    for (Grad g : mldGradovi.getValue()) {
+                            gradovi.add(g.getNaziv());
+                        }
+                        ArrayAdapter<String> gradoviAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_spinner_dropdown_item, gradovi);
+                        gradoviAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        spinnerGradovi.setAdapter(gradoviAdapter);
+                        spinnerGradovi.setOnItemSelectedListener(MainActivity.this);
+                    }
+            });
 
         //recycler view
         ArtikalAdapter adapterArtikli = new ArtikalAdapter(this);
 
-//        MutableLiveData<ArrayList<Item>> artikli = UserRepository.getInstance(MainApplication.apiManager).GetAllItems();
-//        artikli.observe(MainActivity.this, new Observer<ArrayList<Item>>() {
-//            @Override
-//            public void onChanged(ArrayList<Item> items) {
-//                adapterArtikli.setArtikli(artikli.getValue());
-//                recyclerArtikli.setAdapter(adapterArtikli);
-//                progress.setVisibility(View.INVISIBLE);
-//            }
-//        });
+        MutableLiveData<ArrayList<Item>> artikli = UserRepository.getInstance(MainApplication.apiManager).GetAllItems();
+        artikli.observe(MainActivity.this, new Observer<ArrayList<Item>>() {
+            @Override
+            public void onChanged(ArrayList<Item> items) {
+                adapterArtikli.setArtikli(artikli.getValue());
+                recyclerArtikli.setAdapter(adapterArtikli);
+                progress.setVisibility(View.INVISIBLE);
+            }
+        });
 
         SearchView searchView = findViewById(R.id.search_bar);
         //searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
@@ -115,20 +118,8 @@ public class MainActivity extends ToolbarNavigacijaSetup implements AdapterView.
         });
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        switch(parent.getId()) {
-            case R.id.spinnerKategorije:
-                //ovde primamo filtrirano po kategoriji
-                break;
-            case R.id.spinnerGradovi:
-                //ovde primamo filtrirano po gradovima
-                break;
-        }
-    }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
+    void PrimeniFiltere(){
+        //TODO:OVDE FILTRIRAMO
     }
 }
