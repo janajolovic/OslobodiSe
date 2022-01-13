@@ -41,10 +41,16 @@ public interface RestInterface {
     @GET("items/{Id}")
     Call<Item> getItem(@Path("Id") int Id);
 
-    @GET("/items/user/{userId}")
+    @GET("items/user/{userId}")
     Call<ArrayList<Item>> getItemsFromUser(@Path("userId") String Id);
 
+    @GET("items/grad/{gradId}")
+    Call<ArrayList<Item>> getItemsFromGrad(@Path("gradId") int gradId);
+
+    @GET("items/kategorije/{kategorijaId}")
+    Call<ArrayList<Item>> getItemsFromKategorija(@Path("kategorijaId") int kategorijaId);
+
     @HTTP(method = "DELETE", path = "items/delete", hasBody = true)
-    Call<Void> deleteItem(@Body int Id);
+    Call<String> deleteItem(@Body int Id);
 
 }

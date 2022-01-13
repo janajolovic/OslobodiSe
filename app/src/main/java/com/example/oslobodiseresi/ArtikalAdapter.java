@@ -17,7 +17,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.oslobodiseresi.Activity.ArtikalActivity;
@@ -91,7 +94,14 @@ public class ArtikalAdapter extends RecyclerView.Adapter<ArtikalAdapter.ViewHold
                 builder.setPositiveButton("Da", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        ItemRepository.getInstance(MainApplication.apiManager).DeleteItem(artikli.get(position).getId());
+                        MutableLiveData<String> mld = ItemRepository.getInstance(MainApplication.apiManager).DeleteItem(artikli.get(position).getId());
+                        mld.observe((AppCompatActivity)context, new Observer<String>() {
+                            @Override
+                            public void onChanged(String s) {
+                                artikli.remove(position);
+                                notifyItemRemoved(position);
+                            }
+                        });
                         Toast.makeText(context, "obrisano", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -131,7 +141,7 @@ public class ArtikalAdapter extends RecyclerView.Adapter<ArtikalAdapter.ViewHold
             else
             {
                 String filteredPattern = constraint.toString().toLowerCase().trim();
-                for(Item item : filteredArtikli)
+                for(Item item : artikliFull)
                     if(item.getNaziv().toLowerCase().trim().contains(filteredPattern))
                         filteredArtikli.add(item);
             }

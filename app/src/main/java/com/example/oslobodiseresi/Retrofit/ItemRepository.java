@@ -23,6 +23,7 @@ public class ItemRepository {
     private MutableLiveData<Item> item = new MutableLiveData<>();
     private MutableLiveData<ArrayList<Kategorija>> kategorije = new MutableLiveData<>();
     private MutableLiveData<ArrayList<Grad>> gradovi = new MutableLiveData<>();
+    private MutableLiveData<String> str = new MutableLiveData<>();
 
     private ItemRepository(ApiManager apiManager){
         this.apiManager = apiManager;
@@ -62,11 +63,12 @@ public class ItemRepository {
                 if(response.isSuccessful()){
                     item.setValue(response.body());
                 }
+                Log.println(Log.ASSERT, "[Post OnResponse]", response.message());
             }
 
             @Override
             public void onFailure(Call<Item> call, Throwable t) {
-
+                Log.println(Log.ASSERT, "[Post OnFailure]", t.getMessage());
             }
         });
         return item;
@@ -143,17 +145,56 @@ public class ItemRepository {
         return items;
     }
 
-    public void DeleteItem(int Id){
-        apiManager.DeleteItem(Id, new Callback<Void>() {
+    public MutableLiveData<String> DeleteItem(int Id){
+        apiManager.DeleteItem(Id, new Callback<String>() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
+            public void onResponse(Call<String> call, Response<String> response) {
+                if(response.isSuccessful()){
+                    str.setValue(response.body());
+                }
                 Log.println(Log.ASSERT, "[Brisanje OnResponse]", response.message());
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
+            public void onFailure(Call<String> call, Throwable t) {
                 Log.println(Log.ASSERT, "[Brisanje OnFailure]", t.getMessage());
             }
         });
+
+        return str;
+    }
+
+    public MutableLiveData<ArrayList<Item>> getItemsFromGrad(int Id){
+        apiManager.GetItemsFromGrad(Id, new Callback<ArrayList<Item>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Item>> call, Response<ArrayList<Item>> response) {
+                if(response.isSuccessful()){
+                    items.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Item>> call, Throwable t) {
+
+            }
+        });
+        return items;
+    }
+
+    public MutableLiveData<ArrayList<Item>> getItemsFromKategorija(int Id){
+        apiManager.GetItemsFromKategorija(Id, new Callback<ArrayList<Item>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Item>> call, Response<ArrayList<Item>> response) {
+                if(response.isSuccessful()){
+                    items.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Item>> call, Throwable t) {
+
+            }
+        });
+        return items;
     }
 }
