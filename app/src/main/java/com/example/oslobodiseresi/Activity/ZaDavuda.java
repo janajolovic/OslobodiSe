@@ -43,7 +43,7 @@ public class ZaDavuda extends ToolbarNavigacijaSetup {
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        setToolbar(this, false);
+        setToolbar(false);
 
 
         dugme = findViewById(R.id.dugme);

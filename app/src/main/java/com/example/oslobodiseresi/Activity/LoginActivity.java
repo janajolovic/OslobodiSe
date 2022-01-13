@@ -36,7 +36,7 @@ public class LoginActivity extends ToolbarNavigacijaSetup {
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        setToolbar(this, false);
+        setToolbar(false);
 
         Email = findViewById(R.id.emailLogin);
         Lozinka = findViewById(R.id.lozinkaLogin);
@@ -54,7 +54,6 @@ public class LoginActivity extends ToolbarNavigacijaSetup {
                         if(k.getValue()!=null){
                             Log.println(Log.ERROR,"[GRESKA]","prijava gotova, korisnik je "+korisnik.toString());
                             Utils.getInstance().setKorisnik(k.getValue());
-                            Utils.getInstance().setJelUlogovan(1);
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
                         }
