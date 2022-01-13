@@ -20,6 +20,10 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="SpinnerTheme" parent="android:Widget.Spinner">
+        <item name="android:background">@drawable/ic_filter</item>
+    </style>
+
     <style name="Theme.OslobodiSeResi.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.OslobodiSeResi.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

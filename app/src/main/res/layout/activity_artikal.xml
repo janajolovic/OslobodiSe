@@ -139,7 +139,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txtGrad" />
 
     <TextView
-        android:id="@+id/txtKorisnik"
+        android:id="@+id/txtKontakt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -147,6 +147,30 @@
         android:layout_marginLeft="10dp"
         android:text="TextView"
         app:layout_constraintStart_toEndOf="@+id/textViewKorisnik"
+        app:layout_constraintTop_toBottomOf="@+id/txtKorisnik" />
+
+    <TextView
+        android:id="@+id/textViewKontakt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Kontakt: "
+        android:textStyle="bold"
+        android:textSize="@dimen/velicina_slova"
+        app:layout_constraintEnd_toEndOf="@+id/textView2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/textViewKorisnik" />
+
+    <TextView
+        android:id="@+id/txtKorisnik"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textSize="@dimen/velicina_slova"
+        android:layout_marginLeft="10dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/textViewKontakt"
         app:layout_constraintTop_toBottomOf="@+id/txtGrad" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

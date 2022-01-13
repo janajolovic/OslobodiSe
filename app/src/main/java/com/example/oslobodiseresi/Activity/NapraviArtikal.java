@@ -71,7 +71,6 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
 
         ArrayList<String> kategorije = new ArrayList<>();
         kategorije.add(" ");
-        kategorije = new ArrayList<>();
 
         MutableLiveData<ArrayList<Kategorija>> mldKategorije = ItemRepository.getInstance(MainApplication.apiManager).getAllKategorije();
         mldKategorije.observe(NapraviArtikal.this, new Observer<ArrayList<Kategorija>>() {
@@ -107,7 +106,7 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
         spinnerKategorije.setAdapter(kategorijeAdapter);
 
         spinnerGradovi = findViewById(R.id.spinnerGradovi);
-        gradovi = new ArrayList<>();
+        gradovi.add(" ");
 
         MutableLiveData<ArrayList<Grad>> mldGradovi = ItemRepository.getInstance(MainApplication.apiManager).getAllGradovi();
         mldGradovi.observe(NapraviArtikal.this, new Observer<ArrayList<Grad>>() {
@@ -169,10 +168,7 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
                 MutableLiveData<Item> mld = ItemRepository.getInstance(MainApplication.apiManager).postItem(new ItemPostModel(
                         naziv.getText().toString(),
                         opis.getText().toString(),
-
-                        spinnerKategorije.getSelectedItemPosition(),
-                        spinnerGradovi.getSelectedItemPosition(),
-                        1, spinnerGradovi.getSelectedItemPosition(),
+                        spinnerKategorije.getSelectedItemPosition(), spinnerGradovi.getSelectedItemPosition(),
                         Utils.getInstance().getKorisnik().getId()
                 ));
                 Toast.makeText(NapraviArtikal.this, Integer.toString(spinnerGradovi.getSelectedItemPosition() + 1), Toast.LENGTH_SHORT).show();
