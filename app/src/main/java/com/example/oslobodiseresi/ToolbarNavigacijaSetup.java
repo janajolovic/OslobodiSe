@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +20,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 
 import com.example.oslobodiseresi.Activity.InformacijeActivity;
 import com.example.oslobodiseresi.Activity.LoginActivity;
@@ -27,7 +30,11 @@ import com.example.oslobodiseresi.Activity.MojProfilActivity;
 import com.example.oslobodiseresi.Activity.MojiOglasiActivity;
 import com.example.oslobodiseresi.Activity.RegistracijaActivity;
 import com.example.oslobodiseresi.Activity.ZaDavuda;
+import com.example.oslobodiseresi.Models.Kategorija;
 import com.google.android.material.navigation.NavigationView;
+import com.example.oslobodiseresi.Retrofit.ItemRepository;
+
+import java.util.ArrayList;
 
 public class ToolbarNavigacijaSetup extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     @Override
