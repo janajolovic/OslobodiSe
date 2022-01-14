@@ -69,7 +69,7 @@ public class MainActivity extends ToolbarNavigacijaSetup {
                         ArrayAdapter<String> kategorijeAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_spinner_dropdown_item, kategorije);
                         kategorijeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         spinnerKategorije.setAdapter(kategorijeAdapter);
-                        spinnerKategorije.setOnItemSelectedListener(MainActivity.this);
+                        //spinnerKategorije.setOnItemSelectedListener(MainActivity.this);
                     }
             });
 
@@ -86,7 +86,7 @@ public class MainActivity extends ToolbarNavigacijaSetup {
                         ArrayAdapter<String> gradoviAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_spinner_dropdown_item, gradovi);
                         gradoviAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         spinnerGradovi.setAdapter(gradoviAdapter);
-                        spinnerGradovi.setOnItemSelectedListener(MainActivity.this);
+                        //spinnerGradovi.setOnItemSelectedListener(MainActivity.this);
                     }
             });
 
@@ -104,7 +104,7 @@ public class MainActivity extends ToolbarNavigacijaSetup {
         });
 
         SearchView searchView = findViewById(R.id.search_bar);
-        //searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -112,7 +112,7 @@ public class MainActivity extends ToolbarNavigacijaSetup {
             }
             @Override
             public boolean onQueryTextChange(String newText) {
-                adapterArtikli.getFilter().filter(newText);
+                //adapterArtikli.getFilter().filter(newText);
                 return false;
             }
         });

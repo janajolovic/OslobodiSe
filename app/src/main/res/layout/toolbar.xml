@@ -41,7 +41,7 @@
             app:layout_constraintEnd_toStartOf="@+id/imgProfil"
             app:layout_constraintStart_toEndOf="@+id/imgHamburger"
             app:layout_constraintTop_toTopOf="parent"
-            android:searchIcon="@drawable/ic_search"/>
+            android:searchIcon="@drawable/ic_search" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
