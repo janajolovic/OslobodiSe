@@ -2,14 +2,18 @@ package com.example.oslobodiseresi;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.util.TypedValue;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -154,6 +158,13 @@ public class ToolbarNavigacijaSetup extends AppCompatActivity implements Navigat
         {
             searchView.setVisibility(View.VISIBLE);
             //todo da ikonica bude sa desne strane
+            EditText searchEditText = (EditText) searchView.findViewById(R.id.search_src_text);
+            TypedValue typedValue = new TypedValue();
+            Resources.Theme theme = context.getTheme();
+            theme.resolveAttribute(R.attr.colorOnPrimary, typedValue, true);
+            @ColorInt int color = typedValue.data;
+            searchEditText.setTextColor(color);
+            searchEditText.setHintTextColor(color);
         }
         else
             searchView.setVisibility(View.GONE);

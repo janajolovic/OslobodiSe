@@ -3,6 +3,8 @@ package com.example.oslobodiseresi.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.SearchView;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
@@ -61,6 +63,20 @@ public class MojiOglasiActivity extends ToolbarNavigacijaSetup {
             public void onClick(View v) {
                 Intent intent = new Intent(MojiOglasiActivity.this, NapraviArtikal.class);
                 startActivity(intent);
+            }
+        });
+
+        SearchView searchView = findViewById(R.id.search_bar);
+        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapterArtikli.getFilter().filter(newText);
+                return false;
             }
         });
     }

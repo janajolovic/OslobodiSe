@@ -74,7 +74,7 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
             @Override
             public void onChanged(ArrayList<Kategorija> kategorija) {
                 ArrayList<String> kategorije = new ArrayList<>();
-                kategorije.add(" ");
+                kategorije.add("Izaberite kategoriju");
                 for (Kategorija k : mldKategorije.getValue()) {
                     kategorije.add(k.getNaziv());
                 }
@@ -91,7 +91,7 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
             @Override
             public void onChanged(ArrayList<Grad> grad) {
                 ArrayList<String> gradovi = new ArrayList<>();
-                gradovi.add(" ");
+                gradovi.add("Izaberite grad");
                 for (Grad g : mldGradovi.getValue()) {
                     gradovi.add(g.getNaziv());
                 }
