@@ -23,6 +23,18 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
+            android:id="@+id/imgFilter"
+            android:layout_width="@dimen/velicina_ikonice"
+            android:layout_height="@dimen/velicina_ikonice"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_filter"
+            android:layout_marginRight="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imgProfil"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
             android:id="@+id/imgProfil"
             android:layout_width="@dimen/velicina_ikonice"
             android:layout_height="@dimen/velicina_ikonice"
