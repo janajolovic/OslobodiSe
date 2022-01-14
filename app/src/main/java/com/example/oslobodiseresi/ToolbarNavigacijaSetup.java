@@ -107,7 +107,7 @@ public class ToolbarNavigacijaSetup extends AppCompatActivity implements Navigat
                                     startActivity(new Intent(context, MojProfilActivity.class));
                                     return true;
                                 case R.id.odjava:
-                                    Utils.getInstance().setKorisnik(null);
+                                    Utils.getInstance().SacuvajKorisnika(null);
                                     startActivity(new Intent(context, MojProfilActivity.class));
                                     Intent intent = getIntent();
                                     finish();

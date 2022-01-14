@@ -52,7 +52,7 @@ public class LoginActivity extends ToolbarNavigacijaSetup {
                     @Override
                     public void onChanged(Korisnik korisnik) {
                         if(k.getValue()!=null){
-                            Utils.getInstance().setKorisnik(k.getValue());
+                            Utils.getInstance().SacuvajKorisnika(korisnik);
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
                         }

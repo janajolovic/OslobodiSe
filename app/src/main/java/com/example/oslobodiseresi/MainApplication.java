@@ -10,6 +10,7 @@ public class MainApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Utils.getInstance(MainApplication.this);
         apiManager = ApiManager.getInstance();
     }
 }
