@@ -3,6 +3,7 @@ package com.example.oslobodiseresi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -99,39 +100,41 @@ public class ToolbarNavigacijaSetup extends AppCompatActivity implements Navigat
                 PopupMenu popupMenu = new PopupMenu(context, imgPrijava);
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
-                    public boolean onMenuItemClick(MenuItem item) { if (Utils.getInstance().getKorisnik() != null) {
-                        switch(item.getItemId()) {
-                            case R.id.moj_profil:
-                                startActivity(new Intent(context, MojProfilActivity.class));
-                                return true;
-                            case R.id.odjava:
-                                Utils.getInstance().setKorisnik(null);
-                                startActivity(new Intent(context, MojProfilActivity.class));
-                                Intent intent = getIntent();
-                                finish();
-                                startActivity(intent);
-                                return true;
+                    public boolean onMenuItemClick(MenuItem item) {
+                        if (Utils.getInstance().jeUlogovan()) {
+                            switch(item.getItemId()) {
+                                case R.id.moj_profil:
+                                    startActivity(new Intent(context, MojProfilActivity.class));
+                                    return true;
+                                case R.id.odjava:
+                                    Utils.getInstance().setKorisnik(null);
+                                    startActivity(new Intent(context, MojProfilActivity.class));
+                                    Intent intent = getIntent();
+                                    finish();
+                                    startActivity(intent);
+                                    return true;
+                            }
+                        } else {
+                            switch(item.getItemId()) {
+                                case R.id.prijava:
+                                    startActivity(new Intent(context, LoginActivity.class));
+                                    return true;
+                                case R.id.registracija:
+                                    startActivity(new Intent(context, RegistracijaActivity.class));
+                                    return true;
+                            }
                         }
-                    } else {
-                        switch(item.getItemId()) {
-                            case R.id.prijava:
-                                startActivity(new Intent(context, LoginActivity.class));
-                                return true;
-                            case R.id.registracija:
-                                startActivity(new Intent(context, RegistracijaActivity.class));
-                                return true;
-                        }
-                    }
                         return false;
                     }
                 });
                 MenuInflater inflater = getMenuInflater();
                 MenuInflater menuInflater = popupMenu.getMenuInflater();
-                inflater.inflate(R.menu.prijava_registracija, popupMenu.getMenu());
+                if(Utils.getInstance().jeUlogovan()){
+                    inflater.inflate(R.menu.moj_profil_menu, popupMenu.getMenu());
+                }else{
+                    inflater.inflate(R.menu.prijava_registracija, popupMenu.getMenu());
+                }
                 popupMenu.show();
-
-
-
             }
         });
         //todo search
@@ -158,13 +161,13 @@ public class ToolbarNavigacijaSetup extends AppCompatActivity implements Navigat
         {
             searchView.setVisibility(View.VISIBLE);
             //todo da ikonica bude sa desne strane
-            EditText searchEditText = (EditText) searchView.findViewById(R.id.search_src_text);
-            TypedValue typedValue = new TypedValue();
-            Resources.Theme theme = context.getTheme();
-            theme.resolveAttribute(R.attr.colorOnPrimary, typedValue, true);
-            @ColorInt int color = typedValue.data;
-            searchEditText.setTextColor(color);
-            searchEditText.setHintTextColor(color);
+//            EditText searchEditText = (EditText) searchView.findViewById(androidx.appcompat.R.id.search_src_text);
+//            TypedValue typedValue = new TypedValue();
+//            Resources.Theme theme = context.getTheme();
+//            theme.resolveAttribute(R.attr.colorOnPrimary, typedValue, true);
+//            @ColorInt int color = typedValue.data;
+//            searchEditText.setTextColor(getResources().getColor(R.color.white));
+//            searchEditText.setHintTextColor(getResources().getColor(R.color.white));
         }
         else
             searchView.setVisibility(View.GONE);

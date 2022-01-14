@@ -98,7 +98,7 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
         txtKategorija.setText(artikal.getKategorija().getNaziv());
         txtGrad.setText(artikal.getGrad().getNaziv());
         txtKorisnik.setText(artikal.getUser().getIme());
-        txtKontakt.setText(Utils.getInstance().getKorisnik().getBrojTelefona());
+//      txtKontakt.setText(Utils.getInstance().getKorisnik().getBrojTelefona());
 //        Glide.with(this)
 //                .asBitmap()
 //                .load(artikal.getSlika())

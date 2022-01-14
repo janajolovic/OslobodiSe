@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,12 +50,12 @@ public class ArtikalAdapter extends RecyclerView.Adapter<ArtikalAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
-        if(!Utils.getInstance().jeUlogovan())
-            holder.imgDelete.setVisibility(View.INVISIBLE);
-        else if(Utils.getInstance().getKorisnik().getId() == artikli.get(position).getUserId())
+        holder.imgDelete.setVisibility(View.INVISIBLE);
+        if(Utils.getInstance().jeUlogovan() && (Utils.getInstance().getKorisnik().getId().equals(artikli.get(position).getUserId())))
             holder.imgDelete.setVisibility(View.VISIBLE);
-
+        else if(Utils.getInstance().jeUlogovan()){
+            Log.println(Log.ASSERT, "[UTILS]", Utils.getInstance().getKorisnik().getId() + " --- " + artikli.get(position).getUserId());
+        }
 
         holder.txtNaziv.setText(artikli.get(position).getNaziv());
 //        holder.imgProfil.setImageBitmap(artikli.get(position).getSlika());

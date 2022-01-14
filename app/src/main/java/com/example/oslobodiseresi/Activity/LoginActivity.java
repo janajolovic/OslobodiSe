@@ -52,7 +52,6 @@ public class LoginActivity extends ToolbarNavigacijaSetup {
                     @Override
                     public void onChanged(Korisnik korisnik) {
                         if(k.getValue()!=null){
-                            Log.println(Log.ERROR,"[GRESKA]","prijava gotova, korisnik je "+korisnik.toString());
                             Utils.getInstance().setKorisnik(k.getValue());
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
@@ -61,7 +60,6 @@ public class LoginActivity extends ToolbarNavigacijaSetup {
                             loginPogresno.setVisibility(View.VISIBLE);
                     }
                 });
-
             }
         });
 

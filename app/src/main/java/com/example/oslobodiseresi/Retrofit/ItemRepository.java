@@ -197,4 +197,21 @@ public class ItemRepository {
         });
         return items;
     }
+
+    public MutableLiveData<ArrayList<Item>> getItemFromKategorijaGrad(int kategorijaId, int gradId){
+        apiManager.GetItemsFromKategorijaGrad(kategorijaId, gradId, new Callback<ArrayList<Item>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Item>> call, Response<ArrayList<Item>> response) {
+                if(response.isSuccessful()){
+                    items.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Item>> call, Throwable t) {
+
+            }
+        });
+        return items;
+    }
 }

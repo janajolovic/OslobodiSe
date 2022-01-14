@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Spinner;
@@ -34,6 +35,7 @@ public class MainActivity extends ToolbarNavigacijaSetup {
     private RecyclerView recyclerArtikli;
     private NavigationView navigationView;
     private ProgressBar progress;
+    private Button primeniFiltere;
     Spinner spinnerKategorije, spinnerGradovi;
 
     int izabraniGrad, izabranaKategorija;
@@ -44,6 +46,8 @@ public class MainActivity extends ToolbarNavigacijaSetup {
         setContentView(R.layout.nav_activity_main);
 
         progress = findViewById(R.id.progress);
+
+        primeniFiltere = findViewById(R.id.primeniFiltere);
 
         recyclerArtikli = findViewById(R.id.artikli);
 
@@ -69,7 +73,6 @@ public class MainActivity extends ToolbarNavigacijaSetup {
                         ArrayAdapter<String> kategorijeAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_spinner_dropdown_item, kategorije);
                         kategorijeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         spinnerKategorije.setAdapter(kategorijeAdapter);
-                        //spinnerKategorije.setOnItemSelectedListener(MainActivity.this);
                     }
             });
 
@@ -112,14 +115,34 @@ public class MainActivity extends ToolbarNavigacijaSetup {
             }
             @Override
             public boolean onQueryTextChange(String newText) {
-                //adapterArtikli.getFilter().filter(newText);
+                adapterArtikli.getFilter().filter(newText);
                 return false;
             }
         });
-    }
 
-
-    void PrimeniFiltere(){
-        //TODO:OVDE FILTRIRAMO
+        primeniFiltere.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MutableLiveData<ArrayList<Item>> mld;
+                if (spinnerGradovi.getSelectedItemPosition() != 0 && spinnerKategorije.getSelectedItemPosition() != 0) {
+                    mld = ItemRepository.getInstance(MainApplication.apiManager).getItemFromKategorijaGrad(
+                            spinnerKategorije.getSelectedItemPosition(),
+                            spinnerGradovi.getSelectedItemPosition()
+                    );
+                }else if(spinnerKategorije.getSelectedItemPosition() == 0 && spinnerGradovi.getSelectedItemPosition() == 0){
+                    mld = ItemRepository.getInstance(MainApplication.apiManager).getAllItems();
+                }else if(spinnerKategorije.getSelectedItemPosition() != 0){
+                    mld = ItemRepository.getInstance(MainApplication.apiManager).getItemsFromKategorija(spinnerKategorije.getSelectedItemPosition());
+                }else{
+                    mld = ItemRepository.getInstance(MainApplication.apiManager).getItemsFromGrad(spinnerGradovi.getSelectedItemPosition());
+                }
+                mld.observe(MainActivity.this, new Observer<ArrayList<Item>>() {
+                    @Override
+                    public void onChanged(ArrayList<Item> items) {
+                        adapterArtikli.setArtikli(mld.getValue());
+                    }
+                });
+            }
+        });
     }
 }

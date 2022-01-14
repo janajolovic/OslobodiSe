@@ -79,6 +79,11 @@ public class ApiManager {
         getItemsFromKategorija.enqueue(callback);
     }
 
+    public void GetItemsFromKategorijaGrad(int kategorijaId, int gradId,  Callback<ArrayList<Item>> callback){
+        Call<ArrayList<Item>> getItemsFromKategorijaGrad = service.getItemsFromKategorijaGrad(kategorijaId, gradId);
+        getItemsFromKategorijaGrad.enqueue(callback);
+    }
+
     public void DeleteItem(int Id, Callback<String> callback){
         Call<String> deleteItem = service.deleteItem(Id);
         deleteItem.enqueue(callback);

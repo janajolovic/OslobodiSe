@@ -50,6 +50,9 @@ public interface RestInterface {
     @GET("items/kategorije/{kategorijaId}")
     Call<ArrayList<Item>> getItemsFromKategorija(@Path("kategorijaId") int kategorijaId);
 
+    @GET("items/kategorija/grad/{kategorijaId}/{gradId}")
+    Call<ArrayList<Item>> getItemsFromKategorijaGrad(@Path("kategorijaId") int kategorijaId, @Path("gradId") int gradId);
+
     @HTTP(method = "DELETE", path = "items/delete", hasBody = true)
     Call<String> deleteItem(@Body int Id);
 
