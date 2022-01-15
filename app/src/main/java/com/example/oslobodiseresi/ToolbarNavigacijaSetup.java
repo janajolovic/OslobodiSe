@@ -243,7 +243,6 @@ public class ToolbarNavigacijaSetup extends AppCompatActivity implements Navigat
                             //spinnerGradovi.setOnItemSelectedListener(MainActivity.this);
                         }
                     });
-                    Toast.makeText(ToolbarNavigacijaSetup.this, "Radi "+getGradId()+" "+getKategorijaId(), Toast.LENGTH_SHORT).show();
 
                     //todo prepraviti ovo
                     spinnerKategorije.setSelection(getKategorijaId());
