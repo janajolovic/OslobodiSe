@@ -46,21 +46,18 @@
         <entry key="..\:/Users/Computer/AndroidStudioProjects/OslobodiSe/app/src/main/res/layout/artikal_layout.xml" value="0.23278985507246377" />
         <entry key="..\:/Users/Computer/AndroidStudioProjects/OslobodiSe/app/src/main/res/menu/main_menu.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/Computer/AndroidStudioProjects/OslobodiSe3/app/src/main/res/drawable/ic_search.xml" value="0.3619791666666667" />
-        <entry key="..\:/Users/Computer/AndroidStudioProjects/OslobodiSe3/app/src/main/res/layout/activity_artikal.xml" value="0.33" />
+        <entry key="..\:/Users/Computer/AndroidStudioProjects/OslobodiSe3/app/src/main/res/layout/activity_artikal.xml" value="0.1" />
         <entry key="..\:/Users/Computer/AndroidStudioProjects/OslobodiSe3/app/src/main/res/layout/activity_main.xml" value="0.16818642350557245" />
-        <entry key="..\:/Users/Computer/AndroidStudioProjects/OslobodiSe3/app/src/main/res/layout/activity_moj_profil.xml" value="0.1651469098277609" />
-        <entry key="..\:/Users/Computer/AndroidStudioProjects/OslobodiSe3/app/src/main/res/layout/activity_profil_korisnika.xml" value="0.33958333333333335" />
-        <entry key="..\:/Users/Computer/AndroidStudioProjects/OslobodiSe3/app/src/main/res/layout/activity_registracija.xml" value="0.15" />
-        <entry key="..\:/Users/Computer/AndroidStudioProjects/OslobodiSe3/app/src/main/res/layout/filter_dialog.xml" value="0.33" />
-        <entry key="..\:/Users/Computer/AndroidStudioProjects/OslobodiSe3/app/src/main/res/layout/spinner_na_plavo.xml" value="0.234375" />
-        <entry key="..\:/Users/Computer/AndroidStudioProjects/OslobodiSe3/app/src/main/res/layout/toolbar.xml" value="0.33" />
-        <entry key="..\:/Users/Computer/AndroidStudioProjects/OslobodiSe3/app/src/main/res/menu/moj_profil_menu.xml" value="0.23055555555555557" />
-        <entry key="..\:/Users/Computer/AndroidStudioProjects/OslobodiSe3/app/src/main/res/menu/prijava_registracija.xml" value="0.23055555555555557" />
+        <entry key="..\:/Users/Computer/AndroidStudioProjects/OslobodiSe3/app/src/main/res/layout/toolbar.xml" value="0.2" />
         <entry key="..\:/Users/Davud/Desktop/OslobodiSe/app/src/main/res/layout/activity_informacije.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/Davud/Desktop/OslobodiSe/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Users/Davud/Desktop/OslobodiSe/app/src/main/res/layout/activity_main.xml" value="0.22333333333333336" />
+        <entry key="..\:/Users/Davud/Desktop/OslobodiSe/app/src/main/res/layout/activity_moji_oglasi.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/Davud/Desktop/OslobodiSe/app/src/main/res/layout/activity_napravi_artikal.xml" value="0.22333333333333336" />
         <entry key="..\:/Users/Davud/Desktop/OslobodiSe/app/src/main/res/layout/activity_registracija.xml" value="0.22333333333333336" />
+        <entry key="..\:/Users/Davud/Desktop/OslobodiSe/app/src/main/res/layout/spinner_na_plavo.xml" value="0.17916666666666667" />
+        <entry key="..\:/Users/Davud/Desktop/OslobodiSe/app/src/main/res/layout/toolbar.xml" value="0.1" />
+        <entry key="..\:/Users/Davud/Desktop/OslobodiSe/app/src/main/res/menu/moj_profil_menu.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/Davud/Desktop/OslobodiSe/app/src/main/res/xml/network_security_config.xml" value="0.1" />
       </map>
     </option>

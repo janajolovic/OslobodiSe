@@ -32,6 +32,7 @@ public class MojiOglasiActivity extends ToolbarNavigacijaSetup {
     private RecyclerView recyclerArtikli;
     private ArrayList<Item> artikli = new ArrayList<>();
     private FloatingActionButton dodajArtikal;
+    private ArtikalAdapter adapterArtikli;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +45,7 @@ public class MojiOglasiActivity extends ToolbarNavigacijaSetup {
 
         recyclerArtikli = findViewById(R.id.mojiArtikli);
 
-        ArtikalAdapter adapterArtikli = new ArtikalAdapter(this);
+        adapterArtikli = new ArtikalAdapter(this);
 
         recyclerArtikli.setLayoutManager(new GridLayoutManager(this, 2));
 
@@ -80,4 +81,29 @@ public class MojiOglasiActivity extends ToolbarNavigacijaSetup {
             }
         });
     }
+
+    @Override
+    public void primeniFiltere() {
+        super.primeniFiltere();
+        MutableLiveData<ArrayList<Item>> mld;
+        if (getKategorijaId() != 0 && getGradId() != 0) {
+            mld = ItemRepository.getInstance(MainApplication.apiManager).getItemFromKategorijaGrad(
+                    getKategorijaId(),
+                    getGradId()
+            );
+        }else if(getKategorijaId() == 0 && getGradId() == 0){
+            mld = ItemRepository.getInstance(MainApplication.apiManager).getAllItems();
+        }else if(getKategorijaId() != 0){
+            mld = ItemRepository.getInstance(MainApplication.apiManager).getItemsFromKategorija(getKategorijaId());
+        }else{
+            mld = ItemRepository.getInstance(MainApplication.apiManager).getItemsFromGrad(getGradId());
+        }
+        mld.observe(MojiOglasiActivity.this, new Observer<ArrayList<Item>>() {
+            @Override
+            public void onChanged(ArrayList<Item> items) {
+                adapterArtikli.setArtikli(mld.getValue());
+            }
+        });
+    }
+
 }

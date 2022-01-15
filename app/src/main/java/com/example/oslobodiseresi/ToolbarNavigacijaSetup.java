@@ -108,10 +108,14 @@ public class ToolbarNavigacijaSetup extends AppCompatActivity implements Navigat
         return kategorijaId;
     }
 
+    ConstraintLayout dodatak;
+    Spinner spinnerKategorije;
+    Spinner spinnerGradovi;
+
     public void setToolbar(boolean search){
         Context context = this;
 
-        ConstraintLayout dodatak = findViewById(R.id.dodatak);
+        dodatak = findViewById(R.id.dodatak);
         dodatak.setVisibility(View.GONE);
 
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
@@ -203,9 +207,10 @@ public class ToolbarNavigacijaSetup extends AppCompatActivity implements Navigat
                     else{
                         dodatak.setVisibility(View.GONE);
                     }
-                    Spinner spinnerKategorije = findViewById(R.id.spinnerKategorije);
-                    Spinner spinnerGradovi = findViewById(R.id.spinnerGradovi);
-                    Button primeniFiltere = findViewById(R.id.primeniFiltere);
+                    spinnerKategorije = findViewById(R.id.spinnerKategorije);
+                    spinnerGradovi = findViewById(R.id.spinnerGradovi);
+
+                    Button primeniFiltereDugme = findViewById(R.id.primeniFiltere);
 
                     MutableLiveData<ArrayList<Kategorija>> mldKategorije = ItemRepository.getInstance(MainApplication.apiManager).getAllKategorije();
                     mldKategorije.observe(ToolbarNavigacijaSetup.this, new Observer<ArrayList<Kategorija>>() {
@@ -216,7 +221,7 @@ public class ToolbarNavigacijaSetup extends AppCompatActivity implements Navigat
                             for (Kategorija k : mldKategorije.getValue()) {
                                 kategorije.add(k.getNaziv());
                             }
-                            ArrayAdapter<String> kategorijeAdapter = new ArrayAdapter<>(ToolbarNavigacijaSetup.this, android.R.layout.simple_spinner_dropdown_item, kategorije);
+                            ArrayAdapter<String> kategorijeAdapter = new ArrayAdapter<>(ToolbarNavigacijaSetup.this, R.layout.spinner_na_plavo, kategorije);
                             kategorijeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             spinnerKategorije.setAdapter(kategorijeAdapter);
                         }
@@ -232,19 +237,22 @@ public class ToolbarNavigacijaSetup extends AppCompatActivity implements Navigat
                             for (Grad g : mldGradovi.getValue()) {
                                 gradovi.add(g.getNaziv());
                             }
-                            ArrayAdapter<String> gradoviAdapter = new ArrayAdapter<>(ToolbarNavigacijaSetup.this, android.R.layout.simple_spinner_dropdown_item, gradovi);
+                            ArrayAdapter<String> gradoviAdapter = new ArrayAdapter<>(ToolbarNavigacijaSetup.this, R.layout.spinner_na_plavo, gradovi);
                             gradoviAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             spinnerGradovi.setAdapter(gradoviAdapter);
                             //spinnerGradovi.setOnItemSelectedListener(MainActivity.this);
                         }
                     });
+                    Toast.makeText(ToolbarNavigacijaSetup.this, "Radi "+getGradId()+" "+getKategorijaId(), Toast.LENGTH_SHORT).show();
 
-                    primeniFiltere.setOnClickListener(new View.OnClickListener() {
+                    //todo prepraviti ovo
+                    spinnerKategorije.setSelection(getKategorijaId());
+                    spinnerGradovi.setSelection(getGradId());
+
+                    primeniFiltereDugme.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            dodatak.setVisibility(View.GONE);
-                            kategorijaId = spinnerKategorije.getSelectedItemPosition();
-                            gradId = spinnerGradovi.getSelectedItemPosition();
+                            primeniFiltere();
                         }
                     });
                 }
@@ -256,5 +264,13 @@ public class ToolbarNavigacijaSetup extends AppCompatActivity implements Navigat
             imgFilter.setVisibility(View.GONE);
             dodatak.setVisibility(View.GONE);
         }
+    }
+
+
+    public void primeniFiltere()
+    {
+        kategorijaId = spinnerKategorije.getSelectedItemPosition();
+        gradId = spinnerGradovi.getSelectedItemPosition();
+        dodatak.setVisibility(View.GONE);
     }
 }

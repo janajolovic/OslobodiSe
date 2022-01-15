@@ -59,7 +59,7 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/velicina_ikonice"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/imgProfil"
+                app:layout_constraintEnd_toStartOf="@+id/imgFilter"
                 app:layout_constraintStart_toEndOf="@+id/imgHamburger"
                 app:layout_constraintTop_toTopOf="parent"
                 android:searchIcon="@drawable/ic_search" />
@@ -74,6 +74,7 @@
 
 
             <TextView
+                android:textSize="@dimen/velicina_slova"
                 android:id="@+id/textView7"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -87,6 +88,7 @@
                 android:textColor="?colorOnPrimary" />
 
             <TextView
+                android:textSize="@dimen/velicina_slova"
                 android:id="@+id/textView4"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

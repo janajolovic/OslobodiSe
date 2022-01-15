@@ -36,6 +36,7 @@ public class MainActivity extends ToolbarNavigacijaSetup {
     private NavigationView navigationView;
     private ProgressBar progress;
 
+    private ArtikalAdapter adapterArtikli;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +54,7 @@ public class MainActivity extends ToolbarNavigacijaSetup {
         recyclerArtikli.setLayoutManager(new GridLayoutManager(this, 2));
 
         //recycler view
-        ArtikalAdapter adapterArtikli = new ArtikalAdapter(this);
+        adapterArtikli = new ArtikalAdapter(this);
 
         MutableLiveData<ArrayList<Item>> artikli = UserRepository.getInstance(MainApplication.apiManager).GetAllItems();
         artikli.observe(MainActivity.this, new Observer<ArrayList<Item>>() {
@@ -66,34 +67,39 @@ public class MainActivity extends ToolbarNavigacijaSetup {
         });
 
         SearchView searchView = findViewById(R.id.search_bar);
+        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                MutableLiveData<ArrayList<Item>> mld;
-                if (getKategorijaId() != 0 && getGradId() != 0) {
-                    mld = ItemRepository.getInstance(MainApplication.apiManager).getItemFromKategorijaGrad(
-                            getKategorijaId(),
-                            getGradId()
-                    );
-                }else if(getKategorijaId() == 0 && getGradId() == 0){
-                    mld = ItemRepository.getInstance(MainApplication.apiManager).getAllItems();
-                }else if(getKategorijaId() != 0){
-                    mld = ItemRepository.getInstance(MainApplication.apiManager).getItemsFromKategorija(getKategorijaId());
-                }else{
-                    mld = ItemRepository.getInstance(MainApplication.apiManager).getItemsFromGrad(getGradId());
-                }
-                mld.observe(MainActivity.this, new Observer<ArrayList<Item>>() {
-                    @Override
-                    public void onChanged(ArrayList<Item> items) {
-                        adapterArtikli.setArtikli(mld.getValue());
-                        adapterArtikli.getFilter().filter(query);
-                    }
-                });
                 return false;
             }
             @Override
             public boolean onQueryTextChange(String newText) {
-                return false;
+                adapterArtikli.getFilter().filter(newText);
+                return false;            }
+        });
+    }
+
+    @Override
+    public void primeniFiltere() {
+        super.primeniFiltere();
+        MutableLiveData<ArrayList<Item>> mld;
+        if (getKategorijaId() != 0 && getGradId() != 0) {
+            mld = ItemRepository.getInstance(MainApplication.apiManager).getItemFromKategorijaGrad(
+                    getKategorijaId(),
+                    getGradId()
+            );
+        }else if(getKategorijaId() == 0 && getGradId() == 0){
+            mld = ItemRepository.getInstance(MainApplication.apiManager).getAllItems();
+        }else if(getKategorijaId() != 0){
+            mld = ItemRepository.getInstance(MainApplication.apiManager).getItemsFromKategorija(getKategorijaId());
+        }else{
+            mld = ItemRepository.getInstance(MainApplication.apiManager).getItemsFromGrad(getGradId());
+        }
+        mld.observe(MainActivity.this, new Observer<ArrayList<Item>>() {
+            @Override
+            public void onChanged(ArrayList<Item> items) {
+                adapterArtikli.setArtikli(mld.getValue());
             }
         });
     }

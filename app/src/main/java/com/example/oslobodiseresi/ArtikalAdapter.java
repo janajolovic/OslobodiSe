@@ -53,9 +53,6 @@ public class ArtikalAdapter extends RecyclerView.Adapter<ArtikalAdapter.ViewHold
         holder.imgDelete.setVisibility(View.INVISIBLE);
         if(Utils.getInstance().jeUlogovan() && (Utils.getInstance().getKorisnik().getId().equals(artikli.get(position).getUserId())))
             holder.imgDelete.setVisibility(View.VISIBLE);
-        else if(Utils.getInstance().jeUlogovan()){
-            Log.println(Log.ASSERT, "[UTILS]", Utils.getInstance().getKorisnik().getId() + " --- " + artikli.get(position).getUserId());
-        }
 
         holder.txtNaziv.setText(artikli.get(position).getNaziv());
 //        holder.imgProfil.setImageBitmap(artikli.get(position).getSlika());
