@@ -1,5 +1,6 @@
 package com.example.oslobodiseresi;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -9,15 +10,19 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.SearchView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.MutableLiveData;
@@ -30,6 +35,7 @@ import com.example.oslobodiseresi.Activity.MojProfilActivity;
 import com.example.oslobodiseresi.Activity.MojiOglasiActivity;
 import com.example.oslobodiseresi.Activity.RegistracijaActivity;
 import com.example.oslobodiseresi.Activity.ZaDavuda;
+import com.example.oslobodiseresi.Models.Grad;
 import com.example.oslobodiseresi.Models.Kategorija;
 import com.google.android.material.navigation.NavigationView;
 import com.example.oslobodiseresi.Retrofit.ItemRepository;
@@ -91,9 +97,23 @@ public class ToolbarNavigacijaSetup extends AppCompatActivity implements Navigat
         return false;
     }
 
+    private int gradId;
+    private int kategorijaId;
+
+    public int getGradId() {
+        return gradId;
+    }
+
+    public int getKategorijaId() {
+        return kategorijaId;
+    }
 
     public void setToolbar(boolean search){
         Context context = this;
+
+        ConstraintLayout dodatak = findViewById(R.id.dodatak);
+        dodatak.setVisibility(View.GONE);
+
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ImageView back;
@@ -115,10 +135,7 @@ public class ToolbarNavigacijaSetup extends AppCompatActivity implements Navigat
                                     return true;
                                 case R.id.odjava:
                                     Utils.getInstance().SacuvajKorisnika(null);
-                                    startActivity(new Intent(context, MojProfilActivity.class));
-                                    Intent intent = getIntent();
-                                    finish();
-                                    startActivity(intent);
+                                    startActivity(new Intent(context, MainActivity.class));
                                     return true;
                             }
                         } else {
@@ -164,6 +181,7 @@ public class ToolbarNavigacijaSetup extends AppCompatActivity implements Navigat
         });
 
         SearchView searchView = findViewById(R.id.search_bar);
+        ImageView imgFilter = findViewById(R.id.imgFilter);
         if(search)
         {
             searchView.setVisibility(View.VISIBLE);
@@ -175,8 +193,68 @@ public class ToolbarNavigacijaSetup extends AppCompatActivity implements Navigat
 //            @ColorInt int color = typedValue.data;
 //            searchEditText.setTextColor(getResources().getColor(R.color.white));
 //            searchEditText.setHintTextColor(getResources().getColor(R.color.white));
+
+            imgFilter.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(dodatak.getVisibility() == View.GONE) {
+                        dodatak.setVisibility(View.VISIBLE);
+                    }
+                    else{
+                        dodatak.setVisibility(View.GONE);
+                    }
+                    Spinner spinnerKategorije = findViewById(R.id.spinnerKategorije);
+                    Spinner spinnerGradovi = findViewById(R.id.spinnerGradovi);
+                    Button primeniFiltere = findViewById(R.id.primeniFiltere);
+
+                    MutableLiveData<ArrayList<Kategorija>> mldKategorije = ItemRepository.getInstance(MainApplication.apiManager).getAllKategorije();
+                    mldKategorije.observe(ToolbarNavigacijaSetup.this, new Observer<ArrayList<Kategorija>>() {
+                        @Override
+                        public void onChanged(ArrayList<Kategorija> kategorija) {
+                            ArrayList<String> kategorije = new ArrayList<>();
+                            kategorije.add("Sve kategorije");
+                            for (Kategorija k : mldKategorije.getValue()) {
+                                kategorije.add(k.getNaziv());
+                            }
+                            ArrayAdapter<String> kategorijeAdapter = new ArrayAdapter<>(ToolbarNavigacijaSetup.this, android.R.layout.simple_spinner_dropdown_item, kategorije);
+                            kategorijeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            spinnerKategorije.setAdapter(kategorijeAdapter);
+                        }
+                    });
+
+
+                    MutableLiveData<ArrayList<Grad>> mldGradovi = ItemRepository.getInstance(MainApplication.apiManager).getAllGradovi();
+                    mldGradovi.observe(ToolbarNavigacijaSetup.this, new Observer<ArrayList<Grad>>() {
+                        @Override
+                        public void onChanged(ArrayList<Grad> grad) {
+                            ArrayList<String> gradovi = new ArrayList<>();
+                            gradovi.add("Svi gradovi");
+                            for (Grad g : mldGradovi.getValue()) {
+                                gradovi.add(g.getNaziv());
+                            }
+                            ArrayAdapter<String> gradoviAdapter = new ArrayAdapter<>(ToolbarNavigacijaSetup.this, android.R.layout.simple_spinner_dropdown_item, gradovi);
+                            gradoviAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            spinnerGradovi.setAdapter(gradoviAdapter);
+                            //spinnerGradovi.setOnItemSelectedListener(MainActivity.this);
+                        }
+                    });
+
+                    primeniFiltere.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dodatak.setVisibility(View.GONE);
+                            kategorijaId = spinnerKategorije.getSelectedItemPosition();
+                            gradId = spinnerGradovi.getSelectedItemPosition();
+                        }
+                    });
+                }
+            });
         }
         else
+        {
             searchView.setVisibility(View.GONE);
+            imgFilter.setVisibility(View.GONE);
+            dodatak.setVisibility(View.GONE);
+        }
     }
 }

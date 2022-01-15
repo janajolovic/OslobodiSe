@@ -3,5 +3,5 @@
     <item android:id="@+id/moj_profil"
         android:title="Moj Profil"/>
     <item android:id="@+id/odjava"
-        android:title="Odjavi se"/>
+        android:title="Odjava"/>
 </menu>
