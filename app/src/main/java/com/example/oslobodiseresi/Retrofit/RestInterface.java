@@ -6,6 +6,7 @@ import com.example.oslobodiseresi.Models.ItemPostModel;
 import com.example.oslobodiseresi.Models.Kategorija;
 import com.example.oslobodiseresi.Models.Korisnik;
 import com.example.oslobodiseresi.Models.LoginModel;
+import com.example.oslobodiseresi.Models.PrijavljenKorisnikModel;
 import com.example.oslobodiseresi.Models.RegistarModel;
 
 import java.lang.reflect.Array;
@@ -25,7 +26,7 @@ public interface RestInterface {
     Call<Korisnik> register(@Body RegistarModel korisnik);
 
     @POST("users/login")
-    Call<Korisnik> login(@Body LoginModel korisnik);
+    Call<PrijavljenKorisnikModel> login(@Body LoginModel korisnik);
 
     @GET("items/all")
     Call<ArrayList<Item>>getAllItems();
