@@ -21,6 +21,7 @@ public class UserRepository {
 
     private final MutableLiveData<Korisnik> korisnik = new MutableLiveData<>();
     private final MutableLiveData<ArrayList<Item>> items = new MutableLiveData<>();
+    private final MutableLiveData<String> str = new MutableLiveData<>();
 
     private UserRepository(ApiManager apiManager){
         this.apiManager = apiManager;
@@ -96,5 +97,57 @@ public class UserRepository {
             }
         });
         return items;
+    }
+
+    public MutableLiveData<ArrayList<Item>> GetOmiljeniOglasiFromUser(String UserId){
+        apiManager.GetOmiljeniOglasiFromUser(UserId, new Callback<ArrayList<Item>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Item>> call, Response<ArrayList<Item>> response) {
+                if(response.isSuccessful()){
+                    items.setValue(response.body());
+                }else{
+                    Log.println(Log.ASSERT, "[Omiljeni Oglasi OnResponse]", response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Item>> call, Throwable t) {
+                Log.println(Log.ASSERT, "[Omiljeni Oglasi OnFailure]", t.getMessage());
+            }
+        });
+        return items;
+    }
+
+    public MutableLiveData<String> DodajOmiljeniOglas(String UserId, int OglasId){
+        apiManager.DodajOmiljeniOglas(UserId, OglasId, new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if(response.isSuccessful()){
+                    str.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+        return  str;
+    }
+
+    public MutableLiveData<String> IzbrisiOmiljeniOglas(String UserId, int OglasId){
+        apiManager.IzbrisiOmiljeniOglas(UserId, OglasId, new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if(response.isSuccessful()){
+                    str.setValue(response.body());
+                }
+            }
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+        return  str;
     }
 }

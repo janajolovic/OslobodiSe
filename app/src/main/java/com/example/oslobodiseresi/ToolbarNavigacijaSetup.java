@@ -33,6 +33,7 @@ import com.example.oslobodiseresi.Activity.LoginActivity;
 import com.example.oslobodiseresi.Activity.MainActivity;
 import com.example.oslobodiseresi.Activity.MojProfilActivity;
 import com.example.oslobodiseresi.Activity.MojiOglasiActivity;
+import com.example.oslobodiseresi.Activity.OmiljeniOglasiActivity;
 import com.example.oslobodiseresi.Activity.RegistracijaActivity;
 import com.example.oslobodiseresi.Activity.ZaDavuda;
 import com.example.oslobodiseresi.Models.Grad;
@@ -74,7 +75,7 @@ public class ToolbarNavigacijaSetup extends AppCompatActivity implements Navigat
                 break;
             case R.id.omiljeniOglasi:
                 if(Utils.getInstance().jeUlogovan()){
-                    intent = new Intent(this, MojiOglasiActivity.class);
+                    intent = new Intent(this, OmiljeniOglasiActivity.class);
                     startActivity(intent);
                 }
                 else

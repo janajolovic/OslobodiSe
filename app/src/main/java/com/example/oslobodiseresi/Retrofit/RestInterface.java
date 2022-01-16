@@ -16,6 +16,7 @@ import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.HTTP;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
@@ -52,6 +53,15 @@ public interface RestInterface {
 
     @GET("items/kategorija/grad/{kategorijaId}/{gradId}")
     Call<ArrayList<Item>> getItemsFromKategorijaGrad(@Path("kategorijaId") int kategorijaId, @Path("gradId") int gradId);
+
+    @GET("users/omiljenioglasi/{UserId}")
+    Call<ArrayList<Item>> getOmiljeniOglasiFromUser(@Path("UserId") String userId);
+
+    @PATCH("users/omiljenioglasi/dodaj/{UserId}/{OglasId}")
+    Call<String> dodajOmiljeniOglas(@Path("UserId") String userId, @Path("OglasId") int oglasId);
+
+    @PATCH("users/omiljenioglasi/izbrisi/{UserId}/{OglasId}")
+    Call<String> IzbrisiOmiljeniOglas(@Path("UserId") String userId, @Path("OglasId") int oglasId);
 
     @HTTP(method = "DELETE", path = "items/delete", hasBody = true)
     Call<String> deleteItem(@Body int Id);

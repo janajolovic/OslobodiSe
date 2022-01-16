@@ -88,4 +88,19 @@ public class ApiManager {
         Call<String> deleteItem = service.deleteItem(Id);
         deleteItem.enqueue(callback);
     }
+
+    public void GetOmiljeniOglasiFromUser(String UserId, Callback<ArrayList<Item>> callback){
+        Call<ArrayList<Item>> getOmiljeniOglasiFromUser = service.getOmiljeniOglasiFromUser(UserId);
+        getOmiljeniOglasiFromUser.enqueue(callback);
+    }
+
+    public void DodajOmiljeniOglas(String UserId, int OglasId, Callback<String> callback){
+        Call<String> dodajOmiljeniOglas = service.dodajOmiljeniOglas(UserId, OglasId);
+        dodajOmiljeniOglas.enqueue(callback);
+    }
+
+    public void IzbrisiOmiljeniOglas(String UserId, int OglasId, Callback<String> callback){
+        Call<String> izbrisiOmiljeniOglas = service.IzbrisiOmiljeniOglas(UserId, OglasId);
+        izbrisiOmiljeniOglas.enqueue(callback);
+    }
 }

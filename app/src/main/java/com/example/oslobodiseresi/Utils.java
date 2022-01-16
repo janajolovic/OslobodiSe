@@ -22,7 +22,7 @@ public class Utils {
     private Korisnik korisnik;
     private ArrayList<Kategorija> kategorije;
     private ArrayList<Grad> gradovi;
-    public static final String PREFERENCES = "OslobodiSePrefs" ;
+    public static final String PREFERENCES = "OslobodiSePrefs";
     public static final String KorisnikKey = "Korisnik";
     private SharedPreferences sharedpreferences;
     private SharedPreferences.Editor editor;
@@ -49,8 +49,8 @@ public class Utils {
     }
 
     public void SacuvajKorisnika(Korisnik korisnik){
-        editor.putString(KorisnikKey, gson.toJson(korisnik));
         this.korisnik = korisnik;
+        editor.putString(KorisnikKey, gson.toJson(korisnik));
         editor.commit();
     }
 

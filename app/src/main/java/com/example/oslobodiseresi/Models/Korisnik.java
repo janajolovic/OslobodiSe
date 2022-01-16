@@ -2,6 +2,8 @@ package com.example.oslobodiseresi.Models;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+
 public class Korisnik {
     @SerializedName("id")
     private String Id;
@@ -11,6 +13,7 @@ public class Korisnik {
     private String brojTelefona;
     private int brojOcena;
     private int zbirOcena;
+    private ArrayList<Item> omiljeniOglasi;
 
     public Korisnik(String Id, String ime, String email, String brojTelefona, int brojOcena, int zbirOcena) {
         this.Id = Id;
@@ -43,6 +46,10 @@ public class Korisnik {
 
     public int getZbirOcena() {
         return zbirOcena;
+    }
+
+    public ArrayList<Item> getOmiljeniOglasi() {
+        return omiljeniOglasi;
     }
 
     @Override

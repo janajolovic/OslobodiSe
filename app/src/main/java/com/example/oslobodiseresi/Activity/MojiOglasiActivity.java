@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
@@ -80,6 +81,7 @@ public class MojiOglasiActivity extends ToolbarNavigacijaSetup {
                 return false;
             }
         });
+        Toast.makeText(this, "MojiOglasi", Toast.LENGTH_SHORT).show();
     }
 
     @Override
