@@ -8,6 +8,7 @@ import com.example.oslobodiseresi.Models.ItemPostModel;
 import com.example.oslobodiseresi.Models.Kategorija;
 import com.example.oslobodiseresi.Models.Korisnik;
 import com.example.oslobodiseresi.Models.LoginModel;
+import com.example.oslobodiseresi.Models.PrijavljenKorisnikModel;
 import com.example.oslobodiseresi.Models.RegistarModel;
 
 import java.util.ArrayList;
@@ -34,8 +35,8 @@ public class ApiManager {
         registerCall.enqueue(callback);
     }
 
-    public void LoginUser(LoginModel model, Callback<Korisnik> callback) {
-        Call<Korisnik> loginCall = service.login(model);
+    public void LoginUser(LoginModel model, Callback<PrijavljenKorisnikModel> callback) {
+        Call<PrijavljenKorisnikModel> loginCall = service.login(model);
         loginCall.enqueue(callback);
     }
 

@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.oslobodiseresi.Models.Item;
 import com.example.oslobodiseresi.Models.Korisnik;
 import com.example.oslobodiseresi.Models.LoginModel;
+import com.example.oslobodiseresi.Models.PrijavljenKorisnikModel;
 import com.example.oslobodiseresi.Models.RegistarModel;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class UserRepository {
     private final ApiManager apiManager;
 
     private final MutableLiveData<Korisnik> korisnik = new MutableLiveData<>();
+    private final MutableLiveData<PrijavljenKorisnikModel> prijavljen_korisnik = new MutableLiveData<>();
     private final MutableLiveData<ArrayList<Item>> items = new MutableLiveData<>();
     private final MutableLiveData<String> str = new MutableLiveData<>();
 
@@ -56,25 +58,25 @@ public class UserRepository {
         return korisnik;
     }
 
-    public MutableLiveData<Korisnik> Login(LoginModel model) {
-        apiManager.LoginUser(model, new Callback<Korisnik>() {
+    public MutableLiveData<PrijavljenKorisnikModel> Login(LoginModel model) {
+        apiManager.LoginUser(model, new Callback<PrijavljenKorisnikModel>() {
             @Override
-            public void onResponse(Call<Korisnik> call, Response<Korisnik> response) {
+            public void onResponse(Call<PrijavljenKorisnikModel> call, Response<PrijavljenKorisnikModel> response) {
                 if (response.isSuccessful()) {
-                    korisnik.setValue(response.body());
+                    prijavljen_korisnik.setValue(response.body());
                 }else{
                     Log.println(Log.ERROR, "[Greska]",response.message());
-                    korisnik.setValue(null);
+                    prijavljen_korisnik.setValue(null);
                 }
             }
 
             @Override
-            public void onFailure(Call<Korisnik> call, Throwable t) {
+            public void onFailure(Call<PrijavljenKorisnikModel> call, Throwable t) {
                 Log.println(Log.ERROR, "[Greska]",t.getMessage());
-                korisnik.setValue(null);
+                prijavljen_korisnik.setValue(null);
             }
         });
-        return korisnik;
+        return prijavljen_korisnik;
     }
 
 
