@@ -27,6 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.oslobodiseresi.Activity.ArtikalActivity;
 import com.example.oslobodiseresi.Models.Item;
 import com.example.oslobodiseresi.Retrofit.ItemRepository;
+import com.example.oslobodiseresi.Retrofit.UserRepository;
 
 import java.util.ArrayList;
 
@@ -66,6 +67,13 @@ public class ArtikalAdapter extends RecyclerView.Adapter<ArtikalAdapter.ViewHold
             }
         });
 
+        holder.isFav = Utils.getInstance().getOmiljeniOglasiId().contains(artikli.get(position).getId());
+        if(holder.isFav){
+            holder.imgFav.setImageResource(R.drawable.ic_heart);
+        } else {
+            holder.imgFav.setImageResource(R.drawable.ic_prazno_srce);
+        }
+
         holder.imgFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,8 +81,24 @@ public class ArtikalAdapter extends RecyclerView.Adapter<ArtikalAdapter.ViewHold
                     holder.isFav = !holder.isFav;
                     if (holder.isFav) {
                         holder.imgFav.setImageResource(R.drawable.ic_heart);
+                        MutableLiveData<String> mld = UserRepository.getInstance(MainApplication.apiManager).DodajOmiljeniOglas(Utils.getInstance().getKorisnik().getId(), artikli.get(position).getId());
+                        mld.observe((AppCompatActivity)context, new Observer<String>() {
+                            @Override
+                            public void onChanged(String s) {
+                                Utils.getInstance().getOmiljeniOglasiId().add(artikli.get(position).getId());
+                                Toast.makeText(context, "Artikal je dodat u omiljene oglase", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     } else {
                         holder.imgFav.setImageResource(R.drawable.ic_prazno_srce);
+                        MutableLiveData<String> mld = UserRepository.getInstance(MainApplication.apiManager).IzbrisiOmiljeniOglas(Utils.getInstance().getKorisnik().getId(), artikli.get(position).getId());
+                        mld.observe((AppCompatActivity)context, new Observer<String>() {
+                            @Override
+                            public void onChanged(String s) {
+                                Utils.getInstance().getOmiljeniOglasiId().remove(artikli.get(position).getId());
+                                Toast.makeText(context, "Artikal je uklonjen iz omiljenih oglasa", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                 }
                 else

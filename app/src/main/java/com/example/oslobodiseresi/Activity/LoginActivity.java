@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.oslobodiseresi.Models.Item;
 import com.example.oslobodiseresi.Models.Korisnik;
 import com.example.oslobodiseresi.Models.LoginModel;
 import com.example.oslobodiseresi.MainApplication;
@@ -19,6 +20,9 @@ import com.example.oslobodiseresi.R;
 import com.example.oslobodiseresi.Retrofit.UserRepository;
 import com.example.oslobodiseresi.Utils;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.ArrayList;
+import java.util.HashSet;
 
 public class LoginActivity extends ToolbarNavigacijaSetup {
 
@@ -53,6 +57,17 @@ public class LoginActivity extends ToolbarNavigacijaSetup {
                     public void onChanged(Korisnik korisnik) {
                         if(k.getValue()!=null){
                             Utils.getInstance().SacuvajKorisnika(korisnik);
+                            MutableLiveData<ArrayList<Item>> mld = UserRepository.getInstance(MainApplication.apiManager).GetOmiljeniOglasiFromUser(korisnik.getId());
+                            mld.observe(LoginActivity.this, new Observer<ArrayList<Item>>() {
+                                @Override
+                                public void onChanged(ArrayList<Item> items) {
+                                    Log.println(Log.ASSERT,"[login activity]","Pozvan sam "+ korisnik.getIme());
+                                    Utils.getInstance().getOmiljeniOglasiId().clear();
+                                    for(Item item:items){
+                                        Utils.getInstance().getOmiljeniOglasiId().add(item.getId());
+                                    }
+                                }
+                            });
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
                         }

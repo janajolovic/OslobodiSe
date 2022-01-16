@@ -17,11 +17,12 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Utils {
     private Korisnik korisnik;
-    private ArrayList<Kategorija> kategorije;
-    private ArrayList<Grad> gradovi;
+    private HashSet<Integer> omiljeniOglasiId = new HashSet<>();
+
     public static final String PREFERENCES = "OslobodiSePrefs";
     public static final String KorisnikKey = "Korisnik";
     private SharedPreferences sharedpreferences;
@@ -47,6 +48,15 @@ public class Utils {
     {
 
     }
+
+    //region hash set
+
+
+    public HashSet<Integer> getOmiljeniOglasiId() {
+        return omiljeniOglasiId;
+    }
+
+    //endregion hashset
 
     public void SacuvajKorisnika(Korisnik korisnik){
         this.korisnik = korisnik;

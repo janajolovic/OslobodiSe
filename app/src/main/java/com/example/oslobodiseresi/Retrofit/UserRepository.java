@@ -106,13 +106,13 @@ public class UserRepository {
                 if(response.isSuccessful()){
                     items.setValue(response.body());
                 }else{
-                    Log.println(Log.ASSERT, "[Omiljeni Oglasi OnResponse]", response.message());
+                    Log.println(Log.ASSERT, "[Omiljeni OnResponse]", response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<ArrayList<Item>> call, Throwable t) {
-                Log.println(Log.ASSERT, "[Omiljeni Oglasi OnFailure]", t.getMessage());
+                Log.println(Log.ASSERT, "[Omiljeni OnFailure]", t.getMessage());
             }
         });
         return items;
@@ -124,12 +124,14 @@ public class UserRepository {
             public void onResponse(Call<String> call, Response<String> response) {
                 if(response.isSuccessful()){
                     str.setValue(response.body());
+                } else {
+                    str.setValue(response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-
+                str.setValue(t.getMessage());
             }
         });
         return  str;
@@ -141,11 +143,13 @@ public class UserRepository {
             public void onResponse(Call<String> call, Response<String> response) {
                 if(response.isSuccessful()){
                     str.setValue(response.body());
+                }else {
+                    str.setValue(response.message());
                 }
             }
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-
+                str.setValue(t.getMessage());
             }
         });
         return  str;
