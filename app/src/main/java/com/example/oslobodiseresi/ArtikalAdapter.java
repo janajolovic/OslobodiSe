@@ -65,13 +65,14 @@ public class ArtikalAdapter extends RecyclerView.Adapter<ArtikalAdapter.ViewHold
             }
         });
 
-        holder.isFav = Utils.getInstance().getOmiljeniOglasiId().contains(artikli.get(position).getId());
-        if(holder.isFav){
-            holder.imgFav.setImageResource(R.drawable.ic_heart);
-        } else {
-            holder.imgFav.setImageResource(R.drawable.ic_prazno_srce);
+        if(Utils.getInstance().getOmiljeniOglasiId() != null) {
+            holder.isFav = Utils.getInstance().getOmiljeniOglasiId().contains(artikli.get(position).getId());
+            if (holder.isFav) {
+                holder.imgFav.setImageResource(R.drawable.ic_heart);
+            } else {
+                holder.imgFav.setImageResource(R.drawable.ic_prazno_srce);
+            }
         }
-
         holder.imgFav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

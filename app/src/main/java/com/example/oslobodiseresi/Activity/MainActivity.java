@@ -26,6 +26,7 @@ import com.example.oslobodiseresi.Retrofit.ItemRepository;
 import com.example.oslobodiseresi.ToolbarNavigacijaSetup;
 import com.example.oslobodiseresi.R;
 import com.example.oslobodiseresi.Retrofit.UserRepository;
+import com.example.oslobodiseresi.Utils;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
@@ -41,7 +42,6 @@ public class MainActivity extends ToolbarNavigacijaSetup {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nav_activity_main);
-
         progress = findViewById(R.id.progress);
 
         recyclerArtikli = findViewById(R.id.artikli);
