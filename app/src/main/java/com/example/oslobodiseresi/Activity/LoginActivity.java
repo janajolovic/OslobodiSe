@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.oslobodiseresi.Models.Item;
 import com.example.oslobodiseresi.Models.Korisnik;
@@ -58,7 +59,6 @@ public class LoginActivity extends ToolbarNavigacijaSetup {
                     public void onChanged(PrijavljenKorisnikModel prijavljenKorisnikModel) {
                         if(k.getValue()!=null){
                             Utils.getInstance().SacuvajKorisnika(prijavljenKorisnikModel.getKorisnik());
-                            Log.println(Log.ASSERT,"[login activity]","Pozvan sam "+ prijavljenKorisnikModel.getIme());
                             Utils.getInstance().getOmiljeniOglasiId().clear();
                             for(Item item:prijavljenKorisnikModel.getOmiljeniArtikli()){
                                 Utils.getInstance().getOmiljeniOglasiId().add(item.getId());

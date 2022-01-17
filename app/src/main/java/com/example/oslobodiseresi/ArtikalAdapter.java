@@ -31,7 +31,6 @@ import com.example.oslobodiseresi.Retrofit.UserRepository;
 
 import java.util.ArrayList;
 
-
 public class ArtikalAdapter extends RecyclerView.Adapter<ArtikalAdapter.ViewHolder> implements Filterable {
 
     ArrayList<Item> artikli = new ArrayList<>();
@@ -47,7 +46,6 @@ public class ArtikalAdapter extends RecyclerView.Adapter<ArtikalAdapter.ViewHold
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.artikal_layout, parent, false);
         return new ViewHolder(view);
     }
-
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
