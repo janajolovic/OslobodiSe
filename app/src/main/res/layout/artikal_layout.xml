@@ -39,25 +39,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/artikalImage" />
 
-        <ImageView
-            android:id="@+id/imgFav"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="12dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/artikalImage"
-            app:srcCompat="@drawable/ic_prazno_srce" />
-
-
 <!--        TODO: da iskoci poruka za brisanje-->
         <ImageView
             android:id="@+id/imgDelete"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toStartOf="@+id/imgFav"
-            app:layout_constraintTop_toTopOf="@+id/imgFav"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/artikalNaziv"
             app:srcCompat="@drawable/ic_delete_outline" />
 
 

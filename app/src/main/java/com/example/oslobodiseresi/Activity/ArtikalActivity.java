@@ -70,8 +70,6 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
 
     private void setData(Item artikal) {
         this.artikal = new Item(artikal.getId(), artikal.getNaziv(), artikal.getOpis(), artikal.getKategorija(), artikal.getKategorijaId(), artikal.getGrad(), artikal.getGradId(), artikal.getUser(), artikal.getUserId());
-        if(this.artikal == null)
-            Toast.makeText(this, "WTF", Toast.LENGTH_SHORT).show();
         txtOpis.setText(artikal.getOpis());
         txtNaziv.setText(artikal.getNaziv());
         txtKategorija.setText(artikal.getKategorija().getNaziv());
