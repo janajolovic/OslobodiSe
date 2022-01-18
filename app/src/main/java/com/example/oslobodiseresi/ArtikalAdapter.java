@@ -65,48 +65,6 @@ public class ArtikalAdapter extends RecyclerView.Adapter<ArtikalAdapter.ViewHold
             }
         });
 
-        if(Utils.getInstance().getOmiljeniOglasiId() != null) {
-            holder.isFav = Utils.getInstance().getOmiljeniOglasiId().contains(artikli.get(position).getId());
-            if (holder.isFav) {
-                holder.imgFav.setImageResource(R.drawable.ic_heart);
-            } else {
-                holder.imgFav.setImageResource(R.drawable.ic_prazno_srce);
-            }
-        }
-        holder.imgFav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(Utils.getInstance().jeUlogovan()){
-                    holder.isFav = !holder.isFav;
-                    if (holder.isFav) {
-                        holder.imgFav.setImageResource(R.drawable.ic_heart);
-                        MutableLiveData<String> mld = UserRepository.getInstance(MainApplication.apiManager).DodajOmiljeniOglas(Utils.getInstance().getKorisnik().getId(), artikli.get(position).getId());
-                        mld.observe((AppCompatActivity)context, new Observer<String>() {
-                            @Override
-                            public void onChanged(String s) {
-                                Utils.getInstance().getOmiljeniOglasiId().add(artikli.get(position).getId());
-                                Toast.makeText(context, "Artikal je dodat u omiljene oglase", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    } else {
-                        holder.imgFav.setImageResource(R.drawable.ic_prazno_srce);
-                        MutableLiveData<String> mld = UserRepository.getInstance(MainApplication.apiManager).IzbrisiOmiljeniOglas(Utils.getInstance().getKorisnik().getId(), artikli.get(position).getId());
-                        mld.observe((AppCompatActivity)context, new Observer<String>() {
-                            @Override
-                            public void onChanged(String s) {
-                                Utils.getInstance().getOmiljeniOglasiId().remove(artikli.get(position).getId());
-                                Toast.makeText(context, "Artikal je uklonjen iz omiljenih oglasa", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                }
-                else
-                {
-                    Toast.makeText(context, "Morate biti prijavljeni da biste oznacili oglas", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
         holder.imgDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -183,18 +141,13 @@ public class ArtikalAdapter extends RecyclerView.Adapter<ArtikalAdapter.ViewHold
         private CardView parent;
         private ImageView imgProfil;
         private TextView txtNaziv;
-        private ImageView imgFav;
         private ImageView imgDelete;
-
-        private Boolean isFav;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            isFav = false;
             imgProfil = itemView.findViewById(R.id.artikalImage);
             txtNaziv = itemView.findViewById(R.id.artikalNaziv);
             parent = itemView.findViewById(R.id.artikalParent);
-            imgFav = itemView.findViewById(R.id.imgFav);
             imgDelete = itemView.findViewById(R.id.imgDelete);
         }
     }

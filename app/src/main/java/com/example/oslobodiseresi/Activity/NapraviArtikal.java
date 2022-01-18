@@ -50,8 +50,6 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
     private EditText opis;
     private ImageView izaberi;
     private ImageView slika;
-    private ArrayList<String> kategorije;
-    private ArrayList<String> gradovi;
     private TextView txtNemaKategorija, txtNemaGrad;
 
     private Bitmap bitmap;
