@@ -112,6 +112,14 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
                 }
             }
             Context context = ArtikalActivity.this;
+            txtKorisnik.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, ProfilKorisnika.class);
+                    intent.putExtra("KORISNIK_ID", artikal.getUserId());
+                    startActivity(intent);
+                }
+            });
             imgFav.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
