@@ -83,28 +83,28 @@ public class MojiOglasiActivity extends ToolbarNavigacijaSetup {
         Toast.makeText(this, "MojiOglasi", Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void primeniFiltere() {
-        super.primeniFiltere();
-        MutableLiveData<ArrayList<Item>> mld;
-        if (getKategorijaId() != 0 && getGradId() != 0) {
-            mld = ItemRepository.getInstance(MainApplication.apiManager).getItemFromKategorijaGrad(
-                    getKategorijaId(),
-                    getGradId()
-            );
-        }else if(getKategorijaId() == 0 && getGradId() == 0){
-            mld = ItemRepository.getInstance(MainApplication.apiManager).getAllItems();
-        }else if(getKategorijaId() != 0){
-            mld = ItemRepository.getInstance(MainApplication.apiManager).getItemsFromKategorija(getKategorijaId());
-        }else{
-            mld = ItemRepository.getInstance(MainApplication.apiManager).getItemsFromGrad(getGradId());
-        }
-        mld.observe(MojiOglasiActivity.this, new Observer<ArrayList<Item>>() {
-            @Override
-            public void onChanged(ArrayList<Item> items) {
-                adapterArtikli.setArtikli(mld.getValue());
-            }
-        });
-    }
+//    @Override
+//    public void primeniFiltere() {
+//        super.primeniFiltere();
+//        MutableLiveData<ArrayList<Item>> mld;
+//        if (getKategorijaId() != 0 && getGradId() != 0) {
+//            mld = ItemRepository.getInstance(MainApplication.apiManager).getItemFromKategorijaGrad(
+//                    getKategorijaId(),
+//                    getGradId()
+//            );
+//        }else if(getKategorijaId() == 0 && getGradId() == 0){
+//            mld = ItemRepository.getInstance(MainApplication.apiManager).getAllItems();
+//        }else if(getKategorijaId() != 0){
+//            mld = ItemRepository.getInstance(MainApplication.apiManager).getItemsFromKategorija(getKategorijaId());
+//        }else{
+//            mld = ItemRepository.getInstance(MainApplication.apiManager).getItemsFromGrad(getGradId());
+//        }
+//        mld.observe(MojiOglasiActivity.this, new Observer<ArrayList<Item>>() {
+//            @Override
+//            public void onChanged(ArrayList<Item> items) {
+//                adapterArtikli.setArtikli(mld.getValue());
+//            }
+//        });
+//    }
 
 }
