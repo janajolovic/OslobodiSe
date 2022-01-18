@@ -63,8 +63,100 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
                 Gson gson = new Gson();
                 Type type = new TypeToken<Item>() {}.getType();
                 artikal = gson.fromJson(json, type);
-                setData();
-                setViews();
+                setData();if(Utils.getInstance().jeUlogovan()){
+                    MutableLiveData<ArrayList<Item>> mld = UserRepository.getInstance(MainApplication.apiManager).GetOmiljeniOglasiFromUser(artikal.getUserId());
+                    mld.observe(ArtikalActivity.this, new Observer<ArrayList<Item>>() {
+                        @Override
+                        public void onChanged(ArrayList<Item> items) {
+                            isFav = mld.getValue().contains(artikal.getId());
+                            if (isFav) {
+                                imgFav.setImageResource(R.drawable.ic_heart);
+                            } else {
+                                imgFav.setImageResource(R.drawable.ic_prazno_srce);
+                            }
+                            imgFav.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    isFav = !isFav;
+                                    if (isFav) {
+                                        imgFav.setImageResource(R.drawable.ic_heart);
+                                        MutableLiveData<String> mld = UserRepository.getInstance(MainApplication.apiManager).DodajOmiljeniOglas(Utils.getInstance().getKorisnik().getId(), artikal.getId());
+                                        mld.observe(ArtikalActivity.this, new Observer<String>() {
+                                            @Override
+                                            public void onChanged(String s) {
+                                                Toast.makeText(ArtikalActivity.this, "Artikal je dodat u omiljene oglase", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                    } else {
+                                        imgFav.setImageResource(R.drawable.ic_prazno_srce);
+                                        MutableLiveData<String> mld = UserRepository.getInstance(MainApplication.apiManager).IzbrisiOmiljeniOglas(Utils.getInstance().getKorisnik().getId(), artikal.getId());
+                                        mld.observe(ArtikalActivity.this, new Observer<String>() {
+                                            @Override
+                                            public void onChanged(String s) {
+                                                Toast.makeText(ArtikalActivity.this, "Artikal je uklonjen iz omiljenih oglasa", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                    }
+                                }
+                            });
+                        }
+                    });
+                } else { imgFav.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(ArtikalActivity.this, "Morate biti prijavljeni da biste oznacili oglas", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                }
+
+                Context context = ArtikalActivity.this;
+                txtKorisnik.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context, ProfilKorisnika.class);
+                        intent.putExtra("KORISNIK_ID", artikal.getUserId());
+                        startActivity(intent);
+                    }
+                });
+                imgFav.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(Utils.getInstance().jeUlogovan()){
+                            isFav = !isFav;
+                            if (isFav) {
+                                imgFav.setImageResource(R.drawable.ic_heart);
+                                MutableLiveData<String> mld = UserRepository.getInstance(MainApplication.apiManager).DodajOmiljeniOglas(Utils.getInstance().getKorisnik().getId(), artikal.getId());
+                                mld.observe((AppCompatActivity)context, new Observer<String>() {
+                                    @Override
+                                    public void onChanged(String s) {
+                                        Toast.makeText(context, "Artikal je dodat u omiljene oglase", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            } else {
+                                imgFav.setImageResource(R.drawable.ic_prazno_srce);
+                                MutableLiveData<String> mld = UserRepository.getInstance(MainApplication.apiManager).IzbrisiOmiljeniOglas(Utils.getInstance().getKorisnik().getId(), artikal.getId());
+                                mld.observe((AppCompatActivity)context, new Observer<String>() {
+                                    @Override
+                                    public void onChanged(String s) {
+                                        Toast.makeText(context, "Artikal je uklonjen iz omiljenih oglasa", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                        }
+                        else
+                        {
+                            Toast.makeText(context, "Morate biti prijavljeni da biste oznacili oglas", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+                artikalBack = findViewById(R.id.artikalBack);
+                artikalBack.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(ArtikalActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    }
+                });
             }
         }
     }
@@ -95,99 +187,6 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
 
     private void setViews() {
 
-        if(Utils.getInstance().jeUlogovan()){
-            MutableLiveData<ArrayList<Item>> mld = UserRepository.getInstance(MainApplication.apiManager).GetOmiljeniOglasiFromUser(artikal.getUserId());
-            mld.observe(ArtikalActivity.this, new Observer<ArrayList<Item>>() {
-                @Override
-                public void onChanged(ArrayList<Item> items) {
-                    isFav = mld.getValue().contains(artikal.getId());
-                    if (isFav) {
-                        imgFav.setImageResource(R.drawable.ic_heart);
-                    } else {
-                        imgFav.setImageResource(R.drawable.ic_prazno_srce);
-                    }
-                    imgFav.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            isFav = !isFav;
-                            if (isFav) {
-                                imgFav.setImageResource(R.drawable.ic_heart);
-                                MutableLiveData<String> mld = UserRepository.getInstance(MainApplication.apiManager).DodajOmiljeniOglas(Utils.getInstance().getKorisnik().getId(), artikal.getId());
-                                mld.observe(ArtikalActivity.this, new Observer<String>() {
-                                    @Override
-                                    public void onChanged(String s) {
-                                        Toast.makeText(ArtikalActivity.this, "Artikal je dodat u omiljene oglase", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            } else {
-                                imgFav.setImageResource(R.drawable.ic_prazno_srce);
-                                MutableLiveData<String> mld = UserRepository.getInstance(MainApplication.apiManager).IzbrisiOmiljeniOglas(Utils.getInstance().getKorisnik().getId(), artikal.getId());
-                                mld.observe(ArtikalActivity.this, new Observer<String>() {
-                                    @Override
-                                    public void onChanged(String s) {
-                                        Toast.makeText(ArtikalActivity.this, "Artikal je uklonjen iz omiljenih oglasa", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            }
-                        }
-                    });
-                }
-            });
-        } else { imgFav.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(ArtikalActivity.this, "Morate biti prijavljeni da biste oznacili oglas", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
 
-        Context context = ArtikalActivity.this;
-        txtKorisnik.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, ProfilKorisnika.class);
-                intent.putExtra("KORISNIK_ID", artikal.getUserId());
-                startActivity(intent);
-            }
-        });
-        imgFav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(Utils.getInstance().jeUlogovan()){
-                    isFav = !isFav;
-                    if (isFav) {
-                        imgFav.setImageResource(R.drawable.ic_heart);
-                        MutableLiveData<String> mld = UserRepository.getInstance(MainApplication.apiManager).DodajOmiljeniOglas(Utils.getInstance().getKorisnik().getId(), artikal.getId());
-                        mld.observe((AppCompatActivity)context, new Observer<String>() {
-                            @Override
-                            public void onChanged(String s) {
-                                Toast.makeText(context, "Artikal je dodat u omiljene oglase", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    } else {
-                        imgFav.setImageResource(R.drawable.ic_prazno_srce);
-                        MutableLiveData<String> mld = UserRepository.getInstance(MainApplication.apiManager).IzbrisiOmiljeniOglas(Utils.getInstance().getKorisnik().getId(), artikal.getId());
-                        mld.observe((AppCompatActivity)context, new Observer<String>() {
-                            @Override
-                            public void onChanged(String s) {
-                                Toast.makeText(context, "Artikal je uklonjen iz omiljenih oglasa", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                }
-                else
-                {
-                    Toast.makeText(context, "Morate biti prijavljeni da biste oznacili oglas", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-        artikalBack = findViewById(R.id.artikalBack);
-        artikalBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ArtikalActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 }
