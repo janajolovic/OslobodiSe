@@ -65,6 +65,7 @@ public class OmiljeniOglasiActivity extends ToolbarNavigacijaSetup {
                 adapterArtikli.getFilter().filter(newText);
                 return false;            }
         });
+        Toast.makeText(this, "Omiljeni oglasi", Toast.LENGTH_SHORT).show();
     }
     @Override
     public void primeniFiltere() {

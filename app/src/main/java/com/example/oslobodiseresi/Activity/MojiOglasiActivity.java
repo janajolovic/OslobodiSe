@@ -31,7 +31,6 @@ public class MojiOglasiActivity extends ToolbarNavigacijaSetup {
 
     private NavigationView navigationView;
     private RecyclerView recyclerArtikli;
-    private ArrayList<Item> artikli = new ArrayList<>();
     private FloatingActionButton dodajArtikal;
     private ArtikalAdapter adapterArtikli;
     @Override

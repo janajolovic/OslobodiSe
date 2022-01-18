@@ -24,7 +24,7 @@ import com.google.android.material.navigation.NavigationView;
 public class ProfilKorisnika extends ToolbarNavigacijaSetup {
 
     private NavigationView navigationView;
-    public static final String KORISNIK_ID = "korisnikId";
+    public static final String KORISNIK_ID = "KORISNIK_ID";
     private TextView txtKorisnik;
     private RatingBar rating;
     private String korisnikId;
@@ -34,7 +34,7 @@ public class ProfilKorisnika extends ToolbarNavigacijaSetup {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profil_korisnika);
+        setContentView(R.layout.nav_activity_profil_korisnika);
 
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -52,12 +52,12 @@ public class ProfilKorisnika extends ToolbarNavigacijaSetup {
         txtKorisnik = findViewById(R.id.imeKorisnika);
         rating = findViewById(R.id.ratingBar);
 
-        MutableLiveData<Korisnik> mld = UserRepository.getInstance(MainApplication.apiManager).getKorisnikById();
+        MutableLiveData<Korisnik> mld = UserRepository.getInstance(MainApplication.apiManager).GetKorisnikById(korisnikId);
         mld.observe(ProfilKorisnika.this, new Observer<Korisnik>() {
             @Override
             public void onChanged(Korisnik korisnik) {
                 txtKorisnik.setText(korisnik.getIme());
-                rating.setRating((float)korisnik.getZbirOcena()/(float)korisnik.getBrojOcena());
+                rating.setRating(3/5);
             }
         });
     }

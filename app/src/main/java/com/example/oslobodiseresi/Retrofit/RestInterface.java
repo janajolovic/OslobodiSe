@@ -64,6 +64,9 @@ public interface RestInterface {
     @PATCH("users/omiljenioglasi/izbrisi/{UserId}/{OglasId}")
     Call<String> IzbrisiOmiljeniOglas(@Path("UserId") String userId, @Path("OglasId") int oglasId);
 
+    @GET("users/{Id}")
+    Call<Korisnik> getKorisnikById(@Path("Id") String Id);
+
     @HTTP(method = "DELETE", path = "items/delete", hasBody = true)
     Call<String> deleteItem(@Body int Id);
 

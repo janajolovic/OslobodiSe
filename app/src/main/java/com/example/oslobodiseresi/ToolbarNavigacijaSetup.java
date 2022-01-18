@@ -140,8 +140,6 @@ public class ToolbarNavigacijaSetup extends AppCompatActivity implements Navigat
                                     return true;
                                 case R.id.odjava:
                                     Utils.getInstance().SacuvajKorisnika(null);
-                                    Utils.getInstance().getOmiljeniOglasiId().clear();
-
                                     startActivity(new Intent(context, MainActivity.class));
                                     return true;
                             }

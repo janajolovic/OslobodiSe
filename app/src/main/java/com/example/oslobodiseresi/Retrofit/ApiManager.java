@@ -104,4 +104,9 @@ public class ApiManager {
         Call<String> izbrisiOmiljeniOglas = service.IzbrisiOmiljeniOglas(UserId, OglasId);
         izbrisiOmiljeniOglas.enqueue(callback);
     }
+
+    public void GetKorisnikById(String Id, Callback<Korisnik> callback){
+        Call<Korisnik> getKorisnikById = service.getKorisnikById(Id);
+        getKorisnikById.enqueue(callback);
+    }
 }
