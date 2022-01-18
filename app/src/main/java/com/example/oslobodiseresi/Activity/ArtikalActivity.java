@@ -124,33 +124,33 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
                     }
                 });
 
-                if(Utils.getInstance().jeUlogovan()){
-                    MutableLiveData<ArrayList<Item>> mld = UserRepository.getInstance(MainApplication.apiManager).GetOmiljeniOglasiFromUser(artikal.getUserId());
-                    mld.observe(ArtikalActivity.this, new Observer<ArrayList<Item>>() {
-                        @Override
-                        public void onChanged(ArrayList<Item> items) {
-                            isFav = items.contains(artikal.getId());
-                            if (isFav) {
-                                imgFav.setImageResource(R.drawable.ic_heart);
-                            } else {
-                                imgFav.setImageResource(R.drawable.ic_prazno_srce);
-                            }
-                            imgFav.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    isFav = !isFav;
-                                    if (isFav) {
-                                        imgFav.setImageResource(R.drawable.ic_heart);
-                                        UserRepository.getInstance(MainApplication.apiManager).DodajOmiljeniOglas(Utils.getInstance().getKorisnik().getId(), artikal.getId());
-                                    } else {
-                                        imgFav.setImageResource(R.drawable.ic_prazno_srce);
-                                        UserRepository.getInstance(MainApplication.apiManager).IzbrisiOmiljeniOglas(Utils.getInstance().getKorisnik().getId(), artikal.getId());
-                                    }
-                                }
-                            });
-                        }
-                    });
-                }
+//                if(Utils.getInstance().jeUlogovan()){
+//                    MutableLiveData<ArrayList<Item>> mld = UserRepository.getInstance(MainApplication.apiManager).GetOmiljeniOglasiFromUser(artikal.getUserId());
+//                    mld.observe(ArtikalActivity.this, new Observer<ArrayList<Item>>() {
+//                        @Override
+//                        public void onChanged(ArrayList<Item> items) {
+//                            isFav = items.contains(artikal.getId());
+//                            if (isFav) {
+//                                imgFav.setImageResource(R.drawable.ic_heart);
+//                            } else {
+//                                imgFav.setImageResource(R.drawable.ic_prazno_srce);
+//                            }
+//                            imgFav.setOnClickListener(new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View v) {
+//                                    isFav = !isFav;
+//                                    if (isFav) {
+//                                        imgFav.setImageResource(R.drawable.ic_heart);
+//                                        UserRepository.getInstance(MainApplication.apiManager).DodajOmiljeniOglas(Utils.getInstance().getKorisnik().getId(), artikal.getId());
+//                                    } else {
+//                                        imgFav.setImageResource(R.drawable.ic_prazno_srce);
+//                                        UserRepository.getInstance(MainApplication.apiManager).IzbrisiOmiljeniOglas(Utils.getInstance().getKorisnik().getId(), artikal.getId());
+//                                    }
+//                                }
+//                            });
+//                        }
+//                    });
+//                }
             }
         }
     }
