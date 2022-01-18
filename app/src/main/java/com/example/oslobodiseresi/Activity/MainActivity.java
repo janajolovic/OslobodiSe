@@ -64,6 +64,7 @@ public class MainActivity extends ToolbarNavigacijaSetup {
         artikli.observe(MainActivity.this, new Observer<ArrayList<Item>>() {
             @Override
             public void onChanged(ArrayList<Item> items) {
+                Log.println(Log.ASSERT,"[MainActivity]","Pozvan sam");
                 adapterArtikli.setArtikli(artikli.getValue());
                 recyclerArtikli.setAdapter(adapterArtikli);
                 progress.setVisibility(View.INVISIBLE);
