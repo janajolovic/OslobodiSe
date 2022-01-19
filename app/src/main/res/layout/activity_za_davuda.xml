@@ -6,6 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".Activity.ZaDavuda">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"/>
+
     <ImageView
         android:id="@+id/slika"
         android:layout_width="0dp"

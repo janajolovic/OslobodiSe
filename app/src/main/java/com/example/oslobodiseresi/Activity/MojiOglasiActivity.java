@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -33,11 +34,14 @@ public class MojiOglasiActivity extends ToolbarNavigacijaSetup {
     private RecyclerView recyclerArtikli;
     private FloatingActionButton dodajArtikal;
     private ArtikalAdapter adapterArtikli;
+    private ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nav_activity_moji_oglasi);
 
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -53,6 +57,7 @@ public class MojiOglasiActivity extends ToolbarNavigacijaSetup {
         artikli.observe(MojiOglasiActivity.this, new Observer<ArrayList<Item>>() {
             @Override
             public void onChanged(ArrayList<Item> items) {
+                progressBar.setVisibility(View.INVISIBLE);
                 adapterArtikli.setArtikli(artikli.getValue());
                 recyclerArtikli.setAdapter(adapterArtikli);
             }

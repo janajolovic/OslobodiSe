@@ -38,7 +38,7 @@ public class ZaDavuda extends ToolbarNavigacijaSetup {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_za_davuda);
+        setContentView(R.layout.nav_activity_za_davuda);
 
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);

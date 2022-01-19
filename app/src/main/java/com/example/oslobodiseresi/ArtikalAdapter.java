@@ -66,10 +66,7 @@ public class ArtikalAdapter extends RecyclerView.Adapter<ArtikalAdapter.ViewHold
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ArtikalActivity.class);
-
-                Gson gson = new Gson();
-
-                intent.putExtra(ARTIKAL_ID_KEY, gson.toJson(artikli.get(position)));
+                intent.putExtra(ARTIKAL_ID_KEY, artikli.get(position).getId());
 
                 context.startActivity(intent);
             }
