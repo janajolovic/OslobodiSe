@@ -24,9 +24,8 @@ import java.util.HashSet;
 
 public class Utils {
     private Korisnik korisnik;
-    private HashSet<Integer> omiljeniOglasiId = new HashSet<Integer>();
-//    public static final String PREFERENCES = "OslobodiSePrefs";
-//    public static final String KorisnikKey = "Korisnik";
+    public static final String PREFERENCES = "OslobodiSePrefs";
+    public static final String KorisnikKey = "Korisnik";
     private SharedPreferences sharedpreferences;
     private SharedPreferences.Editor editor;
     private Gson gson;
@@ -37,38 +36,35 @@ public class Utils {
 
     }
 
-//    private Utils(Context context){
-//        gson = new GsonBuilder().serializeNulls().create();
-//        sharedpreferences = context.getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
-//        editor = sharedpreferences.edit();
-//        Type type = new TypeToken<Korisnik>(){}.getType();
-//        korisnik = gson.fromJson(sharedpreferences.getString(KorisnikKey, null), type);
-//        initData();
-//    }
+    private Utils(Context context){
+        gson = new GsonBuilder().serializeNulls().create();
+        sharedpreferences = context.getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
+        editor = sharedpreferences.edit();
+        Type type = new TypeToken<Korisnik>(){}.getType();
+        korisnik = gson.fromJson(sharedpreferences.getString(KorisnikKey, null), type);
+        initData();
+    }
 
     public void initData()
     {
 
     }
 
-    //region hash set
-
-
-    public HashSet<Integer> getOmiljeniOglasiId() {
-        return omiljeniOglasiId;
-    }
-
-    //endregion hashset
-
     public void SacuvajKorisnika(Korisnik korisnik){
         this.korisnik = korisnik;
-//        editor.putString(KorisnikKey, gson.toJson(korisnik));
-//        editor.commit();
+        editor.putString(KorisnikKey, gson.toJson(korisnik));
+        editor.commit();
     }
     
     public static Utils getInstance(){
         if(instance == null)
             instance = new Utils();
+        return instance;
+    }
+
+    public static Utils getInstance(Context context){
+        if(instance == null)
+            instance = new Utils(context);
         return instance;
     }
 

@@ -156,4 +156,21 @@ public class UserRepository {
         });
         return  str;
     }
+
+    public MutableLiveData<Korisnik> GetKorisnikById(String Id){
+        apiManager.GetKorisnikById(Id, new Callback<Korisnik>() {
+            @Override
+            public void onResponse(Call<Korisnik> call, Response<Korisnik> response) {
+                if(response.isSuccessful()){
+                    korisnik.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Korisnik> call, Throwable t) {
+
+            }
+        });
+        return korisnik;
+    }
 }

@@ -12,6 +12,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Spinner;
@@ -36,6 +37,7 @@ public class MainActivity extends ToolbarNavigacijaSetup {
     private RecyclerView recyclerArtikli;
     private NavigationView navigationView;
     private ProgressBar progress;
+    private ImageView imgLogo;
 
     private ArtikalAdapter adapterArtikli;
     @Override
@@ -51,6 +53,8 @@ public class MainActivity extends ToolbarNavigacijaSetup {
 
         setToolbar(true);
 
+        imgLogo = findViewById(R.id.imgLogo);
+
         recyclerArtikli.setLayoutManager(new GridLayoutManager(this, 2));
 
         //recycler view
@@ -60,9 +64,11 @@ public class MainActivity extends ToolbarNavigacijaSetup {
         artikli.observe(MainActivity.this, new Observer<ArrayList<Item>>() {
             @Override
             public void onChanged(ArrayList<Item> items) {
+                Log.println(Log.ASSERT,"[MainActivity]","Pozvan sam");
                 adapterArtikli.setArtikli(artikli.getValue());
                 recyclerArtikli.setAdapter(adapterArtikli);
                 progress.setVisibility(View.INVISIBLE);
+                imgLogo.setVisibility(View.INVISIBLE);
             }
         });
 

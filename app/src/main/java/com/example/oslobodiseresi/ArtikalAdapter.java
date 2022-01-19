@@ -28,6 +28,7 @@ import com.example.oslobodiseresi.Activity.ArtikalActivity;
 import com.example.oslobodiseresi.Models.Item;
 import com.example.oslobodiseresi.Retrofit.ItemRepository;
 import com.example.oslobodiseresi.Retrofit.UserRepository;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -49,6 +50,11 @@ public class ArtikalAdapter extends RecyclerView.Adapter<ArtikalAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        if(artikli.get(position).getKategorija()!=null)
+            Log.println(Log.ASSERT,"[kategorija]",artikli.get(position).getNaziv()+" "+artikli.get(position).getKategorija().getNaziv());
+        else
+            Log.println(Log.ASSERT,"[kategorija]",artikli.get(position).getNaziv()+" je null");
+
         holder.imgDelete.setVisibility(View.INVISIBLE);
         if(Utils.getInstance().jeUlogovan() && (Utils.getInstance().getKorisnik().getId().equals(artikli.get(position).getUserId())))
             holder.imgDelete.setVisibility(View.VISIBLE);
@@ -60,7 +66,11 @@ public class ArtikalAdapter extends RecyclerView.Adapter<ArtikalAdapter.ViewHold
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ArtikalActivity.class);
-                intent.putExtra(ARTIKAL_ID_KEY, artikli.get(holder.getAdapterPosition()).getId());
+
+                Gson gson = new Gson();
+
+                intent.putExtra(ARTIKAL_ID_KEY, gson.toJson(artikli.get(position)));
+
                 context.startActivity(intent);
             }
         });
@@ -138,7 +148,6 @@ public class ArtikalAdapter extends RecyclerView.Adapter<ArtikalAdapter.ViewHold
     };
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private CardView parent;
         private ImageView imgProfil;
         private TextView txtNaziv;
         private ImageView imgDelete;
@@ -147,7 +156,6 @@ public class ArtikalAdapter extends RecyclerView.Adapter<ArtikalAdapter.ViewHold
             super(itemView);
             imgProfil = itemView.findViewById(R.id.artikalImage);
             txtNaziv = itemView.findViewById(R.id.artikalNaziv);
-            parent = itemView.findViewById(R.id.artikalParent);
             imgDelete = itemView.findViewById(R.id.imgDelete);
         }
     }
