@@ -34,7 +34,7 @@ public class ProfilKorisnika extends ToolbarNavigacijaSetup {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profil_korisnika);
+        setContentView(R.layout.nav_activity_profil_korisnika);
 
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -52,7 +52,7 @@ public class ProfilKorisnika extends ToolbarNavigacijaSetup {
         txtKorisnik = findViewById(R.id.imeKorisnika);
         rating = findViewById(R.id.ratingBar);
 
-        MutableLiveData<Korisnik> mld = UserRepository.getInstance(MainApplication.apiManager).getKorisnikById();
+        MutableLiveData<Korisnik> mld = UserRepository.getInstance(MainApplication.apiManager).GetKorisnikById(korisnikId);
         mld.observe(ProfilKorisnika.this, new Observer<Korisnik>() {
             @Override
             public void onChanged(Korisnik korisnik) {

@@ -24,6 +24,7 @@ public class UserRepository {
     private final MutableLiveData<PrijavljenKorisnikModel> prijavljen_korisnik = new MutableLiveData<>();
     private final MutableLiveData<ArrayList<Item>> items = new MutableLiveData<>();
     private final MutableLiveData<String> str = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> bool = new MutableLiveData<>();
 
     private UserRepository(ApiManager apiManager){
         this.apiManager = apiManager;
@@ -156,4 +157,41 @@ public class UserRepository {
         });
         return  str;
     }
+
+    public MutableLiveData<Korisnik> GetKorisnikById(String Id){
+        apiManager.GetKorisnikById(Id, new Callback<Korisnik>() {
+            @Override
+            public void onResponse(Call<Korisnik> call, Response<Korisnik> response) {
+                if(response.isSuccessful()){
+                    korisnik.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Korisnik> call, Throwable t) {
+
+            }
+        });
+
+        return korisnik;
+    }
+
+    public MutableLiveData<Boolean> ProveriOmiljeniOglas(String UserId, int OglasId){
+        apiManager.ProveriOmiljeniOglas(UserId, OglasId, new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if(response.isSuccessful()){
+                    bool.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+
+            }
+        });
+
+        return bool;
+    }
+
 }

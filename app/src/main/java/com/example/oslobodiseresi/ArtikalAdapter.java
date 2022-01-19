@@ -137,6 +137,15 @@ public class ArtikalAdapter extends RecyclerView.Adapter<ArtikalAdapter.ViewHold
         }
     };
 
+    public void izbrisiArtikal(int id){
+        for(int i=0;i<artikli.size();i++){
+            if(artikli.get(i).getId()==i){
+                artikli.remove(i);
+                notifyItemRemoved(i);
+            }
+        }
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         private CardView parent;
         private ImageView imgProfil;

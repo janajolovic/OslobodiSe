@@ -59,10 +59,6 @@ public class LoginActivity extends ToolbarNavigacijaSetup {
                     public void onChanged(PrijavljenKorisnikModel prijavljenKorisnikModel) {
                         if(k.getValue()!=null){
                             Utils.getInstance().SacuvajKorisnika(prijavljenKorisnikModel.getKorisnik());
-                            Utils.getInstance().getOmiljeniOglasiId().clear();
-                            for(Item item:prijavljenKorisnikModel.getOmiljeniArtikli()){
-                                Utils.getInstance().getOmiljeniOglasiId().add(item.getId());
-                            }
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
                         }

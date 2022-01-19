@@ -3,6 +3,7 @@ package com.example.oslobodiseresi.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -28,6 +29,7 @@ public class OmiljeniOglasiActivity extends ToolbarNavigacijaSetup {
     private NavigationView navigationView;
     private RecyclerView recyclerArtikli;
     private ArtikalAdapter adapterArtikli;
+    private ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,13 +43,15 @@ public class OmiljeniOglasiActivity extends ToolbarNavigacijaSetup {
 
         //recycler view
         adapterArtikli = new ArtikalAdapter(this);
-
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
         MutableLiveData<ArrayList<Item>> mld = UserRepository.getInstance(MainApplication.apiManager).GetOmiljeniOglasiFromUser(
                 Utils.getInstance().getKorisnik().getId()
         );
         mld.observe(this, new Observer<ArrayList<Item>>() {
             @Override
             public void onChanged(ArrayList<Item> items) {
+                progressBar.setVisibility(View.INVISIBLE);
                 ArrayList<Item> artikli = mld.getValue();
                 adapterArtikli.setArtikli(artikli);
                 recyclerArtikli.setAdapter(adapterArtikli);
@@ -63,7 +67,8 @@ public class OmiljeniOglasiActivity extends ToolbarNavigacijaSetup {
             @Override
             public boolean onQueryTextChange(String newText) {
                 adapterArtikli.getFilter().filter(newText);
-                return false;            }
+                return false;
+            }
         });
     }
     @Override
@@ -86,6 +91,34 @@ public class OmiljeniOglasiActivity extends ToolbarNavigacijaSetup {
             @Override
             public void onChanged(ArrayList<Item> items) {
                 adapterArtikli.setArtikli(mld.getValue());
+            }
+        });
+    }
+
+    void izbrisiOglas(int id) {
+        adapterArtikli.izbrisiArtikal(id);
+    }
+
+    int bitniOglasId = -1;
+
+    public void setBitniOglasId(int bitniOglasId) {
+        this.bitniOglasId = bitniOglasId;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MutableLiveData<ArrayList<Item>> mld = UserRepository.getInstance(MainApplication.apiManager).GetOmiljeniOglasiFromUser(
+                Utils.getInstance().getKorisnik().getId()
+        );
+        progressBar.setVisibility(View.VISIBLE);
+        mld.observe(this, new Observer<ArrayList<Item>>() {
+            @Override
+            public void onChanged(ArrayList<Item> items) {
+                progressBar.setVisibility(View.INVISIBLE);
+                ArrayList<Item> artikli = mld.getValue();
+                adapterArtikli.setArtikli(artikli);
+                recyclerArtikli.setAdapter(adapterArtikli);
             }
         });
     }

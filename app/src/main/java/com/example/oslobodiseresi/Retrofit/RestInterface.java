@@ -8,6 +8,7 @@ import com.example.oslobodiseresi.Models.Korisnik;
 import com.example.oslobodiseresi.Models.LoginModel;
 import com.example.oslobodiseresi.Models.PrijavljenKorisnikModel;
 import com.example.oslobodiseresi.Models.RegistarModel;
+import com.google.android.material.slider.BaseOnChangeListener;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -63,6 +64,12 @@ public interface RestInterface {
 
     @PATCH("users/omiljenioglasi/izbrisi/{UserId}/{OglasId}")
     Call<String> IzbrisiOmiljeniOglas(@Path("UserId") String userId, @Path("OglasId") int oglasId);
+
+    @GET("users/{Id}")
+    Call<Korisnik> GetKorisnikById(@Path("Id") String Id);
+
+    @GET("users/omiljenioglasi/proveri/{UserId}/{OglasId}")
+    Call<Boolean> ProveriOmiljeniOglas(@Path("UserId") String UserId, @Path("OglasId") int OglasId);
 
     @HTTP(method = "DELETE", path = "items/delete", hasBody = true)
     Call<String> deleteItem(@Body int Id);

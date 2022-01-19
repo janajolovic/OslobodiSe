@@ -100,8 +100,19 @@ public class ApiManager {
         dodajOmiljeniOglas.enqueue(callback);
     }
 
+    public void GetKorisnikById(String Id, Callback<Korisnik> callback){
+        Call<Korisnik> getKorisnikById = service.GetKorisnikById(Id);
+        getKorisnikById.enqueue(callback);
+    }
+
     public void IzbrisiOmiljeniOglas(String UserId, int OglasId, Callback<String> callback){
         Call<String> izbrisiOmiljeniOglas = service.IzbrisiOmiljeniOglas(UserId, OglasId);
         izbrisiOmiljeniOglas.enqueue(callback);
     }
+
+    public void ProveriOmiljeniOglas(String UserId, int OglasId, Callback<Boolean> callback){
+        Call<Boolean> proveriOmiljeniOglas = service.ProveriOmiljeniOglas(UserId, OglasId);
+        proveriOmiljeniOglas.enqueue(callback);
+    }
+
 }
