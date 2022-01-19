@@ -4,12 +4,14 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Bratstvo-24/Desktop/OslobodiSe-main/app/src/main/res/drawable-anydpi/ic_back.xml" value="0.10885416666666667" />
+        <entry key="..\:/Users/Bratstvo-24/Desktop/OslobodiSe-main/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2203125" />
         <entry key="..\:/Users/Bratstvo-24/Desktop/OslobodiSe-main/app/src/main/res/drawable/ic_account.xml" value="0.10885416666666667" />
         <entry key="..\:/Users/Bratstvo-24/Desktop/OslobodiSe-main/app/src/main/res/drawable/ic_arrow_back.xml" value="0.2203125" />
         <entry key="..\:/Users/Bratstvo-24/Desktop/OslobodiSe-main/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.10885416666666667" />
         <entry key="..\:/Users/Bratstvo-24/Desktop/OslobodiSe-main/app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.1125" />
         <entry key="..\:/Users/Bratstvo-24/Desktop/OslobodiSe-main/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.10885416666666667" />
         <entry key="..\:/Users/Bratstvo-24/Desktop/OslobodiSe-main/app/src/main/res/drawable/ic_launcher_background.xml" value="0.10885416666666667" />
+        <entry key="..\:/Users/Bratstvo-24/Desktop/OslobodiSe-main/app/src/main/res/drawable/ic_logo_round_background.xml" value="0.2203125" />
         <entry key="..\:/Users/Bratstvo-24/Desktop/OslobodiSe-main/app/src/main/res/drawable/side_nav_bar.xml" value="0.2203125" />
         <entry key="..\:/Users/Bratstvo-24/Desktop/OslobodiSe-main/app/src/main/res/layout/activity_artikal.xml" value="0.2" />
         <entry key="..\:/Users/Bratstvo-24/Desktop/OslobodiSe-main/app/src/main/res/layout/activity_drawer.xml" value="0.20416666666666666" />
@@ -20,6 +22,7 @@
         <entry key="..\:/Users/Bratstvo-24/Desktop/OslobodiSe-main/app/src/main/res/layout/activity_moj_profil.xml" value="0.18" />
         <entry key="..\:/Users/Bratstvo-24/Desktop/OslobodiSe-main/app/src/main/res/layout/activity_moji_oglasi.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Bratstvo-24/Desktop/OslobodiSe-main/app/src/main/res/layout/activity_napravi_artikal.xml" value="0.22" />
+        <entry key="..\:/Users/Bratstvo-24/Desktop/OslobodiSe-main/app/src/main/res/layout/activity_profil_korisnika.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Bratstvo-24/Desktop/OslobodiSe-main/app/src/main/res/layout/activity_registracija.xml" value="0.33" />
         <entry key="..\:/Users/Bratstvo-24/Desktop/OslobodiSe-main/app/src/main/res/layout/activity_za_davuda.xml" value="0.1" />
         <entry key="..\:/Users/Bratstvo-24/Desktop/OslobodiSe-main/app/src/main/res/layout/artikal_layout.xml" value="0.33" />
@@ -37,6 +40,9 @@
         <entry key="..\:/Users/Bratstvo-24/Desktop/OslobodiSe-main/app/src/main/res/menu/drawer.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Bratstvo-24/Desktop/OslobodiSe-main/app/src/main/res/menu/main_menu.xml" value="0.1" />
         <entry key="..\:/Users/Bratstvo-24/Desktop/OslobodiSe-main/app/src/main/res/menu/nav_drawer.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Bratstvo-24/Desktop/OslobodiSe-main/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2203125" />
+        <entry key="..\:/Users/Bratstvo-24/Desktop/OslobodiSe-main/app/src/main/res/mipmap-anydpi-v26/ic_logo_round.xml" value="0.2203125" />
+        <entry key="..\:/Users/Bratstvo-24/Desktop/OslobodiSe-main/app/src/main/res/mipmap-anydpi-v26/ic_logo_round_round.xml" value="0.2203125" />
         <entry key="..\:/Users/Bratstvo-24/Desktop/OslobodiSeResi/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/Bratstvo-24/Desktop/OslobodiSeResi/app/src/main/res/layout/artikal_layout.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Computer/AndroidStudioProjects/OslobodiSe/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.3692708333333333" />
@@ -58,10 +64,8 @@
         <entry key="..\:/Users/Davud/Desktop/OslobodiSe/app/src/main/res/layout/activity_omiljeni_oglasi.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/Davud/Desktop/OslobodiSe/app/src/main/res/layout/activity_profil_korisnika.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/Davud/Desktop/OslobodiSe/app/src/main/res/layout/activity_registracija.xml" value="0.22333333333333336" />
-        <entry key="..\:/Users/Davud/Desktop/OslobodiSe/app/src/main/res/layout/header.xml" value="0.1" />
         <entry key="..\:/Users/Davud/Desktop/OslobodiSe/app/src/main/res/layout/nav_activity_omiljeni_oglasi.xml" value="0.1" />
         <entry key="..\:/Users/Davud/Desktop/OslobodiSe/app/src/main/res/layout/nav_activity_profil_korisnika.xml" value="0.17916666666666667" />
-        <entry key="..\:/Users/Davud/Desktop/OslobodiSe/app/src/main/res/layout/nav_activity_registracija.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/Davud/Desktop/OslobodiSe/app/src/main/res/layout/spinner_na_plavo.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/Davud/Desktop/OslobodiSe/app/src/main/res/layout/toolbar.xml" value="0.1" />
         <entry key="..\:/Users/Davud/Desktop/OslobodiSe/app/src/main/res/menu/moj_profil_menu.xml" value="0.17916666666666667" />
