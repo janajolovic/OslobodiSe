@@ -7,7 +7,6 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.oslobodiseresi.Models.Item;
 import com.example.oslobodiseresi.Models.Korisnik;
 import com.example.oslobodiseresi.Models.LoginModel;
-import com.example.oslobodiseresi.Models.PrijavljenKorisnikModel;
 import com.example.oslobodiseresi.Models.RegistarModel;
 
 import java.util.ArrayList;
@@ -21,7 +20,6 @@ public class UserRepository {
     private final ApiManager apiManager;
 
     private final MutableLiveData<Korisnik> korisnik = new MutableLiveData<>();
-    private final MutableLiveData<PrijavljenKorisnikModel> prijavljen_korisnik = new MutableLiveData<>();
     private final MutableLiveData<ArrayList<Item>> items = new MutableLiveData<>();
     private final MutableLiveData<String> str = new MutableLiveData<>();
     private final MutableLiveData<Boolean> bool = new MutableLiveData<>();
@@ -59,25 +57,25 @@ public class UserRepository {
         return korisnik;
     }
 
-    public MutableLiveData<PrijavljenKorisnikModel> Login(LoginModel model) {
-        apiManager.LoginUser(model, new Callback<PrijavljenKorisnikModel>() {
+    public MutableLiveData<Korisnik> Login(LoginModel model) {
+        apiManager.LoginUser(model, new Callback<Korisnik>() {
             @Override
-            public void onResponse(Call<PrijavljenKorisnikModel> call, Response<PrijavljenKorisnikModel> response) {
+            public void onResponse(Call<Korisnik> call, Response<Korisnik> response) {
                 if (response.isSuccessful()) {
-                    prijavljen_korisnik.setValue(response.body());
+                    korisnik.setValue(response.body());
                 }else{
                     Log.println(Log.ERROR, "[Greska]",response.message());
-                    prijavljen_korisnik.setValue(null);
+                    korisnik.setValue(null);
                 }
             }
 
             @Override
-            public void onFailure(Call<PrijavljenKorisnikModel> call, Throwable t) {
+            public void onFailure(Call<Korisnik> call, Throwable t) {
                 Log.println(Log.ERROR, "[Greska]",t.getMessage());
-                prijavljen_korisnik.setValue(null);
+                korisnik.setValue(null);
             }
         });
-        return prijavljen_korisnik;
+        return korisnik;
     }
 
 
@@ -192,6 +190,25 @@ public class UserRepository {
         });
 
         return bool;
+    }
+
+    public MutableLiveData<String> DodajOcenu(String UserId, String RaterId, float ocena){
+        apiManager.DodajOcenu(UserId, RaterId, ocena, new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if(response.isSuccessful()){
+                    str.setValue(response.body());
+                }else{
+                    Log.println(Log.ASSERT, "[Dodaj Ocenu]", response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.println(Log.ASSERT, "[Dodaj Ocenu F]", t.getMessage());
+            }
+        });
+        return str;
     }
 
 }

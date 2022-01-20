@@ -6,16 +6,12 @@ import com.example.oslobodiseresi.Models.ItemPostModel;
 import com.example.oslobodiseresi.Models.Kategorija;
 import com.example.oslobodiseresi.Models.Korisnik;
 import com.example.oslobodiseresi.Models.LoginModel;
-import com.example.oslobodiseresi.Models.PrijavljenKorisnikModel;
 import com.example.oslobodiseresi.Models.RegistarModel;
-import com.google.android.material.slider.BaseOnChangeListener;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.HTTP;
 import retrofit2.http.PATCH;
@@ -27,7 +23,7 @@ public interface RestInterface {
     Call<Korisnik> register(@Body RegistarModel korisnik);
 
     @POST("users/login")
-    Call<PrijavljenKorisnikModel> login(@Body LoginModel korisnik);
+    Call<Korisnik> login(@Body LoginModel korisnik);
 
     @GET("items/all")
     Call<ArrayList<Item>>getAllItems();
@@ -70,6 +66,9 @@ public interface RestInterface {
 
     @GET("users/omiljenioglasi/proveri/{UserId}/{OglasId}")
     Call<Boolean> ProveriOmiljeniOglas(@Path("UserId") String UserId, @Path("OglasId") int OglasId);
+
+    @PATCH("users/dodajocenu/{UserId}/{RaterId}/{ocena}")
+    Call<String> DodajOcenu(@Path("UserId") String UserId, @Path("RaterId") String RaterId, @Path("ocena") float ocena);
 
     @HTTP(method = "DELETE", path = "items/delete", hasBody = true)
     Call<String> deleteItem(@Body int Id);

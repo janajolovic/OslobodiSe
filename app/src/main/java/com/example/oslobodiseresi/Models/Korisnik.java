@@ -12,7 +12,7 @@ public class Korisnik {
     private String email;
     private String brojTelefona;
     private int brojOcena;
-    private int zbirOcena;
+    private float zbirOcena;
     private ArrayList<Item> omiljeniOglasi;
 
     public Korisnik(String Id, String ime, String email, String brojTelefona, int brojOcena, int zbirOcena) {
@@ -44,7 +44,7 @@ public class Korisnik {
         return brojOcena;
     }
 
-    public int getZbirOcena() {
+    public float getZbirOcena() {
         return zbirOcena;
     }
 

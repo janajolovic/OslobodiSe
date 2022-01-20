@@ -10,121 +10,125 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar"/>
 
-    <ProgressBar
-        android:id="@+id/progress"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-
-
-    <ImageView
-        android:id="@+id/imgKorisnik"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        tools:srcCompat="@tools:sample/avatars"
-        android:src="@drawable/ic_prazno_srce"/>
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="Korisničko ime:"
-        android:textStyle="bold"
-        android:textSize="@dimen/velicina_slova"
-        app:layout_constraintStart_toEndOf="@+id/imgKorisnik"
-        app:layout_constraintTop_toTopOf="@+id/imgKorisnik" />
-
-    <TextView
-        android:id="@+id/imeKorisnika"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:textSize="@dimen/velicina_slova"
-        app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="@+id/textView" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="5dp"
-        android:text="Kontakt:"
-        android:textStyle="bold"
-        android:textSize="@dimen/velicina_slova"
-        app:layout_constraintStart_toEndOf="@+id/imgKorisnik"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <TextView
-        android:id="@+id/brojKorisnika"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:textSize="@dimen/velicina_slova"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toTopOf="@+id/textView2" />
-
-
-    <RatingBar
-        android:id="@+id/ratingBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imgKorisnik"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-    <TextView
-        android:id="@+id/txtOcena"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:text="Prosečna ocena: "
-        android:textSize="@dimen/velicina_slova"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imgKorisnik"
-        app:layout_constraintStart_toEndOf="@+id/imgKorisnik"
-        app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
-
-    <TextView
-        android:id="@+id/prosecnaOcena"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:textSize="@dimen/velicina_slova"
-        app:layout_constraintStart_toEndOf="@+id/txtOcena"
-        app:layout_constraintTop_toTopOf="@+id/txtOcena" />
-
     <ScrollView
         android:id="@+id/scrollView3"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgKorisnik">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-        <RelativeLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/artikliKorisnik"
+            <ProgressBar
+                android:id="@+id/progress"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+            <ImageView
+                android:id="@+id/imgKorisnik"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars"
+                android:src="@drawable/ic_prazno_srce"/>
+
+            <TextView
+                android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"></androidx.recyclerview.widget.RecyclerView>
+                android:layout_marginStart="16dp"
+                android:text="Korisničko ime:"
+                android:textStyle="bold"
+                android:textSize="@dimen/velicina_slova"
+                app:layout_constraintStart_toEndOf="@+id/imgKorisnik"
+                app:layout_constraintTop_toTopOf="@+id/imgKorisnik" />
 
-        </RelativeLayout>
+            <TextView
+                android:id="@+id/imeKorisnika"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textSize="@dimen/velicina_slova"
+                app:layout_constraintStart_toEndOf="@+id/textView"
+                app:layout_constraintTop_toTopOf="@+id/textView" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="5dp"
+                android:text="Kontakt:"
+                android:textStyle="bold"
+                android:textSize="@dimen/velicina_slova"
+                app:layout_constraintStart_toEndOf="@+id/imgKorisnik"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+            <TextView
+                android:id="@+id/brojKorisnika"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textSize="@dimen/velicina_slova"
+                app:layout_constraintStart_toEndOf="@+id/textView2"
+                app:layout_constraintTop_toTopOf="@+id/textView2" />
+
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imgKorisnik"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+            <TextView
+                android:id="@+id/txtOcena"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="Prosečna ocena: "
+                android:textSize="@dimen/velicina_slova"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/imgKorisnik"
+                app:layout_constraintStart_toEndOf="@+id/imgKorisnik"
+                app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
+
+            <TextView
+                android:id="@+id/prosecnaOcena"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textSize="@dimen/velicina_slova"
+                app:layout_constraintStart_toEndOf="@+id/txtOcena"
+                app:layout_constraintTop_toTopOf="@+id/txtOcena" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/artikliKorisnik"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/imgKorisnik"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="16dp"
+                    android:layout_centerHorizontal="true"></androidx.recyclerview.widget.RecyclerView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </ScrollView>
 

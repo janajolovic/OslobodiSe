@@ -1,14 +1,11 @@
 package com.example.oslobodiseresi.Retrofit;
 
-import android.os.RemoteCallbackList;
-
 import com.example.oslobodiseresi.Models.Grad;
 import com.example.oslobodiseresi.Models.Item;
 import com.example.oslobodiseresi.Models.ItemPostModel;
 import com.example.oslobodiseresi.Models.Kategorija;
 import com.example.oslobodiseresi.Models.Korisnik;
 import com.example.oslobodiseresi.Models.LoginModel;
-import com.example.oslobodiseresi.Models.PrijavljenKorisnikModel;
 import com.example.oslobodiseresi.Models.RegistarModel;
 
 import java.util.ArrayList;
@@ -35,8 +32,8 @@ public class ApiManager {
         registerCall.enqueue(callback);
     }
 
-    public void LoginUser(LoginModel model, Callback<PrijavljenKorisnikModel> callback) {
-        Call<PrijavljenKorisnikModel> loginCall = service.login(model);
+    public void LoginUser(LoginModel model, Callback<Korisnik> callback) {
+        Call<Korisnik> loginCall = service.login(model);
         loginCall.enqueue(callback);
     }
 
@@ -113,6 +110,11 @@ public class ApiManager {
     public void ProveriOmiljeniOglas(String UserId, int OglasId, Callback<Boolean> callback){
         Call<Boolean> proveriOmiljeniOglas = service.ProveriOmiljeniOglas(UserId, OglasId);
         proveriOmiljeniOglas.enqueue(callback);
+    }
+
+    public void DodajOcenu(String UserId, String RaterId, float ocena, Callback<String> callback){
+        Call<String> dodajOcenu = service.DodajOcenu(UserId, RaterId, ocena);
+        dodajOcenu.enqueue(callback);
     }
 
 }

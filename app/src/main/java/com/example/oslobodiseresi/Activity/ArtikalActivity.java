@@ -3,6 +3,7 @@ package com.example.oslobodiseresi.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,6 +13,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.Group;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
@@ -37,6 +40,7 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
     private NavigationView navigationView;
     private TextView txtKontakt;
     private Item artikal;
+    private ConstraintLayout constraintLayout;
     private ProgressBar progressBar;
 
     private ArtikalAdapter parent;
@@ -94,10 +98,12 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
         txtKontakt = findViewById(R.id.txtKontakt);
         imgFav = findViewById(R.id.imgFav);
         progressBar = findViewById(R.id.progressBar);
+        constraintLayout = findViewById(R.id.grupa);
     }
 
     private void setViews() {
-
+        progressBar.setVisibility(View.VISIBLE);
+        constraintLayout.setVisibility(View.INVISIBLE);
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -123,12 +129,12 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
                 }
             });
             if(Utils.getInstance().jeUlogovan()){
-                progressBar.setVisibility(View.VISIBLE);
                 MutableLiveData<Boolean> mld = UserRepository.getInstance(MainApplication.apiManager).ProveriOmiljeniOglas(Utils.getInstance().getKorisnik().getId(), artikal.getId());
                 mld.observe(ArtikalActivity.this, new Observer<Boolean>() {
                     @Override
                     public void onChanged(Boolean aBoolean) {
                         progressBar.setVisibility(View.INVISIBLE);
+                        constraintLayout.setVisibility(View.VISIBLE);
                         isFav = aBoolean.booleanValue();
                         if(isFav){
                             imgFav.setImageResource(R.drawable.ic_heart);
@@ -164,6 +170,8 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
                 });
             }
             else{
+                progressBar.setVisibility(View.INVISIBLE);
+                constraintLayout.setVisibility(View.VISIBLE);
                 imgFav.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

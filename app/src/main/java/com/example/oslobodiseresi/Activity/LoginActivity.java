@@ -5,26 +5,19 @@ import androidx.lifecycle.Observer;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.oslobodiseresi.Models.Item;
 import com.example.oslobodiseresi.Models.Korisnik;
 import com.example.oslobodiseresi.Models.LoginModel;
 import com.example.oslobodiseresi.MainApplication;
-import com.example.oslobodiseresi.Models.PrijavljenKorisnikModel;
 import com.example.oslobodiseresi.ToolbarNavigacijaSetup;
 import com.example.oslobodiseresi.R;
 import com.example.oslobodiseresi.Retrofit.UserRepository;
 import com.example.oslobodiseresi.Utils;
 import com.google.android.material.navigation.NavigationView;
-
-import java.util.ArrayList;
-import java.util.HashSet;
 
 public class LoginActivity extends ToolbarNavigacijaSetup {
 
@@ -53,12 +46,12 @@ public class LoginActivity extends ToolbarNavigacijaSetup {
         dugme.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MutableLiveData<PrijavljenKorisnikModel> k = UserRepository.getInstance(MainApplication.apiManager).Login(new LoginModel(Email.getText().toString(), Lozinka.getText().toString()));
-                k.observe(LoginActivity.this, new Observer<PrijavljenKorisnikModel>() {
+                MutableLiveData<Korisnik> k = UserRepository.getInstance(MainApplication.apiManager).Login(new LoginModel(Email.getText().toString(), Lozinka.getText().toString()));
+                k.observe(LoginActivity.this, new Observer<Korisnik>() {
                     @Override
-                    public void onChanged(PrijavljenKorisnikModel prijavljenKorisnikModel) {
+                    public void onChanged(Korisnik korisnik){
                         if(k.getValue()!=null){
-                            Utils.getInstance().SacuvajKorisnika(prijavljenKorisnikModel.getKorisnik());
+                            Utils.getInstance().SacuvajKorisnika(korisnik);
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
                         }

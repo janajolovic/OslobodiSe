@@ -88,28 +88,38 @@ public class MojiOglasiActivity extends ToolbarNavigacijaSetup {
         Toast.makeText(this, "MojiOglasi", Toast.LENGTH_SHORT).show();
     }
 
-//    @Override
-//    public void primeniFiltere() {
-//        super.primeniFiltere();
-//        MutableLiveData<ArrayList<Item>> mld;
-//        if (getKategorijaId() != 0 && getGradId() != 0) {
-//            mld = ItemRepository.getInstance(MainApplication.apiManager).getItemFromKategorijaGrad(
-//                    getKategorijaId(),
-//                    getGradId()
-//            );
-//        }else if(getKategorijaId() == 0 && getGradId() == 0){
-//            mld = ItemRepository.getInstance(MainApplication.apiManager).getAllItems();
-//        }else if(getKategorijaId() != 0){
-//            mld = ItemRepository.getInstance(MainApplication.apiManager).getItemsFromKategorija(getKategorijaId());
-//        }else{
-//            mld = ItemRepository.getInstance(MainApplication.apiManager).getItemsFromGrad(getGradId());
-//        }
-//        mld.observe(MojiOglasiActivity.this, new Observer<ArrayList<Item>>() {
-//            @Override
-//            public void onChanged(ArrayList<Item> items) {
-//                adapterArtikli.setArtikli(mld.getValue());
-//            }
-//        });
-//    }
+    @Override
+    public void primeniFiltere() {
+        super.primeniFiltere();
 
+        MutableLiveData<ArrayList<Item>> mld = ItemRepository.getInstance(MainApplication.apiManager).getItemsFromUser(Utils.getInstance().getKorisnik().getId());
+        mld.observe(MojiOglasiActivity.this, new Observer<ArrayList<Item>>() {
+            @Override
+            public void onChanged(ArrayList<Item> items) {
+                ArrayList<Item> artikli = new ArrayList<>();
+                if (getKategorijaId() != 0 && getGradId() != 0) {
+                    for(Item i:items){
+                        if(i.getKategorijaId()==getKategorijaId() && i.getGradId()==getGradId()){
+                            artikli.add(i);
+                        }
+                    }
+                }else if(getKategorijaId() == 0 && getGradId() == 0){
+                    artikli = items;
+                }else if(getKategorijaId() != 0){
+                    for(Item i:items){
+                        if(i.getKategorijaId()==getKategorijaId()){
+                            artikli.add(i);
+                        }
+                    }
+                }else{
+                    for(Item i:items){
+                        if(i.getGradId()==getGradId()){
+                            artikli.add(i);
+                        }
+                    }
+                }
+                adapterArtikli.setArtikli(artikli);
+            }
+        });
+    }
 }

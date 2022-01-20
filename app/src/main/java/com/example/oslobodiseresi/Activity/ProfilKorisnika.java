@@ -9,9 +9,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.oslobodiseresi.ArtikalAdapter;
 import com.example.oslobodiseresi.MainApplication;
@@ -39,8 +41,7 @@ public class ProfilKorisnika extends ToolbarNavigacijaSetup {
     private TextView brojKorisnika;
     private TextView prosecnaOcena;
     private ArtikalAdapter adapterArtikli;
-
-    float rate = 0;
+    private Korisnik korisnik;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +66,7 @@ public class ProfilKorisnika extends ToolbarNavigacijaSetup {
         brojKorisnika = findViewById(R.id.brojKorisnika);
         artikliKorisnik = findViewById(R.id.artikliKorisnik);
         adapterArtikli = new ArtikalAdapter(this);
+        prosecnaOcena = findViewById(R.id.prosecnaOcena);
         artikliKorisnik.setLayoutManager(new GridLayoutManager(this, 2));
 
 
@@ -75,10 +77,22 @@ public class ProfilKorisnika extends ToolbarNavigacijaSetup {
                 txtKorisnik.setText(korisnik.getIme());
                 brojKorisnika.setText(korisnik.getBrojTelefona());
                 if (korisnik.getBrojOcena() == 0) {
-                    prosecnaOcena.setText("Korisnik nije ocenjen");
+                    prosecnaOcena.setText("/");
                 } else {
-                    prosecnaOcena.setText(korisnik.getZbirOcena() / korisnik.getBrojOcena());
+                    prosecnaOcena.setText(String.valueOf(korisnik.getZbirOcena() / korisnik.getBrojOcena()));
                 }
+            }
+        });
+
+        rating.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                MutableLiveData<String> ocena = UserRepository.getInstance(MainApplication.apiManager).DodajOcenu(korisnikId, Utils.getInstance().getKorisnik().getId(), rating);
+                ocena.observe(ProfilKorisnika.this, new Observer<String>() {
+                    @Override
+                    public void onChanged(String s) {
+                    }
+                });
             }
         });
 
@@ -88,6 +102,41 @@ public class ProfilKorisnika extends ToolbarNavigacijaSetup {
             public void onChanged(ArrayList<Item> items) {
                 adapterArtikli.setArtikli(artikli.getValue());
                 artikliKorisnik.setAdapter(adapterArtikli);
+            }
+        });
+    }
+
+    @Override
+    public void primeniFiltere() {
+        super.primeniFiltere();
+
+        MutableLiveData<ArrayList<Item>> mld = ItemRepository.getInstance(MainApplication.apiManager).getItemsFromUser(korisnikId);
+        mld.observe(ProfilKorisnika.this, new Observer<ArrayList<Item>>() {
+            @Override
+            public void onChanged(ArrayList<Item> items) {
+                ArrayList<Item> artikli = new ArrayList<>();
+                if (getKategorijaId() != 0 && getGradId() != 0) {
+                    for(Item i:items){
+                        if(i.getKategorijaId()==getKategorijaId() && i.getGradId()==getGradId()){
+                            artikli.add(i);
+                        }
+                    }
+                }else if(getKategorijaId() == 0 && getGradId() == 0){
+                    artikli = items;
+                }else if(getKategorijaId() != 0){
+                    for(Item i:items){
+                        if(i.getKategorijaId()==getKategorijaId()){
+                            artikli.add(i);
+                        }
+                    }
+                }else{
+                    for(Item i:items){
+                        if(i.getGradId()==getGradId()){
+                            artikli.add(i);
+                        }
+                    }
+                }
+                adapterArtikli.setArtikli(artikli);
             }
         });
     }
