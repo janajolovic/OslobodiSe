@@ -10,6 +10,8 @@ import com.example.oslobodiseresi.Models.RegistarModel;
 
 import java.util.ArrayList;
 
+import okhttp3.MultipartBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 
@@ -112,9 +114,14 @@ public class ApiManager {
         proveriOmiljeniOglas.enqueue(callback);
     }
 
-    public void DodajOcenu(String UserId, String RaterId, float ocena, Callback<String> callback){
-        Call<String> dodajOcenu = service.DodajOcenu(UserId, RaterId, ocena);
+    public void DodajOcenu(String UserId, String RaterId, float ocena, Callback<Float> callback){
+        Call<Float> dodajOcenu = service.DodajOcenu(UserId, RaterId, ocena);
         dodajOcenu.enqueue(callback);
+    }
+
+    public void PostSlika(MultipartBody.Part body, Callback<ResponseBody> callback){
+        Call<ResponseBody> postSlika = service.PostSlika(body);
+        postSlika.enqueue(callback);
     }
 
 }

@@ -81,6 +81,7 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
         txtKategorija.setText(artikal.getKategorija().getNaziv());
         txtGrad.setText(artikal.getGrad().getNaziv());
         txtKorisnik.setText(artikal.getUser().getIme());
+        txtKontakt.setText(artikal.getUser().getBrojTelefona());
 //      txtKontakt.setText(Utils.getInstance().getKorisnik().getBrojTelefona());
 //        Glide.with(this)
 //                .asBitmap()
@@ -123,9 +124,15 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
             txtKorisnik.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(context, ProfilKorisnika.class);
-                    intent.putExtra("KORISNIK_ID", artikal.getUserId());
-                    startActivity(intent);
+                    if (Utils.getInstance().jeUlogovan() && artikal.getUserId().equals(Utils.getInstance().getKorisnik().getId())) {
+                        Intent intent = new Intent(context, MojProfilActivity.class);
+                        startActivity(intent);
+                    } else  {
+                        Intent intent = new Intent(context, ProfilKorisnika.class);
+                        intent.putExtra("KORISNIK_ID", artikal.getUserId());
+                        startActivity(intent);
+                    }
+
                 }
             });
             if(Utils.getInstance().jeUlogovan()){

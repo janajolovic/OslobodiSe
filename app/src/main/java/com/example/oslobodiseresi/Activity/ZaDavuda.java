@@ -5,10 +5,13 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -17,13 +20,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.example.oslobodiseresi.MainApplication;
 import com.example.oslobodiseresi.R;
 
+import com.example.oslobodiseresi.Retrofit.UserRepository;
 import com.example.oslobodiseresi.ToolbarNavigacijaSetup;
 import com.google.android.material.navigation.NavigationView;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 
 public class ZaDavuda extends ToolbarNavigacijaSetup {
     private NavigationView navigationView;
@@ -64,7 +77,46 @@ public class ZaDavuda extends ToolbarNavigacijaSetup {
         dugme.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                File f = new File(ZaDavuda.this.getCacheDir(), "Slika");
+                try {
+                    f.createNewFile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 0, bos);
+                byte[] bitmapdata = bos.toByteArray();
+
+                FileOutputStream fos = null;
+
+                try {
+                    fos = new FileOutputStream(f);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    fos.write(bitmapdata);
+                    fos.flush();
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), f);
+                MultipartBody.Part body = MultipartBody.Part.createFormData("upload", f.getName(), reqFile);
+
+                MutableLiveData<ResponseBody> mld = UserRepository.getInstance(MainApplication.apiManager).PostSlika(body);
+
+                mld.observe(ZaDavuda.this, new Observer<ResponseBody>() {
+                    @Override
+                    public void onChanged(ResponseBody responseBody) {
+                        if(mld.getValue() != null){
+                            Bitmap bmp = BitmapFactory.decodeStream(mld.getValue().byteStream());
+                            slika2.setImageBitmap(bmp);
+                        }
+                    }
+                });
             }
         });
     }

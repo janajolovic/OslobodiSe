@@ -69,6 +69,9 @@ public class ProfilKorisnika extends ToolbarNavigacijaSetup {
         prosecnaOcena = findViewById(R.id.prosecnaOcena);
         artikliKorisnik.setLayoutManager(new GridLayoutManager(this, 2));
 
+        if(!Utils.getInstance().jeUlogovan()){
+            rating.setEnabled(false);
+        }
 
         MutableLiveData<Korisnik> mld = UserRepository.getInstance(MainApplication.apiManager).GetKorisnikById(korisnikId);
         mld.observe(ProfilKorisnika.this, new Observer<Korisnik>() {
@@ -87,12 +90,17 @@ public class ProfilKorisnika extends ToolbarNavigacijaSetup {
         rating.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                MutableLiveData<String> ocena = UserRepository.getInstance(MainApplication.apiManager).DodajOcenu(korisnikId, Utils.getInstance().getKorisnik().getId(), rating);
-                ocena.observe(ProfilKorisnika.this, new Observer<String>() {
-                    @Override
-                    public void onChanged(String s) {
-                    }
-                });
+                if (Utils.getInstance().jeUlogovan()) {
+                    MutableLiveData<Float> ocena = UserRepository.getInstance(MainApplication.apiManager).DodajOcenu(korisnikId, Utils.getInstance().getKorisnik().getId(), rating);
+                    ocena.observe(ProfilKorisnika.this, new Observer<Float>() {
+                        @Override
+                        public void onChanged(Float s) {
+                            prosecnaOcena.setText(String.valueOf(ocena.getValue()));
+                        }
+                    });
+                }else{
+                    Toast.makeText(ProfilKorisnika.this, "Morate biti ulogovani da bi ocenjivali korisnike", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

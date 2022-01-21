@@ -9,8 +9,11 @@ import com.example.oslobodiseresi.Models.Korisnik;
 import com.example.oslobodiseresi.Models.LoginModel;
 import com.example.oslobodiseresi.Models.RegistarModel;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
+import okhttp3.MultipartBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -23,6 +26,8 @@ public class UserRepository {
     private final MutableLiveData<ArrayList<Item>> items = new MutableLiveData<>();
     private final MutableLiveData<String> str = new MutableLiveData<>();
     private final MutableLiveData<Boolean> bool = new MutableLiveData<>();
+    private final MutableLiveData<ResponseBody> responseBody = new MutableLiveData<>();
+    private final MutableLiveData<Float> flt = new MutableLiveData<>();
 
     private UserRepository(ApiManager apiManager){
         this.apiManager = apiManager;
@@ -192,23 +197,47 @@ public class UserRepository {
         return bool;
     }
 
-    public MutableLiveData<String> DodajOcenu(String UserId, String RaterId, float ocena){
-        apiManager.DodajOcenu(UserId, RaterId, ocena, new Callback<String>() {
+    public MutableLiveData<Float> DodajOcenu(String UserId, String RaterId, float ocena){
+        apiManager.DodajOcenu(UserId, RaterId, ocena, new Callback<Float>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(Call<Float> call, Response<Float> response) {
                 if(response.isSuccessful()){
-                    str.setValue(response.body());
+                    flt.setValue(response.body());
                 }else{
                     Log.println(Log.ASSERT, "[Dodaj Ocenu]", response.message());
                 }
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call<Float> call, Throwable t) {
                 Log.println(Log.ASSERT, "[Dodaj Ocenu F]", t.getMessage());
             }
         });
-        return str;
+        return flt;
+    }
+
+    public MutableLiveData<ResponseBody> PostSlika(MultipartBody.Part body){
+        apiManager.PostSlika(body, new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.isSuccessful()){
+                    responseBody.setValue(response.body());
+                    Log.println(Log.ASSERT, "[Slika isSuccessful]", String.valueOf(response.errorBody()));
+                }else{
+                    try {
+                        Log.println(Log.ASSERT, "[Slika isSuccessful]", response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.println(Log.ASSERT, "[Slika onFailure]", t.getMessage());
+            }
+        });
+        return responseBody;
     }
 
 }

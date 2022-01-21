@@ -10,12 +10,16 @@ import com.example.oslobodiseresi.Models.RegistarModel;
 
 import java.util.ArrayList;
 
+import okhttp3.MultipartBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.HTTP;
+import retrofit2.http.Multipart;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 public interface RestInterface {
@@ -68,7 +72,11 @@ public interface RestInterface {
     Call<Boolean> ProveriOmiljeniOglas(@Path("UserId") String UserId, @Path("OglasId") int OglasId);
 
     @PATCH("users/dodajocenu/{UserId}/{RaterId}/{ocena}")
-    Call<String> DodajOcenu(@Path("UserId") String UserId, @Path("RaterId") String RaterId, @Path("ocena") float ocena);
+    Call<Float> DodajOcenu(@Path("UserId") String UserId, @Path("RaterId") String RaterId, @Path("ocena") float ocena);
+
+    @Multipart
+    @POST("slike/post")
+    Call<ResponseBody> PostSlika(@Part MultipartBody.Part image);
 
     @HTTP(method = "DELETE", path = "items/delete", hasBody = true)
     Call<String> deleteItem(@Body int Id);
