@@ -18,6 +18,7 @@ import com.example.oslobodiseresi.ToolbarNavigacijaSetup;
 import com.example.oslobodiseresi.R;
 import com.example.oslobodiseresi.Models.RegistarModel;
 import com.example.oslobodiseresi.Retrofit.UserRepository;
+import com.example.oslobodiseresi.Utils;
 import com.google.android.material.navigation.NavigationView;
 
 public class RegistracijaActivity extends ToolbarNavigacijaSetup {
@@ -78,9 +79,9 @@ public class RegistracijaActivity extends ToolbarNavigacijaSetup {
                 k.observe(RegistracijaActivity.this, new Observer<Korisnik>() {
                     @Override
                     public void onChanged(Korisnik korisnik) {
-                        Intent intent = new Intent(RegistracijaActivity.this, LoginActivity.class);
+                        Utils.getInstance().SacuvajKorisnika(korisnik);
+                        Intent intent = new Intent(RegistracijaActivity.this, OdabirSlikeNakonRegistracije.class);
                         startActivity(intent);
-                        Log.println(Log.ERROR,"[GRESKA]","registracija gotova, korisnik je "+korisnik.toString());
                     }
                 });
 

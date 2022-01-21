@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.OdabirSlikeNakonRegistracije"
+    android:background="?colorPrimary">
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Odaberite profilnu sliku"
+        android:textColor="?colorOnPrimary"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.19999999" />
+
+    <Button
+        android:id="@+id/btnPotvrdite"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Potvrdite"
+        android:backgroundTint="?colorSecondary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgProfil" />
+
+    <ImageView
+        android:id="@+id/imgProfil"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="24dp"
+        android:background="?colorPrimaryVariant"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11"
+        app:srcCompat="@drawable/ic_baseline_account_box_24" />
+
+    <TextView
+        android:id="@+id/txtPreskocite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Preskočite ovaj korak"
+        android:textColor="?colorOnPrimary"
+
+        android:textSize="@dimen/velicina_slova"
+        app:layout_constraintEnd_toEndOf="@+id/btnPotvrdite"
+        app:layout_constraintTop_toBottomOf="@+id/btnPotvrdite" />
+
+    <ImageView
+        android:id="@+id/imgIzaberi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:tint="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/imgProfil"
+        app:layout_constraintEnd_toEndOf="@+id/imgProfil"
+        app:srcCompat="@drawable/ic_baseline_camera_alt_24" />
+</androidx.constraintlayout.widget.ConstraintLayout>

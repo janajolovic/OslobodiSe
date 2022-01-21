@@ -15,6 +15,9 @@
         android:theme="@style/Theme.OslobodiSeResi"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Activity.OdabirSlikeNakonRegistracije"
+            android:exported="false" />
+        <activity
             android:name=".Activity.ProfilKorisnika"
             android:exported="false" />
         <activity
