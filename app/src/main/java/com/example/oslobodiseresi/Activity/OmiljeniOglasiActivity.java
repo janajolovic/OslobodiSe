@@ -3,6 +3,7 @@ package com.example.oslobodiseresi.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -30,6 +31,7 @@ public class OmiljeniOglasiActivity extends ToolbarNavigacijaSetup {
     private RecyclerView recyclerArtikli;
     private ArtikalAdapter adapterArtikli;
     private ProgressBar progressBar;
+    private ImageView imgNoResults;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +44,7 @@ public class OmiljeniOglasiActivity extends ToolbarNavigacijaSetup {
         recyclerArtikli.setLayoutManager(new GridLayoutManager(this, 2));
 
         //recycler view
+        imgNoResults = findViewById(R.id.imgNoResults);
         adapterArtikli = new ArtikalAdapter(this);
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
@@ -67,6 +70,11 @@ public class OmiljeniOglasiActivity extends ToolbarNavigacijaSetup {
             @Override
             public boolean onQueryTextChange(String newText) {
                 adapterArtikli.getFilter().filter(newText);
+                if (newText.length() == 0) {
+                    imgNoResults.setVisibility(View.VISIBLE);
+                } else {
+                    imgNoResults.setVisibility(View.INVISIBLE);
+                }
                 return false;
             }
         });

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -35,6 +36,7 @@ public class MojiOglasiActivity extends ToolbarNavigacijaSetup {
     private FloatingActionButton dodajArtikal;
     private ArtikalAdapter adapterArtikli;
     private ProgressBar progressBar;
+    private ImageView imgNoResults;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +48,8 @@ public class MojiOglasiActivity extends ToolbarNavigacijaSetup {
         navigationView.setNavigationItemSelectedListener(this);
 
         setToolbar(true);
+
+        imgNoResults = findViewById(R.id.imgNoResults);
 
         recyclerArtikli = findViewById(R.id.mojiArtikli);
 
@@ -82,6 +86,11 @@ public class MojiOglasiActivity extends ToolbarNavigacijaSetup {
             @Override
             public boolean onQueryTextChange(String newText) {
                 adapterArtikli.getFilter().filter(newText);
+                if (newText.length() == 0) {
+                    imgNoResults.setVisibility(View.VISIBLE);
+                } else {
+                    imgNoResults.setVisibility(View.INVISIBLE);
+                }
                 return false;
             }
         });

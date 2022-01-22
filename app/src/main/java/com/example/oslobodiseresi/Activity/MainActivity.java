@@ -38,6 +38,7 @@ public class MainActivity extends ToolbarNavigacijaSetup {
     private NavigationView navigationView;
     private ProgressBar progress;
     private ImageView imgLogo;
+    private ImageView imgNoResults;
 
     private ArtikalAdapter adapterArtikli;
     @Override
@@ -54,6 +55,7 @@ public class MainActivity extends ToolbarNavigacijaSetup {
         setToolbar(true);
 
         imgLogo = findViewById(R.id.imgLogo);
+        imgNoResults = findViewById(R.id.imgNoResults);
 
         recyclerArtikli.setLayoutManager(new GridLayoutManager(this, 2));
 
@@ -82,7 +84,13 @@ public class MainActivity extends ToolbarNavigacijaSetup {
             @Override
             public boolean onQueryTextChange(String newText) {
                 adapterArtikli.getFilter().filter(newText);
-                return false;            }
+                if (newText.length() == 0) {
+                    imgNoResults.setVisibility(View.VISIBLE);
+                } else {
+                    imgNoResults.setVisibility(View.INVISIBLE);
+                }
+                return false;
+            }
         });
     }
 
