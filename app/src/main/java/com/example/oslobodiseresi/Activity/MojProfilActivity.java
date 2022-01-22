@@ -33,7 +33,12 @@ public class MojProfilActivity extends ToolbarNavigacijaSetup {
             ime.setText(Utils.getInstance().getKorisnik().getIme());
             email.setText(Utils.getInstance().getKorisnik().getEmail());
             kontakt.setText(Utils.getInstance().getKorisnik().getBrojTelefona());
-            ocena.setText(String.valueOf(Utils.getInstance().getKorisnik().getZbirOcena() / Utils.getInstance().getKorisnik().getBrojOcena()));
+            if (Utils.getInstance().getKorisnik().getBrojOcena() == 0) {
+                ocena.setText("/");
+            } else {
+                ocena.setText(String.valueOf(Utils.getInstance().getKorisnik().getZbirOcena() / Utils.getInstance().getKorisnik().getBrojOcena()));
+            }
+
         }
 
         setToolbar(false);

@@ -32,6 +32,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:src="@mipmap/logo2"/>
 
+    <ImageView
+        android:id="@+id/imgNoResults"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:visibility="invisible"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@mipmap/pikachumeme"/>
+
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="0dp"
