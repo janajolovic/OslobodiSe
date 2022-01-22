@@ -4,22 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.OdabirSlikeNakonRegistracije"
-    android:background="?colorPrimary">
+    tools:context=".Activity.OdabirSlikeNakonRegistracije">
 
     <TextView
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Odaberite profilnu sliku"
-        android:textColor="?colorOnPrimary"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.19999999" />
+        app:layout_constraintVertical_bias="0.13999999" />
 
     <Button
         android:id="@+id/btnPotvrdite"
@@ -27,7 +25,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Potvrdite"
-        android:backgroundTint="?colorSecondary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgProfil" />
@@ -37,11 +34,13 @@
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_marginTop="24dp"
-        android:background="?colorPrimaryVariant"
+        android:background="?colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView11"
-        app:srcCompat="@drawable/ic_baseline_account_box_24" />
+        app:srcCompat="@drawable/ic_baseline_account_box_24"
+        tools:srcCompat="@drawable/ic_baseline_account_box_24"
+        app:tint="?android:colorBackground" />
 
     <TextView
         android:id="@+id/txtPreskocite"
@@ -49,18 +48,17 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="Preskočite ovaj korak"
-        android:textColor="?colorOnPrimary"
-
+        android:textStyle="bold"
         android:textSize="@dimen/velicina_slova"
         app:layout_constraintEnd_toEndOf="@+id/btnPotvrdite"
         app:layout_constraintTop_toBottomOf="@+id/btnPotvrdite" />
 
     <ImageView
         android:id="@+id/imgIzaberi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:tint="@color/white"
+        android:layout_width="@dimen/velicina_ikonice"
+        android:layout_height="@dimen/velicina_ikonice"
         app:layout_constraintBottom_toBottomOf="@+id/imgProfil"
         app:layout_constraintEnd_toEndOf="@+id/imgProfil"
-        app:srcCompat="@drawable/ic_baseline_camera_alt_24" />
+        app:srcCompat="@drawable/ic_baseline_camera_alt_24"
+        app:tint="@color/white"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
