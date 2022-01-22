@@ -203,6 +203,7 @@ public class UserRepository {
             public void onResponse(Call<Float> call, Response<Float> response) {
                 if(response.isSuccessful()){
                     flt.setValue(response.body());
+                    Log.println(Log.ASSERT, "[Dodaj Ocenu]", response.message());
                 }else{
                     Log.println(Log.ASSERT, "[Dodaj Ocenu]", response.message());
                 }
@@ -222,13 +223,9 @@ public class UserRepository {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if(response.isSuccessful()){
                     responseBody.setValue(response.body());
-                    Log.println(Log.ASSERT, "[Slika isSuccessful]", String.valueOf(response.errorBody()));
+                    Log.println(Log.ASSERT, "[Slika isSuccessful]", response.message());
                 }else{
-                    try {
-                        Log.println(Log.ASSERT, "[Slika isSuccessful]", response.errorBody().string());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                   Log.println(Log.ASSERT, "[Slika onResponse]", response.message());
                 }
             }
 
@@ -239,5 +236,4 @@ public class UserRepository {
         });
         return responseBody;
     }
-
 }

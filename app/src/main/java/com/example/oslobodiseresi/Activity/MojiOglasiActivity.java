@@ -86,11 +86,11 @@ public class MojiOglasiActivity extends ToolbarNavigacijaSetup {
             @Override
             public boolean onQueryTextChange(String newText) {
                 adapterArtikli.getFilter().filter(newText);
-                if (newText.length() == 0) {
-                    imgNoResults.setVisibility(View.VISIBLE);
-                } else {
-                    imgNoResults.setVisibility(View.INVISIBLE);
-                }
+//                if (adapterArtikli.getItemCount() == 0) {
+//                    imgNoResults.setVisibility(View.VISIBLE);
+//                } else {
+//                    imgNoResults.setVisibility(View.INVISIBLE);
+//                }
                 return false;
             }
         });

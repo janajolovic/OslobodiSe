@@ -3,6 +3,9 @@
     package="com.example.oslobodiseresi">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
 
     <application
         android:name=".MainApplication"
@@ -13,7 +16,9 @@
         android:roundIcon="@mipmap/ic_logo_round_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OslobodiSeResi"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        android:requestLegacyExternalStorage="true">
+
         <activity
             android:name=".Activity.OdabirSlikeNakonRegistracije"
             android:exported="false" />
