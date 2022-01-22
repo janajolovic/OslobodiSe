@@ -75,17 +75,38 @@ public class ZaDavuda extends ToolbarNavigacijaSetup {
         dugme.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                File file = new File("/storage/emulated/0/DCIM/Camera/IMG_20220122_171340.jpg");
-                RequestBody requestFile =
-                        RequestBody.create(MediaType.parse("multipart/form-data"), file);
-                MultipartBody.Part body =
-                        MultipartBody.Part.createFormData("image", file.getName(), requestFile);
-                RequestBody fullName =
-                        RequestBody.create(MediaType.parse("multipart/form-data"), "Your Name");
+                File f = new File(ZaDavuda.this.getCacheDir(), "");
+                try {
+                    f.createNewFile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 0, bos);
+                byte[] bitmapdata = bos.toByteArray();
+
+                FileOutputStream fos = null;
+                try {
+                    fos = new FileOutputStream(f);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    fos.write(bitmapdata);
+                    fos.flush();
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), f);
+                MultipartBody.Part body = MultipartBody.Part.createFormData("upload", f.getName(), reqFile);
+
                 MutableLiveData<ResponseBody> mld = UserRepository.getInstance(MainApplication.apiManager).PostSlika(body);
                 mld.observe(ZaDavuda.this, new Observer<ResponseBody>() {
                     @Override
                     public void onChanged(ResponseBody responseBody) {
+
                     }
                 });
             }
