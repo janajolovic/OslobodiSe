@@ -47,25 +47,15 @@
         app:srcCompat="@drawable/ic_outline_thumb_up_24"
         app:tint="?colorOnBackground" />
 
-    <ImageView
-        android:id="@+id/thumbDown"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        app:layout_constraintStart_toEndOf="@+id/thumbUp"
-        app:layout_constraintTop_toTopOf="@+id/thumbUp"
-        app:srcCompat="@drawable/ic_outline_thumb_down_24"
-        app:tint="?colorOnBackground" />
-
     <TextView
         android:id="@+id/brojGlasova"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:text=" "
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/thumbDown"
-        app:layout_constraintStart_toEndOf="@+id/thumbDown"
-        app:layout_constraintTop_toTopOf="@+id/thumbDown" />
+        android:layout_marginLeft="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/thumbUp"
+        app:layout_constraintStart_toEndOf="@+id/thumbUp"
+        app:layout_constraintTop_toTopOf="@+id/thumbUp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
