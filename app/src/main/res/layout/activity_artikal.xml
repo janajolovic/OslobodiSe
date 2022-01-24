@@ -10,180 +10,218 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar"/>
 
-   <androidx.constraintlayout.widget.ConstraintLayout
+   <ScrollView
        android:layout_width="0dp"
        android:layout_height="0dp"
-       android:id="@+id/grupa"
        app:layout_constraintTop_toBottomOf="@+id/toolbar"
        app:layout_constraintBottom_toBottomOf="parent"
        app:layout_constraintStart_toStartOf="parent"
        app:layout_constraintEnd_toEndOf="parent">
-
-       <ImageView
-           android:id="@+id/imgOpsirno"
-           android:layout_width="0dp"
-           android:layout_height="200dp"
-           android:layout_marginTop="16dp"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintHorizontal_bias="0.0"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toTopOf="parent"
-           app:srcCompat="@drawable/ic_launcher_background" />
-
-       <ImageView
-           android:id="@+id/artikalBack"
-           android:layout_width="@dimen/velicina_ikonice"
-           android:layout_height="@dimen/velicina_ikonice"
-           android:layout_marginStart="16dp"
-           android:layout_marginTop="16dp"
-           android:src="@drawable/ic_arrow_back"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toTopOf="parent"
-           tools:ignore="MissingConstraints" />
-
-
-       <TextView
-           android:id="@+id/txtNaziv"
-           android:layout_width="wrap_content"
+       <androidx.constraintlayout.widget.ConstraintLayout
+           android:layout_width="match_parent"
            android:layout_height="wrap_content"
-           android:layout_marginStart="16dp"
-           android:layout_marginTop="16dp"
-           android:text="TextView"
-           android:textSize="28sp"
-           android:textStyle="bold"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@+id/imgOpsirno" />
+           android:id="@+id/grupa">
 
-       <TextView
-           android:id="@+id/textView2"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginStart="16dp"
-           android:layout_marginTop="16dp"
-           android:text="Opis:"
-           android:textSize="@dimen/velicina_slova"
-           android:textStyle="bold"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@+id/txtNaziv" />
+           <ImageView
+               android:id="@+id/imgOpsirno"
+               android:layout_width="0dp"
+               android:layout_height="200dp"
+               android:layout_marginTop="16dp"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintHorizontal_bias="0.0"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toTopOf="parent"
+               app:srcCompat="@drawable/ic_launcher_background" />
 
-       <TextView
-           android:id="@+id/opis"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginStart="16dp"
-           android:layout_marginTop="16dp"
-           android:text="TextView"
-           android:textSize="@dimen/velicina_slova"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@+id/textView2" />
+           <ImageView
+               android:id="@+id/artikalBack"
+               android:layout_width="@dimen/velicina_ikonice"
+               android:layout_height="@dimen/velicina_ikonice"
+               android:layout_marginStart="16dp"
+               android:layout_marginTop="16dp"
+               android:src="@drawable/ic_arrow_back"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toTopOf="parent"
+               tools:ignore="MissingConstraints" />
 
-       <ImageView
-           android:id="@+id/imgFav"
-           android:layout_width="@dimen/velicina_ikonice"
-           android:layout_height="@dimen/velicina_ikonice"
-           android:layout_marginTop="16dp"
-           android:layout_marginRight="16dp"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintTop_toBottomOf="@+id/imgOpsirno"
-           app:srcCompat="@drawable/ic_prazno_srce" />
 
-       <TextView
-           android:id="@+id/textViewKategorija"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginTop="16dp"
-           android:text="Kategorija: "
-           android:textSize="@dimen/velicina_slova"
-           android:textStyle="bold"
-           app:layout_constraintEnd_toEndOf="@+id/textView2"
-           app:layout_constraintHorizontal_bias="0.0"
-           app:layout_constraintStart_toStartOf="@+id/textView2"
-           app:layout_constraintTop_toBottomOf="@+id/opis" />
+           <TextView
+               android:id="@+id/txtNaziv"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginStart="16dp"
+               android:layout_marginTop="16dp"
+               android:text="TextView"
+               android:textSize="28sp"
+               android:textStyle="bold"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toBottomOf="@+id/imgOpsirno" />
 
-       <TextView
-           android:id="@+id/txtKategorija"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginLeft="10dp"
-           android:layout_marginTop="16dp"
-           android:text="TextView"
-           android:textSize="@dimen/velicina_slova"
-           app:layout_constraintStart_toEndOf="@+id/textViewKategorija"
-           app:layout_constraintTop_toBottomOf="@+id/opis" />
+           <TextView
+               android:id="@+id/textView2"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginStart="16dp"
+               android:layout_marginTop="16dp"
+               android:text="Opis:"
+               android:textSize="@dimen/velicina_slova"
+               android:textStyle="bold"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toBottomOf="@+id/txtNaziv" />
 
-       <TextView
-           android:id="@+id/textViewGrad"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginTop="16dp"
-           android:text="Grad: "
-           android:textSize="@dimen/velicina_slova"
-           android:textStyle="bold"
-           app:layout_constraintEnd_toEndOf="@+id/textView2"
-           app:layout_constraintHorizontal_bias="0.0"
-           app:layout_constraintStart_toStartOf="@+id/textView2"
-           app:layout_constraintTop_toBottomOf="@+id/txtKategorija" />
+           <TextView
+               android:id="@+id/opis"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginStart="16dp"
+               android:layout_marginTop="16dp"
+               android:text="TextView"
+               android:textSize="@dimen/velicina_slova"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-       <TextView
-           android:id="@+id/txtGrad"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginLeft="10dp"
-           android:layout_marginTop="16dp"
-           android:text="TextView"
-           android:textSize="@dimen/velicina_slova"
-           app:layout_constraintStart_toEndOf="@+id/textViewGrad"
-           app:layout_constraintTop_toBottomOf="@+id/txtKategorija" />
+           <ImageView
+               android:id="@+id/imgFav"
+               android:layout_width="@dimen/velicina_ikonice"
+               android:layout_height="@dimen/velicina_ikonice"
+               android:layout_marginTop="16dp"
+               android:layout_marginRight="16dp"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintTop_toBottomOf="@+id/imgOpsirno"
+               app:srcCompat="@drawable/ic_prazno_srce" />
 
-       <TextView
-           android:id="@+id/textViewKorisnik"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginTop="16dp"
-           android:text="Korisnik: "
-           android:textSize="@dimen/velicina_slova"
-           android:textStyle="bold"
-           app:layout_constraintEnd_toEndOf="@+id/textView2"
-           app:layout_constraintHorizontal_bias="0.0"
-           app:layout_constraintStart_toStartOf="@+id/textView2"
-           app:layout_constraintTop_toBottomOf="@+id/txtGrad" />
+           <TextView
+               android:id="@+id/textViewKategorija"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="16dp"
+               android:text="Kategorija: "
+               android:textSize="@dimen/velicina_slova"
+               android:textStyle="bold"
+               app:layout_constraintEnd_toEndOf="@+id/textView2"
+               app:layout_constraintHorizontal_bias="0.0"
+               app:layout_constraintStart_toStartOf="@+id/textView2"
+               app:layout_constraintTop_toBottomOf="@+id/opis" />
 
-       <TextView
-           android:id="@+id/txtKontakt"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginLeft="10dp"
-           android:layout_marginTop="16dp"
-           android:text="TextView"
-           android:textSize="@dimen/velicina_slova"
-           app:layout_constraintStart_toEndOf="@+id/textViewKorisnik"
-           app:layout_constraintTop_toBottomOf="@+id/txtKorisnik" />
+           <TextView
+               android:id="@+id/txtKategorija"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginLeft="10dp"
+               android:layout_marginTop="16dp"
+               android:text="TextView"
+               android:textSize="@dimen/velicina_slova"
+               app:layout_constraintStart_toEndOf="@+id/textViewKategorija"
+               app:layout_constraintTop_toBottomOf="@+id/opis" />
 
-       <TextView
-           android:id="@+id/textViewKontakt"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginTop="16dp"
-           android:text="Kontakt: "
-           android:textSize="@dimen/velicina_slova"
-           android:textStyle="bold"
-           app:layout_constraintEnd_toEndOf="@+id/textView2"
-           app:layout_constraintHorizontal_bias="0.0"
-           app:layout_constraintStart_toStartOf="@+id/textView2"
-           app:layout_constraintTop_toBottomOf="@+id/textViewKorisnik" />
+           <TextView
+               android:id="@+id/textViewGrad"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="16dp"
+               android:text="Grad: "
+               android:textSize="@dimen/velicina_slova"
+               android:textStyle="bold"
+               app:layout_constraintEnd_toEndOf="@+id/textView2"
+               app:layout_constraintHorizontal_bias="0.0"
+               app:layout_constraintStart_toStartOf="@+id/textView2"
+               app:layout_constraintTop_toBottomOf="@+id/txtKategorija" />
 
-       <TextView
-           android:id="@+id/txtKorisnik"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginLeft="10dp"
-           android:layout_marginTop="16dp"
-           android:text="TextView"
-           android:textSize="@dimen/velicina_slova"
-           app:layout_constraintStart_toEndOf="@+id/textViewKontakt"
-           app:layout_constraintTop_toBottomOf="@+id/txtGrad" />
+           <TextView
+               android:id="@+id/txtGrad"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginLeft="10dp"
+               android:layout_marginTop="16dp"
+               android:text="TextView"
+               android:textSize="@dimen/velicina_slova"
+               app:layout_constraintStart_toEndOf="@+id/textViewGrad"
+               app:layout_constraintTop_toBottomOf="@+id/txtKategorija" />
 
-   </androidx.constraintlayout.widget.ConstraintLayout>
+           <TextView
+               android:id="@+id/textViewKorisnik"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="16dp"
+               android:text="Korisnik: "
+               android:textSize="@dimen/velicina_slova"
+               android:textStyle="bold"
+               app:layout_constraintEnd_toEndOf="@+id/textView2"
+               app:layout_constraintHorizontal_bias="0.0"
+               app:layout_constraintStart_toStartOf="@+id/textView2"
+               app:layout_constraintTop_toBottomOf="@+id/txtGrad" />
+
+           <TextView
+               android:id="@+id/txtKontakt"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginLeft="10dp"
+               android:layout_marginTop="16dp"
+               android:text="TextView"
+               android:textSize="@dimen/velicina_slova"
+               app:layout_constraintStart_toEndOf="@+id/textViewKorisnik"
+               app:layout_constraintTop_toBottomOf="@+id/txtKorisnik" />
+
+           <TextView
+               android:id="@+id/textViewKontakt"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="16dp"
+               android:text="Kontakt: "
+               android:textSize="@dimen/velicina_slova"
+               android:textStyle="bold"
+               app:layout_constraintEnd_toEndOf="@+id/textView2"
+               app:layout_constraintHorizontal_bias="0.0"
+               app:layout_constraintStart_toStartOf="@+id/textView2"
+               app:layout_constraintTop_toBottomOf="@+id/textViewKorisnik" />
+
+           <TextView
+               android:id="@+id/txtKorisnik"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginLeft="10dp"
+               android:layout_marginTop="16dp"
+               android:text="TextView"
+               android:textSize="@dimen/velicina_slova"
+               app:layout_constraintStart_toEndOf="@+id/textViewKontakt"
+               app:layout_constraintTop_toBottomOf="@+id/txtGrad" />
+
+           <EditText
+               android:id="@+id/txtDodajKomentar"
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:ems="10"
+               android:gravity="start|top"
+               android:layout_marginTop="16dp"
+               android:hint="Napisite komentar"
+               android:layout_marginLeft="16dp"
+               android:inputType="textMultiLine"
+               app:layout_constraintTop_toBottomOf="@+id/txtKontakt"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintEnd_toStartOf="@+id/btnDodajKomentar"/>
+
+           <ImageView
+               android:id="@+id/btnDodajKomentar"
+               android:layout_width="@dimen/velicina_ikonice"
+               android:layout_height="@dimen/velicina_ikonice"
+               android:layout_marginRight="16dp"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintTop_toTopOf="@+id/txtDodajKomentar"
+               app:srcCompat="@drawable/ic_baseline_send_24"
+               app:tint="?colorPrimary" />
+
+           <androidx.recyclerview.widget.RecyclerView
+               android:id="@+id/komentari"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="16dp"
+               app:layout_constraintTop_toBottomOf="@+id/txtDodajKomentar"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintEnd_toEndOf="parent"/>
+
+
+       </androidx.constraintlayout.widget.ConstraintLayout>
+   </ScrollView>
 
     <ProgressBar
         android:visibility="invisible"

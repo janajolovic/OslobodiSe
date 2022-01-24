@@ -30,6 +30,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:src="@mipmap/pikachumeme"/>
 
+    <TextView
+        android:id="@+id/txtNoResults"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nema rezultata :("
+        android:textSize="@dimen/velicina_slova"
+        app:layout_constraintTop_toBottomOf="@+id/imgNoResults"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="invisible" />
+
     <ScrollView
         android:id="@+id/scrollView3"
         android:layout_width="0dp"

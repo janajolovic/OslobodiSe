@@ -10,12 +10,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.oslobodiseresi.Models.Item;
+import com.example.oslobodiseresi.Models.Komentar;
 
 import java.util.ArrayList;
 
 public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHolder> {
 
-    ArrayList<Item> komentari = new ArrayList<>();
+    ArrayList<Komentar> komentari = new ArrayList<>();
 
     @NonNull
     @Override
@@ -65,7 +66,7 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
         return komentari.size();
     }
 
-    public void setKomentari(ArrayList<Item> komentari) {
+    public void setKomentari(ArrayList<Komentar> komentari) {
         this.komentari = komentari;
         notifyDataSetChanged();
     }
