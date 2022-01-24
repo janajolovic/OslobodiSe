@@ -5,14 +5,18 @@ public class Komentar {
     private Korisnik korisnik;
     private String sadrzaj;
     private Integer brojLajkova;
-    private Integer brojDislajkova;
+    private boolean lajkovan;
 
-    public Komentar(int id, Korisnik korisnik, String sadrzaj, Integer brojLajkova, Integer brojDislajkova) {
+    public Komentar(int id, Korisnik korisnik, String sadrzaj, Integer brojLajkova, boolean lajkovan) {
         this.id = id;
         this.korisnik = korisnik;
         this.sadrzaj = sadrzaj;
         this.brojLajkova = brojLajkova;
-        this.brojDislajkova = brojDislajkova;
+        this.lajkovan = lajkovan;
+    }
+
+    public boolean isLajkovan() {
+        return lajkovan;
     }
 
     public int getId() {
@@ -31,7 +35,11 @@ public class Komentar {
         return brojLajkova;
     }
 
-    public Integer getBrojDislajkova() {
-        return brojDislajkova;
+    public void setBrojLajkova(Integer brojLajkova) {
+        this.brojLajkova = brojLajkova;
+    }
+
+    public void setLajkovan(boolean lajkovan) {
+        this.lajkovan = lajkovan;
     }
 }
