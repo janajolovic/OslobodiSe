@@ -7,6 +7,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
@@ -37,6 +38,7 @@ public class MojiOglasiActivity extends ToolbarNavigacijaSetup {
     private ArtikalAdapter adapterArtikli;
     private ProgressBar progressBar;
     private ImageView imgNoResults;
+    private TextView txtNoResults;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +52,7 @@ public class MojiOglasiActivity extends ToolbarNavigacijaSetup {
         setToolbar(true);
 
         imgNoResults = findViewById(R.id.imgNoResults);
+        txtNoResults = findViewById(R.id.txtNoResults);
 
         recyclerArtikli = findViewById(R.id.mojiArtikli);
 
@@ -81,16 +84,18 @@ public class MojiOglasiActivity extends ToolbarNavigacijaSetup {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                adapterArtikli.getFilter().filter(query);
+                if (adapterArtikli.getItemCount() == 0) {
+                    imgNoResults.setVisibility(View.VISIBLE);
+                    txtNoResults.setVisibility(View.VISIBLE);
+                } else {
+                    imgNoResults.setVisibility(View.INVISIBLE);
+                    txtNoResults.setVisibility(View.INVISIBLE);
+                }
                 return false;
             }
             @Override
             public boolean onQueryTextChange(String newText) {
-                adapterArtikli.getFilter().filter(newText);
-//                if (adapterArtikli.getItemCount() == 0) {
-//                    imgNoResults.setVisibility(View.VISIBLE);
-//                } else {
-//                    imgNoResults.setVisibility(View.INVISIBLE);
-//                }
                 return false;
             }
         });
@@ -128,6 +133,13 @@ public class MojiOglasiActivity extends ToolbarNavigacijaSetup {
                     }
                 }
                 adapterArtikli.setArtikli(artikli);
+                if (adapterArtikli.getItemCount() == 0) {
+                    imgNoResults.setVisibility(View.VISIBLE);
+                    txtNoResults.setVisibility(View.VISIBLE);
+                } else {
+                    imgNoResults.setVisibility(View.INVISIBLE);
+                    txtNoResults.setVisibility(View.INVISIBLE);
+                }
             }
         });
     }

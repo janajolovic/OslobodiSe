@@ -17,8 +17,10 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.Group;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.oslobodiseresi.ArtikalAdapter;
+import com.example.oslobodiseresi.KomentarAdapter;
 import com.example.oslobodiseresi.MainApplication;
 import com.example.oslobodiseresi.Models.Item;
 import com.example.oslobodiseresi.Retrofit.ItemRepository;
@@ -42,6 +44,10 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
     private Item artikal;
     private ConstraintLayout constraintLayout;
     private ProgressBar progressBar;
+    private TextView txtDodajKomentar;
+    private ImageView btnDodajKomentar;
+    private KomentarAdapter komentarAdapter;
+    private RecyclerView komentariRecycler;
 
     private ArtikalAdapter parent;
     private Integer adapterId;
@@ -100,6 +106,9 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
         imgFav = findViewById(R.id.imgFav);
         progressBar = findViewById(R.id.progressBar);
         constraintLayout = findViewById(R.id.grupa);
+        txtDodajKomentar = findViewById(R.id.txtDodajKomentar);
+        btnDodajKomentar = findViewById(R.id.btnDodajKomentar);
+        komentariRecycler = findViewById(R.id.komentari);
     }
 
     private void setViews() {
@@ -109,6 +118,12 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
         navigationView.setNavigationItemSelectedListener(this);
 
         setToolbar(false);
+
+        btnDodajKomentar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
 
         artikalBack = findViewById(R.id.artikalBack);
         artikalBack.setOnClickListener(new View.OnClickListener() {

@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.oslobodiseresi.ArtikalAdapter;
@@ -39,6 +40,7 @@ public class MainActivity extends ToolbarNavigacijaSetup {
     private ProgressBar progress;
     private ImageView imgLogo;
     private ImageView imgNoResults;
+    private TextView txtNoResults;
 
     private ArtikalAdapter adapterArtikli;
     @Override
@@ -56,6 +58,7 @@ public class MainActivity extends ToolbarNavigacijaSetup {
 
         imgLogo = findViewById(R.id.imgLogo);
         imgNoResults = findViewById(R.id.imgNoResults);
+        txtNoResults = findViewById(R.id.txtNoResults);
 
         recyclerArtikli.setLayoutManager(new GridLayoutManager(this, 2));
 
@@ -82,8 +85,10 @@ public class MainActivity extends ToolbarNavigacijaSetup {
                 adapterArtikli.getFilter().filter(query);
                 if (adapterArtikli.getItemCount() == 0) {
                     imgNoResults.setVisibility(View.VISIBLE);
+                    txtNoResults.setVisibility(View.VISIBLE);
                 } else {
                     imgNoResults.setVisibility(View.INVISIBLE);
+                    txtNoResults.setVisibility(View.INVISIBLE);
                 }
                 return false;
             }
@@ -116,8 +121,10 @@ public class MainActivity extends ToolbarNavigacijaSetup {
                 adapterArtikli.setArtikli(mld.getValue());
                 if (adapterArtikli.getItemCount() == 0) {
                     imgNoResults.setVisibility(View.VISIBLE);
+                    txtNoResults.setVisibility(View.VISIBLE);
                 } else {
                     imgNoResults.setVisibility(View.INVISIBLE);
+                    txtNoResults.setVisibility(View.INVISIBLE);
                 }
             }
         });
