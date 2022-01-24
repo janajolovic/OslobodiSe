@@ -75,20 +75,20 @@ public class MainActivity extends ToolbarNavigacijaSetup {
         });
 
         SearchView searchView = findViewById(R.id.search_bar);
-        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+       // searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                adapterArtikli.getFilter().filter(query);
+                if (adapterArtikli.getItemCount() == 0) {
+                    imgNoResults.setVisibility(View.VISIBLE);
+                } else {
+                    imgNoResults.setVisibility(View.INVISIBLE);
+                }
                 return false;
             }
             @Override
             public boolean onQueryTextChange(String newText) {
-                adapterArtikli.getFilter().filter(newText);
-//                if (adapterArtikli.getItemCount() == 0) {
-//                    imgNoResults.setVisibility(View.VISIBLE);
-//                } else {
-//                    imgNoResults.setVisibility(View.INVISIBLE);
-//                }
                 return false;
             }
         });
@@ -114,6 +114,11 @@ public class MainActivity extends ToolbarNavigacijaSetup {
             @Override
             public void onChanged(ArrayList<Item> items) {
                 adapterArtikli.setArtikli(mld.getValue());
+                if (adapterArtikli.getItemCount() == 0) {
+                    imgNoResults.setVisibility(View.VISIBLE);
+                } else {
+                    imgNoResults.setVisibility(View.INVISIBLE);
+                }
             }
         });
     }
