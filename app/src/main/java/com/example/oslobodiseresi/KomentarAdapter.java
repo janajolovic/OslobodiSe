@@ -80,34 +80,39 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
 
         holder.txtSadrzaj.setText(komentari.get(position).getSadrzaj());
 
-        holder.izbrisi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setMessage("Da li ste sigurni da zelite da obrisete ovaj komentar?");
-                builder.setPositiveButton("Da", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        MutableLiveData<String> mld = ItemRepository.getInstance(MainApplication.apiManager).IzbrisiKomentar(komentari.get(position).getId());
-                        mld.observe((AppCompatActivity)context, new Observer<String>() {
-                            @Override
-                            public void onChanged(String s) {
-                                komentari.remove(position);
-                                notifyItemRemoved(position);
-                            }
-                        });
-                    }
-                });
-                builder.setNegativeButton("Ne", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                });
-                builder.show();
-            }
-        });
+        holder.izbrisi.setVisibility(View.GONE);
+
+        if(Utils.getInstance().jeUlogovan() && Utils.getInstance().getKorisnik().getId() == komentari.get(position).getKorisnik().getId()) {
+            holder.izbrisi.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setMessage("Da li ste sigurni da zelite da obrisete ovaj komentar?");
+                    builder.setPositiveButton("Da", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            MutableLiveData<String> mld = ItemRepository.getInstance(MainApplication.apiManager).IzbrisiKomentar(komentari.get(position).getId());
+                            mld.observe((AppCompatActivity)context, new Observer<String>() {
+                                @Override
+                                public void onChanged(String s) {
+                                    komentari.remove(position);
+                                    notifyItemRemoved(position);
+                                }
+                            });
+                        }
+                    });
+                    builder.setNegativeButton("Ne", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+                    builder.show();
+                }
+            });
+        }
 
         holder.txtIme.setText(komentari.get(position).getKorisnik().getIme());
+
     }
 
     @Override
