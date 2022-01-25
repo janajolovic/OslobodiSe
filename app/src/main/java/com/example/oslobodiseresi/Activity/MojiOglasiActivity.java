@@ -143,4 +143,20 @@ public class MojiOglasiActivity extends ToolbarNavigacijaSetup {
             }
         });
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MutableLiveData<ArrayList<Item>> mld = ItemRepository.getInstance(MainApplication.apiManager).getItemsFromUser(Utils.getInstance().getKorisnik().getId());
+        progressBar.setVisibility(View.VISIBLE);
+        mld.observe(this, new Observer<ArrayList<Item>>() {
+            @Override
+            public void onChanged(ArrayList<Item> items) {
+                progressBar.setVisibility(View.INVISIBLE);
+                ArrayList<Item> artikli = mld.getValue();
+                adapterArtikli.setArtikli(artikli);
+                recyclerArtikli.setAdapter(adapterArtikli);
+            }
+        });
+    }
 }

@@ -41,7 +41,6 @@ public class ProfilKorisnika extends ToolbarNavigacijaSetup {
     private TextView brojKorisnika;
     private TextView prosecnaOcena;
     private ArtikalAdapter adapterArtikli;
-    private Korisnik korisnik;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -145,6 +144,21 @@ public class ProfilKorisnika extends ToolbarNavigacijaSetup {
                     }
                 }
                 adapterArtikli.setArtikli(artikli);
+            }
+        });
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MutableLiveData<ArrayList<Item>> mld = ItemRepository.getInstance(MainApplication.apiManager).getItemsFromUser(korisnikId);
+        mld.observe(this, new Observer<ArrayList<Item>>() {
+            @Override
+            public void onChanged(ArrayList<Item> items) {
+                ArrayList<Item> artikli = mld.getValue();
+                adapterArtikli.setArtikli(artikli);
+                artikliKorisnik.setAdapter(adapterArtikli);
             }
         });
     }
