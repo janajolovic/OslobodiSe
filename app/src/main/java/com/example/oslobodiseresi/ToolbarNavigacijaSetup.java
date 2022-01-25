@@ -102,8 +102,8 @@ public class ToolbarNavigacijaSetup extends AppCompatActivity implements Navigat
         return false;
     }
 
-    private int gradId;
-    private int kategorijaId;
+    private int gradId = 0;
+    private int kategorijaId = 0;
 
     public int getGradId() {
         return gradId;
@@ -230,7 +230,7 @@ public class ToolbarNavigacijaSetup extends AppCompatActivity implements Navigat
                             ArrayAdapter<String> kategorijeAdapter = new ArrayAdapter<>(ToolbarNavigacijaSetup.this, R.layout.spinner_na_plavo, kategorije);
                             kategorijeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             spinnerKategorije.setAdapter(kategorijeAdapter);
-                            spinnerKategorije.setSelection(getKategorijaId());
+                            spinnerKategorije.setSelection(kategorijaId);
                         }
                     });
 
@@ -247,12 +247,12 @@ public class ToolbarNavigacijaSetup extends AppCompatActivity implements Navigat
                             ArrayAdapter<String> gradoviAdapter = new ArrayAdapter<>(ToolbarNavigacijaSetup.this, R.layout.spinner_na_plavo, gradovi);
                             gradoviAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             spinnerGradovi.setAdapter(gradoviAdapter);
-                            spinnerGradovi.setSelection(getGradId());
+                            spinnerGradovi.setSelection(gradId);
+                            Log.println(Log.ASSERT, "[grad id]", "pozvan sam, id je " + gradId);
                         }
                     });
 
                     //todo prepraviti ovo
-
                     primeniFiltereDugme.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
