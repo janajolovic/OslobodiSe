@@ -90,6 +90,7 @@ public class NoviActivity extends ToolbarNavigacijaSetup {
             public void onClick(View v) {
                 try{
                     File file = new File(imagePath);
+                    Toast.makeText(getApplicationContext(),imagePath,Toast.LENGTH_LONG).show();
                     RequestBody photoContent = RequestBody.create(MediaType.parse("multipart/from-data"), file);
                     MultipartBody.Part photo = MultipartBody.Part.createFormData("photo", file.getName(), photoContent);
                     RequestBody description = RequestBody.create(MediaType.parse("text/plain"), editTextDescription.getText().toString());
@@ -98,7 +99,9 @@ public class NoviActivity extends ToolbarNavigacijaSetup {
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                             if(response.isSuccessful()){
-                                Toast.makeText(getApplicationContext(),"Uspeh",Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(),response.message(),Toast.LENGTH_LONG).show();
+                            }else{
+                                Toast.makeText(getApplicationContext(),response.message(),Toast.LENGTH_LONG).show();
                             }
                         }
 

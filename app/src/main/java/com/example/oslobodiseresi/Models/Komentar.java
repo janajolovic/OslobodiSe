@@ -1,7 +1,10 @@
 package com.example.oslobodiseresi.Models;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Komentar {
     private int id;
+    @SerializedName("user")
     private Korisnik korisnik;
     private String sadrzaj;
     private Integer brojLajkova;

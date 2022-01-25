@@ -8,6 +8,7 @@ import com.example.oslobodiseresi.Models.Korisnik;
 import com.example.oslobodiseresi.Models.LoginModel;
 import com.example.oslobodiseresi.Models.RegistarModel;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import okhttp3.MultipartBody;
@@ -122,6 +123,11 @@ public class ApiManager {
     public void PostSlika(MultipartBody.Part body, Callback<ResponseBody> callback){
         Call<ResponseBody> postSlika = service.PostSlika(body);
         postSlika.enqueue(callback);
+    }
+
+    public void DodajKomentar(int OglasId, String UserId, String tekst, Callback<String> callback){
+        Call<String> dodajKomentar = service.DodajKomentar(OglasId, UserId, tekst);
+        dodajKomentar.enqueue(callback);
     }
 
 }

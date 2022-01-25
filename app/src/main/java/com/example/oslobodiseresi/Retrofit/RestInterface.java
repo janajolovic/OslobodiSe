@@ -8,6 +8,7 @@ import com.example.oslobodiseresi.Models.Korisnik;
 import com.example.oslobodiseresi.Models.LoginModel;
 import com.example.oslobodiseresi.Models.RegistarModel;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import okhttp3.MultipartBody;
@@ -75,9 +76,12 @@ public interface RestInterface {
     @PATCH("users/dodajocenu/{UserId}/{RaterId}/{ocena}")
     Call<Float> DodajOcenu(@Path("UserId") String UserId, @Path("RaterId") String RaterId, @Path("ocena") float ocena);
 
+    @PATCH("items/komentar/dodaj/{OglasId}/{UserId}")
+    Call<String> DodajKomentar(@Path("OglasId") int OglasId, @Path("UserId") String UserId, @Body String text);
+
     @Multipart
     @POST("slike/post")
-    Call<ResponseBody> PostSlika(@Part  MultipartBody.Part image);
+    Call<ResponseBody> PostSlika(@Part MultipartBody.Part image);
 
     @HTTP(method = "DELETE", path = "items/delete", hasBody = true)
     Call<String> deleteItem(@Body int Id);

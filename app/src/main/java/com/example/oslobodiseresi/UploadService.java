@@ -10,8 +10,6 @@ import retrofit2.http.Part;
 
 public interface UploadService {
     @Multipart
-    @POST("file/upload")
+    @POST("slike/post")
     Call<ResponseBody> Upload(@Part MultipartBody.Part photo, @Part("description")RequestBody description);
-
-
 }

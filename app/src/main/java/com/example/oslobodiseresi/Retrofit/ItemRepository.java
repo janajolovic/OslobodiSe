@@ -214,4 +214,23 @@ public class ItemRepository {
         });
         return items;
     }
+
+    public MutableLiveData<String> DodajKomentar(int OglasId, String UserId, String tektst){
+        apiManager.DodajKomentar(OglasId, UserId, tektst, new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if(response.isSuccessful()){
+                    str.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+        return str;
+    }
+
+
 }
