@@ -33,6 +33,7 @@ import com.example.oslobodiseresi.Utils;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ArtikalActivity extends ToolbarNavigacijaSetup {
 
@@ -206,7 +207,7 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
             komentarAdapter = new KomentarAdapter(this);
 
             ArrayList<Komentar> komentari = artikal.getKomentari();
-
+            Collections.reverse(komentari);
             komentarAdapter.setKomentari(komentari);
             komentariRecycler.setAdapter(komentarAdapter);
 
@@ -218,10 +219,9 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
                         mld.observe(ArtikalActivity.this, new Observer<String>() {
                             @Override
                             public void onChanged(String s) {
-                                int index = komentarAdapter.getKomentari().size();
-                                //komentarAdapter.getKomentari().add(komentar);
-                                //komentarAdapter.notifyItemInserted(index);
-                                //todo da se zavrsi
+                                //todo da se otkomentarise
+//                                komentarAdapter.getKomentari().add(0, komentar);
+//                                komentarAdapter.notifyItemInserted(0);
                             }
                         });
                     } else {
