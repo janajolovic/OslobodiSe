@@ -123,12 +123,6 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
 
         setToolbar(false);
 
-        btnDodajKomentar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
-
         artikalBack = findViewById(R.id.artikalBack);
         artikalBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -219,16 +213,20 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
             btnDodajKomentar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MutableLiveData<String> mld = ItemRepository.getInstance(MainApplication.apiManager).DodajKomentar(artikal.getId(), artikal.getUserId(), txtDodajKomentar.getText().toString());
-                    mld.observe(ArtikalActivity.this, new Observer<String>() {
-                        @Override
-                        public void onChanged(String s) {
-                            int index = komentarAdapter.getKomentari().size();
-                            //komentarAdapter.getKomentari().add(komentar);
-                            //komentarAdapter.notifyItemInserted(index);
-                            //todo da se zavrsi
-                        }
-                    });
+                    if(Utils.getInstance().jeUlogovan()) {
+                        MutableLiveData<String> mld = ItemRepository.getInstance(MainApplication.apiManager).DodajKomentar(artikal.getId(), artikal.getUserId(), txtDodajKomentar.getText().toString());
+                        mld.observe(ArtikalActivity.this, new Observer<String>() {
+                            @Override
+                            public void onChanged(String s) {
+                                int index = komentarAdapter.getKomentari().size();
+                                //komentarAdapter.getKomentari().add(komentar);
+                                //komentarAdapter.notifyItemInserted(index);
+                                //todo da se zavrsi
+                            }
+                        });
+                    } else {
+                        Toast.makeText(context, "Morate biti prijavljeni da biste objavili komentar", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
         }

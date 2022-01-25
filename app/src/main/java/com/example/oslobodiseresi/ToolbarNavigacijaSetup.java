@@ -53,7 +53,6 @@ public class ToolbarNavigacijaSetup extends AppCompatActivity implements Navigat
                 intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
                 break;
-            //TODO: dovrsiti
             case R.id.mojProfil:
                 if(Utils.getInstance().jeUlogovan()){
                     intent = new Intent(this, MojProfilActivity.class);
