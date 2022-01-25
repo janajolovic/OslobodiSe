@@ -230,6 +230,7 @@ public class ToolbarNavigacijaSetup extends AppCompatActivity implements Navigat
                             ArrayAdapter<String> kategorijeAdapter = new ArrayAdapter<>(ToolbarNavigacijaSetup.this, R.layout.spinner_na_plavo, kategorije);
                             kategorijeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             spinnerKategorije.setAdapter(kategorijeAdapter);
+                            spinnerKategorije.setSelection(getKategorijaId());
                         }
                     });
 
@@ -246,13 +247,11 @@ public class ToolbarNavigacijaSetup extends AppCompatActivity implements Navigat
                             ArrayAdapter<String> gradoviAdapter = new ArrayAdapter<>(ToolbarNavigacijaSetup.this, R.layout.spinner_na_plavo, gradovi);
                             gradoviAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             spinnerGradovi.setAdapter(gradoviAdapter);
-                            //spinnerGradovi.setOnItemSelectedListener(MainActivity.this);
+                            spinnerGradovi.setSelection(getGradId());
                         }
                     });
 
                     //todo prepraviti ovo
-                    spinnerKategorije.setSelection(getKategorijaId());
-                    spinnerGradovi.setSelection(getGradId());
 
                     primeniFiltereDugme.setOnClickListener(new View.OnClickListener() {
                         @Override
