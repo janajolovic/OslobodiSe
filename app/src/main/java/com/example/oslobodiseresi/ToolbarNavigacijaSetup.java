@@ -33,6 +33,7 @@ import com.example.oslobodiseresi.Activity.LoginActivity;
 import com.example.oslobodiseresi.Activity.MainActivity;
 import com.example.oslobodiseresi.Activity.MojProfilActivity;
 import com.example.oslobodiseresi.Activity.MojiOglasiActivity;
+import com.example.oslobodiseresi.Activity.NoviActivity;
 import com.example.oslobodiseresi.Activity.OmiljeniOglasiActivity;
 import com.example.oslobodiseresi.Activity.RegistracijaActivity;
 import com.example.oslobodiseresi.Activity.ZaDavuda;
@@ -89,6 +90,10 @@ public class ToolbarNavigacijaSetup extends AppCompatActivity implements Navigat
                 break;
             case R.id.informacije:
                 intent = new Intent(this, InformacijeActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.novi:
+                intent = new Intent(this, NoviActivity.class);
                 startActivity(intent);
                 break;
         }

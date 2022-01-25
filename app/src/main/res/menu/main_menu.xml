@@ -17,6 +17,9 @@
         <item
             android:id="@+id/davud"
             android:title="DAVUD"/>
+        <item
+            android:id="@+id/novi"
+            android:title="NOVI"/>
     </group>
     <group android:checkableBehavior="single">
         <item
