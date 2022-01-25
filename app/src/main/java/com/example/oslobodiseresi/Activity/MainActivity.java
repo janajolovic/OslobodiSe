@@ -133,9 +133,7 @@ public class MainActivity extends ToolbarNavigacijaSetup {
     @Override
     protected void onResume() {
         super.onResume();
-        MutableLiveData<ArrayList<Item>> mld = UserRepository.getInstance(MainApplication.apiManager).GetOmiljeniOglasiFromUser(
-                Utils.getInstance().getKorisnik().getId()
-        );
+        MutableLiveData<ArrayList<Item>> mld = UserRepository.getInstance(MainApplication.apiManager).GetAllItems();
         progress.setVisibility(View.VISIBLE);
         mld.observe(this, new Observer<ArrayList<Item>>() {
             @Override
