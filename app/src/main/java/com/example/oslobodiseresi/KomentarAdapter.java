@@ -80,9 +80,9 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
 
         holder.txtSadrzaj.setText(komentari.get(position).getSadrzaj());
 
-        holder.izbrisi.setVisibility(View.GONE);
+        holder.izbrisi.setVisibility(View.INVISIBLE);
 
-        if(Utils.getInstance().jeUlogovan() && Utils.getInstance().getKorisnik().getId() == komentari.get(position).getKorisnik().getId()) {
+        if(Utils.getInstance().jeUlogovan() && Utils.getInstance().getKorisnik().getId().equals(komentari.get(position).getKorisnik().getId())) {
             holder.izbrisi.setVisibility(View.VISIBLE);
             holder.izbrisi.setOnClickListener(new View.OnClickListener() {
                 @Override
