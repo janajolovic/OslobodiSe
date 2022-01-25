@@ -50,10 +50,6 @@ public class ArtikalAdapter extends RecyclerView.Adapter<ArtikalAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        if(artikli.get(position).getKategorija()!=null)
-            Log.println(Log.ASSERT,"[kategorija]",artikli.get(position).getNaziv()+" "+artikli.get(position).getKategorija().getNaziv());
-        else
-            Log.println(Log.ASSERT,"[kategorija]",artikli.get(position).getNaziv()+" je null");
 
         holder.imgDelete.setVisibility(View.INVISIBLE);
         if(Utils.getInstance().jeUlogovan() && (Utils.getInstance().getKorisnik().getId().equals(artikli.get(position).getUserId())))
