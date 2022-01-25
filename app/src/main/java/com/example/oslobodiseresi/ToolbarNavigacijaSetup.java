@@ -248,7 +248,6 @@ public class ToolbarNavigacijaSetup extends AppCompatActivity implements Navigat
                             gradoviAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             spinnerGradovi.setAdapter(gradoviAdapter);
                             spinnerGradovi.setSelection(gradId);
-                            Log.println(Log.ASSERT, "[grad id]", "pozvan sam, id je " + gradId);
                         }
                     });
 
