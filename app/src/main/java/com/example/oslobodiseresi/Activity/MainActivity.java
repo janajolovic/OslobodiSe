@@ -129,4 +129,10 @@ public class MainActivity extends ToolbarNavigacijaSetup {
             }
         });
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.println(Log.ASSERT,"[Main Activity]","pozvan sam, on resume");
+    }
 }
