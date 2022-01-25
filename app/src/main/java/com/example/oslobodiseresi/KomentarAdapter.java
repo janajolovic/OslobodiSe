@@ -106,6 +106,8 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
                 builder.show();
             }
         });
+
+        holder.txtIme.setText(komentari.get(position).getKorisnik().getIme());
     }
 
     @Override

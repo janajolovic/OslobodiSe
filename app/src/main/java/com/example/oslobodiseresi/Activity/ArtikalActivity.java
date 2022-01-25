@@ -206,7 +206,7 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
                 });
             }
 
-            komentariRecycler.setLayoutManager(new GridLayoutManager(this, 2));
+            komentariRecycler.setLayoutManager(new GridLayoutManager(this, 1));
 
             //recycler view
             komentarAdapter = new KomentarAdapter(this);
