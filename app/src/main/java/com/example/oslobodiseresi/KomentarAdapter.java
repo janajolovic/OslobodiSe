@@ -83,6 +83,7 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
         holder.izbrisi.setVisibility(View.GONE);
 
         if(Utils.getInstance().jeUlogovan() && Utils.getInstance().getKorisnik().getId() == komentari.get(position).getKorisnik().getId()) {
+            holder.izbrisi.setVisibility(View.VISIBLE);
             holder.izbrisi.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
