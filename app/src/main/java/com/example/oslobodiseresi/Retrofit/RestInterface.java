@@ -16,6 +16,7 @@ import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.HTTP;
 import retrofit2.http.Multipart;
@@ -82,6 +83,10 @@ public interface RestInterface {
     @Multipart
     @POST("slike/post")
     Call<ResponseBody> PostSlika(@Part MultipartBody.Part image);
+
+
+    @DELETE("/items/komentar/izbrisi/{KomentarId}")
+    Call<String> IzbrisiKoemntar(@Path("KomentarId") int KomentarId);
 
     @HTTP(method = "DELETE", path = "items/delete", hasBody = true)
     Call<String> deleteItem(@Body int Id);

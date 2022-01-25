@@ -130,4 +130,9 @@ public class ApiManager {
         dodajKomentar.enqueue(callback);
     }
 
+    public void IzbrisiKomentar(int KomentarId, Callback<String> callback){
+        Call<String> izbrisiKomentar = service.IzbrisiKoemntar(KomentarId);
+        izbrisiKomentar.enqueue(callback);
+    }
+
 }

@@ -232,5 +232,22 @@ public class ItemRepository {
         return str;
     }
 
+    public MutableLiveData<String> IzbrisiKomentar(int KomentarId){
+        apiManager.IzbrisiKomentar(KomentarId, new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if(response.isSuccessful()){
+                    str.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+        return  str;
+    }
+
 
 }
