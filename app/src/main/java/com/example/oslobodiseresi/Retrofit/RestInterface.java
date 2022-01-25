@@ -4,6 +4,7 @@ import com.example.oslobodiseresi.Models.Grad;
 import com.example.oslobodiseresi.Models.Item;
 import com.example.oslobodiseresi.Models.ItemPostModel;
 import com.example.oslobodiseresi.Models.Kategorija;
+import com.example.oslobodiseresi.Models.Komentar;
 import com.example.oslobodiseresi.Models.Korisnik;
 import com.example.oslobodiseresi.Models.LoginModel;
 import com.example.oslobodiseresi.Models.RegistarModel;
@@ -77,13 +78,12 @@ public interface RestInterface {
     @PATCH("users/dodajocenu/{UserId}/{RaterId}/{ocena}")
     Call<Float> DodajOcenu(@Path("UserId") String UserId, @Path("RaterId") String RaterId, @Path("ocena") float ocena);
 
-    @PATCH("items/komentar/dodaj/{OglasId}/{UserId}")
-    Call<String> DodajKomentar(@Path("OglasId") int OglasId, @Path("UserId") String UserId, @Body String text);
+    @PATCH("items/komentar/dodaj/{OglasId}/{UserId}/{tekst}")
+    Call<Komentar> DodajKomentar(@Path("OglasId") int OglasId, @Path("UserId") String UserId, @Path("tekst") String tekst);
 
     @Multipart
     @POST("slike/post")
     Call<ResponseBody> PostSlika(@Part MultipartBody.Part image);
-
 
     @DELETE("/items/komentar/izbrisi/{KomentarId}")
     Call<String> IzbrisiKoemntar(@Path("KomentarId") int KomentarId);

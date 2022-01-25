@@ -4,6 +4,7 @@ import com.example.oslobodiseresi.Models.Grad;
 import com.example.oslobodiseresi.Models.Item;
 import com.example.oslobodiseresi.Models.ItemPostModel;
 import com.example.oslobodiseresi.Models.Kategorija;
+import com.example.oslobodiseresi.Models.Komentar;
 import com.example.oslobodiseresi.Models.Korisnik;
 import com.example.oslobodiseresi.Models.LoginModel;
 import com.example.oslobodiseresi.Models.RegistarModel;
@@ -125,8 +126,8 @@ public class ApiManager {
         postSlika.enqueue(callback);
     }
 
-    public void DodajKomentar(int OglasId, String UserId, String tekst, Callback<String> callback){
-        Call<String> dodajKomentar = service.DodajKomentar(OglasId, UserId, tekst);
+    public void DodajKomentar(int OglasId, String UserId, String tekst, Callback<Komentar> callback){
+        Call<Komentar> dodajKomentar = service.DodajKomentar(OglasId, UserId , tekst);
         dodajKomentar.enqueue(callback);
     }
 

@@ -86,6 +86,7 @@ public class OmiljeniOglasiActivity extends ToolbarNavigacijaSetup {
                return false;
             }
         });
+        Log.println(Log.ASSERT, "[Omiljeni Oglasi]", "pozvan sam");
     }
     @Override
     public void primeniFiltere() {

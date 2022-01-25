@@ -8,6 +8,7 @@ import com.example.oslobodiseresi.Models.Grad;
 import com.example.oslobodiseresi.Models.Item;
 import com.example.oslobodiseresi.Models.ItemPostModel;
 import com.example.oslobodiseresi.Models.Kategorija;
+import com.example.oslobodiseresi.Models.Komentar;
 
 import java.util.ArrayList;
 
@@ -24,6 +25,7 @@ public class ItemRepository {
     private MutableLiveData<ArrayList<Kategorija>> kategorije = new MutableLiveData<>();
     private MutableLiveData<ArrayList<Grad>> gradovi = new MutableLiveData<>();
     private MutableLiveData<String> str = new MutableLiveData<>();
+    private MutableLiveData<Komentar> komentar = new MutableLiveData<>();
 
     private ItemRepository(ApiManager apiManager){
         this.apiManager = apiManager;
@@ -215,21 +217,24 @@ public class ItemRepository {
         return items;
     }
 
-    public MutableLiveData<String> DodajKomentar(int OglasId, String UserId, String tektst){
-        apiManager.DodajKomentar(OglasId, UserId, tektst, new Callback<String>() {
+    public MutableLiveData<Komentar> DodajKomentar(int OglasId, String UserId, String tektst){
+        apiManager.DodajKomentar(OglasId, UserId, tektst, new Callback<Komentar>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(Call<Komentar> call, Response<Komentar> response) {
                 if(response.isSuccessful()){
-                    str.setValue(response.body());
+                    komentar.setValue(response.body());
+                    Log.println(Log.ASSERT, "[Komentar]", response.message());
+                }else{
+                    Log.println(Log.ASSERT, "[Komentar]", response.message());
                 }
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
-
+            public void onFailure(Call<Komentar> call, Throwable t) {
+                Log.println(Log.ASSERT, "[Komentar]", t.getMessage());
             }
         });
-        return str;
+        return komentar;
     }
 
     public MutableLiveData<String> IzbrisiKomentar(int KomentarId){
@@ -243,7 +248,6 @@ public class ItemRepository {
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-
             }
         });
         return  str;

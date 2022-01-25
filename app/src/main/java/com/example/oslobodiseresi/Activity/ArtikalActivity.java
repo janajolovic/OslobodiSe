@@ -215,10 +215,10 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
                 @Override
                 public void onClick(View v) {
                     if(Utils.getInstance().jeUlogovan()) {
-                        MutableLiveData<String> mld = ItemRepository.getInstance(MainApplication.apiManager).DodajKomentar(artikal.getId(), artikal.getUserId(), txtDodajKomentar.getText().toString());
-                        mld.observe(ArtikalActivity.this, new Observer<String>() {
+                        MutableLiveData<Komentar> mld = ItemRepository.getInstance(MainApplication.apiManager).DodajKomentar(artikal.getId(), Utils.getInstance().getKorisnik().getId(), txtDodajKomentar.getText().toString());
+                        mld.observe(ArtikalActivity.this, new Observer<Komentar>() {
                             @Override
-                            public void onChanged(String s) {
+                            public void onChanged(Komentar k) {
                                 //todo da se otkomentarise
 //                                komentarAdapter.getKomentari().add(0, komentar);
 //                                komentarAdapter.notifyItemInserted(0);
