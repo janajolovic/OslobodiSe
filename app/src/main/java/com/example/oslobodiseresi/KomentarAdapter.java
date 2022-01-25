@@ -1,20 +1,27 @@
 package com.example.oslobodiseresi;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.oslobodiseresi.Activity.ArtikalActivity;
 import com.example.oslobodiseresi.Activity.ProfilKorisnika;
 import com.example.oslobodiseresi.Models.Item;
 import com.example.oslobodiseresi.Models.Komentar;
+import com.example.oslobodiseresi.Retrofit.ItemRepository;
 
 import java.util.ArrayList;
 
@@ -72,6 +79,33 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
         holder.txtBrojGlasova.setText(String.valueOf(komentari.get(position).getBrojLajkova()));
 
         holder.txtSadrzaj.setText(komentari.get(position).getSadrzaj());
+
+        holder.izbrisi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setMessage("Da li ste sigurni da zelite da obrisete ovaj komentar?");
+                builder.setPositiveButton("Da", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        MutableLiveData<String> mld = ItemRepository.getInstance(MainApplication.apiManager).IzbrisiKomentar(komentari.get(position).getId());
+                        mld.observe((AppCompatActivity)context, new Observer<String>() {
+                            @Override
+                            public void onChanged(String s) {
+                                komentari.remove(position);
+                                notifyItemRemoved(position);
+                            }
+                        });
+                    }
+                });
+                builder.setNegativeButton("Ne", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+                builder.show();
+            }
+        });
     }
 
     @Override
@@ -84,16 +118,22 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
         notifyDataSetChanged();
     }
 
+    public ArrayList<Komentar> getKomentari() {
+        return komentari;
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView imgProfil;
         private TextView txtIme;
         private TextView txtBrojGlasova;
         private TextView txtSadrzaj;
         private ImageView imgLajk;
+        private TextView izbrisi;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            izbrisi = itemView.findViewById(R.id.txtIzbrisi);
             imgProfil = itemView.findViewById(R.id.imgProfil);
             txtIme = itemView.findViewById(R.id.ime);
             txtBrojGlasova = itemView.findViewById(R.id.brojGlasova);

@@ -17,18 +17,22 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.Group;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.oslobodiseresi.ArtikalAdapter;
 import com.example.oslobodiseresi.KomentarAdapter;
 import com.example.oslobodiseresi.MainApplication;
 import com.example.oslobodiseresi.Models.Item;
+import com.example.oslobodiseresi.Models.Komentar;
 import com.example.oslobodiseresi.Retrofit.ItemRepository;
 import com.example.oslobodiseresi.Retrofit.UserRepository;
 import com.example.oslobodiseresi.ToolbarNavigacijaSetup;
 import com.example.oslobodiseresi.R;
 import com.example.oslobodiseresi.Utils;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.ArrayList;
 
 public class ArtikalActivity extends ToolbarNavigacijaSetup {
 
@@ -81,7 +85,7 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
     }
 
     private void setData(Item artikal) {
-        this.artikal = new Item(artikal.getId(), artikal.getNaziv(), artikal.getOpis(), artikal.getKategorija(), artikal.getKategorijaId(), artikal.getGrad(), artikal.getGradId(), artikal.getUser(), artikal.getUserId());
+        this.artikal = artikal;
         txtOpis.setText(artikal.getOpis());
         txtNaziv.setText(artikal.getNaziv());
         txtKategorija.setText(artikal.getKategorija().getNaziv());
@@ -201,6 +205,32 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
                     }
                 });
             }
+
+            komentariRecycler.setLayoutManager(new GridLayoutManager(this, 2));
+
+            //recycler view
+            komentarAdapter = new KomentarAdapter(this);
+
+            ArrayList<Komentar> komentari = artikal.getKomentari();
+
+            komentarAdapter.setKomentari(komentari);
+            komentariRecycler.setAdapter(komentarAdapter);
+
+            btnDodajKomentar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MutableLiveData<String> mld = ItemRepository.getInstance(MainApplication.apiManager).DodajKomentar(artikal.getId(), artikal.getUserId(), txtDodajKomentar.getText().toString());
+                    mld.observe(ArtikalActivity.this, new Observer<String>() {
+                        @Override
+                        public void onChanged(String s) {
+                            int index = komentarAdapter.getKomentari().size();
+                            //komentarAdapter.getKomentari().add(komentar);
+                            //komentarAdapter.notifyItemInserted(index);
+                            //todo da se zavrsi
+                        }
+                    });
+                }
+            });
         }
         else{
         }

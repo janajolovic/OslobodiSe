@@ -84,13 +84,11 @@ public class ArtikalAdapter extends RecyclerView.Adapter<ArtikalAdapter.ViewHold
                                 notifyItemRemoved(position);
                             }
                         });
-                        Toast.makeText(context, "obrisano", Toast.LENGTH_SHORT).show();
                     }
                 });
                 builder.setNegativeButton("Ne", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(context, "nista", Toast.LENGTH_SHORT).show();
                     }
                 });
                 builder.show();
