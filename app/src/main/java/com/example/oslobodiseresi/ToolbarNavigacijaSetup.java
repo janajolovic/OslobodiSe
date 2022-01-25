@@ -234,7 +234,6 @@ public class ToolbarNavigacijaSetup extends AppCompatActivity implements Navigat
                         }
                     });
 
-
                     MutableLiveData<ArrayList<Grad>> mldGradovi = ItemRepository.getInstance(MainApplication.apiManager).getAllGradovi();
                     mldGradovi.observe(ToolbarNavigacijaSetup.this, new Observer<ArrayList<Grad>>() {
                         @Override

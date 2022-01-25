@@ -1,6 +1,7 @@
 package com.example.oslobodiseresi.Activity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
@@ -128,19 +129,10 @@ public class OmiljeniOglasiActivity extends ToolbarNavigacijaSetup {
         });
     }
 
-    void izbrisiOglas(int id) {
-        adapterArtikli.izbrisiArtikal(id);
-    }
-
-    int bitniOglasId = -1;
-
-    public void setBitniOglasId(int bitniOglasId) {
-        this.bitniOglasId = bitniOglasId;
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
+        Log.println(Log.ASSERT,"[resume]","pozvan sam");
         MutableLiveData<ArrayList<Item>> mld = UserRepository.getInstance(MainApplication.apiManager).GetOmiljeniOglasiFromUser(
                 Utils.getInstance().getKorisnik().getId()
         );
@@ -154,5 +146,11 @@ public class OmiljeniOglasiActivity extends ToolbarNavigacijaSetup {
                 recyclerArtikli.setAdapter(adapterArtikli);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Log.println(Log.ASSERT,"[back]","pozvan sam");
     }
 }
