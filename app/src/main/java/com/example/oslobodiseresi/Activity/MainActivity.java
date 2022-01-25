@@ -133,6 +133,18 @@ public class MainActivity extends ToolbarNavigacijaSetup {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.println(Log.ASSERT,"[Main Activity]","pozvan sam, on resume");
+        MutableLiveData<ArrayList<Item>> mld = UserRepository.getInstance(MainApplication.apiManager).GetOmiljeniOglasiFromUser(
+                Utils.getInstance().getKorisnik().getId()
+        );
+        progress.setVisibility(View.VISIBLE);
+        mld.observe(this, new Observer<ArrayList<Item>>() {
+            @Override
+            public void onChanged(ArrayList<Item> items) {
+                progress.setVisibility(View.INVISIBLE);
+                ArrayList<Item> artikli = mld.getValue();
+                adapterArtikli.setArtikli(artikli);
+                recyclerArtikli.setAdapter(adapterArtikli);
+            }
+        });
     }
 }

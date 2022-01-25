@@ -132,7 +132,6 @@ public class OmiljeniOglasiActivity extends ToolbarNavigacijaSetup {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.println(Log.ASSERT,"[resume]","pozvan sam");
         MutableLiveData<ArrayList<Item>> mld = UserRepository.getInstance(MainApplication.apiManager).GetOmiljeniOglasiFromUser(
                 Utils.getInstance().getKorisnik().getId()
         );
@@ -146,11 +145,5 @@ public class OmiljeniOglasiActivity extends ToolbarNavigacijaSetup {
                 recyclerArtikli.setAdapter(adapterArtikli);
             }
         });
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Log.println(Log.ASSERT,"[back]","pozvan sam");
     }
 }
