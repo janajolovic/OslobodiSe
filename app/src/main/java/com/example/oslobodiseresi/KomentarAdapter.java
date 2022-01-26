@@ -94,9 +94,15 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
             holder.izbrisi.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ItemRepository.getInstance(MainApplication.apiManager).IzbrisiKomentar(komentari.get(position).getId());
-                    komentari.remove(position);
-                    notifyItemRemoved(position);
+                    MutableLiveData<String> mld = ItemRepository.getInstance(MainApplication.apiManager).IzbrisiKomentar(komentari.get(position).getId());
+
+                    mld.observe((AppCompatActivity) context, new Observer<String>() {
+                        @Override
+                        public void onChanged(String s) {
+                            komentari.remove(position);
+                            notifyItemRemoved(position);
+                        }
+                    });
                 }
             });
         }

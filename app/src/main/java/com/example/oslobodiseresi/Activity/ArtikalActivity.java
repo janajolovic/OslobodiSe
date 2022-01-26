@@ -215,13 +215,13 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
                 public void onClick(View v) {
                     if(Utils.getInstance().jeUlogovan()) {
                         MutableLiveData<Komentar> mld = ItemRepository.getInstance(MainApplication.apiManager).DodajKomentar(artikal.getId(), Utils.getInstance().getKorisnik().getId(), txtDodajKomentar.getText().toString());
-                        txtDodajKomentar.setText("");
                         mld.observe(ArtikalActivity.this, new Observer<Komentar>() {
                             @Override
                             public void onChanged(Komentar k) {
                                 Toast.makeText(context, "Komentar je objavljen", Toast.LENGTH_SHORT).show();
                                 komentarAdapter.getKomentari().add(0, k);
                                 komentarAdapter.notifyItemInserted(0);
+                                txtDodajKomentar.setText("");
                             }
                         });
                     } else {
