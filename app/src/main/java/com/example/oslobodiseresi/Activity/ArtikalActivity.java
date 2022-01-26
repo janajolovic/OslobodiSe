@@ -234,16 +234,19 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
     @Override
     protected void onResume() {
         super.onResume();
-        ArrayList<Komentar> komentari = artikal.getKomentari();
+        if(artikal != null){
+            ArrayList<Komentar> komentari = artikal.getKomentari();
 
-        if(Utils.getInstance().jeUlogovan()){
-            for(int i=0;i<komentari.size();i++) {
-                komentari.get(i).setLajkovan(Utils.getInstance().getKorisnik().getLajkovaniKomentari().contains(komentari.get(i).getId()));
+            if(Utils.getInstance().jeUlogovan()){
+                for(int i=0;i<komentari.size();i++) {
+                    komentari.get(i).setLajkovan(Utils.getInstance().getKorisnik().getLajkovaniKomentari().contains(komentari.get(i).getId()));
+                }
             }
+
+            Collections.reverse(komentari);
+            komentarAdapter.setKomentari(komentari);
+            komentariRecycler.setAdapter(komentarAdapter);
         }
 
-        Collections.reverse(komentari);
-        komentarAdapter.setKomentari(komentari);
-        komentariRecycler.setAdapter(komentarAdapter);
     }
 }
