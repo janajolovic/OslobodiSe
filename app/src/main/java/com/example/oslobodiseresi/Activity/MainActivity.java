@@ -100,9 +100,14 @@ public class MainActivity extends ToolbarNavigacijaSetup {
         searchView.setOnCloseListener(new SearchView.OnCloseListener() {
             @Override
             public boolean onClose() {
-                imgNoResults.setVisibility(View.INVISIBLE);
-                txtNoResults.setVisibility(View.INVISIBLE);
                 adapterArtikli.getFilter().filter("");
+                if (adapterArtikli.getItemCount() == 0) {
+                    imgNoResults.setVisibility(View.VISIBLE);
+                    txtNoResults.setVisibility(View.VISIBLE);
+                } else {
+                    imgNoResults.setVisibility(View.INVISIBLE);
+                    txtNoResults.setVisibility(View.INVISIBLE);
+                }
                 return false;
             }
         });
