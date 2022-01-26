@@ -242,7 +242,6 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
                     komentari.get(i).setLajkovan(Utils.getInstance().getKorisnik().getLajkovaniKomentari().contains(komentari.get(i).getId()));
                 }
             }
-
             Collections.reverse(komentari);
             komentarAdapter.setKomentari(komentari);
             komentariRecycler.setAdapter(komentarAdapter);

@@ -118,6 +118,7 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
         mld.observe((AppCompatActivity) context, new Observer<ResponseBody>() {
             @Override
             public void onChanged(ResponseBody responseBody) {
+                Toast.makeText(context, "KomentarAdapter mld, pozvan sam", Toast.LENGTH_SHORT).show();
                 Bitmap bmp = BitmapFactory.decodeStream(responseBody.byteStream());
                 holder.imgProfil.setImageBitmap(bmp);
             }
