@@ -64,6 +64,8 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
 
         constraintLayout = findViewById(R.id.grupa);
         constraintLayout.setVisibility(View.INVISIBLE);
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
 
         initViews();
         Intent intent = getIntent();
@@ -112,14 +114,12 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
         txtKorisnik = findViewById(R.id.txtKorisnik);
         txtKontakt = findViewById(R.id.txtKontakt);
         imgFav = findViewById(R.id.imgFav);
-        progressBar = findViewById(R.id.progressBar);
         txtDodajKomentar = findViewById(R.id.txtDodajKomentar);
         btnDodajKomentar = findViewById(R.id.btnDodajKomentar);
         komentariRecycler = findViewById(R.id.komentari);
     }
 
     private void setViews() {
-        progressBar.setVisibility(View.VISIBLE);
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
