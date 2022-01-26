@@ -63,7 +63,7 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
                 } else {
                     holder.imgLajk.setImageResource(R.drawable.ic_outline_thumb_up_24);
                     komentari.get(position).setBrojLajkova(komentari.get(position).getBrojLajkova()-1);
-                    Utils.getInstance().getKorisnik().getLajkovaniKomentari().remove(komentari.get(position).getId());
+                    Utils.getInstance().getKorisnik().getLajkovaniKomentari().remove(Integer.valueOf(komentari.get(position).getId()));
                 }
                 notifyItemChanged(position);
             }
