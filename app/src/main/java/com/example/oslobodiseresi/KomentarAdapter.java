@@ -87,6 +87,19 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
                 }
             }
         });
+
+        holder.izbrisi.setVisibility(View.INVISIBLE);
+        if(Utils.getInstance().jeUlogovan()&&Utils.getInstance().getKorisnik().getId().equals(komentari.get(position).getKorisnik().getId())){
+            holder.izbrisi.setVisibility(View.VISIBLE);
+            holder.izbrisi.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ItemRepository.getInstance(MainApplication.apiManager).IzbrisiKomentar(komentari.get(position).getId());
+                    komentari.remove(position);
+                    notifyItemRemoved(position);
+                }
+            });
+        }
     }
 
     @Override
