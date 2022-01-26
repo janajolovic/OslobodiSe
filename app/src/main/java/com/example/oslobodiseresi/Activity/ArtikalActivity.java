@@ -205,7 +205,6 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
                         }
                     }
 
-                    Collections.reverse(komentari);
                     komentarAdapter.setKomentari(komentari);
                     komentariRecycler.setAdapter(komentarAdapter);
                 }
@@ -248,7 +247,6 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
                         }
                     }
 
-                    Collections.reverse(komentari);
                     komentarAdapter.setKomentari(komentari);
                     komentariRecycler.setAdapter(komentarAdapter);
                 }
