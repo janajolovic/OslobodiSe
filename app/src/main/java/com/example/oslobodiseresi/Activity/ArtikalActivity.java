@@ -209,6 +209,9 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
             ArrayList<Komentar> komentari = artikal.getKomentari();
             for(int i=0;i<komentari.size();i++) {
                 komentari.get(i).setLajkovan(Utils.getInstance().getKorisnik().getLajkovaniKomentari().contains(komentari.get(i).getId()));
+                if(komentari.get(i).isLajkovan()){
+                    Log.println(Log.ASSERT,"[komentarAdapter]", i +" je lajkovan\n");
+                }
             }
             Collections.reverse(komentari);
             komentarAdapter.setKomentari(komentari);

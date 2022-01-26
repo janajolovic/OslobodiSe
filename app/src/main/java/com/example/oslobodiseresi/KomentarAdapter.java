@@ -50,6 +50,7 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
         } else {
             holder.imgLajk.setImageResource(R.drawable.ic_outline_thumb_up_24);
         }
+
         holder.imgLajk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
