@@ -71,6 +71,7 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
         mldKategorije.observe(NapraviArtikal.this, new Observer<ArrayList<Kategorija>>() {
             @Override
             public void onChanged(ArrayList<Kategorija> kategorija) {
+                Toast.makeText(NapraviArtikal.this, "Kategorije pozvan sam", Toast.LENGTH_SHORT).show();
                 ArrayList<String> kategorije = new ArrayList<>();
                 kategorije.add("Izaberite kategoriju");
                 for (Kategorija k : mldKategorije.getValue()) {
@@ -88,6 +89,7 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
         mldGradovi.observe(NapraviArtikal.this, new Observer<ArrayList<Grad>>() {
             @Override
             public void onChanged(ArrayList<Grad> grad) {
+                Toast.makeText(NapraviArtikal.this, "Gradovi pozvan sam", Toast.LENGTH_SHORT).show();
                 ArrayList<String> gradovi = new ArrayList<>();
                 gradovi.add("Izaberite grad");
                 for (Grad g : mldGradovi.getValue()) {
@@ -118,19 +120,6 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
             }
         });
 
-        spinnerGradovi.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                 position = spinnerGradovi
-                           .getSelectedItemPosition();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                txtNemaGrad.setVisibility(View.VISIBLE);
-            }
-        });
-
         dodajArtikal = findViewById(R.id.dodajArtikal);
         dodajArtikal.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,7 +138,6 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
                         spinnerKategorije.getSelectedItemPosition(), spinnerGradovi.getSelectedItemPosition(),
                         Utils.getInstance().getKorisnik().getId()
                 ));
-                Toast.makeText(NapraviArtikal.this, Integer.toString(spinnerGradovi.getSelectedItemPosition() + 1), Toast.LENGTH_SHORT).show();
                 mld.observe(NapraviArtikal.this, new Observer<Item>() {
                     @Override
                     public void onChanged(Item item) {
