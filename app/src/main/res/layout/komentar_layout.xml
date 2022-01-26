@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imgProfil"
         android:layout_width="@dimen/velicina_ikonice"
         android:layout_height="@dimen/velicina_ikonice"
@@ -13,7 +13,7 @@
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:src="@color/black"/>
 
     <TextView
         android:id="@+id/ime"

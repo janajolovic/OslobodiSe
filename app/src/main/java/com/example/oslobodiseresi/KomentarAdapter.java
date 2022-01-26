@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +26,16 @@ import com.example.oslobodiseresi.Models.Komentar;
 import com.example.oslobodiseresi.Retrofit.ItemRepository;
 import com.example.oslobodiseresi.Retrofit.UserRepository;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 
 public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHolder> {
 
@@ -76,6 +87,16 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
                 Intent intent = new Intent(context, ProfilKorisnika.class);
                 intent.putExtra("KORISNIK_ID", komentari.get(position).getKorisnik().getId());
                 context.startActivity(intent);
+            }
+        });
+
+        MutableLiveData<ResponseBody> mld = UserRepository.getInstance(MainApplication.apiManager).GetProfilna(Utils.getInstance().getKorisnik().getId());
+
+        mld.observe((AppCompatActivity) context, new Observer<ResponseBody>() {
+            @Override
+            public void onChanged(ResponseBody responseBody) {
+                Bitmap bmp = BitmapFactory.decodeStream(responseBody.byteStream());
+                holder.imgProfil.setImageBitmap(bmp);
             }
         });
 
@@ -138,7 +159,7 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private ImageView imgProfil;
+        private CircleImageView imgProfil;
         private TextView txtIme;
         private TextView txtBrojGlasova;
         private TextView txtSadrzaj;

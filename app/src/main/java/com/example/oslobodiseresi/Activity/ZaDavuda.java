@@ -166,8 +166,8 @@ public class ZaDavuda extends ToolbarNavigacijaSetup {
 //                mld.observe(ZaDavuda.this, new Observer<ResponseBody>() {
 //                    @Override
 //                    public void onChanged(ResponseBody responseBody) {
-//                        Bitmap bmp = BitmapFactory.decodeStream(responseBody.byteStream());
-//                        slika2.setImageBitmap(bmp);
+//////                        Bitmap bmp = BitmapFactory.decodeStream(responseBody.byteStream());
+//////                        slika2.setImageBitmap(bmp);
 //                    }
 //                });
 //            }
