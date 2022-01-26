@@ -195,14 +195,14 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
             //recycler view
             komentarAdapter = new KomentarAdapter(this);
 
-            for(int i=0;i<Utils.getInstance().getKorisnik().getLajkovaniKomentari().size();i++) {
-                Log.println(Log.ASSERT,"[getLajkovaniKomentari]", Utils.getInstance().getKorisnik().getLajkovaniKomentari().get(i) +" je lajkovan");
+            ArrayList<Komentar> komentari = artikal.getKomentari();
+
+            if(Utils.getInstance().jeUlogovan()){
+                for(int i=0;i<komentari.size();i++) {
+                    komentari.get(i).setLajkovan(Utils.getInstance().getKorisnik().getLajkovaniKomentari().contains(komentari.get(i).getId()));
+                }
             }
 
-            ArrayList<Komentar> komentari = artikal.getKomentari();
-            for(int i=0;i<komentari.size();i++) {
-                komentari.get(i).setLajkovan(Utils.getInstance().getKorisnik().getLajkovaniKomentari().contains(komentari.get(i).getId()));
-            }
             Collections.reverse(komentari);
             komentarAdapter.setKomentari(komentari);
             komentariRecycler.setAdapter(komentarAdapter);

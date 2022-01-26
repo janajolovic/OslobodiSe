@@ -89,7 +89,21 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
         holder.txtIme.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Utils.getInstance().jeUlogovan()&&Utils.getInstance().getKorisnik().getId().equals(komentari.get(position).getKorisnik().getId())){
+                if(Utils.getInstance().jeUlogovan() && Utils.getInstance().getKorisnik().getId().equals(komentari.get(position).getKorisnik().getId())){
+                    Intent intent = new Intent(context, MojProfilActivity.class);
+                    context.startActivity(intent);
+                } else {
+                    Intent intent = new Intent(context, ProfilKorisnika.class);
+                    intent.putExtra("KORISNIK_ID", komentari.get(position).getKorisnik().getId());
+                    context.startActivity(intent);
+                }
+            }
+        });
+
+        holder.imgProfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(Utils.getInstance().jeUlogovan() && Utils.getInstance().getKorisnik().getId().equals(komentari.get(position).getKorisnik().getId())){
                     Intent intent = new Intent(context, MojProfilActivity.class);
                     context.startActivity(intent);
                 } else {
@@ -106,20 +120,6 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
             public void onChanged(ResponseBody responseBody) {
                 Bitmap bmp = BitmapFactory.decodeStream(responseBody.byteStream());
                 holder.imgProfil.setImageBitmap(bmp);
-            }
-        });
-
-        holder.imgProfil.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(Utils.getInstance().jeUlogovan() && Utils.getInstance().getKorisnik().getId().equals(komentari.get(position).getKorisnik().getId())){
-                    Intent intent = new Intent(context, MojProfilActivity.class);
-                    context.startActivity(intent);
-                } else {
-                    Intent intent = new Intent(context, ProfilKorisnika.class);
-                    intent.putExtra("KORISNIK_ID", komentari.get(position).getKorisnik().getId());
-                    context.startActivity(intent);
-                }
             }
         });
 
