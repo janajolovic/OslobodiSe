@@ -218,6 +218,7 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
                             public void onChanged(Komentar k) {
                                 Toast.makeText(context, "Komentar je objavljen", Toast.LENGTH_SHORT).show();
                                 komentarAdapter.getKomentari().add(0, k);
+                                komentarAdapter.notifyItemInserted(0);
                             }
                         });
                     } else {
