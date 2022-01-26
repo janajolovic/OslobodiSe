@@ -8,6 +8,7 @@ import com.example.oslobodiseresi.Models.Komentar;
 import com.example.oslobodiseresi.Models.Korisnik;
 import com.example.oslobodiseresi.Models.LoginModel;
 import com.example.oslobodiseresi.Models.RegistarModel;
+import com.example.oslobodiseresi.Models.UploadImage;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -84,13 +85,15 @@ public interface RestInterface {
     @PATCH("items/komentar/lajkuj/{KomentarId}/{UserId}")
     Call<String> LajkujKomentar(@Path("KomentarId") int KomentarId, @Path("UserId") String UserId);
 
-    @Multipart
     @POST("slike/post")
-    Call<ResponseBody> PostSlika(@Part MultipartBody.Part image);
+    Call<String> PostSlika(@Body UploadImage image);
 
     @DELETE("/items/komentar/izbrisi/{KomentarId}")
     Call<String> IzbrisiKoemntar(@Path("KomentarId") int KomentarId);
 
     @HTTP(method = "DELETE", path = "items/delete", hasBody = true)
     Call<String> deleteItem(@Body int Id);
+
+    @GET("users/getprofilna/{UserId}")
+    Call<String> GetProfilna(@Path("UserId") String UserId);
 }

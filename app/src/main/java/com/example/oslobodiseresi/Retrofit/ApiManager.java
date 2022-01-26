@@ -8,6 +8,7 @@ import com.example.oslobodiseresi.Models.Komentar;
 import com.example.oslobodiseresi.Models.Korisnik;
 import com.example.oslobodiseresi.Models.LoginModel;
 import com.example.oslobodiseresi.Models.RegistarModel;
+import com.example.oslobodiseresi.Models.UploadImage;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -121,11 +122,6 @@ public class ApiManager {
         dodajOcenu.enqueue(callback);
     }
 
-    public void PostSlika(MultipartBody.Part body, Callback<ResponseBody> callback){
-        Call<ResponseBody> postSlika = service.PostSlika(body);
-        postSlika.enqueue(callback);
-    }
-
     public void DodajKomentar(int OglasId, String UserId, String tekst, Callback<Komentar> callback){
         Call<Komentar> dodajKomentar = service.DodajKomentar(OglasId, UserId , tekst);
         dodajKomentar.enqueue(callback);
@@ -139,6 +135,16 @@ public class ApiManager {
     public void IzbrisiKomentar(int KomentarId, Callback<String> callback){
         Call<String> izbrisiKomentar = service.IzbrisiKoemntar(KomentarId);
         izbrisiKomentar.enqueue(callback);
+    }
+
+    public void PostSlika(UploadImage slika, Callback<String> callback){
+        Call<String> postSlika = service.PostSlika(slika);
+        postSlika.enqueue(callback);
+    }
+
+    public void GetProfilna(String UserId, Callback<String> callback){
+        Call<String> getProfilna = service.GetProfilna(UserId);
+        getProfilna.enqueue(callback);
     }
 
 }

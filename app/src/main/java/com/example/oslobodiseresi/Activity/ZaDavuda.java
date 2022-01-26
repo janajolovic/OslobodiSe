@@ -30,6 +30,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.oslobodiseresi.MainApplication;
+import com.example.oslobodiseresi.Models.UploadImage;
 import com.example.oslobodiseresi.R;
 
 import com.example.oslobodiseresi.Retrofit.UserRepository;
@@ -110,15 +111,12 @@ public class ZaDavuda extends ToolbarNavigacijaSetup {
                 photo.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                 byte[] imageBytes = baos.toByteArray();
                 String imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-                Log.println(Log.ASSERT, "[ZaDavud]", imageString);
-                RequestBody requestFile = RequestBody.create(MediaType.parse("text/plain"), imageString);
-                MultipartBody.Part body = MultipartBody.Part.createFormData("", "slika", requestFile);
-                MutableLiveData<ResponseBody> mld = UserRepository.getInstance(MainApplication.apiManager).PostSlika(body);
-                mld.observe(ZaDavuda.this, new Observer<ResponseBody>() {
+                //Log.println(Log.ASSERT, "[ZaDavud]", imageString);
+                MutableLiveData<String> mld = UserRepository.getInstance(MainApplication.apiManager).PostSlika(new UploadImage(imageString));
+                mld.observe(ZaDavuda.this, new Observer<String>() {
                     @Override
-                    public void onChanged(ResponseBody responseBody) {
-                        Bitmap bmp = BitmapFactory.decodeStream(responseBody.byteStream());
-                        slika2.setImageBitmap(bmp);
+                    public void onChanged(String s) {
+                        Toast.makeText(ZaDavuda.this, "Slika sacuvana", Toast.LENGTH_SHORT).show();
                     }
                 });
             }

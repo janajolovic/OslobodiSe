@@ -8,6 +8,7 @@ import com.example.oslobodiseresi.Models.Item;
 import com.example.oslobodiseresi.Models.Korisnik;
 import com.example.oslobodiseresi.Models.LoginModel;
 import com.example.oslobodiseresi.Models.RegistarModel;
+import com.example.oslobodiseresi.Models.UploadImage;
 
 import java.io.File;
 import java.io.IOException;
@@ -236,23 +237,40 @@ public class UserRepository {
         return str;
     }
 
-    public MutableLiveData<ResponseBody> PostSlika(MultipartBody.Part body){
-        apiManager.PostSlika(body, new Callback<ResponseBody>() {
+    public MutableLiveData<String> PostSlika(UploadImage slika){
+        apiManager.PostSlika(slika, new Callback<String>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(Call<String> call, Response<String> response) {
                 if(response.isSuccessful()){
-                    responseBody.setValue(response.body());
-                    Log.println(Log.ASSERT, "[Slika isSuccessful]", response.message());
+                    str.setValue(response.body());
                 }else{
-                   Log.println(Log.ASSERT, "[Slika onResponse]", response.message());
+                    Log.println(Log.ASSERT, "[Slika onResponse]", response.message());
                 }
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<String> call, Throwable t) {
                 Log.println(Log.ASSERT, "[Slika onFailure]", t.getMessage());
             }
         });
-        return responseBody;
+        return str;
+    }
+
+    public MutableLiveData<String> GetProfilna(String UserId){
+        apiManager.GetProfilna(UserId, new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if(response.isSuccessful()){
+                    str.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+
+        return str;
     }
 }
