@@ -116,7 +116,7 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
         });
 
         MutableLiveData<ResponseBody> mld = UserRepository.getInstance(MainApplication.apiManager).GetProfilna(komentari.get(position).getKorisnik().getId());
-        mld.observe((LifecycleOwner) this, new Observer<ResponseBody>() {
+        mld.observe((AppCompatActivity)context, new Observer<ResponseBody>() {
             @Override
             public void onChanged(ResponseBody responseBody) {
                 Bitmap bmp = BitmapFactory.decodeStream(responseBody.byteStream());

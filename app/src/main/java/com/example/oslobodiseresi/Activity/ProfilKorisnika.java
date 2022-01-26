@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,6 +30,8 @@ import com.example.oslobodiseresi.Utils;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
+
+import okhttp3.ResponseBody;
 
 public class ProfilKorisnika extends ToolbarNavigacijaSetup {
 
@@ -67,10 +71,20 @@ public class ProfilKorisnika extends ToolbarNavigacijaSetup {
         adapterArtikli = new ArtikalAdapter(this);
         prosecnaOcena = findViewById(R.id.prosecnaOcena);
         artikliKorisnik.setLayoutManager(new GridLayoutManager(this, 2));
+        imgKorisnik = findViewById(R.id.imgKorisnik);
 
         if(!Utils.getInstance().jeUlogovan()){
             rating.setEnabled(false);
         }
+
+        MutableLiveData<ResponseBody> mldProfilna = UserRepository.getInstance(MainApplication.apiManager).GetProfilna(korisnikId);
+        mldProfilna.observe(ProfilKorisnika.this, new Observer<ResponseBody>() {
+            @Override
+            public void onChanged(ResponseBody responseBody) {
+                Bitmap bmp = BitmapFactory.decodeStream(responseBody.byteStream());
+                imgKorisnik.setImageBitmap(bmp);
+            }
+        });
 
         MutableLiveData<Korisnik> mld = UserRepository.getInstance(MainApplication.apiManager).GetKorisnikById(korisnikId);
         mld.observe(ProfilKorisnika.this, new Observer<Korisnik>() {
