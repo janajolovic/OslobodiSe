@@ -195,7 +195,10 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
             //recycler view
             komentarAdapter = new KomentarAdapter(this);
 
-            ArrayList<Komentar> komentari = artikal.getKomentari();
+            ArrayList<Komentar> komentari = new ArrayList<>();
+            for(Komentar k:artikal.getKomentari()){
+                komentari.add(k);
+            }
 
             if(Utils.getInstance().jeUlogovan()){
                 for(int i=0;i<komentari.size();i++) {
@@ -235,15 +238,16 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
     protected void onResume() {
         super.onResume();
         if(artikal != null){
-            Toast.makeText(ArtikalActivity.this, "onResume() pozvan sam", Toast.LENGTH_SHORT).show();
-            ArrayList<Komentar> komentari = artikal.getKomentari();
-
+            ArrayList<Komentar> komentari = new ArrayList<>();
+            for(Komentar k:artikal.getKomentari()){
+                komentari.add(k);
+            }
             if(Utils.getInstance().jeUlogovan()){
                 for(int i=0;i<komentari.size();i++) {
                     komentari.get(i).setLajkovan(Utils.getInstance().getKorisnik().getLajkovaniKomentari().contains(komentari.get(i).getId()));
                 }
             }
-            //Collections.reverse(komentari);
+            Collections.reverse(komentari);
             komentarAdapter.setKomentari(komentari);
             komentariRecycler.setAdapter(komentarAdapter);
         }
