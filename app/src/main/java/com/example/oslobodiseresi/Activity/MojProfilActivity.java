@@ -38,7 +38,7 @@ public class MojProfilActivity extends ToolbarNavigacijaSetup {
         email = findViewById(R.id.email);
         kontakt = findViewById(R.id.kontakt);
         ocena = findViewById(R.id.ocena);
-        imgProfil = findViewById(R.id.imageView)
+        imgProfil = findViewById(R.id.imageView);
 
         if(Utils.getInstance().jeUlogovan())
         {
