@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
@@ -115,10 +116,9 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
         });
 
         MutableLiveData<ResponseBody> mld = UserRepository.getInstance(MainApplication.apiManager).GetProfilna(komentari.get(position).getKorisnik().getId());
-        mld.observe((AppCompatActivity) context, new Observer<ResponseBody>() {
+        mld.observe((LifecycleOwner) this, new Observer<ResponseBody>() {
             @Override
             public void onChanged(ResponseBody responseBody) {
-                Toast.makeText(context, "KomentarAdapter mld, pozvan sam", Toast.LENGTH_SHORT).show();
                 Bitmap bmp = BitmapFactory.decodeStream(responseBody.byteStream());
                 holder.imgProfil.setImageBitmap(bmp);
             }

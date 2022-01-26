@@ -235,6 +235,7 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
     protected void onResume() {
         super.onResume();
         if(artikal != null){
+            Toast.makeText(ArtikalActivity.this, "onResume() pozvan sam", Toast.LENGTH_SHORT).show();
             ArrayList<Komentar> komentari = artikal.getKomentari();
 
             if(Utils.getInstance().jeUlogovan()){

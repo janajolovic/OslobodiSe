@@ -55,7 +55,6 @@ public class MojProfilActivity extends ToolbarNavigacijaSetup {
             mld.observe(MojProfilActivity.this, new Observer<ResponseBody>() {
                 @Override
                 public void onChanged(ResponseBody responseBody) {
-                    Toast.makeText(MojProfilActivity.this, "MojProfilActivity mld, pozvan sam", Toast.LENGTH_SHORT).show();
                     Bitmap bmp = BitmapFactory.decodeStream(responseBody.byteStream());
                     imgProfil.setImageBitmap(bmp);
                 }
