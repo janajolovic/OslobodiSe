@@ -65,6 +65,7 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
                     komentari.get(position).setBrojLajkova(komentari.get(position).getBrojLajkova()-1);
                     Utils.getInstance().getKorisnik().getLajkovaniKomentari().remove(Integer.valueOf(komentari.get(position).getId()));
                 }
+                Utils.getInstance().SacuvajKorisnika(Utils.getInstance().getKorisnik());
                 notifyItemChanged(position);
             }
         });
