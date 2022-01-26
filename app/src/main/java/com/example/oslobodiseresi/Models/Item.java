@@ -24,9 +24,7 @@ public class Item {
     @SerializedName("userId")
     private String UserId;
 
-    private ArrayList<Komentar> komentari;
-
-    public Item(int id, String naziv, String opis, Kategorija kategorija, int kategorijaId, Grad grad, int gradId, Korisnik user, String userId, ArrayList<Komentar> komentari) {
+    public Item(int id, String naziv, String opis, Kategorija kategorija, int kategorijaId, Grad grad, int gradId, Korisnik user, String userId) {
         Id = id;
         Naziv = naziv;
         Opis = opis;
@@ -36,7 +34,6 @@ public class Item {
         GradId = gradId;
         this.user = user;
         UserId = userId;
-        this.komentari = komentari;
     }
 
     //region Getters
@@ -74,10 +71,6 @@ public class Item {
 
     public String getUserId() {
         return UserId;
-    }
-
-    public ArrayList<Komentar> getKomentari() {
-        return komentari;
     }
 
     //endregion

@@ -147,4 +147,9 @@ public class ApiManager {
         getProfilna.enqueue(callback);
     }
 
+    public void GetKomentariFromOglas(int OglasId, Callback<ArrayList<Komentar>> callback){
+        Call<ArrayList<Komentar>> getKomentariFromOglas = service.GetKomentariFromOglas(OglasId);
+        getKomentariFromOglas.enqueue(callback);
+    }
+
 }

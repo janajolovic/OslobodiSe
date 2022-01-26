@@ -96,4 +96,7 @@ public interface RestInterface {
 
     @GET("users/getprofilna/{UserId}")
     Call<ResponseBody> GetProfilna(@Path("UserId") String UserId);
+
+    @GET("items/komentari/{OglasId}")
+    Call<ArrayList<Komentar>> GetKomentariFromOglas(@Path("OglasId") int OglasId);
 }

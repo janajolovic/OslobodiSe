@@ -26,6 +26,7 @@ public class ItemRepository {
     private MutableLiveData<ArrayList<Grad>> gradovi = new MutableLiveData<>();
     private MutableLiveData<String> str = new MutableLiveData<>();
     private MutableLiveData<Komentar> komentar = new MutableLiveData<>();
+    private MutableLiveData<ArrayList<Komentar>> komentari = new MutableLiveData<>();
 
     private ItemRepository(ApiManager apiManager){
         this.apiManager = apiManager;
@@ -253,5 +254,21 @@ public class ItemRepository {
         return  str;
     }
 
+    public MutableLiveData<ArrayList<Komentar>> GetKomentariFromOglas(int OglasId){
+        apiManager.GetKomentariFromOglas(OglasId, new Callback<ArrayList<Komentar>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Komentar>> call, Response<ArrayList<Komentar>> response) {
+                if(response.isSuccessful()){
+                    komentari.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Komentar>> call, Throwable t) {
+
+            }
+        });
+        return  komentari;
+    }
 
 }
