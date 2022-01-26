@@ -108,7 +108,7 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
         holder.imgProfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Utils.getInstance().jeUlogovan()&&Utils.getInstance().getKorisnik().getId().equals(komentari.get(position).getKorisnik().getId())){
+                if(Utils.getInstance().jeUlogovan() && Utils.getInstance().getKorisnik().getId().equals(komentari.get(position).getKorisnik().getId())){
                     Intent intent = new Intent(context, MojProfilActivity.class);
                     context.startActivity(intent);
                 } else {
