@@ -96,7 +96,14 @@ public class MainActivity extends ToolbarNavigacijaSetup {
                 return false;
             }
         });
-        Log.println(Log.ASSERT,"[MainActivity]","Pozvan sam");
+
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                adapterArtikli.getFilter().filter("");
+                return false;
+            }
+        });
     }
 
     @Override
