@@ -99,7 +99,16 @@ public class MojiOglasiActivity extends ToolbarNavigacijaSetup {
                 return false;
             }
         });
-        Toast.makeText(this, "MojiOglasi", Toast.LENGTH_SHORT).show();
+
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                imgNoResults.setVisibility(View.INVISIBLE);
+                txtNoResults.setVisibility(View.INVISIBLE);
+                adapterArtikli.getFilter().filter("");
+                return false;
+            }
+        });
     }
 
     @Override

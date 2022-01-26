@@ -86,7 +86,16 @@ public class OmiljeniOglasiActivity extends ToolbarNavigacijaSetup {
                return false;
             }
         });
-        Log.println(Log.ASSERT, "[Omiljeni Oglasi]", "pozvan sam");
+
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                imgNoResults.setVisibility(View.INVISIBLE);
+                txtNoResults.setVisibility(View.INVISIBLE);
+                adapterArtikli.getFilter().filter("");
+                return false;
+            }
+        });
     }
     @Override
     public void primeniFiltere() {
