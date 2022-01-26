@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -121,6 +122,7 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
             public void onChanged(ResponseBody responseBody) {
                 Bitmap bmp = BitmapFactory.decodeStream(responseBody.byteStream());
                 holder.imgProfil.setImageBitmap(bmp);
+                Log.println(Log.ASSERT,komentari.get(position).getSadrzaj().substring(0,10)+"...", bmp.toString().substring(0,20));
             }
         });
 
