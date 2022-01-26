@@ -131,6 +131,11 @@ public class ApiManager {
         dodajKomentar.enqueue(callback);
     }
 
+    public void LajkujKomentar(int KomentarId, String UserId, Callback<String> callback){
+        Call<String> lajkujKomentar = service.LajkujKomentar(KomentarId, UserId);
+        lajkujKomentar.enqueue(callback);
+    }
+
     public void IzbrisiKomentar(int KomentarId, Callback<String> callback){
         Call<String> izbrisiKomentar = service.IzbrisiKoemntar(KomentarId);
         izbrisiKomentar.enqueue(callback);

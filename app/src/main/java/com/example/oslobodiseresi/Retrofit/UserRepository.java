@@ -218,6 +218,24 @@ public class UserRepository {
         return flt;
     }
 
+    public MutableLiveData<String> LajkujKomentar(int KomentarId, String UserId){
+        apiManager.LajkujKomentar(KomentarId, UserId, new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if(response.isSuccessful()){
+                    str.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+
+        return str;
+    }
+
     public MutableLiveData<ResponseBody> PostSlika(MultipartBody.Part body){
         apiManager.PostSlika(body, new Callback<ResponseBody>() {
             @Override

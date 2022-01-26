@@ -81,6 +81,9 @@ public interface RestInterface {
     @PATCH("items/komentar/dodaj/{OglasId}/{UserId}/{tekst}")
     Call<Komentar> DodajKomentar(@Path("OglasId") int OglasId, @Path("UserId") String UserId, @Path("tekst") String tekst);
 
+    @PATCH("items/komentar/lajkuj/{KomentarId}/{UserId}")
+    Call<String> LajkujKomentar(@Path("KomentarId") int KomentarId, @Path("UserId") String UserId);
+
     @Multipart
     @POST("slike/post")
     Call<ResponseBody> PostSlika(@Part MultipartBody.Part image);

@@ -14,6 +14,7 @@ public class Korisnik {
     private int brojOcena;
     private float zbirOcena;
     private ArrayList<Item> omiljeniOglasi;
+    private ArrayList<Integer> lajkovaniKomentari;
 
     public Korisnik(String Id, String ime, String email, String brojTelefona, int brojOcena, int zbirOcena) {
         this.Id = Id;
@@ -51,6 +52,8 @@ public class Korisnik {
     public ArrayList<Item> getOmiljeniOglasi() {
         return omiljeniOglasi;
     }
+
+    public ArrayList<Integer> getLajkovaniKomentari() { return lajkovaniKomentari; }
 
     @Override
     public String toString() {
