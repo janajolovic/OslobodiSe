@@ -92,14 +92,9 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
                     builder.setPositiveButton("Da", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            MutableLiveData<String> mld = ItemRepository.getInstance(MainApplication.apiManager).IzbrisiKomentar(komentari.get(position).getId());
-                            mld.observe((AppCompatActivity)context, new Observer<String>() {
-                                @Override
-                                public void onChanged(String s) {
-                                    komentari.remove(position);
-                                    notifyItemRemoved(position);
-                                }
-                            });
+                            ItemRepository.getInstance(MainApplication.apiManager).IzbrisiKomentar(komentari.get(position).getId());
+                            komentari.remove(position);
+                            notifyItemRemoved(position);
                         }
                     });
                     builder.setNegativeButton("Ne", new DialogInterface.OnClickListener() {

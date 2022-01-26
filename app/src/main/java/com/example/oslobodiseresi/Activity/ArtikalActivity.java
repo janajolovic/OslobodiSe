@@ -220,8 +220,8 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
                             @Override
                             public void onChanged(Komentar k) {
                                 //todo da se otkomentarise
-//                                komentarAdapter.getKomentari().add(0, komentar);
-//                                komentarAdapter.notifyItemInserted(0);
+                                komentarAdapter.getKomentari().add(0, k);
+                                komentarAdapter.notifyItemInserted(0);
                             }
                         });
                     } else {
