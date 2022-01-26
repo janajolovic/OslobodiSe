@@ -71,7 +71,6 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
         mldKategorije.observe(NapraviArtikal.this, new Observer<ArrayList<Kategorija>>() {
             @Override
             public void onChanged(ArrayList<Kategorija> kategorija) {
-                Toast.makeText(NapraviArtikal.this, "Kategorije pozvan sam", Toast.LENGTH_SHORT).show();
                 ArrayList<String> kategorije = new ArrayList<>();
                 kategorije.add("Izaberite kategoriju");
                 for (Kategorija k : mldKategorije.getValue()) {
@@ -80,6 +79,7 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
                 ArrayAdapter<String> kategorijeAdapter = new ArrayAdapter<>(NapraviArtikal.this, android.R.layout.simple_spinner_dropdown_item, kategorije);
                 kategorijeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinnerKategorije.setAdapter(kategorijeAdapter);
+                Toast.makeText(NapraviArtikal.this, "Kategorije pozvan sam " + String.valueOf(kategorije.size()), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -89,7 +89,6 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
         mldGradovi.observe(NapraviArtikal.this, new Observer<ArrayList<Grad>>() {
             @Override
             public void onChanged(ArrayList<Grad> grad) {
-                Toast.makeText(NapraviArtikal.this, "Gradovi pozvan sam", Toast.LENGTH_SHORT).show();
                 ArrayList<String> gradovi = new ArrayList<>();
                 gradovi.add("Izaberite grad");
                 for (Grad g : mldGradovi.getValue()) {
@@ -98,6 +97,7 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
                 ArrayAdapter<String> gradoviAdapter = new ArrayAdapter<>(NapraviArtikal.this, android.R.layout.simple_spinner_dropdown_item, gradovi);
                 gradoviAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinnerGradovi.setAdapter(gradoviAdapter);
+                Toast.makeText(NapraviArtikal.this, "Gradovi pozvan sam " + String.valueOf(gradovi.size()), Toast.LENGTH_SHORT).show();
             }
         });
 
