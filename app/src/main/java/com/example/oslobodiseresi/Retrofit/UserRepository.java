@@ -256,21 +256,21 @@ public class UserRepository {
         return str;
     }
 
-    public MutableLiveData<String> GetProfilna(String UserId){
-        apiManager.GetProfilna(UserId, new Callback<String>() {
+    public MutableLiveData<ResponseBody> GetProfilna(String UserId){
+        apiManager.GetProfilna(UserId, new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if(response.isSuccessful()){
-                    str.setValue(response.body());
+                    responseBody.setValue(response.body());
                 }
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
 
             }
         });
 
-        return str;
+        return responseBody;
     }
 }

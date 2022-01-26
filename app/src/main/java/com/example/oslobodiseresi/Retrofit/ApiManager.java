@@ -142,8 +142,8 @@ public class ApiManager {
         postSlika.enqueue(callback);
     }
 
-    public void GetProfilna(String UserId, Callback<String> callback){
-        Call<String> getProfilna = service.GetProfilna(UserId);
+    public void GetProfilna(String UserId, Callback<ResponseBody> callback){
+        Call<ResponseBody> getProfilna = service.GetProfilna(UserId);
         getProfilna.enqueue(callback);
     }
 

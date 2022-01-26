@@ -95,5 +95,5 @@ public interface RestInterface {
     Call<String> deleteItem(@Body int Id);
 
     @GET("users/getprofilna/{UserId}")
-    Call<String> GetProfilna(@Path("UserId") String UserId);
+    Call<ResponseBody> GetProfilna(@Path("UserId") String UserId);
 }
