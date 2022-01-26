@@ -22,6 +22,7 @@ import com.example.oslobodiseresi.Activity.ProfilKorisnika;
 import com.example.oslobodiseresi.Models.Item;
 import com.example.oslobodiseresi.Models.Komentar;
 import com.example.oslobodiseresi.Retrofit.ItemRepository;
+import com.example.oslobodiseresi.Retrofit.UserRepository;
 
 import java.util.ArrayList;
 
@@ -46,13 +47,16 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
         holder.imgLajk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                UserRepository.getInstance(MainApplication.apiManager).LajkujKomentar(komentari.get(position).getId(), Utils.getInstance().getKorisnik().getId());
                 komentari.get(position).setLajkovan(!komentari.get(position).isLajkovan());
                 if(komentari.get(position).isLajkovan()){
                     holder.imgLajk.setImageResource(R.drawable.ic_baseline_thumb_up_24);
                     komentari.get(position).setBrojLajkova(komentari.get(position).getBrojLajkova()+1);
+                    Utils.getInstance().getKorisnik().getLajkovaniKomentari().add(komentari.get(position).getId());
                 } else {
                     holder.imgLajk.setImageResource(R.drawable.ic_outline_thumb_up_24);
                     komentari.get(position).setBrojLajkova(komentari.get(position).getBrojLajkova()-1);
+                    Utils.getInstance().getKorisnik().getLajkovaniKomentari().remove(komentari.get(position).getId());
                 }
                 notifyItemChanged(position);
             }
