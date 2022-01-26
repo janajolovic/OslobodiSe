@@ -219,7 +219,7 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
                         mld.observe(ArtikalActivity.this, new Observer<Komentar>() {
                             @Override
                             public void onChanged(Komentar k) {
-                                Toast.makeText(context, "Komentar je objavljen", Toast.LENGTH_SHORT).show();
+                                Log.println(Log.ASSERT,"[dodaj komentar]","dodat sam");
                                 txtDodajKomentar.setText("");
                                 onResume();
                             }
