@@ -57,7 +57,8 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        if(komentari.get(position).isLajkovan()) {
+        final boolean[] lajkovan = {komentari.get(position).isLajkovan()};
+        if(lajkovan[0]) {
             holder.imgLajk.setImageResource(R.drawable.ic_baseline_thumb_up_24);
         } else {
             holder.imgLajk.setImageResource(R.drawable.ic_outline_thumb_up_24);
@@ -68,18 +69,17 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
             public void onClick(View v) {
                 if(Utils.getInstance().jeUlogovan()){
                     UserRepository.getInstance(MainApplication.apiManager).LajkujKomentar(komentari.get(position).getId(), Utils.getInstance().getKorisnik().getId());
-                    komentari.get(position).setLajkovan(!komentari.get(position).isLajkovan());
-                    if(komentari.get(position).isLajkovan()){
+                    lajkovan[0] = !lajkovan[0];
+                    if(lajkovan[0]){
                         holder.imgLajk.setImageResource(R.drawable.ic_baseline_thumb_up_24);
-                        komentari.get(position).setBrojLajkova(komentari.get(position).getBrojLajkova()+1);
+                        holder.txtBrojGlasova.setText(Integer.parseInt(holder.txtBrojGlasova.getText().toString())+1);
                         Utils.getInstance().getKorisnik().getLajkovaniKomentari().add(komentari.get(position).getId());
                     } else {
                         holder.imgLajk.setImageResource(R.drawable.ic_outline_thumb_up_24);
-                        komentari.get(position).setBrojLajkova(komentari.get(position).getBrojLajkova()-1);
+                        holder.txtBrojGlasova.setText(Integer.parseInt(holder.txtBrojGlasova.getText().toString())-1);
                         Utils.getInstance().getKorisnik().getLajkovaniKomentari().remove(Integer.valueOf(komentari.get(position).getId()));
                     }
                     Utils.getInstance().SacuvajKorisnika(Utils.getInstance().getKorisnik());
-                    notifyItemChanged(position);
                 } else {
                     Toast.makeText(context, "Morate biti prijavljeni da biste lajkovali komentare", Toast.LENGTH_SHORT).show();
                 }
