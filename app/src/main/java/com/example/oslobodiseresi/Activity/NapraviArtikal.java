@@ -79,7 +79,7 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
                 ArrayAdapter<String> kategorijeAdapter = new ArrayAdapter<>(NapraviArtikal.this, android.R.layout.simple_spinner_dropdown_item, kategorije);
                 kategorijeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinnerKategorije.setAdapter(kategorijeAdapter);
-                Toast.makeText(NapraviArtikal.this, "Kategorije pozvan sam " + String.valueOf(kategorije.size()), Toast.LENGTH_SHORT).show();
+                Log.println(Log.ASSERT,"[Kategorije]",String.valueOf(spinnerKategorije.getAdapter().getCount()));
             }
         });
 
@@ -97,9 +97,12 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
                 ArrayAdapter<String> gradoviAdapter = new ArrayAdapter<>(NapraviArtikal.this, android.R.layout.simple_spinner_dropdown_item, gradovi);
                 gradoviAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinnerGradovi.setAdapter(gradoviAdapter);
-                Toast.makeText(NapraviArtikal.this, "Gradovi pozvan sam " + String.valueOf(gradovi.size()), Toast.LENGTH_SHORT).show();
+                Log.println(Log.ASSERT,"[Gradovi]",String.valueOf(spinnerGradovi.getAdapter().getCount()));
             }
         });
+
+        Toast.makeText(NapraviArtikal.this, "Kategorije su "+spinnerKategorije.getAdapter().getCount(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(NapraviArtikal.this, "Gradovi su "+spinnerKategorije.getAdapter().getCount(), Toast.LENGTH_SHORT).show();
 
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
