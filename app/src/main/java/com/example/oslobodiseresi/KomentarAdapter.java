@@ -72,11 +72,11 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
                     lajkovan[0] = !lajkovan[0];
                     if(lajkovan[0]){
                         holder.imgLajk.setImageResource(R.drawable.ic_baseline_thumb_up_24);
-                        holder.txtBrojGlasova.setText(Integer.parseInt(holder.txtBrojGlasova.getText().toString())+1);
+                        holder.txtBrojGlasova.setText(String.valueOf(Integer.parseInt(holder.txtBrojGlasova.getText().toString())+1));
                         Utils.getInstance().getKorisnik().getLajkovaniKomentari().add(komentari.get(position).getId());
                     } else {
                         holder.imgLajk.setImageResource(R.drawable.ic_outline_thumb_up_24);
-                        holder.txtBrojGlasova.setText(Integer.parseInt(holder.txtBrojGlasova.getText().toString())-1);
+                        holder.txtBrojGlasova.setText(String.valueOf(Integer.parseInt(holder.txtBrojGlasova.getText().toString())-1));
                         Utils.getInstance().getKorisnik().getLajkovaniKomentari().remove(Integer.valueOf(komentari.get(position).getId()));
                     }
                     Utils.getInstance().SacuvajKorisnika(Utils.getInstance().getKorisnik());
