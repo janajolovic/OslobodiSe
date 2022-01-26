@@ -79,7 +79,7 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
                 ArrayAdapter<String> kategorijeAdapter = new ArrayAdapter<>(NapraviArtikal.this, android.R.layout.simple_spinner_dropdown_item, kategorije);
                 kategorijeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinnerKategorije.setAdapter(kategorijeAdapter);
-                Log.println(Log.ASSERT,"[Kategorije]",String.valueOf(spinnerKategorije.getAdapter().getCount()));
+                //Log.println(Log.ASSERT,"[Kategorije]",String.valueOf(spinnerKategorije.getAdapter().getCount()));
             }
         });
 
@@ -97,7 +97,7 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
                 ArrayAdapter<String> gradoviAdapter = new ArrayAdapter<>(NapraviArtikal.this, android.R.layout.simple_spinner_dropdown_item, gradovi);
                 gradoviAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinnerGradovi.setAdapter(gradoviAdapter);
-                Log.println(Log.ASSERT,"[Gradovi]",String.valueOf(spinnerGradovi.getAdapter().getCount()));
+                //Log.println(Log.ASSERT,"[Gradovi]",String.valueOf(spinnerGradovi.getAdapter().getCount()));
             }
         });
 
