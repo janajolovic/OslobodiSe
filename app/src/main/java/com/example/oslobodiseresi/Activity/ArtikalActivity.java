@@ -195,20 +195,21 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
             //recycler view
             komentarAdapter = new KomentarAdapter(this);
 
-            ArrayList<Komentar> komentari = new ArrayList<>();
-            for(Komentar k:artikal.getKomentari()){
-                komentari.add(k);
-            }
+            MutableLiveData<ArrayList<Komentar>> mld = ItemRepository.getInstance(MainApplication.apiManager).GetKomentariFromOglas(artikal.getId());
+            mld.observe(ArtikalActivity.this, new Observer<ArrayList<Komentar>>() {
+                @Override
+                public void onChanged(ArrayList<Komentar> komentari) {
+                    if(Utils.getInstance().jeUlogovan()){
+                        for(int i=0;i<komentari.size();i++) {
+                            komentari.get(i).setLajkovan(Utils.getInstance().getKorisnik().getLajkovaniKomentari().contains(komentari.get(i).getId()));
+                        }
+                    }
 
-            if(Utils.getInstance().jeUlogovan()){
-                for(int i=0;i<komentari.size();i++) {
-                    komentari.get(i).setLajkovan(Utils.getInstance().getKorisnik().getLajkovaniKomentari().contains(komentari.get(i).getId()));
+                    Collections.reverse(komentari);
+                    komentarAdapter.setKomentari(komentari);
+                    komentariRecycler.setAdapter(komentarAdapter);
                 }
-            }
-
-            Collections.reverse(komentari);
-            komentarAdapter.setKomentari(komentari);
-            komentariRecycler.setAdapter(komentarAdapter);
+            });
 
             btnDodajKomentar.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -236,19 +237,21 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
     protected void onResume() {
         super.onResume();
         if(artikal != null){
-            ArrayList<Komentar> komentari = new ArrayList<>();
-            for(Komentar k:artikal.getKomentari()){
-                komentari.add(k);
-            }
-            if(Utils.getInstance().jeUlogovan()){
-                for(int i=0;i<komentari.size();i++) {
-                    komentari.get(i).setLajkovan(Utils.getInstance().getKorisnik().getLajkovaniKomentari().contains(komentari.get(i).getId()));
-                }
-            }
-            Collections.reverse(komentari);
-            komentarAdapter.setKomentari(komentari);
-            komentariRecycler.setAdapter(komentarAdapter);
-        }
+            MutableLiveData<ArrayList<Komentar>> mld = ItemRepository.getInstance(MainApplication.apiManager).GetKomentariFromOglas(artikal.getId());
+            mld.observe(ArtikalActivity.this, new Observer<ArrayList<Komentar>>() {
+                @Override
+                public void onChanged(ArrayList<Komentar> komentari) {
+                    if(Utils.getInstance().jeUlogovan()){
+                        for(int i=0;i<komentari.size();i++) {
+                            komentari.get(i).setLajkovan(Utils.getInstance().getKorisnik().getLajkovaniKomentari().contains(komentari.get(i).getId()));
+                        }
+                    }
 
+                    Collections.reverse(komentari);
+                    komentarAdapter.setKomentari(komentari);
+                    komentariRecycler.setAdapter(komentarAdapter);
+                }
+            });
+        }
     }
 }
