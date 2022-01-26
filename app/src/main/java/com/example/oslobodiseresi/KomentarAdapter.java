@@ -20,6 +20,7 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.oslobodiseresi.Activity.ArtikalActivity;
+import com.example.oslobodiseresi.Activity.MojProfilActivity;
 import com.example.oslobodiseresi.Activity.ProfilKorisnika;
 import com.example.oslobodiseresi.Models.Item;
 import com.example.oslobodiseresi.Models.Komentar;
@@ -84,9 +85,14 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
         holder.txtIme.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, ProfilKorisnika.class);
-                intent.putExtra("KORISNIK_ID", komentari.get(position).getKorisnik().getId());
-                context.startActivity(intent);
+                if(Utils.getInstance().jeUlogovan()&&Utils.getInstance().getKorisnik().getId().equals(komentari.get(position).getKorisnik().getId())){
+                    Intent intent = new Intent(context, MojProfilActivity.class);
+                    context.startActivity(intent);
+                } else {
+                    Intent intent = new Intent(context, ProfilKorisnika.class);
+                    intent.putExtra("KORISNIK_ID", komentari.get(position).getKorisnik().getId());
+                    context.startActivity(intent);
+                }
             }
         });
 
@@ -102,9 +108,14 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
         holder.imgProfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, ProfilKorisnika.class);
-                intent.putExtra("KORISNIK_ID", komentari.get(position).getKorisnik().getId());
-                context.startActivity(intent);
+                if(Utils.getInstance().jeUlogovan()&&Utils.getInstance().getKorisnik().getId().equals(komentari.get(position).getKorisnik().getId())){
+                    Intent intent = new Intent(context, MojProfilActivity.class);
+                    context.startActivity(intent);
+                } else {
+                    Intent intent = new Intent(context, ProfilKorisnika.class);
+                    intent.putExtra("KORISNIK_ID", komentari.get(position).getKorisnik().getId());
+                    context.startActivity(intent);
+                }
             }
         });
 
