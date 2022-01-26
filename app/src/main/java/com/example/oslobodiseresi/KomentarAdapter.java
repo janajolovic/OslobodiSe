@@ -66,19 +66,23 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
         holder.imgLajk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UserRepository.getInstance(MainApplication.apiManager).LajkujKomentar(komentari.get(position).getId(), Utils.getInstance().getKorisnik().getId());
-                komentari.get(position).setLajkovan(!komentari.get(position).isLajkovan());
-                if(komentari.get(position).isLajkovan()){
-                    holder.imgLajk.setImageResource(R.drawable.ic_baseline_thumb_up_24);
-                    komentari.get(position).setBrojLajkova(komentari.get(position).getBrojLajkova()+1);
-                    Utils.getInstance().getKorisnik().getLajkovaniKomentari().add(komentari.get(position).getId());
+                if(Utils.getInstance().jeUlogovan()){
+                    UserRepository.getInstance(MainApplication.apiManager).LajkujKomentar(komentari.get(position).getId(), Utils.getInstance().getKorisnik().getId());
+                    komentari.get(position).setLajkovan(!komentari.get(position).isLajkovan());
+                    if(komentari.get(position).isLajkovan()){
+                        holder.imgLajk.setImageResource(R.drawable.ic_baseline_thumb_up_24);
+                        komentari.get(position).setBrojLajkova(komentari.get(position).getBrojLajkova()+1);
+                        Utils.getInstance().getKorisnik().getLajkovaniKomentari().add(komentari.get(position).getId());
+                    } else {
+                        holder.imgLajk.setImageResource(R.drawable.ic_outline_thumb_up_24);
+                        komentari.get(position).setBrojLajkova(komentari.get(position).getBrojLajkova()-1);
+                        Utils.getInstance().getKorisnik().getLajkovaniKomentari().remove(Integer.valueOf(komentari.get(position).getId()));
+                    }
+                    Utils.getInstance().SacuvajKorisnika(Utils.getInstance().getKorisnik());
+                    notifyItemChanged(position);
                 } else {
-                    holder.imgLajk.setImageResource(R.drawable.ic_outline_thumb_up_24);
-                    komentari.get(position).setBrojLajkova(komentari.get(position).getBrojLajkova()-1);
-                    Utils.getInstance().getKorisnik().getLajkovaniKomentari().remove(Integer.valueOf(komentari.get(position).getId()));
+                    Toast.makeText(context, "Morate biti prijavljeni da biste lajkovali komentare", Toast.LENGTH_SHORT).show();
                 }
-                Utils.getInstance().SacuvajKorisnika(Utils.getInstance().getKorisnik());
-                notifyItemChanged(position);
             }
         });
 
