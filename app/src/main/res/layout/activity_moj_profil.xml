@@ -110,8 +110,7 @@
         android:layout_height="@dimen/velicina_ikonice"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:srcCompat="@drawable/ic_baseline_camera_alt_24"
-        android:background="?colorOnBackground"/>
+        app:srcCompat="@drawable/ic_baseline_camera_alt_24"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
