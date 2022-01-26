@@ -44,6 +44,12 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
+        if(komentari.get(position).isLajkovan()) {
+            holder.imgLajk.setImageResource(R.drawable.ic_baseline_thumb_up_24);
+        } else {
+            holder.imgLajk.setImageResource(R.drawable.ic_outline_thumb_up_24);
+        }
         holder.imgLajk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
