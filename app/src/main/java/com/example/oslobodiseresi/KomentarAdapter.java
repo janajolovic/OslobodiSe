@@ -27,6 +27,7 @@ import com.example.oslobodiseresi.Activity.MojProfilActivity;
 import com.example.oslobodiseresi.Activity.ProfilKorisnika;
 import com.example.oslobodiseresi.Models.Item;
 import com.example.oslobodiseresi.Models.Komentar;
+import com.example.oslobodiseresi.Models.Korisnik;
 import com.example.oslobodiseresi.Retrofit.ItemRepository;
 import com.example.oslobodiseresi.Retrofit.UserRepository;
 
@@ -103,6 +104,11 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
                             mld.observe((AppCompatActivity)context, new Observer<String>() {
                                 @Override
                                 public void onChanged(String s) {
+                                    for(int i=0;i<komentari.size();i++){
+                                        Log.println(Log.ASSERT,"["+String.valueOf(i)+"]",String.valueOf(komentari.get(i).getId()));
+                                    }
+                                    Log.println(Log.ASSERT,"[pozicija je]",String.valueOf(position));
+                                    Log.println(Log.ASSERT,"[getAdapterPosition je]",String.valueOf(holder.getAdapterPosition()));
                                     komentari.remove(komentari.get(holder.getAdapterPosition()));
                                     notifyItemRemoved(holder.getAdapterPosition());
                                     notifyItemRangeChanged(holder.getAdapterPosition(), getItemCount());
