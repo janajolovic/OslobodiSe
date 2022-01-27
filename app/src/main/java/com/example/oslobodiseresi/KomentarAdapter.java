@@ -62,6 +62,7 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.txtIme.setText(komentari.get(holder.getAdapterPosition()).getKorisnik().getIme());
         holder.txtSadrzaj.setText(komentari.get(holder.getAdapterPosition()).getSadrzaj());
+        holder.txtBrojGlasova.setText(komentari.get(holder.getAdapterPosition()).getBrojLajkova().toString());
 
         holder.txtIme.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +77,17 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
             }
         });
 
+        MutableLiveData<ResponseBody> mld = UserRepository.getInstance(MainApplication).GetProfilna(komentari.get(holder.getAdapterPosition()).getKorisnik().getId());
+        mld.observe((AppCompatActivity) context, new Observer<ResponseBody>() {
+            @Override
+            public void onChanged(ResponseBody responseBody) {
+                if(holder.getAdapterPosition()==-1){
+                    return;
+                }
+                Bitmap bmp = BitmapFactory.decodeStream(responseBody.byteStream());
+                holder.imgProfil.setImageBitmap(bmp);
+            }
+        });
         holder.imgProfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,6 +97,32 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
                     Intent intent = new Intent(context, ProfilKorisnika.class);
                     intent.putExtra("KORISNIK_ID", komentari.get(holder.getAdapterPosition()).getKorisnik().getId());
                     context.startActivity(intent);
+                }
+            }
+        });
+
+        holder.lajkovan = komentari.get(holder.getAdapterPosition()).isLajkovan();
+        if(holder.lajkovan){
+            holder.imgLajk.setImageResource(R.drawable.ic_baseline_thumb_up_24);
+        }else{
+            holder.imgLajk.setImageResource(R.drawable.ic_outline_thumb_up_24);
+        }
+        holder.imgLajk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(Utils.getInstance().jeUlogovan()){
+
+                    holder.lajkovan = !holder.lajkovan;
+                    UserRepository.getInstance(MainApplication.apiManager).LajkujKomentar(komentari.get(holder.getAdapterPosition()).getId(), Utils.getInstance().getKorisnik().getId());
+                    if(holder.lajkovan){
+                        holder.imgLajk.setImageResource(R.drawable.ic_baseline_thumb_up_24);
+                        holder.txtBrojGlasova.setText((Integer.parseInt(holder.txtBrojGlasova.getText().toString())+1).toString());
+                    } else{
+                        holder.imgLajk.setImageResource(R.drawable.ic_outline_thumb_up_24);
+                        holder.txtBrojGlasova.setText((Integer.parseInt(holder.txtBrojGlasova.getText().toString())-1).toString());
+                    }
+                } else {
+                    Toast.makeText(context, "Morate biti prijavljeni da biste lajkovali komentar", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -141,6 +179,7 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        boolean lajkovan;
         private CircleImageView imgProfil;
         private TextView txtIme;
         private TextView txtBrojGlasova;
