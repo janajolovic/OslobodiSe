@@ -130,7 +130,7 @@ tools:context=".Activity.NapraviArtikal">
                 android:textSize="@dimen/velicina_slova"
                 android:visibility="invisible"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerKategorije"/>
+                app:layout_constraintTop_toBottomOf="@+id/spinnerKategorije2"/>
 
             <Spinner
                 android:id="@+id/spinnerKategorije2"
