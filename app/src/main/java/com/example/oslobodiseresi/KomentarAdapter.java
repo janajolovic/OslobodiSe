@@ -109,9 +109,8 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
                                     }
                                     Log.println(Log.ASSERT,"[pozicija je]",String.valueOf(position));
                                     Log.println(Log.ASSERT,"[getAdapterPosition je]",String.valueOf(holder.getAdapterPosition()));
-                                    komentari.remove(komentari.get(holder.getAdapterPosition()));
-                                    notifyItemRemoved(holder.getAdapterPosition());
-                                    notifyItemRangeChanged(holder.getAdapterPosition(), getItemCount());
+                                    komentari.remove(komentari.get(position));
+                                    notifyItemRemoved(position);
                                 }
                             });
                         }
