@@ -55,7 +55,7 @@
         <entry key="..\:/Users/Computer/AndroidStudioProjects/OslobodiSe3/app/src/main/res/drawable/ic_baseline_thumb_down_24.xml" value="0.3072916666666667" />
         <entry key="..\:/Users/Computer/AndroidStudioProjects/OslobodiSe3/app/src/main/res/drawable/ic_baseline_thumb_up_24.xml" value="0.3072916666666667" />
         <entry key="..\:/Users/Computer/AndroidStudioProjects/OslobodiSe3/app/src/main/res/drawable/ic_search.xml" value="0.3619791666666667" />
-        <entry key="..\:/Users/Computer/AndroidStudioProjects/OslobodiSe3/app/src/main/res/layout/activity_artikal.xml" value="0.1" />
+        <entry key="..\:/Users/Computer/AndroidStudioProjects/OslobodiSe3/app/src/main/res/layout/activity_artikal.xml" value="0.22" />
         <entry key="..\:/Users/Computer/AndroidStudioProjects/OslobodiSe3/app/src/main/res/layout/activity_main.xml" value="0.16818642350557245" />
         <entry key="..\:/Users/Computer/AndroidStudioProjects/OslobodiSe3/app/src/main/res/layout/activity_moj_profil.xml" value="0.22" />
         <entry key="..\:/Users/Computer/AndroidStudioProjects/OslobodiSe3/app/src/main/res/layout/activity_moji_oglasi.xml" value="0.14159067882472137" />
@@ -72,13 +72,11 @@
         <entry key="..\:/Users/Davud/Desktop/OslobodiSe/app/src/main/res/layout/activity_informacije.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/Davud/Desktop/OslobodiSe/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Users/Davud/Desktop/OslobodiSe/app/src/main/res/layout/activity_main.xml" value="0.22333333333333336" />
-        <entry key="..\:/Users/Davud/Desktop/OslobodiSe/app/src/main/res/layout/activity_moj_profil.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/Davud/Desktop/OslobodiSe/app/src/main/res/layout/activity_moji_oglasi.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/Davud/Desktop/OslobodiSe/app/src/main/res/layout/activity_napravi_artikal.xml" value="0.22333333333333336" />
         <entry key="..\:/Users/Davud/Desktop/OslobodiSe/app/src/main/res/layout/activity_omiljeni_oglasi.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/Davud/Desktop/OslobodiSe/app/src/main/res/layout/activity_profil_korisnika.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/Davud/Desktop/OslobodiSe/app/src/main/res/layout/activity_registracija.xml" value="0.22333333333333336" />
-        <entry key="..\:/Users/Davud/Desktop/OslobodiSe/app/src/main/res/layout/nav_activity_napravi_artikal.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/Davud/Desktop/OslobodiSe/app/src/main/res/layout/nav_activity_omiljeni_oglasi.xml" value="0.1" />
         <entry key="..\:/Users/Davud/Desktop/OslobodiSe/app/src/main/res/layout/nav_activity_profil_korisnika.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/Davud/Desktop/OslobodiSe/app/src/main/res/layout/spinner_na_plavo.xml" value="0.17916666666666667" />
