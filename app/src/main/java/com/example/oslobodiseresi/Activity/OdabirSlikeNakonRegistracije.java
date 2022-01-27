@@ -9,11 +9,14 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -22,10 +25,13 @@ import android.widget.Toast;
 
 import com.example.oslobodiseresi.MainApplication;
 import com.example.oslobodiseresi.Models.Korisnik;
+import com.example.oslobodiseresi.Models.UploadImage;
 import com.example.oslobodiseresi.R;
 import com.example.oslobodiseresi.Retrofit.UserRepository;
 import com.example.oslobodiseresi.ToolbarNavigacijaSetup;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -72,10 +78,23 @@ public class OdabirSlikeNakonRegistracije extends ToolbarNavigacijaSetup {
                 intent.setType("image/*");
                 someActivityResultLauncher.launch(intent);
 
+
+
                 btnPotvrdite.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //todo postavi sliku korisniku
+                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                        byte[] imageBytes = baos.toByteArray();
+                        String imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+                        MutableLiveData<String> mld = UserRepository.getInstance(MainApplication.apiManager).PostSlika(new UploadImage(imageString));
+                        mld.observe(OdabirSlikeNakonRegistracije.this, new Observer<String>() {
+                            @Override
+                            public void onChanged(String s) {
+                                Intent intent = new Intent(OdabirSlikeNakonRegistracije.this, MainActivity.class);
+                                startActivity(intent);
+                            }
+                        });
                     }
                 });
             }
@@ -83,24 +102,37 @@ public class OdabirSlikeNakonRegistracije extends ToolbarNavigacijaSetup {
     }
 
     ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if (result.getResultCode() == Activity.RESULT_OK) {
-                        // There are no request codes
-                        Intent data = result.getData();
-                        uri = data.getData();
-                        try{
-                            bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
-                            imgProfil.setImageBitmap(bitmap);
-                        } catch (FileNotFoundException e){
-                            e.printStackTrace();
-                        } catch (IOException e)
-                        {
-                            e.printStackTrace();
-                        }
+        new ActivityResultContracts.StartActivityForResult(),
+        new ActivityResultCallback<ActivityResult>() {
+            @Override
+            public void onActivityResult(ActivityResult result) {
+                if (result.getResultCode() == Activity.RESULT_OK) {
+                    // There are no request codes
+                    Intent data = result.getData();
+                    uri = data.getData();
+                    try{
+                        bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
+                        imgProfil.setImageBitmap(bitmap);
+                    } catch (FileNotFoundException e){
+                        e.printStackTrace();
+                    } catch (IOException e)
+                    {
+                        e.printStackTrace();
                     }
                 }
-            });
+            }
+        });
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
+
+    public String getRealPathFromURI(Uri uri) {
+        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+        cursor.moveToFirst();
+        int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+        return cursor.getString(idx);
+    }
 }

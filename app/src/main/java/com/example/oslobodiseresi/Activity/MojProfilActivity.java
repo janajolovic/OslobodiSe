@@ -69,34 +69,8 @@ public class MojProfilActivity extends ToolbarNavigacijaSetup {
         mld.observe(MojProfilActivity.this, new Observer<ResponseBody>() {
             @Override
             public void onChanged(ResponseBody responseBody) {
-                if(!promenjen){
-
-                    Bitmap bmp = BitmapFactory.decodeStream(responseBody.byteStream());
-
-                    if(bmp!=null){
-                        promenjen=true;
-                        bitmap=bmp;
-                        imgProfil.setImageBitmap(bitmap);
-                        Log.println(Log.ASSERT,"nbtn","bitmapa je promenjena");
-                    }
-                }
-//                try {
-//                    Log.println(Log.ASSERT, "[response]", responseBody.string().substring(0,100));
-//                } catch (IOException e) {
-//                    Log.println(Log.ASSERT, "[response err]", e.getMessage());
-//                }
-//
                 Bitmap bmp = BitmapFactory.decodeStream(responseBody.byteStream());
                 imgProfil.setImageBitmap(bmp);
-//                try {
-//                    responseBody.byteStream().reset();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//                if (bmp != null)
-//                else {
-//                    Log.println(Log.ASSERT, "[bmp]", "null");
-//                }
             }
         });
     }
