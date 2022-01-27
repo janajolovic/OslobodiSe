@@ -59,17 +59,17 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.txtIme.setText(komentari.get(position).getKorisnik().getIme());
-        holder.txtSadrzaj.setText(komentari.get(position).getSadrzaj());
+        holder.txtIme.setText(komentari.get(holder.getAdapterPosition()).getKorisnik().getIme());
+        holder.txtSadrzaj.setText(komentari.get(holder.getAdapterPosition()).getSadrzaj());
 
         holder.txtIme.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Utils.getInstance().jeUlogovan() && Utils.getInstance().getKorisnik().getId().equals(komentari.get(position).getKorisnik().getId())){
+                if(Utils.getInstance().jeUlogovan() && Utils.getInstance().getKorisnik().getId().equals(komentari.get(holder.getAdapterPosition()).getKorisnik().getId())){
                     context.startActivity(new Intent(context, MojProfilActivity.class));
                 } else {
                     Intent intent = new Intent(context, ProfilKorisnika.class);
-                    intent.putExtra("KORISNIK_ID", komentari.get(position).getKorisnik().getId());
+                    intent.putExtra("KORISNIK_ID", komentari.get(holder.getAdapterPosition()).getKorisnik().getId());
                     context.startActivity(intent);
                 }
             }
@@ -78,18 +78,18 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
         holder.imgProfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Utils.getInstance().jeUlogovan() && Utils.getInstance().getKorisnik().getId().equals(komentari.get(position).getKorisnik().getId())){
+                if(Utils.getInstance().jeUlogovan() && Utils.getInstance().getKorisnik().getId().equals(komentari.get(holder.getAdapterPosition()).getKorisnik().getId())){
                     context.startActivity(new Intent(context, MojProfilActivity.class));
                 } else {
                     Intent intent = new Intent(context, ProfilKorisnika.class);
-                    intent.putExtra("KORISNIK_ID", komentari.get(position).getKorisnik().getId());
+                    intent.putExtra("KORISNIK_ID", komentari.get(holder.getAdapterPosition()).getKorisnik().getId());
                     context.startActivity(intent);
                 }
             }
         });
 
         holder.izbrisi.setVisibility(View.INVISIBLE);
-        if(Utils.getInstance().jeUlogovan()&&Utils.getInstance().getKorisnik().getId().equals(komentari.get(position).getKorisnik().getId())){
+        if(Utils.getInstance().jeUlogovan()&&Utils.getInstance().getKorisnik().getId().equals(komentari.get(holder.getAdapterPosition()).getKorisnik().getId())){
             holder.izbrisi.setVisibility(View.VISIBLE);
             holder.izbrisi.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -99,7 +99,7 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
                     builder.setPositiveButton("Da", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            MutableLiveData<String> mld = ItemRepository.getInstance(MainApplication.apiManager).IzbrisiKomentar(komentari.get(position).getId());
+                            MutableLiveData<String> mld = ItemRepository.getInstance(MainApplication.apiManager).IzbrisiKomentar(komentari.get(holder.getAdapterPosition()).getId());
                             mld.observe((AppCompatActivity)context, new Observer<String>() {
                                 @Override
                                 public void onChanged(String s) {
