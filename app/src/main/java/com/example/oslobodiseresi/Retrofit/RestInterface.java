@@ -91,8 +91,8 @@ public interface RestInterface {
     @DELETE("/items/komentar/izbrisi/{KomentarId}")
     Call<String> IzbrisiKoemntar(@Path("KomentarId") int KomentarId);
 
-    @HTTP(method = "DELETE", path = "items/delete", hasBody = true)
-    Call<String> deleteItem(@Body int Id);
+    @HTTP(method = "DELETE", path = "items/delete/{OglasId}", hasBody = true)
+    Call<String> deleteItem(@Path("OglasId") int Id);
 
     @GET("users/getprofilna/{UserId}")
     Call<ResponseBody> GetProfilna(@Path("UserId") String UserId);

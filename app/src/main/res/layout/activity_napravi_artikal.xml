@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
 xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
-xmlns:android="http://schemas.android.com/apk/res/android">
+xmlns:android="http://schemas.android.com/apk/res/android"
 tools:context=".Activity.NapraviArtikal">
 <include
     android:id="@+id/toolbar"
@@ -130,25 +130,27 @@ tools:context=".Activity.NapraviArtikal">
                 android:textSize="@dimen/velicina_slova"
                 android:visibility="invisible"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerKategorije"></TextView>
+                app:layout_constraintTop_toBottomOf="@+id/spinnerKategorije"/>
 
             <Spinner
-                android:id="@+id/spinnerKategorije"
+                android:id="@+id/spinnerKategorije2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtOpis" />
 
             <Spinner
-                android:id="@+id/spinnerGradovi"
+                android:id="@+id/spinnerGradovi2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
+                android:textColor="@color/black"
                 android:layout_marginTop="32dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerKategorije" />
+                app:layout_constraintTop_toBottomOf="@+id/spinnerKategorije2" />
 
             <TextView
                 android:id="@+id/txtNemaGrad"
@@ -160,7 +162,7 @@ tools:context=".Activity.NapraviArtikal">
                 android:textSize="@dimen/velicina_slova"
                 android:visibility="invisible"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerGradovi"></TextView>
+                app:layout_constraintTop_toBottomOf="@+id/spinnerGradovi2"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>

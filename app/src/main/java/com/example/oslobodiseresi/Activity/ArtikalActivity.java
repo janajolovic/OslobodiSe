@@ -218,7 +218,6 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
                         mld.observe(ArtikalActivity.this, new Observer<Komentar>() {
                             @Override
                             public void onChanged(Komentar k) {
-                                Log.println(Log.ASSERT,"[dodaj komentar]","dodat sam");
                                 txtDodajKomentar.setText("");
                                 onResume();
                             }

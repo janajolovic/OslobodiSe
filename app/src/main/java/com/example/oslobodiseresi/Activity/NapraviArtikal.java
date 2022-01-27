@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -57,15 +58,32 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
     int SELECT_PHOTO = 1;
     Uri uri;
 
+    ArrayAdapter<String> kategorijeAdapter;
+    ArrayAdapter<String> gradoviAdapter;
+
+    void initViews(){
+        dodajArtikal = findViewById(R.id.dodajArtikal);
+        spinnerGradovi = findViewById(R.id.spinnerGradovi2);
+        spinnerKategorije = findViewById(R.id.spinnerKategorije2);
+        naziv = findViewById(R.id.txtNaziv);
+        opis = findViewById(R.id.txtOpis);
+        slika = findViewById(R.id.slika);
+        izaberi = findViewById(R.id.imgIzaberi);
+        txtNemaKategorija = findViewById(R.id.txtNemaKategorija);
+        txtNemaGrad = findViewById(R.id.txtNemaGrad);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nav_activity_napravi_artikal);
 
-        txtNemaKategorija = findViewById(R.id.txtNemaKategorija);
-        txtNemaGrad = findViewById(R.id.txtNemaGrad);
+        initViews();
 
-        spinnerKategorije = findViewById(R.id.spinnerKategorije);
+        navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        setToolbar(false);
 
         MutableLiveData<ArrayList<Kategorija>> mldKategorije = ItemRepository.getInstance(MainApplication.apiManager).getAllKategorije();
         mldKategorije.observe(NapraviArtikal.this, new Observer<ArrayList<Kategorija>>() {
@@ -76,16 +94,14 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
                 for (Kategorija k : mldKategorije.getValue()) {
                     kategorije.add(k.getNaziv());
                 }
-                ArrayAdapter<String> kategorijeAdapter = new ArrayAdapter<>(NapraviArtikal.this, android.R.layout.simple_spinner_dropdown_item, kategorije);
+                kategorijeAdapter = new ArrayAdapter<>(NapraviArtikal.this, android.R.layout.simple_spinner_dropdown_item, kategorije);
                 kategorijeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinnerKategorije.setAdapter(kategorijeAdapter);
-                for(String kat:kategorije){
-                    Log.println(Log.ASSERT,"[Kategorije]",kat);
+                for(int i=0; i<kategorijeAdapter.getCount(); i++){
+                    Log.println(Log.ASSERT,"[Kategorije]",kategorijeAdapter.getItem(i));
                 }
             }
         });
-
-        spinnerGradovi = findViewById(R.id.spinnerGradovi);
 
         MutableLiveData<ArrayList<Grad>> mldGradovi = ItemRepository.getInstance(MainApplication.apiManager).getAllGradovi();
         mldGradovi.observe(NapraviArtikal.this, new Observer<ArrayList<Grad>>() {
@@ -96,25 +112,15 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
                 for (Grad g : mldGradovi.getValue()) {
                     gradovi.add(g.getNaziv());
                 }
-                ArrayAdapter<String> gradoviAdapter = new ArrayAdapter<>(NapraviArtikal.this, android.R.layout.simple_spinner_dropdown_item, gradovi);
+                gradoviAdapter = new ArrayAdapter<>(NapraviArtikal.this, android.R.layout.simple_spinner_dropdown_item, gradovi);
                 gradoviAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinnerGradovi.setAdapter(gradoviAdapter);
-                for(String gra:gradovi){
-                    Log.println(Log.ASSERT,"[Gradovi]",gra);
+                for(int i=0; i<gradoviAdapter.getCount(); i++){
+                    Log.println(Log.ASSERT,"[Gradovi]",gradoviAdapter.getItem(i));
                 }
             }
         });
 
-        navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
-        setToolbar(false);
-
-        naziv = findViewById(R.id.txtNaziv);
-        opis = findViewById(R.id.txtOpis);
-        slika = findViewById(R.id.slika);
-
-        izaberi = findViewById(R.id.imgIzaberi);
         izaberi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,7 +130,6 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
             }
         });
 
-        dodajArtikal = findViewById(R.id.dodajArtikal);
         dodajArtikal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

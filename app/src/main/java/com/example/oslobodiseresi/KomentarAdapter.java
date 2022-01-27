@@ -104,13 +104,13 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
                             mld.observe((AppCompatActivity)context, new Observer<String>() {
                                 @Override
                                 public void onChanged(String s) {
-                                    for(int i=0;i<komentari.size();i++){
-                                        Log.println(Log.ASSERT,"["+String.valueOf(i)+"]",String.valueOf(komentari.get(i).getId()));
+                                    if(holder.getAdapterPosition()==-1){
+                                        return;
                                     }
-                                    Log.println(Log.ASSERT,"[pozicija je]",String.valueOf(position));
-                                    Log.println(Log.ASSERT,"[getAdapterPosition je]",String.valueOf(holder.getAdapterPosition()));
-                                    komentari.remove(komentari.get(position));
-                                    notifyItemRemoved(position);
+                                    komentari.remove(komentari.get(holder.getAdapterPosition()));
+                                    notifyItemRemoved(holder.getAdapterPosition());
+                                    notifyItemRangeChanged(holder.getAdapterPosition(), komentari.size());
+
                                 }
                             });
                         }
