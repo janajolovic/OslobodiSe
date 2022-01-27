@@ -202,6 +202,10 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
                     if(Utils.getInstance().jeUlogovan()){
                         for(int i=0;i<komentari.size();i++) {
                             komentari.get(i).setLajkovan(Utils.getInstance().getKorisnik().getLajkovaniKomentari().contains(komentari.get(i).getId()));
+                            if(komentari.get(i).isLajkovan())
+                                Log.println(Log.ASSERT,"komentari",String.valueOf(i));
+                            if(Utils.getInstance().getKorisnik().getLajkovaniKomentari().contains(komentari.get(i).getId()))
+                                Log.println(Log.ASSERT,"getLajkovaniKomentari",String.valueOf(i));
                         }
                     }
 

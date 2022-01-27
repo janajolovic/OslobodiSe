@@ -77,7 +77,7 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
             }
         });
 
-        MutableLiveData<ResponseBody> mld = UserRepository.getInstance(MainApplication).GetProfilna(komentari.get(holder.getAdapterPosition()).getKorisnik().getId());
+        MutableLiveData<ResponseBody> mld = UserRepository.getInstance(MainApplication.apiManager).GetProfilna(komentari.get(holder.getAdapterPosition()).getKorisnik().getId());
         mld.observe((AppCompatActivity) context, new Observer<ResponseBody>() {
             @Override
             public void onChanged(ResponseBody responseBody) {
@@ -116,11 +116,15 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
                     UserRepository.getInstance(MainApplication.apiManager).LajkujKomentar(komentari.get(holder.getAdapterPosition()).getId(), Utils.getInstance().getKorisnik().getId());
                     if(holder.lajkovan){
                         holder.imgLajk.setImageResource(R.drawable.ic_baseline_thumb_up_24);
-                        holder.txtBrojGlasova.setText((Integer.parseInt(holder.txtBrojGlasova.getText().toString())+1).toString());
+                        holder.txtBrojGlasova.setText(String.valueOf(Integer.parseInt(holder.txtBrojGlasova.getText().toString())+1));
+                        Utils.getInstance().getKorisnik().getLajkovaniKomentari().add(Integer.valueOf(komentari.get(holder.getAdapterPosition()).getId()));
                     } else{
                         holder.imgLajk.setImageResource(R.drawable.ic_outline_thumb_up_24);
-                        holder.txtBrojGlasova.setText((Integer.parseInt(holder.txtBrojGlasova.getText().toString())-1).toString());
+                        holder.txtBrojGlasova.setText(String.valueOf(Integer.parseInt(holder.txtBrojGlasova.getText().toString())-1));
+
+                        Utils.getInstance().getKorisnik().getLajkovaniKomentari().remove(Integer.valueOf(komentari.get(holder.getAdapterPosition()).getId()));
                     }
+                    Utils.getInstance().SacuvajKorisnika(Utils.getInstance().getKorisnik());
                 } else {
                     Toast.makeText(context, "Morate biti prijavljeni da biste lajkovali komentar", Toast.LENGTH_SHORT).show();
                 }

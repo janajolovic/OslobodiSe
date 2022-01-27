@@ -101,13 +101,8 @@ public class MainActivity extends ToolbarNavigacijaSetup {
             @Override
             public boolean onClose() {
                 adapterArtikli.getFilter().filter("");
-                if (adapterArtikli.getItemCount() == 0) {
-                    imgNoResults.setVisibility(View.VISIBLE);
-                    txtNoResults.setVisibility(View.VISIBLE);
-                } else {
-                    imgNoResults.setVisibility(View.INVISIBLE);
-                    txtNoResults.setVisibility(View.INVISIBLE);
-                }
+                imgNoResults.setVisibility(View.INVISIBLE);
+                txtNoResults.setVisibility(View.INVISIBLE);
                 return false;
             }
         });

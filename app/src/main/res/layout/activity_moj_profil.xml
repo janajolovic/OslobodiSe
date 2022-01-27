@@ -10,7 +10,7 @@
         layout="@layout/toolbar"/>
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/mojaSlika"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_marginTop="32dp"
@@ -28,8 +28,8 @@
         android:textSize="@dimen/velicina_slova"
         android:textStyle="bold"
         android:layout_marginTop="32dp"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintStart_toStartOf="@+id/mojaSlika"
+        app:layout_constraintTop_toBottomOf="@+id/mojaSlika" />
 
     <TextView
         android:id="@+id/textView3"
@@ -39,7 +39,7 @@
         android:text="Email:"
         android:textStyle="bold"
         android:textSize="@dimen/velicina_slova"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/mojaSlika"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
@@ -50,7 +50,7 @@
         android:text="Kontakt:"
         android:textSize="@dimen/velicina_slova"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/mojaSlika"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <TextView
@@ -61,7 +61,7 @@
         android:text="Prosecna ocena:"
         android:textSize="@dimen/velicina_slova"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/mojaSlika"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <TextView
@@ -108,8 +108,8 @@
         android:id="@+id/imgPromeniSliku"
         android:layout_width="@dimen/velicina_ikonice"
         android:layout_height="@dimen/velicina_ikonice"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintBottom_toBottomOf="@+id/mojaSlika"
+        app:layout_constraintEnd_toEndOf="@+id/mojaSlika"
         app:srcCompat="@drawable/ic_baseline_camera_alt_24"/>
 
 

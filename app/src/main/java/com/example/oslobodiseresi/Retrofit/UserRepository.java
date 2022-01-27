@@ -225,12 +225,15 @@ public class UserRepository {
             public void onResponse(Call<String> call, Response<String> response) {
                 if(response.isSuccessful()){
                     str.setValue(response.body());
+                    Log.println(Log.ASSERT, "[lajk]", "uspelo");
+                } else {
+                    Log.println(Log.ASSERT, "[lajk]", response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-
+                Log.println(Log.ASSERT, "[lajk]", t.getMessage());
             }
         });
 
@@ -261,13 +264,22 @@ public class UserRepository {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if(response.isSuccessful()){
+                    try {
+                        if(responseBody!=null&&responseBody.getValue()!=null)
+                        responseBody.getValue().byteStream().reset();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     responseBody.setValue(response.body());
+                    Log.println(Log.ASSERT,"[successful]", response.message());
+                } else {
+                    Log.println(Log.ASSERT,"[nije successful]", response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                Log.println(Log.ASSERT,"[on failure]", t.getMessage());
             }
         });
 
