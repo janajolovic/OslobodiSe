@@ -78,8 +78,6 @@ public class OdabirSlikeNakonRegistracije extends ToolbarNavigacijaSetup {
                 intent.setType("image/*");
                 someActivityResultLauncher.launch(intent);
 
-
-
                 btnPotvrdite.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -122,17 +120,4 @@ public class OdabirSlikeNakonRegistracije extends ToolbarNavigacijaSetup {
                 }
             }
         });
-    public Uri getImageUri(Context inContext, Bitmap inImage) {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
-        return Uri.parse(path);
-    }
-
-    public String getRealPathFromURI(Uri uri) {
-        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
-        cursor.moveToFirst();
-        int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-        return cursor.getString(idx);
-    }
 }
