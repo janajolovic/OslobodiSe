@@ -10,6 +10,17 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar"/>
 
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
     <TextView
         android:id="@+id/OpisApp"
         android:layout_width="0dp"
@@ -17,24 +28,21 @@
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
         android:layout_marginTop="32dp"
-        android:text='"Oslobodi se" je aplikacija koja vam omogucava da se oslobodite stvari koje vam vise nisu potrebne, tako sto cete ih pokloniti nekome.'
+        android:text='Imate stvari koje Vam više ne trebaju i želite da ih bacite? Imamo bolji način kako da ih se "oslobodite".
+        \n\n "Oslobodi se" je aplikacija koja Vam omogućava da se oslobodite stvari koje Vam više nisu potrebne tako što ćete ih pokloniti nekome kome jesu i ko ih može na dobar način iskoristiti.
+        \n\n Proizvode možete pretražiti ili ih filtrirati po kategorijama ili gradovima.
+        \n\n Kada pogledate sliku i opis proizvoda i uverite se da je to ono što Vama treba, možete kontaktirati korisnika putem broja telefona i sa njim se detaljnije dogovoriti oko dostave.
+        \n\n Stvari koje Vam se dopadaju možete dodati u listu omiljenih. Možete komentarisati neki proizvod ili lajkovati neki komentar.
+        \n\n Možete pogledati profil nekog korisnika, videti potrebne informacije i kontakt i takođe oceniti tog korisnika.
+        \n\n Ukoliko ste ulogovani, možete pogledati svoj profil i oglase koje ste postavili i obrisati ih ako to želite. Kada se registrujete možete odabrati svoju profilnu sliku.
+        \n\n Nadamo se da će Vam ova aplikacija pomoći da nađete ono što Vam treba :)
+
+
+'
         android:textSize="@dimen/velicina_slova"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgLogo" />
-
-    <TextView
-        android:id="@+id/OpisApp2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginTop="16dp"
-        android:text='Mozete pogledati sliku i opis proizvoda i kontaktirati osobu putem broja telefona. Takodje mozete pretraziti proizvode po kategorijama.'
-        android:textSize="@dimen/velicina_slova"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/OpisApp" />
 
     <TextView
         android:id="@+id/textView9"
@@ -45,7 +53,7 @@
         android:textStyle="bold"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="@+id/OpisApp"
-        app:layout_constraintTop_toBottomOf="@+id/OpisApp2" />
+        app:layout_constraintTop_toBottomOf="@+id/OpisApp" />
 
     <TextView
         android:id="@+id/textView10"
@@ -64,8 +72,9 @@
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/logo2" />
 
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
