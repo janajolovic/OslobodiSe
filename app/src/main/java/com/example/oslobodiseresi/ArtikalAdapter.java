@@ -80,8 +80,9 @@ public class ArtikalAdapter extends RecyclerView.Adapter<ArtikalAdapter.ViewHold
                         mld.observe((AppCompatActivity)context, new Observer<String>() {
                             @Override
                             public void onChanged(String s) {
-                                artikli.remove(position);
-                                notifyItemRemoved(position);
+                                artikli.remove(holder.getAdapterPosition());
+                                notifyItemRemoved(holder.getAdapterPosition());
+                                notifyItemRangeChanged(holder.getAdapterPosition(), getItemCount());
                             }
                         });
                     }

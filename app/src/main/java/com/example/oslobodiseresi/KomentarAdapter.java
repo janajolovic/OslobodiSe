@@ -103,8 +103,9 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
                             mld.observe((AppCompatActivity)context, new Observer<String>() {
                                 @Override
                                 public void onChanged(String s) {
-                                    komentari.remove(position);
-                                    notifyItemRemoved(position);
+                                    komentari.remove(holder.getAdapterPosition());
+                                    notifyItemRemoved(holder.getAdapterPosition());
+                                    notifyItemRangeChanged(holder.getAdapterPosition(), getItemCount());
                                 }
                             });
                         }
