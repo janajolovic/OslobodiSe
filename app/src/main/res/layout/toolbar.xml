@@ -44,7 +44,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/imgProfil"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imgProfil"
                 android:layout_width="@dimen/velicina_ikonice"
                 android:layout_height="@dimen/velicina_ikonice"

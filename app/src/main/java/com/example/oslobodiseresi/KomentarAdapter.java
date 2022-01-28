@@ -92,6 +92,7 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
                 holder.imgProfil.setImageBitmap(bitmap);
             }
         });
+
         holder.imgProfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

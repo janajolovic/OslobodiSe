@@ -4,6 +4,9 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
@@ -39,10 +42,13 @@ import com.example.oslobodiseresi.Activity.RegistracijaActivity;
 import com.example.oslobodiseresi.Activity.ZaDavuda;
 import com.example.oslobodiseresi.Models.Grad;
 import com.example.oslobodiseresi.Models.Kategorija;
+import com.example.oslobodiseresi.Retrofit.UserRepository;
 import com.google.android.material.navigation.NavigationView;
 import com.example.oslobodiseresi.Retrofit.ItemRepository;
 
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ToolbarNavigacijaSetup extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     @Override
@@ -127,9 +133,21 @@ public class ToolbarNavigacijaSetup extends AppCompatActivity implements Navigat
         NavigationView navigationView = findViewById(R.id.nav_view);
         ImageView back;
         ImageView hamburger;
-        ImageView  imgPrijava;
+        CircleImageView imgPrijava;
         //prijava
         imgPrijava = findViewById(R.id.imgProfil);
+        if(Utils.getInstance().jeUlogovan()){
+            MutableLiveData<String> mld = UserRepository.getInstance(MainApplication.apiManager).GetProfilna(Utils.getInstance().getKorisnik().getId());
+            mld.observe((AppCompatActivity)context, new Observer<String>() {
+                @Override
+                public void onChanged(String s) {
+                    byte[] bajtovi = Base64.decode(s, Base64.DEFAULT);
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(bajtovi,0,bajtovi.length);
+                    imgPrijava.setImageBitmap(bitmap);
+                }
+            });
+        }
+
         imgPrijava.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
