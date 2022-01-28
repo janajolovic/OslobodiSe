@@ -80,7 +80,7 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
             }
         });
 
-        MutableLiveData<String> mld = UserRepository.getInstance(MainApplication.apiManager).GetProfilna(Utils.getInstance().getKorisnik().getId());
+        MutableLiveData<String> mld = UserRepository.getInstance(MainApplication.apiManager).GetProfilna(komentari.get(holder.getAdapterPosition()).getKorisnik().getId());
         mld.observe((AppCompatActivity)context, new Observer<String>() {
             @Override
             public void onChanged(String str) {
