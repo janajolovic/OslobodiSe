@@ -81,11 +81,11 @@ public class MojProfilActivity extends ToolbarNavigacijaSetup {
                 ocena.setText(String.valueOf(Utils.getInstance().getKorisnik().getZbirOcena() / Utils.getInstance().getKorisnik().getBrojOcena()));
             }
 
-            Log.println(Log.ASSERT,"[moj profil]","ovo je stara slika "+Utils.getInstance().getKorisnik().getSlika().substring(0,50));
+            Log.println(Log.ASSERT,"[moj profil]","ovo je stara slika "+Utils.getInstance().getKorisnik().getSlika().substring(0,100));
             byte[] bajtovi = Base64.decode(Utils.getInstance().getKorisnik().getSlika(), Base64.DEFAULT);
-            Bitmap bitmap = BitmapFactory.decodeByteArray(bajtovi,0,bajtovi.length);
-            bitmapProfilna = bitmap;
-            imgProfil.setImageBitmap(bitmap);
+            Bitmap bmp = BitmapFactory.decodeByteArray(bajtovi,0,bajtovi.length);
+            bitmapProfilna = bmp;
+            imgProfil.setImageBitmap(bmp);
 
             promeniSliku.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -111,8 +111,10 @@ public class MojProfilActivity extends ToolbarNavigacijaSetup {
                             mld.observe(MojProfilActivity.this, new Observer<String>() {
                                 @Override
                                 public void onChanged(String s) {
-                                    Log.println(Log.ASSERT,"[moj profil]","ovo je nova slika "+imageString.substring(0,50));
+                                    Log.println(Log.ASSERT,"[moj profil]","ovo je nova slika "+imageString.substring(0,100));
                                     Utils.getInstance().SacuvajKorisnika(Utils.getInstance().getKorisnik());
+                                    Log.println(Log.ASSERT,"[moj profil]","ovo je slika u utils"+Utils.getInstance().getKorisnik().getSlika().substring(0,100));;
+                                    Log.println(Log.ASSERT,"[moj profil]","ovo je poruka od user respository "+s);
                                 }
                             });
                             btnPotvrdite.setVisibility(View.GONE);
@@ -146,6 +148,7 @@ public class MojProfilActivity extends ToolbarNavigacijaSetup {
                         try{
                             bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
                             imgProfil.setImageBitmap(bitmap);
+
                         } catch (FileNotFoundException e){
                             e.printStackTrace();
                         } catch (IOException e)

@@ -288,12 +288,15 @@ public class UserRepository {
             public void onResponse(Call<String> call, Response<String> response) {
                 if(response.isSuccessful()){
                     str.setValue(response.body());
+                    Log.println(ASSERT,"[succ]", "radi");
+                } else {
+                    Log.println(ASSERT,"[nije succ]", response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-
+                Log.println(ASSERT,"[on failure]", t.getMessage());
             }
         });
 
