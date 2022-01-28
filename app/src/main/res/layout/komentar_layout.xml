@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imgProfil"
+        android:id="@+id/imgProfil2"
         android:layout_width="@dimen/velicina_ikonice"
         android:layout_height="@dimen/velicina_ikonice"
         android:layout_marginStart="16dp"
@@ -22,8 +22,8 @@
         android:text="TextView"
 
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/imgProfil"
-        app:layout_constraintTop_toTopOf="@+id/imgProfil" />
+        app:layout_constraintStart_toEndOf="@+id/imgProfil2"
+        app:layout_constraintTop_toTopOf="@+id/imgProfil2" />
 
     <TextView
         android:id="@+id/komentar"
@@ -31,8 +31,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="TextView"
-        app:layout_constraintStart_toStartOf="@+id/imgProfil"
-        app:layout_constraintTop_toBottomOf="@+id/imgProfil" />
+        app:layout_constraintStart_toStartOf="@+id/imgProfil2"
+        app:layout_constraintTop_toBottomOf="@+id/imgProfil2" />
 
     <ImageView
         android:id="@+id/thumbUp"

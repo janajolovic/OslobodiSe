@@ -53,7 +53,7 @@ public class OdabirSlikeNakonRegistracije extends ToolbarNavigacijaSetup {
 
         btnPotvrdite = findViewById(R.id.btnPotvrdite);
         txtPreskocite = findViewById(R.id.txtPreskocite);
-        imgProfil = findViewById(R.id.imgProfil);
+        imgProfil = findViewById(R.id.imgProfil2);
         imgIzaberi = findViewById(R.id.imgIzaberi);
 
         txtPreskocite.setOnClickListener(new View.OnClickListener() {

@@ -84,6 +84,11 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
                 if(holder.getAdapterPosition()==-1){
                     return;
                 }
+                try {
+                    responseBody.byteStream().reset();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 Bitmap bmp = BitmapFactory.decodeStream(responseBody.byteStream());
                 holder.imgProfil.setImageBitmap(bmp);
             }
@@ -195,7 +200,7 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
             super(itemView);
 
             izbrisi = itemView.findViewById(R.id.txtIzbrisi);
-            imgProfil = itemView.findViewById(R.id.imgProfil);
+            imgProfil = itemView.findViewById(R.id.imgProfil2);
             txtIme = itemView.findViewById(R.id.ime);
             txtBrojGlasova = itemView.findViewById(R.id.brojGlasova);
             txtSadrzaj = itemView.findViewById(R.id.komentar);

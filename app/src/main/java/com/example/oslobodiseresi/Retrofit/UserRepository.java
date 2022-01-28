@@ -264,12 +264,6 @@ public class UserRepository {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if(response.isSuccessful()){
-                    try {
-                        if(responseBody!=null&&responseBody.getValue()!=null)
-                        responseBody.getValue().byteStream().reset();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
                     responseBody.setValue(response.body());
                     Log.println(Log.ASSERT,"[successful]", response.message());
                 } else {

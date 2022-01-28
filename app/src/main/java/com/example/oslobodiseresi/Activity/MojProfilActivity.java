@@ -1,36 +1,27 @@
 package com.example.oslobodiseresi.Activity;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
 import com.example.oslobodiseresi.MainApplication;
 import com.example.oslobodiseresi.Models.UploadImage;
-import com.example.oslobodiseresi.Retrofit.ItemRepository;
 import com.example.oslobodiseresi.Retrofit.UserRepository;
 import com.example.oslobodiseresi.ToolbarNavigacijaSetup;
 import com.example.oslobodiseresi.R;
@@ -40,6 +31,7 @@ import com.google.android.material.navigation.NavigationView;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 
 import okhttp3.ResponseBody;
 
@@ -53,12 +45,13 @@ public class MojProfilActivity extends ToolbarNavigacijaSetup {
     private NavigationView navigationView;
     private ImageView imgProfil;
     private Bitmap bitmap;
+    private Bitmap bitmapProfilna;
     Uri uri;
 
     Button btnPotvrdite;
     Button btnOtkazite;
 
-    private boolean promenjen = false;
+    private boolean izBaze = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,61 +80,66 @@ public class MojProfilActivity extends ToolbarNavigacijaSetup {
                 ocena.setText(String.valueOf(Utils.getInstance().getKorisnik().getZbirOcena() / Utils.getInstance().getKorisnik().getBrojOcena()));
             }
 
-            promeniSliku.setOnClickListener(new View.OnClickListener() {
+            MutableLiveData<ResponseBody> mld = UserRepository.getInstance(MainApplication.apiManager).GetProfilna(Utils.getInstance().getKorisnik().getId());
+            mld.observe(MojProfilActivity.this, new Observer<ResponseBody>() {
                 @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(Intent.ACTION_PICK);
-                    intent.setType("image/*");
-                    someActivityResultLauncher.launch(intent);
+                public void onChanged(ResponseBody responseBody) {
+                    if(izBaze){
+                        try {
+                            byte[] bajtovi = responseBody.bytes();
+                            bitmapProfilna = BitmapFactory.decodeByteArray(bajtovi,0,bajtovi.length);
+                            imgProfil.setImageBitmap(bitmapProfilna);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
 
-                    btnPotvrdite = findViewById(R.id.btnPotvrdite);
-                    btnOtkazite= findViewById(R.id.btnOtkazite);
-                    btnPotvrdite.setVisibility(View.VISIBLE);
-                    btnOtkazite.setVisibility(View.VISIBLE);
-                    btnPotvrdite.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                            byte[] imageBytes = baos.toByteArray();
-                            String imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-                            UserRepository.getInstance(MainApplication.apiManager).PostSlika(new UploadImage(imageString));
-                            btnPotvrdite.setVisibility(View.GONE);
-                            btnOtkazite.setVisibility(View.GONE);
-                        }
-                    });
-                    btnOtkazite.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            btnPotvrdite.setVisibility(View.GONE);
-                            btnOtkazite.setVisibility(View.GONE);
-                            onResume();
-                        }
-                    });
+                        promeniSliku.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                izBaze = false;
+
+                                Intent intent = new Intent(Intent.ACTION_PICK);
+                                intent.setType("image/*");
+                                someActivityResultLauncher.launch(intent);
+
+                                btnPotvrdite = findViewById(R.id.btnPotvrdite);
+                                btnOtkazite= findViewById(R.id.btnOtkazite);
+                                btnPotvrdite.setVisibility(View.VISIBLE);
+                                btnOtkazite.setVisibility(View.VISIBLE);
+                                btnPotvrdite.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                                        byte[] imageBytes = baos.toByteArray();
+                                        String imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+                                        UserRepository.getInstance(MainApplication.apiManager).PostSlika(new UploadImage(imageString));
+                                        btnPotvrdite.setVisibility(View.GONE);
+                                        btnOtkazite.setVisibility(View.GONE);
+                                        bitmapProfilna = bitmap;
+                                    }
+                                });
+                                btnOtkazite.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        btnPotvrdite.setVisibility(View.GONE);
+                                        btnOtkazite.setVisibility(View.GONE);
+                                        imgProfil.setImageBitmap(bitmapProfilna);
+                                    }
+                                });
+                            }
+                        });
+
+                        izBaze = false;
+                    }
                 }
             });
+
+
         }
 
     }
 
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        promenjen = false;
-        MutableLiveData<ResponseBody> mld = UserRepository.getInstance(MainApplication.apiManager).GetProfilna(Utils.getInstance().getKorisnik().getId());
-        mld.observe(MojProfilActivity.this, new Observer<ResponseBody>() {
-            @Override
-            public void onChanged(ResponseBody responseBody) {
-                if(!promenjen){
-                    Bitmap bmp = BitmapFactory.decodeStream(responseBody.byteStream());
-                    imgProfil.setImageBitmap(bmp);
-                    promenjen = true;
-                }
-
-            }
-        });
-    }
     ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
