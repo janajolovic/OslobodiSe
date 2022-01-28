@@ -81,6 +81,7 @@ public class MojProfilActivity extends ToolbarNavigacijaSetup {
                 ocena.setText(String.valueOf(Utils.getInstance().getKorisnik().getZbirOcena() / Utils.getInstance().getKorisnik().getBrojOcena()));
             }
 
+            Log.println(Log.ASSERT,"[moj profil]","ovo je stara slika "+Utils.getInstance().getKorisnik().getSlika().substring(0,50));
             byte[] bajtovi = Base64.decode(Utils.getInstance().getKorisnik().getSlika(), Base64.DEFAULT);
             Bitmap bitmap = BitmapFactory.decodeByteArray(bajtovi,0,bajtovi.length);
             bitmapProfilna = bitmap;
@@ -110,13 +111,13 @@ public class MojProfilActivity extends ToolbarNavigacijaSetup {
                             mld.observe(MojProfilActivity.this, new Observer<String>() {
                                 @Override
                                 public void onChanged(String s) {
+                                    Log.println(Log.ASSERT,"[moj profil]","ovo je nova slika "+imageString.substring(0,50));
                                     Utils.getInstance().SacuvajKorisnika(Utils.getInstance().getKorisnik());
                                 }
                             });
                             btnPotvrdite.setVisibility(View.GONE);
                             btnOtkazite.setVisibility(View.GONE);
                             bitmapProfilna = bitmap;
-
                         }
                     });
                     btnOtkazite.setOnClickListener(new View.OnClickListener() {
