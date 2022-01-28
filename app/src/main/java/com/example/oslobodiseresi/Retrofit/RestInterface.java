@@ -102,4 +102,7 @@ public interface RestInterface {
 
     @GET("items/komentari/{OglasId}")
     Call<ArrayList<Komentar>> GetKomentariFromOglas(@Path("OglasId") int OglasId);
+
+    @POST("users/postaviprofilnu/{UserId}")
+    Call<String> PostaviProfilnu(@Path("UserId") String UserId, @Body UploadImage imageDetails);
 }

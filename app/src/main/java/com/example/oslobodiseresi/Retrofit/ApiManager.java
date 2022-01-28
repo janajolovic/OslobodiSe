@@ -155,4 +155,8 @@ public class ApiManager {
         getKomentariFromOglas.enqueue(callback);
     }
 
+    public void PostaviProfilnu(String UserId, UploadImage imageDetails, Callback<String> callback){
+        Call<String> postaviProfilni = service.PostaviProfilnu(UserId, imageDetails);
+        postaviProfilni.enqueue(callback);
+    }
 }

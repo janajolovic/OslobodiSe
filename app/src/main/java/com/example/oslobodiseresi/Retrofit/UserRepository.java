@@ -279,4 +279,22 @@ public class UserRepository {
         });
         return str64;
     }
+
+    public MutableLiveData<String> PostaviProfilnu(String UserId, UploadImage imageDetails){
+        apiManager.PostaviProfilnu(UserId, imageDetails, new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if(response.isSuccessful()){
+                    str.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+
+            }
+        });
+
+        return str;
+    }
 }
