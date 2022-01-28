@@ -1,5 +1,7 @@
 package com.example.oslobodiseresi;
 
+import static android.util.Log.ASSERT;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -113,20 +115,24 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
             @Override
             public void onClick(View v) {
                 if(Utils.getInstance().jeUlogovan()){
-
-                    holder.lajkovan = !holder.lajkovan;
-                    UserRepository.getInstance(MainApplication.apiManager).LajkujKomentar(komentari.get(holder.getAdapterPosition()).getId(), Utils.getInstance().getKorisnik().getId());
-                    if(holder.lajkovan){
-                        holder.imgLajk.setImageResource(R.drawable.ic_baseline_thumb_up_24);
-                        holder.txtBrojGlasova.setText(String.valueOf(Integer.parseInt(holder.txtBrojGlasova.getText().toString())+1));
-                        Utils.getInstance().getKorisnik().getLajkovaniKomentari().add(Integer.valueOf(komentari.get(holder.getAdapterPosition()).getId()));
-                    } else{
-                        holder.imgLajk.setImageResource(R.drawable.ic_outline_thumb_up_24);
-                        holder.txtBrojGlasova.setText(String.valueOf(Integer.parseInt(holder.txtBrojGlasova.getText().toString())-1));
-
-                        Utils.getInstance().getKorisnik().getLajkovaniKomentari().remove(Integer.valueOf(komentari.get(holder.getAdapterPosition()).getId()));
+                    try{
+                        holder.lajkovan = !holder.lajkovan;
+                        UserRepository.getInstance(MainApplication.apiManager).LajkujKomentar(komentari.get(holder.getAdapterPosition()).getId(), Utils.getInstance().getKorisnik().getId());
+                        if(holder.lajkovan){
+                            holder.imgLajk.setImageResource(R.drawable.ic_baseline_thumb_up_24);
+                            holder.txtBrojGlasova.setText(String.valueOf(Integer.parseInt(holder.txtBrojGlasova.getText().toString())+1));
+                            Utils.getInstance().getKorisnik().getLajkovaniKomentari().add(komentari.get(holder.getAdapterPosition()).getId());
+                        } else{
+                            holder.imgLajk.setImageResource(R.drawable.ic_outline_thumb_up_24);
+                            holder.txtBrojGlasova.setText(String.valueOf(Integer.parseInt(holder.txtBrojGlasova.getText().toString())-1));
+                            Utils.getInstance().getKorisnik().getLajkovaniKomentari().remove(Integer.valueOf(komentari.get(holder.getAdapterPosition()).getId()));
+                        }
+                        Utils.getInstance().SacuvajKorisnika(Utils.getInstance().getKorisnik());
                     }
-                    Utils.getInstance().SacuvajKorisnika(Utils.getInstance().getKorisnik());
+                    catch (Exception e){
+                        Log.println(ASSERT,"[Exception]",e.getMessage());
+                        //Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                     Toast.makeText(context, "Morate biti prijavljeni da biste lajkovali komentar", Toast.LENGTH_SHORT).show();
                 }
