@@ -228,14 +228,14 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
                             Log.println(Log.ASSERT,"[adapter]",komentari.toString());
                         }
                     }
-//                    if(id_sortiranje == 1){
-//                        Collections.sort(komentari, new Comparator<Komentar>() {
-//                            @Override
-//                            public int compare(Komentar o1, Komentar o2) {
-//                                return o1.getBrojLajkova() - o2.getBrojLajkova();
-//                            }
-//                        });
-//                    }
+                    if(id_sortiranje == 1){
+                        Collections.sort(komentari, new Comparator<Komentar>() {
+                            @Override
+                            public int compare(Komentar o1, Komentar o2) {
+                                return o1.getBrojLajkova() - o2.getBrojLajkova();
+                            }
+                        });
+                    }
                     komentarAdapter.setKomentari(komentari);
                     komentariRecycler.setAdapter(komentarAdapter);
                 }
@@ -288,14 +288,14 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
                             Log.println(Log.ASSERT,"[adapter]",komentari.toString());
                         }
                     }
-//                    if(id_sortiranje == 1){
-//                        Collections.sort(komentari, new Comparator<Komentar>() {
-//                            @Override
-//                            public int compare(Komentar o1, Komentar o2) {
-//                                return o1.getBrojLajkova() - o2.getBrojLajkova();
-//                            }
-//                        });
-//                    }
+                    if(id_sortiranje == 1){
+                        Collections.sort(komentari, new Comparator<Komentar>() {
+                            @Override
+                            public int compare(Komentar o1, Komentar o2) {
+                                return o1.getBrojLajkova() - o2.getBrojLajkova();
+                            }
+                        });
+                    }
                     komentarAdapter.setKomentari(komentari);
                     komentariRecycler.setAdapter(komentarAdapter);
                 }

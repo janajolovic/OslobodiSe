@@ -91,16 +91,8 @@ public class ToolbarNavigacijaSetup extends AppCompatActivity implements Navigat
                     Toast.makeText(this, "Morate biti prijavljeni da biste pristupili omiljenim oglasima", Toast.LENGTH_SHORT).show();
                 }
                 break;
-            case R.id.davud:
-                intent = new Intent(this, ZaDavuda.class);
-                startActivity(intent);
-                break;
             case R.id.informacije:
                 intent = new Intent(this, InformacijeActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.novi:
-                intent = new Intent(this, NoviActivity.class);
                 startActivity(intent);
                 break;
         }

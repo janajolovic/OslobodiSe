@@ -104,10 +104,11 @@ public class ArtikalAdapter extends RecyclerView.Adapter<ArtikalAdapter.ViewHold
                 builder.show();
             }
         });
-
-        byte[] bajtovi = Base64.decode(Utils.getInstance().getKorisnik().getSlika(), Base64.DEFAULT);
-        Bitmap bitmap = BitmapFactory.decodeByteArray(bajtovi,0,bajtovi.length);
-        holder.imgProfil.setImageBitmap(bitmap);
+        if(artikli.get(holder.getAdapterPosition()).getSlika()!=null){
+            byte[] bajtovi = Base64.decode(artikli.get(holder.getAdapterPosition()).getSlika(), Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(bajtovi,0,bajtovi.length);
+            holder.imgProfil.setImageBitmap(bitmap);
+        }
     }
 
     @Override
