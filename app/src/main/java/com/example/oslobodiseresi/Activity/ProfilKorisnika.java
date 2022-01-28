@@ -84,6 +84,9 @@ public class ProfilKorisnika extends ToolbarNavigacijaSetup {
         mld.observe(ProfilKorisnika.this, new Observer<Korisnik>() {
             @Override
             public void onChanged(Korisnik korisnik) {
+                if(korisnik==null){
+                    return;
+                }
                 txtKorisnik.setText(korisnik.getIme());
                 brojKorisnika.setText(korisnik.getBrojTelefona());
                 if (korisnik.getBrojOcena() == 0) {
@@ -118,6 +121,9 @@ public class ProfilKorisnika extends ToolbarNavigacijaSetup {
         artikli.observe(ProfilKorisnika.this, new Observer<ArrayList<Item>>() {
             @Override
             public void onChanged(ArrayList<Item> items) {
+                if(items==null){
+                    return;
+                }
                 adapterArtikli.setArtikli(artikli.getValue());
                 artikliKorisnik.setAdapter(adapterArtikli);
             }
@@ -132,6 +138,9 @@ public class ProfilKorisnika extends ToolbarNavigacijaSetup {
         mld.observe(ProfilKorisnika.this, new Observer<ArrayList<Item>>() {
             @Override
             public void onChanged(ArrayList<Item> items) {
+                if(items==null){
+                    return;
+                }
                 ArrayList<Item> artikli = new ArrayList<>();
                 if (getKategorijaId() != 0 && getGradId() != 0) {
                     for(Item i:items){
@@ -167,6 +176,9 @@ public class ProfilKorisnika extends ToolbarNavigacijaSetup {
         mld.observe(this, new Observer<ArrayList<Item>>() {
             @Override
             public void onChanged(ArrayList<Item> items) {
+                if(items==null){
+                    return;
+                }
                 ArrayList<Item> artikli = mld.getValue();
                 adapterArtikli.setArtikli(artikli);
                 artikliKorisnik.setAdapter(adapterArtikli);

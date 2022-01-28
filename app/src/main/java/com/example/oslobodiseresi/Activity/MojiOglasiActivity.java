@@ -64,6 +64,9 @@ public class MojiOglasiActivity extends ToolbarNavigacijaSetup {
         artikli.observe(MojiOglasiActivity.this, new Observer<ArrayList<Item>>() {
             @Override
             public void onChanged(ArrayList<Item> items) {
+                if(items==null){
+                    return;
+                }
                 progressBar.setVisibility(View.INVISIBLE);
                 adapterArtikli.setArtikli(artikli.getValue());
                 recyclerArtikli.setAdapter(adapterArtikli);
@@ -123,6 +126,9 @@ public class MojiOglasiActivity extends ToolbarNavigacijaSetup {
         mld.observe(MojiOglasiActivity.this, new Observer<ArrayList<Item>>() {
             @Override
             public void onChanged(ArrayList<Item> items) {
+                if(items==null){
+                    return;
+                }
                 ArrayList<Item> artikli = new ArrayList<>();
                 if (getKategorijaId() != 0 && getGradId() != 0) {
                     for(Item i:items){
@@ -165,6 +171,9 @@ public class MojiOglasiActivity extends ToolbarNavigacijaSetup {
         mld.observe(this, new Observer<ArrayList<Item>>() {
             @Override
             public void onChanged(ArrayList<Item> items) {
+                if(items==null){
+                    return;
+                }
                 progressBar.setVisibility(View.INVISIBLE);
                 ArrayList<Item> artikli = mld.getValue();
                 adapterArtikli.setArtikli(artikli);

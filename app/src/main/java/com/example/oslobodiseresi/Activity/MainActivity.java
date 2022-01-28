@@ -69,6 +69,9 @@ public class MainActivity extends ToolbarNavigacijaSetup {
         artikli.observe(MainActivity.this, new Observer<ArrayList<Item>>() {
             @Override
             public void onChanged(ArrayList<Item> items) {
+                if(items==null){
+                    return;
+                }
                 adapterArtikli.setArtikli(artikli.getValue());
                 recyclerArtikli.setAdapter(adapterArtikli);
                 progress.setVisibility(View.INVISIBLE);
@@ -131,6 +134,9 @@ public class MainActivity extends ToolbarNavigacijaSetup {
         mld.observe(MainActivity.this, new Observer<ArrayList<Item>>() {
             @Override
             public void onChanged(ArrayList<Item> items) {
+                if(items==null){
+                    return;
+                }
                 adapterArtikli.setArtikli(mld.getValue());
                 if (adapterArtikli.getItemCount() == 0) {
                     imgNoResults.setVisibility(View.VISIBLE);
@@ -151,6 +157,9 @@ public class MainActivity extends ToolbarNavigacijaSetup {
         mld.observe(this, new Observer<ArrayList<Item>>() {
             @Override
             public void onChanged(ArrayList<Item> items) {
+                if(items==null){
+                    return;
+                }
                 progress.setVisibility(View.INVISIBLE);
                 ArrayList<Item> artikli = mld.getValue();
                 adapterArtikli.setArtikli(artikli);

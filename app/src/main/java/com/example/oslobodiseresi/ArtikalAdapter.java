@@ -82,6 +82,9 @@ public class ArtikalAdapter extends RecyclerView.Adapter<ArtikalAdapter.ViewHold
                 builder.setPositiveButton("Da", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        if(holder.getAdapterPosition()==-1){
+                            return;
+                        }
                         MutableLiveData<String> mld = ItemRepository.getInstance(MainApplication.apiManager).DeleteItem(artikli.get(holder.getAdapterPosition()).getId());
                         mld.observe((AppCompatActivity)context, new Observer<String>() {
                             @Override
