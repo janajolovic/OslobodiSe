@@ -80,62 +80,51 @@ public class MojProfilActivity extends ToolbarNavigacijaSetup {
                 ocena.setText(String.valueOf(Utils.getInstance().getKorisnik().getZbirOcena() / Utils.getInstance().getKorisnik().getBrojOcena()));
             }
 
-            MutableLiveData<ResponseBody> mld = UserRepository.getInstance(MainApplication.apiManager).GetProfilna(Utils.getInstance().getKorisnik().getId());
-            mld.observe(MojProfilActivity.this, new Observer<ResponseBody>() {
-                @Override
-                public void onChanged(ResponseBody responseBody) {
-                    if(izBaze){
-                        try {
-                            byte[] bajtovi = responseBody.bytes();
-                            bitmapProfilna = BitmapFactory.decodeByteArray(bajtovi,0,bajtovi.length);
-                            imgProfil.setImageBitmap(bitmapProfilna);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-
-                        promeniSliku.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                izBaze = false;
-
-                                Intent intent = new Intent(Intent.ACTION_PICK);
-                                intent.setType("image/*");
-                                someActivityResultLauncher.launch(intent);
-
-                                btnPotvrdite = findViewById(R.id.btnPotvrdite);
-                                btnOtkazite= findViewById(R.id.btnOtkazite);
-                                btnPotvrdite.setVisibility(View.VISIBLE);
-                                btnOtkazite.setVisibility(View.VISIBLE);
-                                btnPotvrdite.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                                        byte[] imageBytes = baos.toByteArray();
-                                        String imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-                                        UserRepository.getInstance(MainApplication.apiManager).PostSlika(new UploadImage(imageString));
-                                        btnPotvrdite.setVisibility(View.GONE);
-                                        btnOtkazite.setVisibility(View.GONE);
-                                        bitmapProfilna = bitmap;
-                                    }
-                                });
-                                btnOtkazite.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        btnPotvrdite.setVisibility(View.GONE);
-                                        btnOtkazite.setVisibility(View.GONE);
-                                        imgProfil.setImageBitmap(bitmapProfilna);
-                                    }
-                                });
-                            }
-                        });
-
-                        izBaze = false;
+            MutableLiveData<Bitmap> mld = UserRepository.getInstance(MainApplication.apiManager).GetProfilna(Utils.getInstance().getKorisnik().getId());
+            mld.observe(MojProfilActivity.this, new Observer<Bitmap>() {
+                    @Override
+                    public void onChanged(Bitmap bitmap) {
+                        bitmapProfilna = bitmap;
+                        imgProfil.setImageBitmap(bitmap);
                     }
+                });
+
+            promeniSliku.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    izBaze = false;
+
+                    Intent intent = new Intent(Intent.ACTION_PICK);
+                    intent.setType("image/*");
+                    someActivityResultLauncher.launch(intent);
+
+                    btnPotvrdite = findViewById(R.id.btnPotvrdite);
+                    btnOtkazite = findViewById(R.id.btnOtkazite);
+                    btnPotvrdite.setVisibility(View.VISIBLE);
+                    btnOtkazite.setVisibility(View.VISIBLE);
+                    btnPotvrdite.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                            byte[] imageBytes = baos.toByteArray();
+                            String imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+                            UserRepository.getInstance(MainApplication.apiManager).PostSlika(new UploadImage(imageString));
+                            btnPotvrdite.setVisibility(View.GONE);
+                            btnOtkazite.setVisibility(View.GONE);
+                            bitmapProfilna = bitmap;
+                        }
+                    });
+                    btnOtkazite.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            btnPotvrdite.setVisibility(View.GONE);
+                            btnOtkazite.setVisibility(View.GONE);
+                            imgProfil.setImageBitmap(bitmapProfilna);
+                        }
+                    });
                 }
             });
-
-
         }
 
     }

@@ -77,20 +77,11 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
             }
         });
 
-        MutableLiveData<ResponseBody> mld = UserRepository.getInstance(MainApplication.apiManager).GetProfilna(komentari.get(holder.getAdapterPosition()).getKorisnik().getId());
-        mld.observe((AppCompatActivity) context, new Observer<ResponseBody>() {
+        MutableLiveData<Bitmap> mld = UserRepository.getInstance(MainApplication.apiManager).GetProfilna(komentari.get(holder.getAdapterPosition()).getKorisnik().getId());
+        mld.observe((AppCompatActivity) context, new Observer<Bitmap>() {
             @Override
-            public void onChanged(ResponseBody responseBody) {
-                if(holder.getAdapterPosition()==-1){
-                    return;
-                }
-                try {
-                    responseBody.byteStream().reset();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                Bitmap bmp = BitmapFactory.decodeStream(responseBody.byteStream());
-                holder.imgProfil.setImageBitmap(bmp);
+            public void onChanged(Bitmap bitmap) {
+                holder.imgProfil.setImageBitmap(bitmap);
             }
         });
         holder.imgProfil.setOnClickListener(new View.OnClickListener() {

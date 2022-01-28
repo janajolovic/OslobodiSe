@@ -77,16 +77,15 @@ public class ProfilKorisnika extends ToolbarNavigacijaSetup {
             rating.setEnabled(false);
         }
 
-        MutableLiveData<ResponseBody> mldProfilna = UserRepository.getInstance(MainApplication.apiManager).GetProfilna(korisnikId);
-        mldProfilna.observe(ProfilKorisnika.this, new Observer<ResponseBody>() {
-            @Override
-            public void onChanged(ResponseBody responseBody) {
-                Bitmap bmp = BitmapFactory.decodeStream(responseBody.byteStream());
-                imgKorisnik.setImageBitmap(bmp);
-            }
-        });
+        MutableLiveData<Bitmap> mldProfilna = UserRepository.getInstance(MainApplication.apiManager).GetProfilna(korisnikId);
+        mldProfilna.observe(ProfilKorisnika.this, new Observer<Bitmap>() {
+                @Override
+                public void onChanged(Bitmap bitmap) {
+                    imgKorisnik.setImageBitmap(bitmap);
+                }
+            });
 
-        MutableLiveData<Korisnik> mld = UserRepository.getInstance(MainApplication.apiManager).GetKorisnikById(korisnikId);
+        MutableLiveData < Korisnik > mld = UserRepository.getInstance(MainApplication.apiManager).GetKorisnikById(korisnikId);
         mld.observe(ProfilKorisnika.this, new Observer<Korisnik>() {
             @Override
             public void onChanged(Korisnik korisnik) {

@@ -1,5 +1,6 @@
 package com.example.oslobodiseresi.Retrofit;
 
+import android.graphics.Bitmap;
 import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
@@ -30,6 +31,7 @@ public class UserRepository {
     private final MutableLiveData<Boolean> bool = new MutableLiveData<>();
     private final MutableLiveData<ResponseBody> responseBody = new MutableLiveData<>();
     private final MutableLiveData<Float> flt = new MutableLiveData<>();
+    private final MutableLiveData<Bitmap> bitmap = new MutableLiveData<>();
 
     private UserRepository(ApiManager apiManager){
         this.apiManager = apiManager;
@@ -259,24 +261,24 @@ public class UserRepository {
         return str;
     }
 
-    public MutableLiveData<ResponseBody> GetProfilna(String UserId){
-        apiManager.GetProfilna(UserId, new Callback<ResponseBody>() {
+    public MutableLiveData<Bitmap> GetProfilna(String UserId){
+        apiManager.GetProfilna(UserId, new Callback<Bitmap>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(Call<Bitmap> call, Response<Bitmap> response) {
                 if(response.isSuccessful()){
-                    responseBody.setValue(response.body());
-                    Log.println(Log.ASSERT,"[successful]", response.message());
+                    bitmap.setValue(response.body());
+                    Log.println(Log.ASSERT,"[successful]", String.valueOf(responseBody.getValue().contentLength()));
                 } else {
                     Log.println(Log.ASSERT,"[nije successful]", response.message());
                 }
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<Bitmap> call, Throwable t) {
                 Log.println(Log.ASSERT,"[on failure]", t.getMessage());
             }
         });
 
-        return responseBody;
+        return bitmap;
     }
 }

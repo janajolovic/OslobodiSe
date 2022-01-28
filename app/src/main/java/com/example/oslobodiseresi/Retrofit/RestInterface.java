@@ -1,5 +1,7 @@
 package com.example.oslobodiseresi.Retrofit;
 
+import android.graphics.Bitmap;
+
 import com.example.oslobodiseresi.Models.Grad;
 import com.example.oslobodiseresi.Models.Item;
 import com.example.oslobodiseresi.Models.ItemPostModel;
@@ -95,7 +97,7 @@ public interface RestInterface {
     Call<String> deleteItem(@Path("OglasId") int Id);
 
     @GET("users/getprofilna/{UserId}")
-    Call<ResponseBody> GetProfilna(@Path("UserId") String UserId);
+    Call<Bitmap> GetProfilna(@Path("UserId") String UserId);
 
     @GET("items/komentari/{OglasId}")
     Call<ArrayList<Komentar>> GetKomentariFromOglas(@Path("OglasId") int OglasId);

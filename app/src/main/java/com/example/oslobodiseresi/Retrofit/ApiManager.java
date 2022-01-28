@@ -1,5 +1,7 @@
 package com.example.oslobodiseresi.Retrofit;
 
+import android.graphics.Bitmap;
+
 import com.example.oslobodiseresi.Models.Grad;
 import com.example.oslobodiseresi.Models.Item;
 import com.example.oslobodiseresi.Models.ItemPostModel;
@@ -142,8 +144,8 @@ public class ApiManager {
         postSlika.enqueue(callback);
     }
 
-    public void GetProfilna(String UserId, Callback<ResponseBody> callback){
-        Call<ResponseBody> getProfilna = service.GetProfilna(UserId);
+    public void GetProfilna(String UserId, Callback<Bitmap> callback){
+        Call<Bitmap> getProfilna = service.GetProfilna(UserId);
         getProfilna.enqueue(callback);
     }
 
