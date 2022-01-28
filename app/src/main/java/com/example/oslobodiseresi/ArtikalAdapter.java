@@ -7,6 +7,9 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -71,6 +74,9 @@ public class ArtikalAdapter extends RecyclerView.Adapter<ArtikalAdapter.ViewHold
         holder.imgDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(holder.getAdapterPosition()==-1){
+                    return;
+                }
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setMessage("Da li ste sigurni da zelite da obrisete " + holder.txtNaziv.getText().toString() + "?");
                 builder.setPositiveButton("Da", new DialogInterface.OnClickListener() {
@@ -98,6 +104,10 @@ public class ArtikalAdapter extends RecyclerView.Adapter<ArtikalAdapter.ViewHold
                 builder.show();
             }
         });
+
+        byte[] bajtovi = Base64.decode(Utils.getInstance().getKorisnik().getSlika(), Base64.DEFAULT);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(bajtovi,0,bajtovi.length);
+        holder.imgProfil.setImageBitmap(bitmap);
     }
 
     @Override

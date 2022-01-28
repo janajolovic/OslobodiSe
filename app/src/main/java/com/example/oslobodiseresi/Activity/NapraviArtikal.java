@@ -13,6 +13,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Adapter;
@@ -30,6 +31,7 @@ import com.example.oslobodiseresi.Models.Grad;
 import com.example.oslobodiseresi.Models.Item;
 import com.example.oslobodiseresi.Models.ItemPostModel;
 import com.example.oslobodiseresi.Models.Kategorija;
+import com.example.oslobodiseresi.Models.UploadImage;
 import com.example.oslobodiseresi.Retrofit.ItemRepository;
 import com.example.oslobodiseresi.Retrofit.UserRepository;
 import com.example.oslobodiseresi.ToolbarNavigacijaSetup;
@@ -37,6 +39,7 @@ import com.example.oslobodiseresi.R;
 import com.example.oslobodiseresi.Utils;
 import com.google.android.material.navigation.NavigationView;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -121,41 +124,56 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
             }
         });
 
+        dodajArtikal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(NapraviArtikal.this, "Morate izabrati sliku artikla", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         izaberi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType("image/*");
                 someActivityResultLauncher.launch(intent);
-            }
-        });
 
-        dodajArtikal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(spinnerKategorije.getSelectedItemPosition() == 0)
-                    txtNemaKategorija.setVisibility(View.VISIBLE);
-                if(spinnerGradovi.getSelectedItemPosition() == 0)
-                    txtNemaGrad.setVisibility(View.VISIBLE);
-
-                if(spinnerKategorije.getSelectedItemPosition() == 0 || spinnerGradovi.getSelectedItemPosition() == 0)
-                    return;
-
-                MutableLiveData<Item> mld = ItemRepository.getInstance(MainApplication.apiManager).postItem(new ItemPostModel(
-                        naziv.getText().toString(),
-                        opis.getText().toString(),
-                        spinnerKategorije.getSelectedItemPosition(), spinnerGradovi.getSelectedItemPosition(),
-                        Utils.getInstance().getKorisnik().getId()
-                ));
-                mld.observe(NapraviArtikal.this, new Observer<Item>() {
+                dodajArtikal.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onChanged(Item item) {
-                        Intent intent2 = new Intent(NapraviArtikal.this, MainActivity.class);
-                        startActivity(intent2);
+                    public void onClick(View v) {
+                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                        byte[] imageBytes = baos.toByteArray();
+                        String imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+
+                        if(spinnerKategorije.getSelectedItemPosition() == 0)
+                            txtNemaKategorija.setVisibility(View.VISIBLE);
+                        if(spinnerGradovi.getSelectedItemPosition() == 0)
+                            txtNemaGrad.setVisibility(View.VISIBLE);
+
+                        if(spinnerKategorije.getSelectedItemPosition() == 0 || spinnerGradovi.getSelectedItemPosition() == 0)
+                            return;
+
+                        MutableLiveData<Item> mld = ItemRepository.getInstance(MainApplication.apiManager).postItem(new ItemPostModel(
+                                naziv.getText().toString(),
+                                opis.getText().toString(),
+                                spinnerKategorije.getSelectedItemPosition(), spinnerGradovi.getSelectedItemPosition(),
+                                Utils.getInstance().getKorisnik().getId(),
+                                imageString
+                        ));
+                        mld.observe(NapraviArtikal.this, new Observer<Item>() {
+                            @Override
+                            public void onChanged(Item item) {
+                                Intent intent2 = new Intent(NapraviArtikal.this, MainActivity.class);
+                                startActivity(intent2);
+                            }
+                        });
                     }
                 });
             }
         });
+
+
     }
 
     ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(

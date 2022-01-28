@@ -80,9 +80,12 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
             }
         });
 
-        byte[] bajtovi = Base64.decode(komentari.get(holder.getAdapterPosition()).getKorisnik().getSlika(), Base64.DEFAULT);
-        Bitmap bitmap = BitmapFactory.decodeByteArray(bajtovi,0,bajtovi.length);
-        holder.imgProfil.setImageBitmap(bitmap);
+
+        if(komentari.get(holder.getAdapterPosition()).getKorisnik().getSlika()!=null) {
+            byte[] bajtovi = Base64.decode(komentari.get(holder.getAdapterPosition()).getKorisnik().getSlika(), Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(bajtovi,0,bajtovi.length);
+            holder.imgProfil.setImageBitmap(bitmap);
+        }
 
         holder.imgProfil.setOnClickListener(new View.OnClickListener() {
             @Override

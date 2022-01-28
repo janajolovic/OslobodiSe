@@ -185,15 +185,15 @@
                android:id="@+id/txtDodajKomentar"
                android:layout_width="0dp"
                android:layout_height="wrap_content"
+               android:layout_marginLeft="16dp"
+               android:layout_marginTop="16dp"
                android:ems="10"
                android:gravity="start|top"
-               android:layout_marginTop="16dp"
                android:hint="Napisite komentar"
-               android:layout_marginLeft="16dp"
                android:inputType="textMultiLine"
-               app:layout_constraintTop_toBottomOf="@+id/txtKontakt"
+               app:layout_constraintEnd_toStartOf="@+id/btnDodajKomentar"
                app:layout_constraintStart_toStartOf="parent"
-               app:layout_constraintEnd_toStartOf="@+id/btnDodajKomentar"/>
+               app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
            <ImageView
                android:id="@+id/btnDodajKomentar"
@@ -213,6 +213,46 @@
                app:layout_constraintEnd_toEndOf="parent"
                app:layout_constraintStart_toStartOf="parent"
                app:layout_constraintTop_toBottomOf="@+id/txtDodajKomentar" />
+
+           <TextView
+               android:id="@+id/textView12"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginStart="16dp"
+               android:layout_marginTop="32dp"
+               android:text="Komentari"
+               android:textSize="@dimen/velicina_slova"
+               android:textStyle="bold"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toBottomOf="@+id/textViewKontakt" />
+
+           <TextView
+               android:id="@+id/txtBrojKomentara"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginStart="8dp"
+               android:text=""
+               android:textSize="@dimen/velicina_slova"
+               app:layout_constraintBottom_toBottomOf="@+id/textView12"
+               app:layout_constraintStart_toEndOf="@+id/textView12"
+               app:layout_constraintTop_toTopOf="@+id/textView12" />
+
+           <View
+               android:layout_width="match_parent"
+               android:layout_height="2dp"
+               android:background="@color/siva"
+               app:layout_constraintTop_toBottomOf="@+id/textViewKontakt"
+               app:layout_constraintBottom_toTopOf="@+id/textView12"/>
+
+           <ImageView
+               android:id="@+id/imgSortiranje"
+               android:layout_width="30dp"
+               android:layout_height="30dp"
+               android:layout_marginEnd="16dp"
+               app:layout_constraintBottom_toBottomOf="@+id/textView12"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:srcCompat="@drawable/ic_baseline_new_releases_24"
+               app:tint="?colorOnBackground" />
 
 
        </androidx.constraintlayout.widget.ConstraintLayout>

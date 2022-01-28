@@ -24,6 +24,16 @@ public class Item {
     @SerializedName("userId")
     private String UserId;
 
+    private String slika;
+
+    public String getSlika() {
+        return slika;
+    }
+
+    public void setSlika(String slika) {
+        this.slika = slika;
+    }
+
     public Item(int id, String naziv, String opis, Kategorija kategorija, int kategorijaId, Grad grad, int gradId, Korisnik user, String userId) {
         Id = id;
         Naziv = naziv;

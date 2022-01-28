@@ -159,4 +159,9 @@ public class ApiManager {
         Call<String> postaviProfilni = service.PostaviProfilnu(UserId, imageDetails);
         postaviProfilni.enqueue(callback);
     }
+
+    public void PostaviSlikuArtikla(String ItemId, UploadImage imageDetails, Callback<String> callback){
+        Call<String> postaviSlikuArtikla = service.PostaviSlikuArtikla(ItemId, imageDetails);
+        postaviSlikuArtikla.enqueue(callback);
+    }
 }

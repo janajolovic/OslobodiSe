@@ -94,7 +94,7 @@ tools:context=".Activity.NapraviArtikal">
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtNebitno"
-                app:srcCompat="@drawable/ic_launcher_background" />
+                android:background="@color/siva"/>
 
             <ImageView
                 android:id="@+id/imgIzaberi"
@@ -102,7 +102,8 @@ tools:context=".Activity.NapraviArtikal">
                 android:layout_height="@dimen/velicina_ikonice"
                 app:layout_constraintBottom_toBottomOf="@+id/slika"
                 app:layout_constraintEnd_toEndOf="@+id/slika"
-                app:srcCompat="@drawable/ic_baseline_camera_alt_24" />
+                app:srcCompat="@drawable/ic_baseline_camera_alt_24"
+                app:tint="@color/tamno_siva"/>
 
             <EditText
                 android:id="@+id/txtOpis"

@@ -13,13 +13,15 @@ public class ItemPostModel {
     private int GradId;
     @SerializedName("userId")
     private String UserId;
+    private String slika;
 
-    public ItemPostModel(String naziv, String opis, int kategorijaId, int gradId, String userId) {
+    public ItemPostModel(String naziv, String opis, int kategorijaId, int gradId, String userId, String slika) {
         Naziv = naziv;
         Opis = opis;
         KategorijaId = kategorijaId;
         GradId = gradId;
         UserId = userId;
+        this.slika = slika;
     }
 
     //region Getters and Setters

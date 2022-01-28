@@ -60,6 +60,10 @@ public class Korisnik {
 
     public ArrayList<Integer> getLajkovaniKomentari() { return lajkovaniKomentari; }
 
+    public void setSlika(String slika) {
+        this.slika = slika;
+    }
+
     @Override
     public String toString() {
         return "Korisnik{" +

@@ -1,7 +1,9 @@
 package com.example.oslobodiseresi.Activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -81,11 +83,10 @@ public class MojProfilActivity extends ToolbarNavigacijaSetup {
                 ocena.setText(String.valueOf(Utils.getInstance().getKorisnik().getZbirOcena() / Utils.getInstance().getKorisnik().getBrojOcena()));
             }
 
-            Log.println(Log.ASSERT,"[moj profil]","ovo je stara slika "+Utils.getInstance().getKorisnik().getSlika().substring(0,100));
             byte[] bajtovi = Base64.decode(Utils.getInstance().getKorisnik().getSlika(), Base64.DEFAULT);
-            Bitmap bmp = BitmapFactory.decodeByteArray(bajtovi,0,bajtovi.length);
-            bitmapProfilna = bmp;
-            imgProfil.setImageBitmap(bmp);
+            bitmap = BitmapFactory.decodeByteArray(bajtovi,0,bajtovi.length);
+            bitmapProfilna = bitmap;
+            imgProfil.setImageBitmap(bitmap);
 
             promeniSliku.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -103,6 +104,7 @@ public class MojProfilActivity extends ToolbarNavigacijaSetup {
                     btnPotvrdite.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            bitmapProfilna = bitmap;
                             ByteArrayOutputStream baos = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                             byte[] imageBytes = baos.toByteArray();
@@ -111,15 +113,12 @@ public class MojProfilActivity extends ToolbarNavigacijaSetup {
                             mld.observe(MojProfilActivity.this, new Observer<String>() {
                                 @Override
                                 public void onChanged(String s) {
-                                    Log.println(Log.ASSERT,"[moj profil]","ovo je nova slika "+imageString.substring(0,100));
+                                    Utils.getInstance().getKorisnik().setSlika(imageString);
                                     Utils.getInstance().SacuvajKorisnika(Utils.getInstance().getKorisnik());
-                                    Log.println(Log.ASSERT,"[moj profil]","ovo je slika u utils"+Utils.getInstance().getKorisnik().getSlika().substring(0,100));;
-                                    Log.println(Log.ASSERT,"[moj profil]","ovo je poruka od user respository "+s);
                                 }
                             });
                             btnPotvrdite.setVisibility(View.GONE);
                             btnOtkazite.setVisibility(View.GONE);
-                            bitmapProfilna = bitmap;
                         }
                     });
                     btnOtkazite.setOnClickListener(new View.OnClickListener() {
@@ -137,25 +136,38 @@ public class MojProfilActivity extends ToolbarNavigacijaSetup {
     }
 
     ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if (result.getResultCode() == Activity.RESULT_OK) {
-                        // There are no request codes
-                        Intent data = result.getData();
-                        uri = data.getData();
-                        try{
-                            bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
-                            imgProfil.setImageBitmap(bitmap);
-
-                        } catch (FileNotFoundException e){
-                            e.printStackTrace();
-                        } catch (IOException e)
-                        {
-                            e.printStackTrace();
-                        }
+        new ActivityResultContracts.StartActivityForResult(),
+        new ActivityResultCallback<ActivityResult>() {
+            @Override
+            public void onActivityResult(ActivityResult result) {
+                if (result.getResultCode() == Activity.RESULT_OK) {
+                    // There are no request codes
+                    Intent data = result.getData();
+                    uri = data.getData();
+                    try{
+                        bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
+                        imgProfil.setImageBitmap(bitmap);
+                    } catch (FileNotFoundException e){
+                        e.printStackTrace();
+                    } catch (IOException e)
+                    {
+                        e.printStackTrace();
                     }
                 }
-            });
+            }
+        });
+
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
+
+    public String getRealPathFromURI(Uri uri) {
+        Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+        cursor.moveToFirst();
+        int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+        return cursor.getString(idx);
+    }
 }

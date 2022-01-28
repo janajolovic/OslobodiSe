@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.oslobodiseresi.Models.Korisnik;
 import com.example.oslobodiseresi.MainApplication;
@@ -79,6 +80,10 @@ public class RegistracijaActivity extends ToolbarNavigacijaSetup {
                 k.observe(RegistracijaActivity.this, new Observer<Korisnik>() {
                     @Override
                     public void onChanged(Korisnik korisnik) {
+                        if(korisnik==null){
+                            Toast.makeText(RegistracijaActivity.this, "Neispravna registracija", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
                         Utils.getInstance().SacuvajKorisnika(korisnik);
                         Intent intent = new Intent(RegistracijaActivity.this, OdabirSlikeNakonRegistracije.class);
                         startActivity(intent);

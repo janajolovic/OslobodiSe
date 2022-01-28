@@ -100,15 +100,12 @@ public class ItemRepository {
             public void onResponse(Call<Item> call, Response<Item> response) {
                 if(response.isSuccessful()){
                     item.setValue(response.body());
-                    Log.println(Log.ASSERT, "[Greska3]",response.body().toString());
                 }else{
-                    Log.println(Log.ASSERT, "[Greska5]",response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<Item> call, Throwable t) {
-                Log.println(Log.ASSERT, "[Greska5]",t.getMessage());
             }
         });
         return item;
@@ -160,7 +157,6 @@ public class ItemRepository {
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Log.println(Log.ASSERT, "[Brisanje OnFailure]", t.getMessage());
             }
         });
 
@@ -224,15 +220,14 @@ public class ItemRepository {
             public void onResponse(Call<Komentar> call, Response<Komentar> response) {
                 if(response.isSuccessful()){
                     komentar.setValue(response.body());
-                    Log.println(Log.ASSERT, "[Komentar]", response.message());
                 }else{
-                    Log.println(Log.ASSERT, "[Komentar]", response.message());
+                    Log.println(Log.ASSERT,"[dodaj]",response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<Komentar> call, Throwable t) {
-                Log.println(Log.ASSERT, "[Komentar]", t.getMessage());
+                Log.println(Log.ASSERT,"[dodaj F]",t.getMessage());
             }
         });
         return komentar;
@@ -244,11 +239,14 @@ public class ItemRepository {
             public void onResponse(Call<String> call, Response<String> response) {
                 if(response.isSuccessful()){
                     str.setValue(response.body());
+                } else {
+                    Log.println(Log.ASSERT,"[izbrisi komentar]",response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
+                Log.println(Log.ASSERT,"[izbrisi komentar F]",t.getMessage());
             }
         });
         return  str;
@@ -260,12 +258,14 @@ public class ItemRepository {
             public void onResponse(Call<ArrayList<Komentar>> call, Response<ArrayList<Komentar>> response) {
                 if(response.isSuccessful()){
                     komentari.setValue(response.body());
+                } else {
+                    Log.println(Log.ASSERT,"[get komentari]",response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<ArrayList<Komentar>> call, Throwable t) {
-
+                Log.println(Log.ASSERT,"[get komentari F]",t.getMessage());
             }
         });
         return  komentari;

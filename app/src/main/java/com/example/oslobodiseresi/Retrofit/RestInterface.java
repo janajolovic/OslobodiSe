@@ -105,4 +105,8 @@ public interface RestInterface {
 
     @POST("users/postaviprofilnu/{UserId}")
     Call<String> PostaviProfilnu(@Path("UserId") String UserId, @Body UploadImage imageDetails);
+
+
+    @POST("users/postaviprofilnu/{ItemId}")
+    Call<String> PostaviSlikuArtikla(@Path("UserId") String ItemId, @Body UploadImage imageDetails);
 }

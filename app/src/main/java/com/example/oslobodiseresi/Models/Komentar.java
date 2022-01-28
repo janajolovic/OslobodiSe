@@ -45,4 +45,15 @@ public class Komentar {
     public void setLajkovan(boolean lajkovan) {
         this.lajkovan = lajkovan;
     }
+
+    @Override
+    public String toString() {
+        return "Komentar{" +
+                "id=" + id +
+                ", korisnik=" + korisnik +
+                ", sadrzaj='" + sadrzaj + '\'' +
+                ", brojLajkova=" + brojLajkova +
+                ", lajkovan=" + lajkovan +
+                '}';
+    }
 }

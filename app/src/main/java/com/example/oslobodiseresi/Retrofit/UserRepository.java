@@ -54,7 +54,6 @@ public class UserRepository {
                 if(response.isSuccessful()){
                     korisnik.setValue(response.body());
                 }else{
-                    Log.println(Log.ERROR, "[Greska]",response.message());
                     korisnik.setValue(null);
                 }
 
@@ -62,7 +61,6 @@ public class UserRepository {
 
             @Override
             public void onFailure(Call<Korisnik> call, Throwable t) {
-                Log.println(Log.ERROR, "[Greska]",t.getMessage());
                 korisnik.setValue(null);
             }
         });
@@ -76,14 +74,12 @@ public class UserRepository {
                 if (response.isSuccessful()) {
                     korisnik.setValue(response.body());
                 }else{
-                    Log.println(Log.ERROR, "[Greska]",response.message());
                     korisnik.setValue(null);
                 }
             }
 
             @Override
             public void onFailure(Call<Korisnik> call, Throwable t) {
-                Log.println(Log.ERROR, "[Greska]",t.getMessage());
                 korisnik.setValue(null);
             }
         });
@@ -98,14 +94,12 @@ public class UserRepository {
                 if (response.isSuccessful()) {
                     items.setValue(response.body());
                 }else{
-                    Log.println(Log.ERROR, "[Greska]",response.message());
                     items.setValue(null);
                 }
             }
 
             @Override
             public void onFailure(Call<ArrayList<Item>> call, Throwable t) {
-                Log.println(Log.ERROR, "[Greska]",t.getMessage());
                 items.setValue(null);
             }
         });
@@ -119,13 +113,11 @@ public class UserRepository {
                 if(response.isSuccessful()){
                     items.setValue(response.body());
                 }else{
-                    Log.println(Log.ASSERT, "[Omiljeni OnResponse]", response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<ArrayList<Item>> call, Throwable t) {
-                Log.println(Log.ASSERT, "[Omiljeni OnFailure]", t.getMessage());
             }
         });
         return items;
@@ -210,15 +202,12 @@ public class UserRepository {
             public void onResponse(Call<Float> call, Response<Float> response) {
                 if(response.isSuccessful()){
                     flt.setValue(response.body());
-                    Log.println(Log.ASSERT, "[Dodaj Ocenu]", response.message());
                 }else{
-                    Log.println(Log.ASSERT, "[Dodaj Ocenu]", response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<Float> call, Throwable t) {
-                Log.println(Log.ASSERT, "[Dodaj Ocenu F]", t.getMessage());
             }
         });
         return flt;
@@ -230,15 +219,12 @@ public class UserRepository {
             public void onResponse(Call<String> call, Response<String> response) {
                 if(response.isSuccessful()){
                     str.setValue(response.body());
-                    Log.println(Log.ASSERT, "[lajk]", "uspelo");
                 } else {
-                    Log.println(Log.ASSERT, "[lajk]", response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Log.println(Log.ASSERT, "[lajk]", t.getMessage());
             }
         });
         return str;
@@ -251,13 +237,11 @@ public class UserRepository {
                 if(response.isSuccessful()){
                     str.setValue(response.body());
                 }else{
-                    Log.println(Log.ASSERT, "[Slika onResponse]", response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Log.println(Log.ASSERT, "[Slika onFailure]", t.getMessage());
             }
         });
         return str;
@@ -270,13 +254,11 @@ public class UserRepository {
                 if(response.isSuccessful()){
                     str64.setValue(response.body());
                 } else {
-                    Log.println(Log.ASSERT,"[nije successful]", response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Log.println(Log.ASSERT,"[on failure]", t.getMessage());
             }
         });
         return str64;
@@ -288,15 +270,30 @@ public class UserRepository {
             public void onResponse(Call<String> call, Response<String> response) {
                 if(response.isSuccessful()){
                     str.setValue(response.body());
-                    Log.println(ASSERT,"[succ]", "radi");
                 } else {
-                    Log.println(ASSERT,"[nije succ]", response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Log.println(ASSERT,"[on failure]", t.getMessage());
+            }
+        });
+
+        return str;
+    }
+
+    public MutableLiveData<String> PostaviSlikuArtikla(String ItemId, UploadImage imageDetails){
+        apiManager.PostaviProfilnu(ItemId, imageDetails, new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if(response.isSuccessful()){
+                    str.setValue(response.body());
+                } else {
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
             }
         });
 
