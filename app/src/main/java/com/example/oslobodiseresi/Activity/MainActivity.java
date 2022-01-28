@@ -82,13 +82,6 @@ public class MainActivity extends ToolbarNavigacijaSetup {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 adapterArtikli.getFilter().filter(query);
-                if (adapterArtikli.getItemCount() == 0) {
-                    imgNoResults.setVisibility(View.VISIBLE);
-                    txtNoResults.setVisibility(View.VISIBLE);
-                } else {
-                    imgNoResults.setVisibility(View.INVISIBLE);
-                    txtNoResults.setVisibility(View.INVISIBLE);
-                }
                 return false;
             }
             @Override
@@ -101,9 +94,20 @@ public class MainActivity extends ToolbarNavigacijaSetup {
             @Override
             public boolean onClose() {
                 adapterArtikli.getFilter().filter("");
-                imgNoResults.setVisibility(View.INVISIBLE);
-                txtNoResults.setVisibility(View.INVISIBLE);
                 return false;
+            }
+        });
+        adapterArtikli.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                super.onChanged();
+                if (adapterArtikli.getItemCount() == 0) {
+                    imgNoResults.setVisibility(View.VISIBLE);
+                    txtNoResults.setVisibility(View.VISIBLE);
+                } else {
+                    imgNoResults.setVisibility(View.INVISIBLE);
+                    txtNoResults.setVisibility(View.INVISIBLE);
+                }
             }
         });
     }
