@@ -82,6 +82,9 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
         mld.observe((AppCompatActivity)context, new Observer<String>() {
             @Override
             public void onChanged(String str) {
+                if(holder.getAdapterPosition() == -1){
+                    return;
+                }
                 byte[] bajtovi = Base64.decode(str, Base64.DEFAULT);
                 Bitmap bitmap = BitmapFactory.decodeByteArray(bajtovi,0,bajtovi.length);
                 holder.imgProfil.setImageBitmap(bitmap);
