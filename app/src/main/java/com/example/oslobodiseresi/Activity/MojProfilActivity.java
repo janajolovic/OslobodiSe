@@ -112,7 +112,7 @@ public class MojProfilActivity extends ToolbarNavigacijaSetup {
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                             byte[] imageBytes = baos.toByteArray();
                             String imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-                            UserRepository.getInstance(MainApplication.apiManager).PostSlika(new UploadImage(imageString));
+                            UserRepository.getInstance(MainApplication.apiManager).PostaviProfilnu(Utils.getInstance().getKorisnik().getId(), new UploadImage(imageString));
                             btnPotvrdite.setVisibility(View.GONE);
                             btnOtkazite.setVisibility(View.GONE);
                             bitmapProfilna = bitmap;

@@ -29,6 +29,7 @@ import com.example.oslobodiseresi.Models.UploadImage;
 import com.example.oslobodiseresi.R;
 import com.example.oslobodiseresi.Retrofit.UserRepository;
 import com.example.oslobodiseresi.ToolbarNavigacijaSetup;
+import com.example.oslobodiseresi.Utils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -85,7 +86,7 @@ public class OdabirSlikeNakonRegistracije extends ToolbarNavigacijaSetup {
                         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                         byte[] imageBytes = baos.toByteArray();
                         String imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-                        MutableLiveData<String> mld = UserRepository.getInstance(MainApplication.apiManager).PostSlika(new UploadImage(imageString));
+                        MutableLiveData<String> mld = UserRepository.getInstance(MainApplication.apiManager).PostaviProfilnu(Utils.getInstance().getKorisnik().getId(), new UploadImage(imageString));
                         mld.observe(OdabirSlikeNakonRegistracije.this, new Observer<String>() {
                             @Override
                             public void onChanged(String s) {

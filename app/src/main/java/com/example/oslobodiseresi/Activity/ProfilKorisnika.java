@@ -78,7 +78,7 @@ public class ProfilKorisnika extends ToolbarNavigacijaSetup {
             rating.setEnabled(false);
         }
 
-        MutableLiveData<String> mld2 = UserRepository.getInstance(MainApplication.apiManager).GetProfilna(Utils.getInstance().getKorisnik().getId());
+        MutableLiveData<String> mld2 = UserRepository.getInstance(MainApplication.apiManager).GetProfilna(korisnikId);
         mld2.observe(ProfilKorisnika.this, new Observer<String>() {
             @Override
             public void onChanged(String str) {

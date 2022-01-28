@@ -1,5 +1,7 @@
 package com.example.oslobodiseresi.Retrofit;
 
+import static android.util.Log.ASSERT;
+
 import android.graphics.Bitmap;
 import android.util.Log;
 
@@ -267,6 +269,7 @@ public class UserRepository {
             public void onResponse(Call<String> call, Response<String> response) {
                 if(response.isSuccessful()){
                     str64.setValue(response.body());
+                    Log.println(ASSERT,"[succesful]", str64.getValue().substring(0,200));
                 } else {
                     Log.println(Log.ASSERT,"[nije successful]", response.message());
                 }
