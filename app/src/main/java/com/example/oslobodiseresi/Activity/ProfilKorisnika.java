@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -77,13 +78,15 @@ public class ProfilKorisnika extends ToolbarNavigacijaSetup {
             rating.setEnabled(false);
         }
 
-        MutableLiveData<Bitmap> mldProfilna = UserRepository.getInstance(MainApplication.apiManager).GetProfilna(korisnikId);
-        mldProfilna.observe(ProfilKorisnika.this, new Observer<Bitmap>() {
-                @Override
-                public void onChanged(Bitmap bitmap) {
-                    imgKorisnik.setImageBitmap(bitmap);
-                }
-            });
+        MutableLiveData<String> mld2 = UserRepository.getInstance(MainApplication.apiManager).GetProfilna(Utils.getInstance().getKorisnik().getId());
+        mld2.observe(ProfilKorisnika.this, new Observer<String>() {
+            @Override
+            public void onChanged(String str) {
+                byte[] bajtovi = Base64.decode(str, Base64.DEFAULT);
+                Bitmap bitmap = BitmapFactory.decodeByteArray(bajtovi,0,bajtovi.length);
+                imgKorisnik.setImageBitmap(bitmap);
+            }
+        });
 
         MutableLiveData < Korisnik > mld = UserRepository.getInstance(MainApplication.apiManager).GetKorisnikById(korisnikId);
         mld.observe(ProfilKorisnika.this, new Observer<Korisnik>() {

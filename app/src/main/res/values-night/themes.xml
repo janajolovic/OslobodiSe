@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.OslobodiSeResi" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/plava</item>
-        <item name="colorPrimaryVariant">@color/svetlo_plava</item>
+        <item name="colorPrimary">@color/svetlo_plava</item>
+        <item name="colorPrimaryVariant">@color/plava</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/svetlo_narandzasta</item>

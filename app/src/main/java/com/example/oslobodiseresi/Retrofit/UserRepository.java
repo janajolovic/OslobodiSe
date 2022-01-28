@@ -14,6 +14,7 @@ import com.example.oslobodiseresi.Models.UploadImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Base64;
 
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
@@ -261,24 +262,23 @@ public class UserRepository {
         return str;
     }
 
-    public MutableLiveData<Bitmap> GetProfilna(String UserId){
-        apiManager.GetProfilna(UserId, new Callback<Bitmap>() {
+    public MutableLiveData<String> GetProfilna(String UserId){
+        apiManager.GetProfilna(UserId, new Callback<String>() {
             @Override
-            public void onResponse(Call<Bitmap> call, Response<Bitmap> response) {
+            public void onResponse(Call<String> call, Response<String> response) {
                 if(response.isSuccessful()){
-                    bitmap.setValue(response.body());
-                    Log.println(Log.ASSERT,"[successful]", String.valueOf(responseBody.getValue().contentLength()));
+                    str.setValue(response.body());
                 } else {
                     Log.println(Log.ASSERT,"[nije successful]", response.message());
                 }
             }
 
             @Override
-            public void onFailure(Call<Bitmap> call, Throwable t) {
+            public void onFailure(Call<String> call, Throwable t) {
                 Log.println(Log.ASSERT,"[on failure]", t.getMessage());
             }
         });
 
-        return bitmap;
+        return str;
     }
 }

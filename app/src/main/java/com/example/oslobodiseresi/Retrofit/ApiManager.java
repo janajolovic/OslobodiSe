@@ -14,6 +14,7 @@ import com.example.oslobodiseresi.Models.UploadImage;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Base64;
 
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
@@ -144,8 +145,8 @@ public class ApiManager {
         postSlika.enqueue(callback);
     }
 
-    public void GetProfilna(String UserId, Callback<Bitmap> callback){
-        Call<Bitmap> getProfilna = service.GetProfilna(UserId);
+    public void GetProfilna(String UserId, Callback<String> callback){
+        Call<String> getProfilna = service.GetProfilna(UserId);
         getProfilna.enqueue(callback);
     }
 

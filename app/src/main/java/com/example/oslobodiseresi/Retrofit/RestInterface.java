@@ -14,6 +14,7 @@ import com.example.oslobodiseresi.Models.UploadImage;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Base64;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -97,7 +98,7 @@ public interface RestInterface {
     Call<String> deleteItem(@Path("OglasId") int Id);
 
     @GET("users/getprofilna/{UserId}")
-    Call<Bitmap> GetProfilna(@Path("UserId") String UserId);
+    Call<String> GetProfilna(@Path("UserId") String UserId);
 
     @GET("items/komentari/{OglasId}")
     Call<ArrayList<Komentar>> GetKomentariFromOglas(@Path("OglasId") int OglasId);

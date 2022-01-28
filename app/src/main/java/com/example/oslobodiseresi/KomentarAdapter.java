@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -77,10 +78,12 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
             }
         });
 
-        MutableLiveData<Bitmap> mld = UserRepository.getInstance(MainApplication.apiManager).GetProfilna(komentari.get(holder.getAdapterPosition()).getKorisnik().getId());
-        mld.observe((AppCompatActivity) context, new Observer<Bitmap>() {
+        MutableLiveData<String> mld = UserRepository.getInstance(MainApplication.apiManager).GetProfilna(Utils.getInstance().getKorisnik().getId());
+        mld.observe((AppCompatActivity)context, new Observer<String>() {
             @Override
-            public void onChanged(Bitmap bitmap) {
+            public void onChanged(String str) {
+                byte[] bajtovi = Base64.decode(str, Base64.DEFAULT);
+                Bitmap bitmap = BitmapFactory.decodeByteArray(bajtovi,0,bajtovi.length);
                 holder.imgProfil.setImageBitmap(bitmap);
             }
         });

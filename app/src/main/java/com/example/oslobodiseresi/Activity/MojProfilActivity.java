@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -80,10 +81,12 @@ public class MojProfilActivity extends ToolbarNavigacijaSetup {
                 ocena.setText(String.valueOf(Utils.getInstance().getKorisnik().getZbirOcena() / Utils.getInstance().getKorisnik().getBrojOcena()));
             }
 
-            MutableLiveData<Bitmap> mld = UserRepository.getInstance(MainApplication.apiManager).GetProfilna(Utils.getInstance().getKorisnik().getId());
-            mld.observe(MojProfilActivity.this, new Observer<Bitmap>() {
+            MutableLiveData<String> mld = UserRepository.getInstance(MainApplication.apiManager).GetProfilna(Utils.getInstance().getKorisnik().getId());
+            mld.observe(MojProfilActivity.this, new Observer<String>() {
                     @Override
-                    public void onChanged(Bitmap bitmap) {
+                    public void onChanged(String str) {
+                        byte[] bajtovi = Base64.decode(str, Base64.DEFAULT);
+                        Bitmap bitmap = BitmapFactory.decodeByteArray(bajtovi,0,bajtovi.length);
                         bitmapProfilna = bitmap;
                         imgProfil.setImageBitmap(bitmap);
                     }
