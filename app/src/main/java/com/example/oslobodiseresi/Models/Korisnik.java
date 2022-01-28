@@ -13,6 +13,7 @@ public class Korisnik {
     private String brojTelefona;
     private int brojOcena;
     private float zbirOcena;
+    private String slika;
     private ArrayList<Item> omiljeniOglasi;
     private ArrayList<Integer> lajkovaniKomentari;
 
@@ -23,6 +24,10 @@ public class Korisnik {
         this.brojTelefona = brojTelefona;
         this.brojOcena = brojOcena;
         this.zbirOcena = zbirOcena;
+    }
+
+    public String getSlika() {
+        return slika;
     }
 
     public String getId() {

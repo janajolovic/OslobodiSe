@@ -81,16 +81,10 @@ public class MojProfilActivity extends ToolbarNavigacijaSetup {
                 ocena.setText(String.valueOf(Utils.getInstance().getKorisnik().getZbirOcena() / Utils.getInstance().getKorisnik().getBrojOcena()));
             }
 
-            MutableLiveData<String> mld = UserRepository.getInstance(MainApplication.apiManager).GetProfilna(Utils.getInstance().getKorisnik().getId());
-            mld.observe(MojProfilActivity.this, new Observer<String>() {
-                    @Override
-                    public void onChanged(String str) {
-                        byte[] bajtovi = Base64.decode(str, Base64.DEFAULT);
-                        Bitmap bitmap = BitmapFactory.decodeByteArray(bajtovi,0,bajtovi.length);
-                        bitmapProfilna = bitmap;
-                        imgProfil.setImageBitmap(bitmap);
-                    }
-                });
+            byte[] bajtovi = Base64.decode(Utils.getInstance().getKorisnik().getSlika(), Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(bajtovi,0,bajtovi.length);
+            bitmapProfilna = bitmap;
+            imgProfil.setImageBitmap(bitmap);
 
             promeniSliku.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -112,10 +106,17 @@ public class MojProfilActivity extends ToolbarNavigacijaSetup {
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                             byte[] imageBytes = baos.toByteArray();
                             String imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-                            UserRepository.getInstance(MainApplication.apiManager).PostaviProfilnu(Utils.getInstance().getKorisnik().getId(), new UploadImage(imageString));
+                            MutableLiveData<String> mld = UserRepository.getInstance(MainApplication.apiManager).PostaviProfilnu(Utils.getInstance().getKorisnik().getId(), new UploadImage(imageString));
+                            mld.observe(MojProfilActivity.this, new Observer<String>() {
+                                @Override
+                                public void onChanged(String s) {
+                                    Utils.getInstance().SacuvajKorisnika(Utils.getInstance().getKorisnik());
+                                }
+                            });
                             btnPotvrdite.setVisibility(View.GONE);
                             btnOtkazite.setVisibility(View.GONE);
                             bitmapProfilna = bitmap;
+
                         }
                     });
                     btnOtkazite.setOnClickListener(new View.OnClickListener() {

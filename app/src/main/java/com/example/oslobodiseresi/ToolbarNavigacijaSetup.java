@@ -1,5 +1,7 @@
 package com.example.oslobodiseresi;
 
+import static android.util.Log.ASSERT;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -137,15 +139,14 @@ public class ToolbarNavigacijaSetup extends AppCompatActivity implements Navigat
         //prijava
         imgPrijava = findViewById(R.id.imgProfil);
         if(Utils.getInstance().jeUlogovan()){
-            MutableLiveData<String> mld = UserRepository.getInstance(MainApplication.apiManager).GetProfilna(Utils.getInstance().getKorisnik().getId());
-            mld.observe((AppCompatActivity)context, new Observer<String>() {
-                @Override
-                public void onChanged(String s) {
-                    byte[] bajtovi = Base64.decode(s, Base64.DEFAULT);
-                    Bitmap bitmap = BitmapFactory.decodeByteArray(bajtovi,0,bajtovi.length);
-                    imgPrijava.setImageBitmap(bitmap);
-                }
-            });
+            try{
+                byte[] bajtovi = Base64.decode(Utils.getInstance().getKorisnik().getSlika(), Base64.DEFAULT);
+                Bitmap bitmap = BitmapFactory.decodeByteArray(bajtovi,0,bajtovi.length);
+                imgPrijava.setImageBitmap(bitmap);
+            } catch(Exception e){
+
+            }
+
         }
 
         imgPrijava.setOnClickListener(new View.OnClickListener() {

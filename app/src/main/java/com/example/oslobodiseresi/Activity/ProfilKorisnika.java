@@ -78,15 +78,7 @@ public class ProfilKorisnika extends ToolbarNavigacijaSetup {
             rating.setEnabled(false);
         }
 
-        MutableLiveData<String> mld2 = UserRepository.getInstance(MainApplication.apiManager).GetProfilna(korisnikId);
-        mld2.observe(ProfilKorisnika.this, new Observer<String>() {
-            @Override
-            public void onChanged(String str) {
-                byte[] bajtovi = Base64.decode(str, Base64.DEFAULT);
-                Bitmap bitmap = BitmapFactory.decodeByteArray(bajtovi,0,bajtovi.length);
-                imgKorisnik.setImageBitmap(bitmap);
-            }
-        });
+
 
         MutableLiveData < Korisnik > mld = UserRepository.getInstance(MainApplication.apiManager).GetKorisnikById(korisnikId);
         mld.observe(ProfilKorisnika.this, new Observer<Korisnik>() {
@@ -99,6 +91,9 @@ public class ProfilKorisnika extends ToolbarNavigacijaSetup {
                 } else {
                     prosecnaOcena.setText(String.valueOf(korisnik.getZbirOcena() / korisnik.getBrojOcena()));
                 }
+                byte[] bajtovi = Base64.decode(korisnik.getSlika(), Base64.DEFAULT);
+                Bitmap bitmap = BitmapFactory.decodeByteArray(bajtovi,0,bajtovi.length);
+                imgKorisnik.setImageBitmap(bitmap);
             }
         });
 

@@ -80,18 +80,9 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
             }
         });
 
-        MutableLiveData<String> mld = UserRepository.getInstance(MainApplication.apiManager).GetProfilna(komentari.get(holder.getAdapterPosition()).getKorisnik().getId());
-        mld.observe((AppCompatActivity)context, new Observer<String>() {
-            @Override
-            public void onChanged(String str) {
-                if(holder.getAdapterPosition() == -1){
-                    return;
-                }
-                byte[] bajtovi = Base64.decode(str, Base64.DEFAULT);
-                Bitmap bitmap = BitmapFactory.decodeByteArray(bajtovi,0,bajtovi.length);
-                holder.imgProfil.setImageBitmap(bitmap);
-            }
-        });
+        byte[] bajtovi = Base64.decode(komentari.get(holder.getAdapterPosition()).getKorisnik().getSlika(), Base64.DEFAULT);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(bajtovi,0,bajtovi.length);
+        holder.imgProfil.setImageBitmap(bitmap);
 
         holder.imgProfil.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -199,6 +190,7 @@ public class KomentarAdapter extends RecyclerView.Adapter<KomentarAdapter.ViewHo
         private TextView txtSadrzaj;
         private ImageView imgLajk;
         private TextView izbrisi;
+        private MutableLiveData<String> mld;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
