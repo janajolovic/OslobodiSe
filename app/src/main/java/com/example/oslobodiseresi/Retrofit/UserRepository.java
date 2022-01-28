@@ -14,7 +14,6 @@ import com.example.oslobodiseresi.Models.UploadImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Base64;
 
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
@@ -29,6 +28,7 @@ public class UserRepository {
     private final MutableLiveData<Korisnik> korisnik = new MutableLiveData<>();
     private final MutableLiveData<ArrayList<Item>> items = new MutableLiveData<>();
     private final MutableLiveData<String> str = new MutableLiveData<>();
+    private final MutableLiveData<String> str64 = new MutableLiveData<>();
     private final MutableLiveData<Boolean> bool = new MutableLiveData<>();
     private final MutableLiveData<ResponseBody> responseBody = new MutableLiveData<>();
     private final MutableLiveData<Float> flt = new MutableLiveData<>();
@@ -239,7 +239,6 @@ public class UserRepository {
                 Log.println(Log.ASSERT, "[lajk]", t.getMessage());
             }
         });
-
         return str;
     }
 
@@ -267,7 +266,7 @@ public class UserRepository {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if(response.isSuccessful()){
-                    str.setValue(response.body());
+                    str64.setValue(response.body());
                 } else {
                     Log.println(Log.ASSERT,"[nije successful]", response.message());
                 }
@@ -278,7 +277,6 @@ public class UserRepository {
                 Log.println(Log.ASSERT,"[on failure]", t.getMessage());
             }
         });
-
-        return str;
+        return str64;
     }
 }
