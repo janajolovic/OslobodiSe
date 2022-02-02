@@ -43,6 +43,7 @@ public class LoginActivity extends ToolbarNavigacijaSetup {
         loginToRegister = findViewById(R.id.txtLoginToRegister);
         loginPogresno = findViewById(R.id.loginPogresno);
 
+        //ako je korisnik uspesno loginovan prebacice se u MainActivity
         dugme.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,34 +60,10 @@ public class LoginActivity extends ToolbarNavigacijaSetup {
                             loginPogresno.setVisibility(View.VISIBLE);
                     }
                 });
-
-//                MutableLiveData<Korisnik> k = UserRepository.getInstance(MainApplication.apiManager).Login(new LoginModel(Email.getText().toString(), Lozinka.getText().toString()));
-//                k.observe(LoginActivity.this, new Observer<Korisnik>() {
-//                    @Override
-//                    public void onChanged(Korisnik korisnik) {
-//                        if(k.getValue()!=null){
-//                            Utils.getInstance().SacuvajKorisnika(korisnik);
-//                            MutableLiveData<ArrayList<Item>> mld = UserRepository.getInstance(MainApplication.apiManager).GetOmiljeniOglasiFromUser(korisnik.getId());
-//                            mld.observe(LoginActivity.this, new Observer<ArrayList<Item>>() {
-//                                @Override
-//                                public void onChanged(ArrayList<Item> items) {
-//                                    Log.println(Log.ASSERT,"[login activity]","Pozvan sam "+ korisnik.getIme());
-//                                    Utils.getInstance().getOmiljeniOglasiId().clear();
-//                                    for(Item item:items){
-//                                        Utils.getInstance().getOmiljeniOglasiId().add(item.getId());
-//                                    }
-//                                }
-//                            });
-//                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//                            startActivity(intent);
-//                        }
-//                        else
-//                            loginPogresno.setVisibility(View.VISIBLE);
-//                    }
-//                });
             }
         });
 
+        // ukoliko korisnik zeli da se registruje
         loginToRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

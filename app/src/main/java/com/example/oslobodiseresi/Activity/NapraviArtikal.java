@@ -88,6 +88,7 @@ public class NapraviArtikal extends ToolbarNavigacijaSetup {
 
         setToolbar(false);
 
+        // spinneri tj dropdown meni za izbor grada i kategorije
         MutableLiveData<ArrayList<Kategorija>> mldKategorije = ItemRepository.getInstance(MainApplication.apiManager).getAllKategorije();
         mldKategorije.observe(NapraviArtikal.this, new Observer<ArrayList<Kategorija>>() {
             @Override

@@ -60,6 +60,7 @@ public class MojiOglasiActivity extends ToolbarNavigacijaSetup {
 
         recyclerArtikli.setLayoutManager(new GridLayoutManager(this, 2));
 
+        // ucitavanje oglasa prijavljenog korisnika
         MutableLiveData<ArrayList<Item>> artikli = ItemRepository.getInstance(MainApplication.apiManager).getItemsFromUser(Utils.getInstance().getKorisnik().getId());
         artikli.observe(MojiOglasiActivity.this, new Observer<ArrayList<Item>>() {
             @Override
@@ -73,6 +74,7 @@ public class MojiOglasiActivity extends ToolbarNavigacijaSetup {
             }
         });
 
+        // dugme za dodavanje novog oglasa
         dodajArtikal = findViewById(R.id.dodajArtikal);
         dodajArtikal.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,6 +84,7 @@ public class MojiOglasiActivity extends ToolbarNavigacijaSetup {
             }
         });
 
+        // PRETRAGA
         SearchView searchView = findViewById(R.id.search_bar);
         searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -118,6 +121,7 @@ public class MojiOglasiActivity extends ToolbarNavigacijaSetup {
         });
     }
 
+    // filtriranje po gradovima ili kategorijama
     @Override
     public void primeniFiltere() {
         super.primeniFiltere();

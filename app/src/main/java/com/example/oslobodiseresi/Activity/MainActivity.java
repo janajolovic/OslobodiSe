@@ -72,6 +72,7 @@ public class MainActivity extends ToolbarNavigacijaSetup {
                 if(items==null){
                     return;
                 }
+                // kada se artikli ucitaju sakrivaju se logo i progress bar
                 adapterArtikli.setArtikli(artikli.getValue());
                 recyclerArtikli.setAdapter(adapterArtikli);
                 progress.setVisibility(View.INVISIBLE);
@@ -79,6 +80,7 @@ public class MainActivity extends ToolbarNavigacijaSetup {
             }
         });
 
+        // PRETRAGA
         SearchView searchView = findViewById(R.id.search_bar);
        // searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -115,6 +117,8 @@ public class MainActivity extends ToolbarNavigacijaSetup {
         });
     }
 
+
+    // FILTRIRANJE po gradovima ili kategorijama
     @Override
     public void primeniFiltere() {
         super.primeniFiltere();

@@ -44,10 +44,10 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
 
     public static final String ARTIKAL_ID_KEY = "artikalId";
     private TextView txtOpis, txtKategorija, txtGrad, txtKorisnik;
-    private ImageView img;
+    private ImageView img;  // glavna slika
     private TextView txtNaziv;
-    private ImageView artikalBack;
-    private ImageView imgFav;
+    private ImageView artikalBack;  // ikonica za povratak na prethodnu stranicu
+    private ImageView imgFav;    // ikonica srce, dodavanje u omiljene oglase
     private Boolean isFav;
     private NavigationView navigationView;
     private TextView txtKontakt;
@@ -77,10 +77,10 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
         initViews();
         Intent intent = getIntent();
 
+        // dobijamo odredjeni artikal na koji je korisnik kliknuo
         if(null != intent)
         {
             int artikalId = intent.getIntExtra(ARTIKAL_ID_KEY, -1);
-            Log.println(Log.ASSERT,"[tag]","id je "+artikalId);
             adapterId = artikalId;
             if(artikalId != -1){
                 MutableLiveData<Item> mld = ItemRepository.getInstance(MainApplication.apiManager).getItem(artikalId);
@@ -105,11 +105,6 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
         txtGrad.setText(artikal.getGrad().getNaziv());
         txtKorisnik.setText(artikal.getUser().getIme());
         txtKontakt.setText(artikal.getUser().getBrojTelefona());
-//      txtKontakt.setText(Utils.getInstance().getKorisnik().getBrojTelefona());
-//        Glide.with(this)
-//                .asBitmap()
-//                .load(artikal.getSlika())
-//                .into(img);
     }
 
     private void initViews() {
@@ -133,6 +128,8 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
 
         setToolbar(false);
 
+
+        // kada se klikne na ikonicu vraca se na main activity
         artikalBack = findViewById(R.id.artikalBack);
         artikalBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,6 +139,8 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
             }
         });
 
+        // kada se klikne na naziv korisnika, prebacuje ga u MojProfilActivity ako taj artikal pripada korisniku koji
+        // je ulogovan, a u suprotnom na drugog korisnika
         if(artikal!=null){
             Context context = ArtikalActivity.this;
             txtKorisnik.setOnClickListener(new View.OnClickListener() {
@@ -158,6 +157,8 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
 
                 }
             });
+
+            // proveramo da li je oglas vec dodat u omiljene da bi to oznacili ikonicom
             if(Utils.getInstance().jeUlogovan()){
                 MutableLiveData<Boolean> mld = UserRepository.getInstance(MainApplication.apiManager).ProveriOmiljeniOglas(Utils.getInstance().getKorisnik().getId(), artikal.getId());
                 mld.observe(ArtikalActivity.this, new Observer<Boolean>() {
@@ -173,6 +174,9 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
                         }
                     }
                 });
+
+                // kada se klikne na ikonicu ona treba da doda taj artikal u omiljene
+                // tj da ga ukloni ako je vec bio dodat
                 imgFav.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -200,6 +204,7 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
 
             komentariRecycler.setLayoutManager(new GridLayoutManager(this, 1));
 
+            // POSTAVLJANJE KOMENTARA ZA ARTIKAL
             btnDodajKomentar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -248,6 +253,7 @@ public class ArtikalActivity extends ToolbarNavigacijaSetup {
                     popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                         @Override
                         public boolean onMenuItemClick(MenuItem item) {
+                            // sortiranje komentara ko najnovijim ili najpopularnijim (broju lajkova)
                             switch(item.getItemId()){
                                 case R.id.najnoviji:
                                     sortiranje.setImageResource(R.drawable.ic_baseline_new_releases_24);
