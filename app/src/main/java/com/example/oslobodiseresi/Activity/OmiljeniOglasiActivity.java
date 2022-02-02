@@ -53,6 +53,8 @@ public class OmiljeniOglasiActivity extends ToolbarNavigacijaSetup {
         adapterArtikli = new ArtikalAdapter(this);
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.VISIBLE);
+
+        // ucitavanje omiljenih oglasa
         MutableLiveData<ArrayList<Item>> mld = UserRepository.getInstance(MainApplication.apiManager).GetOmiljeniOglasiFromUser(
                 Utils.getInstance().getKorisnik().getId()
         );
@@ -68,6 +70,8 @@ public class OmiljeniOglasiActivity extends ToolbarNavigacijaSetup {
                 recyclerArtikli.setAdapter(adapterArtikli);
             }
         });
+
+        // pretraga
         SearchView searchView = findViewById(R.id.search_bar);
         searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -103,6 +107,8 @@ public class OmiljeniOglasiActivity extends ToolbarNavigacijaSetup {
             }
         });
     }
+
+    // filtriranje oglasa
     @Override
     public void primeniFiltere() {
         super.primeniFiltere();

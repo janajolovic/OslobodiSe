@@ -59,6 +59,7 @@ public class ProfilKorisnika extends ToolbarNavigacijaSetup {
 
         Intent intent = getIntent();
 
+        // dobijanje korisnikovog id-a
         if(intent != null)
         {
             String idKorisnik = intent.getStringExtra(KORISNIK_ID);
@@ -78,8 +79,7 @@ public class ProfilKorisnika extends ToolbarNavigacijaSetup {
             rating.setEnabled(false);
         }
 
-
-
+        // postavljanje podataka o korisniku kao sto su ime, broj telefona, prosecna ocena i njegovi oglasi
         MutableLiveData < Korisnik > mld = UserRepository.getInstance(MainApplication.apiManager).GetKorisnikById(korisnikId);
         mld.observe(ProfilKorisnika.this, new Observer<Korisnik>() {
             @Override
@@ -100,6 +100,7 @@ public class ProfilKorisnika extends ToolbarNavigacijaSetup {
             }
         });
 
+        // rating bar koji omogucava da se oceni korisnik
         rating.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
@@ -130,6 +131,7 @@ public class ProfilKorisnika extends ToolbarNavigacijaSetup {
         });
     }
 
+    // filtriranje oglasa
     @Override
     public void primeniFiltere() {
         super.primeniFiltere();

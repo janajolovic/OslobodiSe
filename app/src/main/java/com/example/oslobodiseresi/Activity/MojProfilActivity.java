@@ -72,22 +72,27 @@ public class MojProfilActivity extends ToolbarNavigacijaSetup {
         imgProfil = findViewById(R.id.mojaSlika);
         promeniSliku = findViewById(R.id.imgPromeniSliku);
 
+
+        // popunjavaju se korisnikovi podaci
         if(Utils.getInstance().jeUlogovan())
         {
             ime.setText(Utils.getInstance().getKorisnik().getIme());
             email.setText(Utils.getInstance().getKorisnik().getEmail());
             kontakt.setText(Utils.getInstance().getKorisnik().getBrojTelefona());
+            // ako korisnik jos uvek nije ocenjen
             if (Utils.getInstance().getKorisnik().getBrojOcena() == 0) {
                 ocena.setText("/");
-            } else {
+            } else { // racuna se ocena korisnika
                 ocena.setText(String.valueOf(Utils.getInstance().getKorisnik().getZbirOcena() / Utils.getInstance().getKorisnik().getBrojOcena()));
             }
 
+            // slika korisnika
             byte[] bajtovi = Base64.decode(Utils.getInstance().getKorisnik().getSlika(), Base64.DEFAULT);
             bitmap = BitmapFactory.decodeByteArray(bajtovi,0,bajtovi.length);
             bitmapProfilna = bitmap;
             imgProfil.setImageBitmap(bitmap);
 
+            // korisnik moze naknadno promeniti sliku
             promeniSliku.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -121,6 +126,7 @@ public class MojProfilActivity extends ToolbarNavigacijaSetup {
                             btnOtkazite.setVisibility(View.GONE);
                         }
                     });
+                    // ako korisik zeli da odustane od promene slike
                     btnOtkazite.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {

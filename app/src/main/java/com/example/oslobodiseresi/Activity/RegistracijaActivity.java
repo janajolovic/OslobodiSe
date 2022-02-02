@@ -52,6 +52,7 @@ public class RegistracijaActivity extends ToolbarNavigacijaSetup {
         pogresneLozinke = findViewById(R.id.registracijaPogresneLozinke);
         registerToLogin = findViewById(R.id.txtRegisterToLogin);
 
+        // kada se potvrdi registracija i ako su uneti podaci ispravni, korisnik se dodaje u bazu
         dugme.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,7 +62,6 @@ public class RegistracijaActivity extends ToolbarNavigacijaSetup {
                 }
                 pogresneLozinke.setVisibility(View.INVISIBLE);
 
-
                 MutableLiveData<Korisnik> k = UserRepository.getInstance(MainApplication.apiManager).Register(new RegistarModel(
                    ime.getText().toString(),
                    email.getText().toString(),
@@ -69,14 +69,6 @@ public class RegistracijaActivity extends ToolbarNavigacijaSetup {
                    brojTelefona.getText().toString()
                 ));
 
-//                k.observe(RegistracijaActivity.this, funk->{
-//                    if(k.getValue()!=null){
-//                        Intent intent = new Intent(RegistracijaActivity.this, LoginActivity.class);
-//                        startActivity(intent);
-//                    }
-//                    else
-//                        Toast.makeText(RegistracijaActivity.this, "Greska", Toast.LENGTH_LONG).show();
-//                });
                 k.observe(RegistracijaActivity.this, new Observer<Korisnik>() {
                     @Override
                     public void onChanged(Korisnik korisnik) {
@@ -92,6 +84,7 @@ public class RegistracijaActivity extends ToolbarNavigacijaSetup {
 
             }
         });
+        // ukoliko korisnik zeli da se vrati na stranicu za prijavu
         registerToLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
